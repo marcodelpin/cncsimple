@@ -12,7 +12,7 @@ using Framework.Implementors.Wpf.MVVM.Services;
 using ServiceLocation.Silverlight.Unity;
 
 /*
- * --- from tenac
+ * --- from tenac v2
  */
 namespace CncConvProg.View
 {
