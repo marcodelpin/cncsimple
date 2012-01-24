@@ -36,12 +36,6 @@
     <Reference Include="GongSolutions.Wpf.DragDrop">
       <HintPath>..\Lib\GongSolutions.Wpf.DragDrop.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp-WPF">
-      <HintPath>..\Lib\PdfSharp-WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp.Ghostscript-WPF">
-      <HintPath>..\Lib\PdfSharp.Ghostscript-WPF.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -178,7 +172,7 @@
     <Compile Include="VisualModel\GraphicLayer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MecPrev\CncConvProg.Geometry\CncConvProg.Geometry.csproj">
+    <ProjectReference Include="..\CncConvProg.Geometry\CncConvProg.Geometry.csproj">
       <Project>{4A4DE66E-CE74-49F6-B8CD-D45369E25AF7}</Project>
       <Name>CncConvProg.Geometry</Name>
     </ProjectReference>

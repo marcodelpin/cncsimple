@@ -219,19 +219,18 @@
     <Content Include="Tool\ToolsTODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MecPrev\CncConvProg.Geometry\CncConvProg.Geometry.csproj">
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CncConvProg.Geometry\CncConvProg.Geometry.csproj">
       <Project>{4A4DE66E-CE74-49F6-B8CD-D45369E25AF7}</Project>
       <Name>CncConvProg.Geometry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MecPrev\MecPrev.Resources\MecPrev.Resources.csproj">
+    <ProjectReference Include="..\MecPrev.Resources\MecPrev.Resources.csproj">
       <Project>{E1B4B169-6A89-4870-B667-E340EB6DDA3A}</Project>
       <Name>MecPrev.Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
