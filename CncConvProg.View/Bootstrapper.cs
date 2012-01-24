@@ -11,6 +11,9 @@ using Framework.Abstractions.Wpf.ServiceLocation;
 using Framework.Implementors.Wpf.MVVM.Services;
 using ServiceLocation.Silverlight.Unity;
 
+/*
+ * --- from tenac
+ */
 namespace CncConvProg.View
 {
     public class Bootstrapper
