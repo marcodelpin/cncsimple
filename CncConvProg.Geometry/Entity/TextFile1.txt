@@ -1,0 +1,7 @@
+﻿differenziare 2d da 3d --
+
+magari fare base atomicEntity
+
+
+-2d
+-3d

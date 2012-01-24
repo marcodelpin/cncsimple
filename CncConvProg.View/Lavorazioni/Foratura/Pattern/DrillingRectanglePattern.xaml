@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.Foratura.Pattern.DrillingRectanglePattern"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:CustomControl="clr-namespace:CncConvProg.View.Controls" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <CustomControl:FocusableListBox SelectedItem="{Binding SelectedItem}" KeyboardNavigation.TabNavigation="Continue" x:Name="lbParameter" BorderBrush="{x:Null}" Grid.ColumnSpan="1">
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPoint.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Ref. Point" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <ComboBox x:Name="cbMaterial" 
+            				ItemsSource="{Binding Path=StartPointLookup}"
+            				SelectedValue="{Binding Path=SelectedStartPoint}"
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key" 
+                            Width="100" />
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPointDistance.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Ref. Point X : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RefPointX,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPointDistance.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Ref. Point Y : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RefPointY,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/MillFaceA.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Height" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Height, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/MillFaceB.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Width" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Width, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPointDistance.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Drill Count X  : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=DrillCountX,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPointDistance.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Drill Count Y : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=DrillCountY,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+
+
+        </CustomControl:FocusableListBox>
+
+    </Grid>
+</UserControl>

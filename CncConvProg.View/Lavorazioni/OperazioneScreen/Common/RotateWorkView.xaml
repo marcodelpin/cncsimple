@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.OperazioneScreen.Common.RotateWorkView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <GroupBox>
+            <GroupBox.Header>
+                <ToggleButton Content="Rotation Abilited" IsChecked="{Binding RotationAbilited}"/>
+            </GroupBox.Header>
+            <StackPanel IsEnabled="{Binding Path=RotationAbilited}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Center Rotation X" MinWidth="150" />
+                    <TextBox Text="{Binding Path=CenterRotationX}" MinWidth="100" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Center Rotation Y" MinWidth="150" />
+                    <TextBox Text="{Binding Path=CenterRotationY}" MinWidth="100" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="First Angle" MinWidth="150" />
+                    <TextBox Text="{Binding Path=FirstAngle}" MinWidth="100" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="N° Instance" MinWidth="150" />
+                    <TextBox Text="{Binding Path=NumberInstance}" MinWidth="100" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

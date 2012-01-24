@@ -1,0 +1,12 @@
+﻿<Window x:Class="CncConvProg.View.ShellWiew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:View="clr-namespace:CncConvProg.View" Title="MainWindow" Height="768" Width="1024"
+        WindowState="Maximized"
+        MinWidth="600"
+        MinHeight="600">
+    <Grid>
+        <View:MainScreen />
+    </Grid>
+    
+</Window>

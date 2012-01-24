@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddArc" xml:space="preserve">
+    <value>Aggiungi Arco</value>
+  </data>
+  <data name="AddLine" xml:space="preserve">
+    <value>Aggiungi Linea</value>
+  </data>
+  <data name="AlternateArc" xml:space="preserve">
+    <value>Altro Arco</value>
+  </data>
+  <data name="Angle" xml:space="preserve">
+    <value>Angolo</value>
+  </data>
+  <data name="AngleDirection" xml:space="preserve">
+    <value>Direzione Angolo</value>
+  </data>
+  <data name="AutoTool" xml:space="preserve">
+    <value>Utensile Auto</value>
+  </data>
+  <data name="boreDiameter" xml:space="preserve">
+    <value>Diametro Barenatura</value>
+  </data>
+  <data name="CenterRotationX" xml:space="preserve">
+    <value>Centro Rotazione X</value>
+  </data>
+  <data name="CenterRotationY" xml:space="preserve">
+    <value>Centro Rotazione Y</value>
+  </data>
+  <data name="Chamfer" xml:space="preserve">
+    <value>Smusso</value>
+  </data>
+  <data name="Chamfering" xml:space="preserve">
+    <value>Smussatura</value>
+  </data>
+  <data name="CountX" xml:space="preserve">
+    <value>Ripetizioni X</value>
+  </data>
+  <data name="CountY" xml:space="preserve">
+    <value>Ripetizioni Y</value>
+  </data>
+  <data name="CreateNewTool" xml:space="preserve">
+    <value>Crea Nuovo Utensile</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Cancella</value>
+  </data>
+  <data name="Depth" xml:space="preserve">
+    <value>Profondità</value>
+  </data>
+  <data name="Diameter" xml:space="preserve">
+    <value>Diametro</value>
+  </data>
+  <data name="DiameterMax" xml:space="preserve">
+    <value>Diametro Max</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direzione</value>
+  </data>
+  <data name="drillDiameter" xml:space="preserve">
+    <value>Diametro Punta</value>
+  </data>
+  <data name="EndDiameter" xml:space="preserve">
+    <value>Diametro Finale</value>
+  </data>
+  <data name="EndRadius" xml:space="preserve">
+    <value>Raggio Finale</value>
+  </data>
+  <data name="Finishing" xml:space="preserve">
+    <value>Finitura</value>
+  </data>
+  <data name="FirstAngle" xml:space="preserve">
+    <value>Primo Angolo</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Altezza</value>
+  </data>
+  <data name="InitalPointX" xml:space="preserve">
+    <value>Punto Iniziale X</value>
+  </data>
+  <data name="InitialPointY" xml:space="preserve">
+    <value>Punto Iniziale Y</value>
+  </data>
+  <data name="Inside" xml:space="preserve">
+    <value>Interno</value>
+  </data>
+  <data name="InstanceCount" xml:space="preserve">
+    <value>N° Istanze</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Etichetta</value>
+  </data>
+  <data name="Length" xml:space="preserve">
+    <value>Lunghezza</value>
+  </data>
+  <data name="MaterialToRemove" xml:space="preserve">
+    <value>Materiale da rimuovere</value>
+  </data>
+  <data name="NumeroPassate" xml:space="preserve">
+    <value>N° Passate</value>
+  </data>
+  <data name="OperationAb" xml:space="preserve">
+    <value>Operazione Abilitata</value>
+  </data>
+  <data name="Outside" xml:space="preserve">
+    <value>Esterna</value>
+  </data>
+  <data name="OverwriteParameter" xml:space="preserve">
+    <value>Sovrascrivi parametri</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parametri</value>
+  </data>
+  <data name="Pitch" xml:space="preserve">
+    <value>Passo</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>Raggio</value>
+  </data>
+  <data name="RotationAb" xml:space="preserve">
+    <value>Rotazione Abilitata</value>
+  </data>
+  <data name="Roughing" xml:space="preserve">
+    <value>Sgrossatura</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="SelectTool" xml:space="preserve">
+    <value>Seleziona Utensile</value>
+  </data>
+  <data name="StartDiameter" xml:space="preserve">
+    <value>Diametro Iniziale</value>
+  </data>
+  <data name="StartZ" xml:space="preserve">
+    <value>Z Iniziale</value>
+  </data>
+  <data name="Thread" xml:space="preserve">
+    <value>Filetto</value>
+  </data>
+  <data name="ThreadType" xml:space="preserve">
+    <value>Tipologia Filettatura</value>
+  </data>
+  <data name="ToolDetailGroup" xml:space="preserve">
+    <value>Dettagli Utensile</value>
+  </data>
+  <data name="ToolParameter" xml:space="preserve">
+    <value>Parametri Utensile</value>
+  </data>
+  <data name="ToolPositon" xml:space="preserve">
+    <value>Posizione Utensile</value>
+  </data>
+  <data name="ToolWear" xml:space="preserve">
+    <value>Usura Utensile</value>
+  </data>
+  <data name="TranslateAb" xml:space="preserve">
+    <value>Traslazione Abilitata</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Larghezza</value>
+  </data>
+  <data name="zBoreDepth" xml:space="preserve">
+    <value>Profondità Bareno</value>
+  </data>
+  <data name="zCounterboreDepth" xml:space="preserve">
+    <value>Profondità Lamatura</value>
+  </data>
+  <data name="zDepth" xml:space="preserve">
+    <value>Profondità</value>
+  </data>
+  <data name="zDrillDepth" xml:space="preserve">
+    <value>Profondità Punta</value>
+  </data>
+  <data name="ZeroDistanceX" xml:space="preserve">
+    <value>Punto Riferimento X</value>
+  </data>
+  <data name="ZeroDistanceY" xml:space="preserve">
+    <value>Punto Riferimento Y</value>
+  </data>
+  <data name="ZeroPoint" xml:space="preserve">
+    <value>Punto Riferimento</value>
+  </data>
+  <data name="zReamerDepth" xml:space="preserve">
+    <value>Profondità Alesatura</value>
+  </data>
+  <data name="zSecure" xml:space="preserve">
+    <value>Z Sicurezza</value>
+  </data>
+  <data name="zStart" xml:space="preserve">
+    <value>Inizio Z</value>
+  </data>
+  <data name="zTapDepth" xml:space="preserve">
+    <value>Profondità Maschiatura</value>
+  </data>
+  <data name="Lathe2AxPhase" xml:space="preserve">
+    <value>Fase Tornio 2 Assi</value>
+  </data>
+  <data name="Lathe3AxPhase" xml:space="preserve">
+    <value>Fase Tornio 3 Assi</value>
+  </data>
+  <data name="MillPhase" xml:space="preserve">
+    <value>Fase Centro di Lavoro</value>
+  </data>
+  <data name="Arc" xml:space="preserve">
+    <value>Arco</value>
+  </data>
+  <data name="btnAddPoint" xml:space="preserve">
+    <value>Aggiungi Punto</value>
+  </data>
+  <data name="CenterX" xml:space="preserve">
+    <value>Centro X</value>
+  </data>
+  <data name="CenterY" xml:space="preserve">
+    <value>Centro Y</value>
+  </data>
+  <data name="Circle" xml:space="preserve">
+    <value>Cerchio</value>
+  </data>
+  <data name="Circumscribed" xml:space="preserve">
+    <value>Circoscritto</value>
+  </data>
+  <data name="CoordinateRadiusAngle" xml:space="preserve">
+    <value>Coordinate Raggio Angolo</value>
+  </data>
+  <data name="CoordinateXY" xml:space="preserve">
+    <value>Coordinate XY</value>
+  </data>
+  <data name="DSlot" xml:space="preserve">
+    <value>Cava forma a D</value>
+  </data>
+  <data name="EndAngle" xml:space="preserve">
+    <value>Angolo Finale</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Linea</value>
+  </data>
+  <data name="NumberCountX" xml:space="preserve">
+    <value>Ripetizioni X</value>
+  </data>
+  <data name="NumberCountY" xml:space="preserve">
+    <value>Ripetizioni Y</value>
+  </data>
+  <data name="Numero" xml:space="preserve">
+    <value>Numero</value>
+  </data>
+  <data name="PatternParameter" xml:space="preserve">
+    <value>Parametri Pattern</value>
+  </data>
+  <data name="PatternSelection" xml:space="preserve">
+    <value>Selezione Pattern</value>
+  </data>
+  <data name="ProfileEditor" xml:space="preserve">
+    <value>Editor Profilo</value>
+  </data>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Rettangolo</value>
+  </data>
+  <data name="RefPointPos" xml:space="preserve">
+    <value>Posizione Punto Riferimento</value>
+  </data>
+  <data name="RefPointX" xml:space="preserve">
+    <value>Punto Riferimento X</value>
+  </data>
+  <data name="RefPointY" xml:space="preserve">
+    <value>Punto Riferimento Y</value>
+  </data>
+  <data name="RegularPolygon" xml:space="preserve">
+    <value>Poligono Regolare</value>
+  </data>
+  <data name="SideNumber" xml:space="preserve">
+    <value>Numero Lati</value>
+  </data>
+  <data name="Slot" xml:space="preserve">
+    <value>Cava</value>
+  </data>
+  <data name="WorkDefined" xml:space="preserve">
+    <value>Lavoro Definito</value>
+  </data>
+  <data name="WorkNotDefined" xml:space="preserve">
+    <value>Lavoro non definito</value>
+  </data>
+  <data name="DiametroLamatura" xml:space="preserve">
+    <value>Diametro Lamatura</value>
+  </data>
+</root>

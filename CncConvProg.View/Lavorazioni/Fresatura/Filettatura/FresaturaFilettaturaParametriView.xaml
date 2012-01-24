@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.Fresatura.Filettatura.FresaturaFilettaturaParametriView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:Common="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.Common" xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ValueConverter:EnumToBoolConverter x:Key="EBConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="179*" />
+            <RowDefinition Height="121*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Thread Type" MinWidth="100"/>
+                <RadioButton IsChecked="{Binding Path=IsEsterna,    
+                            Converter={StaticResource EBConverter},    
+                            ConverterParameter=true}" Content="Outside"
+                             x:Name="rbDx"
+                             Margin="10,0"
+                             GroupName="direction" MinWidth="90" />
+                <RadioButton IsChecked="{Binding Path=IsEsterna,    
+                            Converter={StaticResource EBConverter},    
+                            ConverterParameter=false}" Content="Inside"
+                             x:Name="rbCcw"
+                             GroupName="direction" MinWidth="90" />
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="" MinWidth="100"/>
+                <RadioButton IsChecked="{Binding Path=IsLeftHand,    
+                            Converter={StaticResource EBConverter},    
+                            ConverterParameter=true}" Content="Left Hand "
+                             x:Name="rbExt"
+                             Margin="10,0"
+                             MinWidth="90"
+                             GroupName="direction"/>
+                <RadioButton IsChecked="{Binding Path=IsLeftHand,    
+                            Converter={StaticResource EBConverter},    
+                            ConverterParameter=false}" Content="Right Hand"
+                             x:Name="rbInt"
+                             GroupName="direction" MinWidth="90" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Start Z : " MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Depth : " MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Profondita,  ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Secure Z : " MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Thread : " MinWidth="100" />
+                <ComboBox SelectedItem="{Binding Path=MaschiaturaSelezionata}" DisplayMemberPath="Descrizione" ItemsSource="{Binding Path=ListaMaschiature}" MinWidth="150" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock  Text="Override Parameter" MinWidth="100" />
+                <CheckBox x:Name="cbAa" IsChecked="{Binding Path=OverrideParameter}" VerticalAlignment="Center" Margin="5,0"/>
+            </StackPanel>
+            <GroupBox Margin="20,0" Header="Parameter" IsEnabled="{Binding Path=OverrideParameter}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Diameter : " MinWidth="100" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=DiametroMetrico, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Pitch  : " MinWidth="100" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=PassoMetrico,  ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <!--<Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="1" />-->
+    </Grid>
+</UserControl>

@@ -1,0 +1,3 @@
+﻿fare interfacce tipo idiametrable.
+
+quando utensile ha diametro , in modo da accorpare tutti i metodi di numero giri e vt..

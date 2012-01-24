@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.OperazioneScreen.Common.OperazioneFresaturaTrocoidaleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Controls="clr-namespace:CncConvProg.View.Controls" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600"  >
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary >
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary  Source="OperazioneViewResources.xaml">
+                    </ResourceDictionary>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="162*" />
+            <RowDefinition Height="200*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*" />
+            <ColumnDefinition Width=".5*" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" >
+            <Button Command="{Binding Path=AutoToolFindCmd}" Margin="5" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Images/gui/Search.png" Height="18"/>
+                    <TextBlock Text="Auto Tool" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding Path=SaveParameterCmd}" Margin="5" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Images/gui/save_16.png" Height="16"/>
+                    <TextBlock Text=" Save" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
+        <Controls:FocusableListBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}" KeyboardNavigation.TabNavigation="Continue" x:Name="lbParameter" BorderBrush="{x:Null}">
+            <Controls:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Groove Width (Dm) :" Width="120" Margin="2" Padding="2" />
+                        <TextBlock Text="{Binding Path=GrooveWidth}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Controls:FocusableListBoxItem>
+
+            <Controls:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Cut Depth ( Ap %) : " Width="120" Margin="2" Padding="2" />
+                    <TextBox Text="{Binding Path=ProfonditaPassataPerc}" Width="80" />
+                    <TextBlock Text="Max 200% Dc" FontStyle="Italic"/>
+                </StackPanel>
+            </Controls:FocusableListBoxItem>
+
+
+            <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/work/trochoid_w.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Spiral Step ( w % ) :" Width="120" Margin="2" Padding="2" />
+                    <TextBox Text="{Binding Path=StepPerc}" Width="80" />
+                    <TextBlock Text="2% ~ 8% Dc" FontStyle="Italic"/>
+                </StackPanel>
+            </Controls:FocusableListBoxItem>
+
+
+            <Controls:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="RPM :" Width="120" Margin="2" Padding="2" />
+                    <TextBox Text="{Binding Path=NumeroGiri}" Width="80" />
+                </StackPanel>
+            </Controls:FocusableListBoxItem>
+
+            <Controls:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Feed  :" Width="120" Margin="2" Padding="2" />
+                    <TextBox Text="{Binding Path=Avanzamento}" Width="80" />
+                </StackPanel>
+            </Controls:FocusableListBoxItem>
+
+            <Controls:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Center Tool Feed  :" Width="120" Margin="2" Padding="2" />
+                    <TextBlock Text="{Binding Path=AvanzamentoCentroUtensile}" Width="80" />
+                </StackPanel>
+            </Controls:FocusableListBoxItem>
+
+
+        </Controls:FocusableListBox>
+
+        <!--<StackPanel Grid.Row="2" Grid.Column="1" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Groove Width (Dm) :" Width="120" Margin="2" Padding="2" />
+                <TextBlock Text="{Binding Path=GrooveWidth}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Cut Depth ( Ap %) : " Width="120" Margin="2" Padding="2" />
+                <TextBox Text="{Binding Path=ProfonditaPassataPerc}" Width="80" />
+                <TextBlock Text="Max 200% Dc" FontStyle="Italic"/>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Spiral Step ( w % ) :" Width="120" Margin="2" Padding="2" />
+                <TextBox Text="{Binding Path=StepPerc}" Width="80" />
+                <TextBlock Text="2% ~ 8% Dc" FontStyle="Italic"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="RPM :" Width="120" Margin="2" Padding="2" />
+                <TextBox Text="{Binding Path=NumeroGiri}" Width="80" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Feed  :" Width="120" Margin="2" Padding="2" />
+                <TextBox Text="{Binding Path=Avanzamento}" Width="80" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Center Tool Feed  :" Width="120" Margin="2" Padding="2" />
+                <TextBlock Text="{Binding Path=AvanzamentoCentroUtensile}" Width="80" />
+            </StackPanel>
+
+        </StackPanel>-->
+
+        <!--<GroupBox Header="Cut Parameter" Grid.Row="2" Grid.Column="1"  Margin="5">
+            <ContentControl Content="{Binding Path=ToolParameterViewModel}"/>
+        </GroupBox>-->
+
+        <GroupBox Header="Machine Setting" Grid.Row="2" Margin="5">
+            <ContentControl Content="{Binding Path=ToolHolderVm}"/>
+        </GroupBox>
+        <GroupBox Header="Tool Detail" Margin="5" Grid.Row="1">
+            <ContentControl Content="{Binding Path=UtensileViewModel}"/>
+        </GroupBox>
+
+        <Image Grid.Column="1" Grid.Row="1" MaxHeight="200" MaxWidth="200" VerticalAlignment="Top" Source="{Binding Path= SelectedItem.Tag}" Grid.RowSpan="1" />
+    </Grid>
+
+</UserControl>
