@@ -44,90 +44,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\InvisibleEntity.cs">
-      <Link>PreviewEntity\InvisibleEntity.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\IPreviewEntity.cs">
-      <Link>PreviewEntity\IPreviewEntity.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\PreviewArc3D.cs">
-      <Link>PreviewEntity\PreviewArc3D.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\PreviewLine3D.cs">
-      <Link>PreviewEntity\PreviewLine3D.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\PreviewPathBuilder.cs">
-      <Link>PreviewEntity\PreviewPathBuilder.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\TimeHelper.cs">
-      <Link>PreviewEntity\TimeHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Alesatore.cs">
-      <Link>Tool\Drill\Alesatore.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Bareno.cs">
-      <Link>Tool\Drill\Bareno.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Centrino.cs">
-      <Link>Tool\Drill\Centrino.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\DrillTool.cs">
-      <Link>Tool\Drill\DrillTool.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Lamatore.cs">
-      <Link>Tool\Drill\Lamatore.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Maschio.cs">
-      <Link>Tool\Drill\Maschio.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Punta.cs">
-      <Link>Tool\Drill\Punta.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Svasatore.cs">
-      <Link>Tool\Drill\Svasatore.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\LatheTool\UtensileScanalatura.cs">
-      <Link>Tool\LatheTool\UtensileScanalatura.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\LatheTool\UtensileTornitura.cs">
-      <Link>Tool\LatheTool\UtensileTornitura.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaBase.cs">
-      <Link>Tool\Mill\FresaBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaCandela.cs">
-      <Link>Tool\Mill\FresaCandela.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaFilettare.cs">
-      <Link>Tool\Mill\FresaFilettare.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaSpianare.cs">
-      <Link>Tool\Mill\FresaSpianare.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaBase.cs">
-      <Link>Tool\Parametro\ParametroFresaBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaCandela.cs">
-      <Link>Tool\Parametro\ParametroFresaCandela.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaFilettare.cs">
-      <Link>Tool\Parametro\ParametroFresaFilettare.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaSpianare.cs">
-      <Link>Tool\Parametro\ParametroFresaSpianare.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroPunta.cs">
-      <Link>Tool\Parametro\ParametroPunta.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroUtensile.cs">
-      <Link>Tool\Parametro\ParametroUtensile.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroUtensileTornitura.cs">
-      <Link>Tool\Parametro\ParametroUtensileTornitura.cs</Link>
-    </Compile>
-    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroUtensileTornituraScanalatura.cs">
-      <Link>Tool\Parametro\ParametroUtensileTornituraScanalatura.cs</Link>
-    </Compile>
     <Compile Include="ConversationalStructure\Abstraction\LavorazioneFresatura.cs" />
     <Compile Include="ConversationalStructure\Abstraction\LavorazioneTornitura.cs" />
     <Compile Include="ConversationalStructure\Abstraction\FaseDiLavoro.cs" />
@@ -165,7 +81,21 @@
     <Compile Include="ConversationalStructure\Lavorazioni\Common\LavorazioniEnumOperazioni.cs" />
     <Compile Include="FeedAndSpeedHelper.cs" />
     <Compile Include="Materiale.cs" />
+    <Compile Include="PreviewEntity\InvisibleEntity.cs" />
+    <Compile Include="PreviewEntity\IPreviewEntity.cs" />
+    <Compile Include="PreviewEntity\PreviewArc3D.cs" />
+    <Compile Include="PreviewEntity\PreviewLine3D.cs" />
+    <Compile Include="PreviewEntity\PreviewPathBuilder.cs" />
+    <Compile Include="PreviewEntity\TimeHelper.cs" />
     <Compile Include="Singleton.cs" />
+    <Compile Include="Tool\Drill\Alesatore.cs" />
+    <Compile Include="Tool\Drill\Bareno.cs" />
+    <Compile Include="Tool\Drill\Centrino.cs" />
+    <Compile Include="Tool\Drill\DrillTool.cs" />
+    <Compile Include="Tool\Drill\Lamatore.cs" />
+    <Compile Include="Tool\Drill\Maschio.cs" />
+    <Compile Include="Tool\Drill\Punta.cs" />
+    <Compile Include="Tool\Drill\Svasatore.cs" />
     <Compile Include="Tool\IDiametrable.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\MillProgrammingHelper.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\CavaDrittaApertaPattern.cs" />
@@ -210,7 +140,21 @@
     <Compile Include="ToolMachine\LatheAxisC.cs" />
     <Compile Include="ToolMachine\ToolMachine.cs" />
     <Compile Include="ToolMachine\VerticalMill.cs" />
+    <Compile Include="Tool\LatheTool\UtensileScanalatura.cs" />
+    <Compile Include="Tool\LatheTool\UtensileTornitura.cs" />
     <Compile Include="Tool\MagazzinoUtensile.cs" />
+    <Compile Include="Tool\Mill\FresaBase.cs" />
+    <Compile Include="Tool\Mill\FresaCandela.cs" />
+    <Compile Include="Tool\Mill\FresaFilettare.cs" />
+    <Compile Include="Tool\Mill\FresaSpianare.cs" />
+    <Compile Include="Tool\Parametro\ParametroFresaBase.cs" />
+    <Compile Include="Tool\Parametro\ParametroFresaCandela.cs" />
+    <Compile Include="Tool\Parametro\ParametroFresaFilettare.cs" />
+    <Compile Include="Tool\Parametro\ParametroFresaSpianare.cs" />
+    <Compile Include="Tool\Parametro\ParametroPunta.cs" />
+    <Compile Include="Tool\Parametro\ParametroUtensile.cs" />
+    <Compile Include="Tool\Parametro\ParametroUtensileTornitura.cs" />
+    <Compile Include="Tool\Parametro\ParametroUtensileTornituraScanalatura.cs" />
     <Compile Include="Tool\ToolHolder.cs" />
     <Compile Include="Tool\Utensile.cs" />
     <Compile Include="UserInput.cs" />
