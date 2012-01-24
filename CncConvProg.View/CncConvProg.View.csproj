@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4E39087E-B45A-4813-AC7E-778C02F77341}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CncConvProg.View</RootNamespace>
+    <AssemblyName>CncConvProg.View</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftp://ftp.mecprev.com/ClickonceCncSimple/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://www.mecprev.com/ClickonceCncsimple/</InstallUrl>
+    <SupportUrl>http://cncsimple.wordpress.com/</SupportUrl>
+    <ProductName>Cnc Simple</ProductName>
+    <PublisherName>Cnc Simple</PublisherName>
+    <SuiteName>Cnc Simple</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>651B7552A06BA8EBC03C51367A79B0273B3D032D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CncConvProg.View_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mecprevico.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GongSolutions.Wpf.DragDrop">
+      <HintPath>..\Lib\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphicViewer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\GraphicViewer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\Lib\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\Lib\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AuxClass\DragDropHelper\DragDropHelper.cs" />
+    <Compile Include="AuxClass\DragDropHelper\DraggedAdorner.cs" />
+    <Compile Include="AuxClass\DragDropHelper\InsertionAdorner.cs" />
+    <Compile Include="AuxClass\DragDropHelper\Utilities.cs" />
+    <Compile Include="AuxClass\ExpressionSolver.cs" />
+    <Compile Include="Controls\ImprovedGroupBox.cs" />
+    <Compile Include="Controls\ListViewEx.cs" />
+    <Compile Include="Controls\RawArcInputView.xaml.cs">
+      <DependentUpon>RawArcInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FocusableListBox.cs" />
+    <Compile Include="Dialog\FilettaturaInPolliciDataTemplateView.xaml.cs">
+      <DependentUpon>FilettaturaInPolliciDataTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\FilettaturaMetricaDataTemplateView.xaml.cs">
+      <DependentUpon>FilettaturaMetricaDataTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ArticleDetailView.xaml.cs">
+      <DependentUpon>ArticleDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\MachinesDialogView.xaml.cs">
+      <DependentUpon>MachinesDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ThreadTableView.xaml.cs">
+      <DependentUpon>ThreadTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ToolDataTemplate\ToolCommonScreenView.xaml.cs">
+      <DependentUpon>ToolCommonScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ToolsDialogView.xaml.cs">
+      <DependentUpon>ToolsDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneLamaturaDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneLamaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneAlesaturaDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneAlesaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneBarenaturaDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneBarenaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneCentrinoDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneCentrinoDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneForaturaDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneForaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneMaschiaturaDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneMaschiaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneSvasaturaDataTemplate.xaml.cs">
+      <DependentUpon>OperazioneSvasaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioniCommonScreenView.xaml.cs">
+      <DependentUpon>OperazioniCommonScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\ParameterScreen\MaschiaturaParametriView.xaml.cs">
+      <DependentUpon>MaschiaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\ParameterScreen\BarenaturaParametriView.xaml.cs">
+      <DependentUpon>BarenaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\ParameterScreen\LamaturaParametriView.xaml.cs">
+      <DependentUpon>LamaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\ParameterScreen\AlesaturaParametriView.xaml.cs">
+      <DependentUpon>AlesaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\XyDrillingPattern.xaml.cs">
+      <DependentUpon>XyDrillingPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\ArcDrillingPattern.xaml.cs">
+      <DependentUpon>ArcDrillingPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\LineDrillingPattern.xaml.cs">
+      <DependentUpon>LineDrillingPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\DrillingRcPattern.xaml.cs">
+      <DependentUpon>DrillingRcPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\DrillingCircularPattern.xaml.cs">
+      <DependentUpon>DrillingCircularPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\DrillingPatternSelectionView.xaml.cs">
+      <DependentUpon>DrillingPatternSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\Pattern\DrillingRectanglePattern.xaml.cs">
+      <DependentUpon>DrillingRectanglePattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Foratura\ParameterScreen\ForaturaSempliceParametriView.xaml.cs">
+      <DependentUpon>ForaturaSempliceParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Cava\FresaturaCavaOperazioniView.xaml.cs">
+      <DependentUpon>FresaturaCavaOperazioniView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Cava\FresaturaCavaParametriView.xaml.cs">
+      <DependentUpon>FresaturaCavaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\CommonMillOperationView.xaml.cs">
+      <DependentUpon>CommonMillOperationView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Contornatura\ContornaturaParametriView.xaml.cs">
+      <DependentUpon>ContornaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\CavaDrittaPattern.xaml.cs">
+      <DependentUpon>CavaDrittaPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\CavaDrittaApertaPattern.xaml.cs">
+      <DependentUpon>CavaDrittaApertaPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\MillingPatternSelectionView.xaml.cs">
+      <DependentUpon>MillingPatternSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniView.xaml.cs">
+      <DependentUpon>ScanalaturaLineaOperazioniView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\TextEngraving\TextEngravingParametriView.xaml.cs">
+      <DependentUpon>TextEngravingParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaOperazioniView.xaml.cs">
+      <DependentUpon>FresaturaFilettaturaOperazioniView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaParametriView.xaml.cs">
+      <DependentUpon>FresaturaFilettaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\ScanalaturaChiusa\ScanalaturaChiusaParametriView.xaml.cs">
+      <DependentUpon>ScanalaturaChiusaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\FresaturaLato\FresaturaLatoParametriView.xaml.cs">
+      <DependentUpon>FresaturaLatoParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\CavaArcoPattern.xaml.cs">
+      <DependentUpon>CavaArcoPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\CirclePattern.xaml.cs">
+      <DependentUpon>CirclePattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\RegularPolygonPattern.xaml.cs">
+      <DependentUpon>RegularPolygonPattern.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaParametriView.xaml.cs">
+      <DependentUpon>ScanalaturaLineaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml.cs">
+      <DependentUpon>RotoTraslateWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\TranslateWorkView.xaml.cs">
+      <DependentUpon>TranslateWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\RotateWorkView.xaml.cs">
+      <DependentUpon>RotateWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\EmptyEditStageView.xaml.cs">
+      <DependentUpon>EmptyEditStageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgramPreferenceView.xaml.cs">
+      <DependentUpon>ProgramPreferenceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditPhaseDetailView.xaml.cs">
+      <DependentUpon>EditPhaseDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroFresaSpianareDataTemplate.xaml.cs">
+      <DependentUpon>ParametroFresaSpianareDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroFresaFilettareDataTemplate.xaml.cs">
+      <DependentUpon>ParametroFresaFilettareDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroPuntaDataTemplate.xaml.cs">
+      <DependentUpon>ParametroPuntaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\MillToolHolderView.xaml.cs">
+      <DependentUpon>MillToolHolderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\OperazioneView.xaml.cs">
+      <DependentUpon>OperazioneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroScanalatoreDataTemplate.xaml.cs">
+      <DependentUpon>ParametroScanalatoreDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\LatheToolHolderView.xaml.cs">
+      <DependentUpon>LatheToolHolderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Spianatura\SpianaturaOperazioniView.xaml.cs">
+      <DependentUpon>SpianaturaOperazioniView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaSpianareDataTemplate.xaml.cs">
+      <DependentUpon>FresaSpianareDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaCandelaDataTemplate.xaml.cs">
+      <DependentUpon>FresaCandelaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\PuntaDataTemplate.xaml.cs">
+      <DependentUpon>PuntaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ValueConverter\EnumToBoolConverter.cs" />
+    <Compile Include="Properties\WorkDialogResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkDialogResources.resx</DependentUpon>
+    </Compile>
+    <Page Include="Controls\AppStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RawArcInputView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RawInitPointInputView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RawLineInputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\FilettaturaInPolliciDataTemplateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\FilettaturaMetricaDataTemplateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\ArticleDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\MachinesDialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\ThreadTableView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\ToolDataTemplate\ToolCommonScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\ToolsDialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneLamaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneAlesaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneBarenaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneCentrinoDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneForaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneMaschiaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneSvasaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioniCommonScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\ParameterScreen\MaschiaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\ParameterScreen\BarenaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\ParameterScreen\LamaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\ParameterScreen\AlesaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\XyDrillingPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\ArcDrillingPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\LineDrillingPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\DrillingRcPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\DrillingCircularPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\DrillingPatternSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\Pattern\DrillingRectanglePattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Foratura\ParameterScreen\ForaturaSempliceParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Cava\FresaturaCavaOperazioniView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Cava\FresaturaCavaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\CommonMillOperationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Contornatura\ContornaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Pattern\CavaDrittaPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Pattern\CavaDrittaApertaPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Pattern\MillingPatternSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\TextEngraving\TextEngravingParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaOperazioniView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\ScanalaturaChiusa\ScanalaturaChiusaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\FresaturaLato\FresaturaLatoParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Pattern\CavaArcoPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Pattern\CirclePattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Pattern\RegularPolygonPattern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\TranslateWorkView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\RotateWorkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\EmptyEditStageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProgramPreferenceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditPhaseDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditWorkViewResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\OperazioneViewResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroFresaSpianareDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroFresaFilettareDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroPuntaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\MillToolHolderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\OperazioneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroScanalatoreDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroFresaCandelaDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\LatheToolHolderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Spianatura\SpianaturaOperazioniView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Spianatura\SpianaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaSpianareDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaCandelaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\PuntaDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditWorkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProfileEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShellWiew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AttachedProperty\AutoSelectTextBox.cs" />
+    <Compile Include="AttachedProperty\AvalonEditorBinding.cs" />
+    <Compile Include="AuxClass\ImageTreeViewItem.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controls\CanvasPreview.cs" />
+    <Compile Include="Controls\RawInitPointInputView.xaml.cs">
+      <DependentUpon>RawInitPointInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RawLineInputView.xaml.cs">
+      <DependentUpon>RawLineInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditWorkView.xaml.cs">
+      <DependentUpon>EditWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProfileEditorView.xaml.cs">
+      <DependentUpon>ProfileEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroFresaCandelaDataTemplate.xaml.cs">
+      <DependentUpon>ParametroFresaCandelaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Spianatura\SpianaturaParametriView.xaml.cs">
+      <DependentUpon>SpianaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainScreen.xaml.cs">
+      <DependentUpon>MainScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ShellWiew.xaml.cs">
+      <DependentUpon>ShellWiew.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomHighlighting.xshd" />
+    <EmbeddedResource Include="Properties\WorkDialogResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WorkDialogResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\ServiceReference1\CncConvProg.View.ServiceReference1.LicenseInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceReference1\Service1.wsdl" />
+    <None Include="Service References\ServiceReference1\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\Service11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\Service12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CncConvProg.Geometry\CncConvProg.Geometry.csproj">
+      <Project>{4A4DE66E-CE74-49F6-B8CD-D45369E25AF7}</Project>
+      <Name>CncConvProg.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CncConvProg.Model\CncConvProg.Model.csproj">
+      <Project>{6E14A35D-0BB4-4EED-82BF-430F9EBD659D}</Project>
+      <Name>CncConvProg.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CncConvProg.ViewModel\CncConvProg.ViewModel.csproj">
+      <Project>{4B33C16C-E3D0-4D8F-9463-08890CAB3AAF}</Project>
+      <Name>CncConvProg.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Abstractions.Wpf\Framework.Abstractions.Wpf.csproj">
+      <Project>{0D705E58-EB2C-4004-877C-E733E58CD81B}</Project>
+      <Name>Framework.Abstractions.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Implementors.Wpf\Framework.Implementors.Wpf.csproj">
+      <Project>{3C6F35FD-D88E-4BFC-92F7-F4C28648770E}</Project>
+      <Name>Framework.Implementors.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sampleImage.png" />
+    <Resource Include="Images\archivia.png" />
+    <Resource Include="Images\Gui\okCheck_16.png" />
+    <Resource Include="Images\Gui\errorMark_16.png" />
+    <Resource Include="Images\Gui\move_ccw.png" />
+    <Resource Include="Images\Gui\Up.png" />
+    <Resource Include="Images\Gui\down.png" />
+    <Resource Include="Images\Gui\left.png" />
+    <Resource Include="Images\Gui\right.png" />
+    <Resource Include="Images\Gui\ok_48.png" />
+    <Resource Include="Images\Gui\warning_48.png" />
+    <Resource Include="Images\Work\Turning.png" />
+    <Resource Include="Images\Work\Turning_big.png" />
+    <Resource Include="Images\Work\turning_small.png" />
+    <Resource Include="Images\Work\MillFaceA.png" />
+    <Resource Include="Images\Work\MillFaceB.png" />
+    <Resource Include="Images\Work\MillFaceC.png" />
+    <Resource Include="Images\Work\MillFace_100.png" />
+    <Resource Include="Images\Work\MillFace_16.png" />
+    <Resource Include="Images\Work\MillFace_32.png" />
+    <Resource Include="Images\Work\MillContA.png" />
+    <Resource Include="Images\Work\MillContB.png" />
+    <Resource Include="Images\Work\MillContC.png" />
+    <Resource Include="Images\Work\MillContD.png" />
+    <Resource Include="Images\Work\MillCont_100.png" />
+    <Resource Include="Images\Work\MillCont_16.png" />
+    <Resource Include="Images\Work\millCont_32.png" />
+    <Resource Include="Images\Gui\generateCode.png" />
+    <Resource Include="Images\Gui\addPhase.png" />
+    <Resource Include="Images\Gui\newFile.png" />
+    <Resource Include="Images\Gui\save.png" />
+    <Resource Include="Images\Gui\openFile.png" />
+    <Resource Include="Images\Work\groove.png" />
+    <Resource Include="Images\Work\groove_big.png" />
+    <Resource Include="Images\Work\groove_small.png" />
+    <Resource Include="Images\Work\drill.png" />
+    <Resource Include="Images\Work\drill_big.png" />
+    <Resource Include="Images\Work\drill_small.png" />
+    <Resource Include="Images\Work\thread.png" />
+    <Resource Include="Images\Work\thread_big.png" />
+    <Resource Include="Images\Work\thread_small.png" />
+    <Resource Include="Images\Gui\tTable.png" />
+    <Resource Include="Images\Gui\tTable_big.png" />
+    <Resource Include="Images\Gui\tTable_small.png" />
+    <Resource Include="Images\Gui\tTools.png" />
+    <Resource Include="Images\Gui\tTools_big.png" />
+    <Resource Include="Images\Gui\tTools_small.png" />
+    <Resource Include="Images\Gui\Material\mat_h.png" />
+    <Resource Include="Images\Gui\Material\mat_k.png" />
+    <Resource Include="Images\Gui\Material\mat_m.png" />
+    <Resource Include="Images\Gui\Material\mat_n.png" />
+    <Resource Include="Images\Gui\Material\mat_p.png" />
+    <Resource Include="Images\Gui\Material\mat_s.png" />
+    <Resource Include="Images\Gui\Search.png" />
+    <Resource Include="Images\Gui\save_16.png" />
+    <Resource Include="Images\Work\MillCava_100.png" />
+    <Resource Include="Images\Work\MillCava_16.png" />
+    <Resource Include="Images\Work\MillCava_32.png" />
+    <Resource Include="Images\Work\caveMill.png" />
+    <Resource Include="Images\Work\caveMillSmall.png" />
+    <Resource Include="Images\Work\caveMill_Big.png" />
+    <Resource Include="Images\Work\MillCavaA.png" />
+    <Resource Include="Images\Work\MillCavaB.png" />
+    <Resource Include="Images\Work\MillCavaC.png" />
+    <Resource Include="Images\Work\millContCerchio_100.png" />
+    <Resource Include="Images\Work\millContCerchio_16.png" />
+    <Resource Include="Images\Work\millContCerchio_32.png" />
+    <Resource Include="Images\Work\millcontCerchio_50.png" />
+    <Resource Include="Images\Work\millLine.png" />
+    <Resource Include="Images\Work\millLine_big.png" />
+    <Resource Include="Images\Work\millline_small.png" />
+    <Resource Include="Images\Work\millScan.png" />
+    <Resource Include="Images\Work\millScanaCerchio_16.png" />
+    <Resource Include="Images\Work\millScanaCerchio_32.png" />
+    <Resource Include="Images\Work\millScanaCerchio_50.png" />
+    <Resource Include="Images\Work\millScanaCerchio_big.png" />
+    <Resource Include="Images\Work\millScan_big.png" />
+    <Resource Include="Images\Work\millscan_small.png" />
+    <Resource Include="Images\Work\LarghPassata.png" />
+    <Resource Include="Images\Work\profPassata.png" />
+    <Resource Include="Images\Work\ripAng_100.png" />
+    <Resource Include="Images\Work\ripAng_16.png" />
+    <Resource Include="Images\Work\ripAng_32.png" />
+    <Resource Include="Images\Work\ripAng_50.png" />
+    <Resource Include="Images\Work\timer.png" />
+    <Resource Include="Images\Work\timer_small.png" />
+    <Resource Include="Images\Work\oneWayFaceMilling.png" />
+    <Resource Include="Images\Work\spiralMilling.png" />
+    <Resource Include="Images\Gui\preference.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\trochoid_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\millLine_big_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\zeroPoint.png" />
+    <Resource Include="Images\Work\Milling\zeroPointDistance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\levelZOrigin.png" />
+    <Resource Include="Images\Work\Milling\sovrametalloZ.png" />
+    <Resource Include="Images\Work\Milling\sovrametalloZFinish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\levelZSecure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\ProfileStartPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\moveDownLeft.png" />
+    <Resource Include="Images\Gui\moveDownRight.png" />
+    <Resource Include="Images\Gui\MoveUpLeft.png" />
+    <Resource Include="Images\Gui\moveUpRight.png" />
+    <Resource Include="Images\Gui\move_cw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\MoveUndefined.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyPageDown.png" />
+    <Resource Include="Images\Gui\keyPageUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\arrowDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\arrowUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyA.png" />
+    <Resource Include="Images\Gui\keyC.png" />
+    <Resource Include="Images\Gui\keyI.png" />
+    <Resource Include="Images\Gui\keyJ.png" />
+    <Resource Include="Images\Gui\K.png" />
+    <Resource Include="Images\Gui\keyR.png" />
+    <Resource Include="Images\Gui\keyU.png" />
+    <Resource Include="Images\Gui\keyV.png" />
+    <Resource Include="Images\Gui\W.png" />
+    <Resource Include="Images\Gui\keyX.png" />
+    <Resource Include="Images\Gui\keyY.png" />
+    <Resource Include="Images\Gui\Z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyCtrl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyCanc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\keyAlt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\tTable.png" />
+    <Resource Include="Images\Work\tTable_big.png" />
+    <Resource Include="Images\Work\tTable_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\textEngraving.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\addPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\sortOperation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\setSortOrder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Lavorazioni\Fresatura\Pattern\Images\arco.png" />
+    <Resource Include="Lavorazioni\Fresatura\Pattern\Images\pentagono.png" />
+    <Resource Include="Images\Gui\ArticleDetail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mecprevico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".cple">
+      <Visible>False</Visible>
+      <Description>CncSimple File</Description>
+      <Progid>CncSimple</Progid>
+      <DefaultIcon>mecprevico.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

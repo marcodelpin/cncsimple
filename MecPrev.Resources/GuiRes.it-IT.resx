@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddCost" xml:space="preserve">
+    <value>Aggiungi Costo</value>
+  </data>
+  <data name="AddMachine" xml:space="preserve">
+    <value>Aggiungi Macchina</value>
+  </data>
+  <data name="Bore" xml:space="preserve">
+    <value>Bareno</value>
+  </data>
+  <data name="Boring" xml:space="preserve">
+    <value>Barenatura</value>
+  </data>
+  <data name="btnAddInchThread" xml:space="preserve">
+    <value>Aggiungi Filettatura Pollici</value>
+  </data>
+  <data name="btnAddMaterial" xml:space="preserve">
+    <value>Aggiungi Materiale</value>
+  </data>
+  <data name="btnAddMetricThread" xml:space="preserve">
+    <value>Aggiungi Filettatura Metrica</value>
+  </data>
+  <data name="btnAddPrice" xml:space="preserve">
+    <value>Aggiungi Prezzo</value>
+  </data>
+  <data name="btnAddTableRow" xml:space="preserve">
+    <value>Aggiungi Riga Tabella</value>
+  </data>
+  <data name="btnAddTool" xml:space="preserve">
+    <value>Aggiungi Utensile</value>
+  </data>
+  <data name="btnCalculate" xml:space="preserve">
+    <value>Calcola</value>
+  </data>
+  <data name="btnDelMateriale" xml:space="preserve">
+    <value>Cancella Materiale</value>
+  </data>
+  <data name="btnDelPrice" xml:space="preserve">
+    <value>Cancella Prezzo</value>
+  </data>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="CenterDrill" xml:space="preserve">
+    <value>Centrino</value>
+  </data>
+  <data name="Chamfer" xml:space="preserve">
+    <value>Svasatore</value>
+  </data>
+  <data name="ChangeToolTime" xml:space="preserve">
+    <value>Tempo Cambio Utensile : [sec]</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Grafici</value>
+  </data>
+  <data name="ContourOp" xml:space="preserve">
+    <value>Contornatura</value>
+  </data>
+  <data name="CostiAggiuntiviDlg" xml:space="preserve">
+    <value>Costi Aggiuntivi</value>
+  </data>
+  <data name="Counterbore" xml:space="preserve">
+    <value>Lamatore</value>
+  </data>
+  <data name="Counterboring" xml:space="preserve">
+    <value>Lamatura</value>
+  </data>
+  <data name="CutParameter" xml:space="preserve">
+    <value>Parametri di Taglio</value>
+  </data>
+  <data name="DefaultTimeGroup" xml:space="preserve">
+    <value>Tempi di Default</value>
+  </data>
+  <data name="DefaultUnit" xml:space="preserve">
+    <value>Unita Default Selezionata</value>
+  </data>
+  <data name="DefinedPrice" xml:space="preserve">
+    <value>Prezzo Definito Utente</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Dettagli</value>
+  </data>
+  <data name="Diameter" xml:space="preserve">
+    <value>Diametro</value>
+  </data>
+  <data name="dlgMachine" xml:space="preserve">
+    <value>Macchine</value>
+  </data>
+  <data name="dlgMaterial" xml:space="preserve">
+    <value>Materiali</value>
+  </data>
+  <data name="DlgPhaseDetail" xml:space="preserve">
+    <value>Dettagli Fase </value>
+  </data>
+  <data name="dlgSelectionUnit" xml:space="preserve">
+    <value>Selezione Unita </value>
+  </data>
+  <data name="dlgTabellaFilettature" xml:space="preserve">
+    <value>Tabella Filettatura</value>
+  </data>
+  <data name="dlgToolWindow" xml:space="preserve">
+    <value>Utensili</value>
+  </data>
+  <data name="Drill" xml:space="preserve">
+    <value>Punta</value>
+  </data>
+  <data name="DrillingOp" xml:space="preserve">
+    <value>Foratura</value>
+  </data>
+  <data name="DrillingTool" xml:space="preserve">
+    <value>Utensile Foratura</value>
+  </data>
+  <data name="Extern" xml:space="preserve">
+    <value>Esterna</value>
+  </data>
+  <data name="FaceGroove" xml:space="preserve">
+    <value>Frontale</value>
+  </data>
+  <data name="FaceMill" xml:space="preserve">
+    <value>Fresa a Spianare</value>
+  </data>
+  <data name="FaceMilling" xml:space="preserve">
+    <value>Spianatura</value>
+  </data>
+  <data name="FaceTurning" xml:space="preserve">
+    <value>Sfacciatura</value>
+  </data>
+  <data name="FlatMill" xml:space="preserve">
+    <value>Fresa Cilindrica</value>
+  </data>
+  <data name="GroovingOp" xml:space="preserve">
+    <value>Scanalatura</value>
+  </data>
+  <data name="HourlyCost" xml:space="preserve">
+    <value>Costo Orario</value>
+  </data>
+  <data name="Inch" xml:space="preserve">
+    <value>Pollici</value>
+  </data>
+  <data name="Intern" xml:space="preserve">
+    <value>Interna</value>
+  </data>
+  <data name="Lathe2Ax" xml:space="preserve">
+    <value>Tornio 2 Assi</value>
+  </data>
+  <data name="Lathe3Ax" xml:space="preserve">
+    <value>Tornio con asse C</value>
+  </data>
+  <data name="LoadingMachine" xml:space="preserve">
+    <value>Caricamento Macchina : [sec]</value>
+  </data>
+  <data name="MachineName" xml:space="preserve">
+    <value>Nome Macchina</value>
+  </data>
+  <data name="MachinesDialog" xml:space="preserve">
+    <value>Macchine</value>
+  </data>
+  <data name="MachineSelected" xml:space="preserve">
+    <value>Macchina Selezionata</value>
+  </data>
+  <data name="Material" xml:space="preserve">
+    <value>Materiale</value>
+  </data>
+  <data name="MaterialDialog" xml:space="preserve">
+    <value>Materiali</value>
+  </data>
+  <data name="MaterialGroup" xml:space="preserve">
+    <value>Gruppo Materiale</value>
+  </data>
+  <data name="MaterialSelected" xml:space="preserve">
+    <value>Materiale selezionato</value>
+  </data>
+  <data name="MaxRev" xml:space="preserve">
+    <value>Giri Max</value>
+  </data>
+  <data name="Mill" xml:space="preserve">
+    <value>Fresa</value>
+  </data>
+  <data name="Millimeter" xml:space="preserve">
+    <value>Millimetri</value>
+  </data>
+  <data name="MillingPreference" xml:space="preserve">
+    <value>Preferenze Centro di Lavoro</value>
+  </data>
+  <data name="MillingTool" xml:space="preserve">
+    <value>Utensile Fresare</value>
+  </data>
+  <data name="MillThreadOp" xml:space="preserve">
+    <value>Filettatura Fresata</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="NewFile" xml:space="preserve">
+    <value>Nuovo File</value>
+  </data>
+  <data name="NewPhase" xml:space="preserve">
+    <value>Aggiungi Fase</value>
+  </data>
+  <data name="NumberPassate" xml:space="preserve">
+    <value>N° Passate</value>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Apri</value>
+  </data>
+  <data name="OpenSlot" xml:space="preserve">
+    <value>Tasca Aperta</value>
+  </data>
+  <data name="Operation" xml:space="preserve">
+    <value>Operazione</value>
+  </data>
+  <data name="ParamMaterial" xml:space="preserve">
+    <value>Materiale Per Parametri</value>
+  </data>
+  <data name="pesoSpecifico" xml:space="preserve">
+    <value>Peso Specifico</value>
+  </data>
+  <data name="PhaseDescription" xml:space="preserve">
+    <value>Descrizione Fase</value>
+  </data>
+  <data name="PhaseProperty" xml:space="preserve">
+    <value>Proprietà Fase</value>
+  </data>
+  <data name="Pitch" xml:space="preserve">
+    <value>Passo</value>
+  </data>
+  <data name="PocketOp" xml:space="preserve">
+    <value>Tasca</value>
+  </data>
+  <data name="preference" xml:space="preserve">
+    <value>Preferenze</value>
+  </data>
+  <data name="ProgrammingOperationTime" xml:space="preserve">
+    <value>Tempo Programmazione Operazione : [min]</value>
+  </data>
+  <data name="RapidVel" xml:space="preserve">
+    <value>Velocità Rapido</value>
+  </data>
+  <data name="Reamer" xml:space="preserve">
+    <value>Alesatore</value>
+  </data>
+  <data name="Reamering" xml:space="preserve">
+    <value>Alesatura</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="SaveAs" xml:space="preserve">
+    <value>Salva con nome</value>
+  </data>
+  <data name="ScreenBack" xml:space="preserve">
+    <value>Indietro</value>
+  </data>
+  <data name="ScreenForward" xml:space="preserve">
+    <value>Avanti</value>
+  </data>
+  <data name="SecureDistance" xml:space="preserve">
+    <value>Distanza di sicurezza</value>
+  </data>
+  <data name="SecureRapidFeed" xml:space="preserve">
+    <value>Velocita Rapida di sicurezza</value>
+  </data>
+  <data name="SetupFixtureTime" xml:space="preserve">
+    <value>Tempo Setup Staffaggio : [min]</value>
+  </data>
+  <data name="SetupToolTime" xml:space="preserve">
+    <value>Tempo Montaggio Utensile : [min]</value>
+  </data>
+  <data name="SideOp" xml:space="preserve">
+    <value>Lato</value>
+  </data>
+  <data name="SimpleDrilling" xml:space="preserve">
+    <value>Foratura Semplice</value>
+  </data>
+  <data name="SlotOp" xml:space="preserve">
+    <value>Cava</value>
+  </data>
+  <data name="SortOperation" xml:space="preserve">
+    <value>Ordina Operazioni</value>
+  </data>
+  <data name="StockQuantity" xml:space="preserve">
+    <value>Quantità</value>
+  </data>
+  <data name="TableGroup" xml:space="preserve">
+    <value>Tabelle</value>
+  </data>
+  <data name="Tap" xml:space="preserve">
+    <value>Maschio</value>
+  </data>
+  <data name="TapDrill" xml:space="preserve">
+    <value>Preforo</value>
+  </data>
+  <data name="Tapping" xml:space="preserve">
+    <value>Maschiatura</value>
+  </data>
+  <data name="ThreadTableDialog" xml:space="preserve">
+    <value>Tabella Filettatura</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Tempo</value>
+  </data>
+  <data name="TimeCalculationGroup" xml:space="preserve">
+    <value>Calcolo Tempo</value>
+  </data>
+  <data name="ToolChange" xml:space="preserve">
+    <value>Cambio Utensile</value>
+  </data>
+  <data name="ToolCost" xml:space="preserve">
+    <value>Costo Utensile</value>
+  </data>
+  <data name="toolDetailGroup" xml:space="preserve">
+    <value>Dettaglio Utensile</value>
+  </data>
+  <data name="ToolDialog" xml:space="preserve">
+    <value>Utensili</value>
+  </data>
+  <data name="ToolLabel" xml:space="preserve">
+    <value>Etichetta Utensile</value>
+  </data>
+  <data name="ToolLifeTimeSpan" xml:space="preserve">
+    <value>Tempo Vita Utensile</value>
+  </data>
+  <data name="ToolWear" xml:space="preserve">
+    <value>Usura Utensile</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Totale</value>
+  </data>
+  <data name="TurnGroove" xml:space="preserve">
+    <value>Utensile Scanalatura</value>
+  </data>
+  <data name="TurningOp" xml:space="preserve">
+    <value>Tornitura</value>
+  </data>
+  <data name="TurningPreference" xml:space="preserve">
+    <value>Preferenze Tornio</value>
+  </data>
+  <data name="TurningTool" xml:space="preserve">
+    <value>Utensile Tornitura</value>
+  </data>
+  <data name="TurnThread" xml:space="preserve">
+    <value>Utensile Filettare</value>
+  </data>
+  <data name="TurnThreadingOp" xml:space="preserve">
+    <value>Filettatura</value>
+  </data>
+  <data name="TurnTool" xml:space="preserve">
+    <value>Utensile Tornitura</value>
+  </data>
+  <data name="VerticalMill" xml:space="preserve">
+    <value>Centro Di Lavoro</value>
+  </data>
+  <data name="Voce" xml:space="preserve">
+    <value>Voce</value>
+  </data>
+  <data name="WorkCycle" xml:space="preserve">
+    <value>Ciclo di Lavorazione</value>
+  </data>
+  <data name="ThreadMill" xml:space="preserve">
+    <value>Fresa Filettare</value>
+  </data>
+  <data name="UpdatePreview" xml:space="preserve">
+    <value>Aggiorna Anteprima</value>
+  </data>
+  <data name="WorkParameter" xml:space="preserve">
+    <value>Parametri Lavorazione</value>
+  </data>
+  <data name="InputProfile" xml:space="preserve">
+    <value>Inserimento Profilo</value>
+  </data>
+  <data name="Fixture" xml:space="preserve">
+    <value>Staffaggio</value>
+  </data>
+  <data name="LoadingMachineTv" xml:space="preserve">
+    <value>Caricamento Materiale</value>
+  </data>
+  <data name="MachiningTime" xml:space="preserve">
+    <value>Tempo Lavorazione</value>
+  </data>
+  <data name="MountingTools" xml:space="preserve">
+    <value>Setup Utensili</value>
+  </data>
+  <data name="Programmation" xml:space="preserve">
+    <value>Programmazione</value>
+  </data>
+  <data name="RapidTime" xml:space="preserve">
+    <value>Tempo Rapidi</value>
+  </data>
+  <data name="SetupFixtureTv" xml:space="preserve">
+    <value>Setup Staffaggio</value>
+  </data>
+  <data name="SetupMachine" xml:space="preserve">
+    <value>Setup Macchina</value>
+  </data>
+  <data name="ToolChangeTv" xml:space="preserve">
+    <value>Tempo Cambio Utensile</value>
+  </data>
+  <data name="VariousCost" xml:space="preserve">
+    <value>Costi Aggiuntivi</value>
+  </data>
+  <data name="WorkTime" xml:space="preserve">
+    <value>Tempo Lavoro</value>
+  </data>
+  <data name="Circle" xml:space="preserve">
+    <value>Cerchio</value>
+  </data>
+  <data name="Hexagon" xml:space="preserve">
+    <value>Esagono</value>
+  </data>
+  <data name="Pipe" xml:space="preserve">
+    <value>Tubo</value>
+  </data>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Rettangolo</value>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>Quadrato</value>
+  </data>
+  <data name="CutDepth" xml:space="preserve">
+    <value>Profondità Taglio</value>
+  </data>
+  <data name="CutSpeed" xml:space="preserve">
+    <value>Velocità Taglio</value>
+  </data>
+  <data name="Feed" xml:space="preserve">
+    <value>Avanzamento</value>
+  </data>
+  <data name="RevMin" xml:space="preserve">
+    <value>Giri\Min</value>
+  </data>
+  <data name="Velocity" xml:space="preserve">
+    <value>Velocità</value>
+  </data>
+  <data name="Esterna" xml:space="preserve">
+    <value>Esterna</value>
+  </data>
+  <data name="Interna" xml:space="preserve">
+    <value>Interna</value>
+  </data>
+  <data name="Tornitura" xml:space="preserve">
+    <value>Tornitura</value>
+  </data>
+  <data name="Tabelle" xml:space="preserve">
+    <value>Tabelle</value>
+  </data>
+  <data name="LarghezzaPassata" xml:space="preserve">
+    <value>Larghezza Passata (ae)</value>
+  </data>
+  <data name="ProfonditaPassata" xml:space="preserve">
+    <value>Prof. Passata (ap)</value>
+  </data>
+  <data name="DettagliFase" xml:space="preserve">
+    <value>Dettagli Fase</value>
+  </data>
+</root>

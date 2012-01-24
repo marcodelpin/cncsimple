@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.Fresatura.ScanalaturaLinea.ScanalaturaLineaOperazioniView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ValueConverter:EnumToBoolConverter x:Key="EBConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".3*" />
+            <RowDefinition Height=".3*" />
+            <RowDefinition Height=".3*" />
+        </Grid.RowDefinitions>
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*" />
+            <ColumnDefinition Width=".5*" />
+        </Grid.ColumnDefinitions>-->
+        <GroupBox Padding="5">
+            <GroupBox.Header>
+                <TextBlock Text="Roughing" FontSize="20"/>
+            </GroupBox.Header>
+            <DockPanel >
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <TextBlock Text="Abilited" FontSize="14"/>
+                    <CheckBox IsChecked="{Binding Path=SgrossaturaAbilitata}" x:Name="cbSgr" Margin="5"/>
+                </StackPanel>
+                <ListBox x:Name="RadioButtonList" IsEnabled="{Binding Path=IsChecked, ElementName=cbSgr}" BorderThickness="0" Background="{x:Null}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton1, Mode=OneWay}">
+                        <RadioButton IsChecked="{Binding Path=ModoSgrossatura,   
+                        Converter={StaticResource EBConverter},   
+                        ConverterParameter=0}" Content="Traditional"
+                        GroupName="Sgrossatura"
+                        x:Name="RadioButton1"     
+                        />
+                    </ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton2, Mode=OneWay}">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton IsChecked="{Binding Path=ModoSgrossatura,   
+                        Converter={StaticResource EBConverter},   
+                        ConverterParameter=1}" Content="Trochidal"
+                        GroupName="Sgrossatura"
+                        x:Name="RadioButton2" 
+                                     
+                    />
+                            <TextBlock Text=" - Step % : "/>
+                            <TextBox Text="{Binding Path=TrochoidalStep}" MinWidth="60" IsEnabled="{Binding IsChecked, ElementName=RadioButton2, Mode=OneWay}"/>
+                            <TextBlock Text=" 8% ~ 10%  x D: "/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+
+                <Image DockPanel.Dock="Right" MaxWidth="200" MaxHeight="200" Grid.Column="1" Source="{Binding SelectedItem.Content.Tag, ElementName=RadioButtonList}" />
+            </DockPanel>
+        </GroupBox>
+
+        <StackPanel  Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Finishing Abilited"/>
+                <CheckBox IsChecked="{Binding Path=FinituraAbilitata}" x:Name="cbFin"/>
+            </StackPanel>
+            <StackPanel Margin="10,0">
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
+                    <TextBlock Text="Compesation Cnc : "/>
+                    <CheckBox IsChecked="{Binding Path=FinishWithCompensation}" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
+                    <TextBlock Text="Rest. Finish Material : "/>
+                    <TextBox Text="{Binding Path=SovrametalloFinitura}" MinWidth="100"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+
+        <StackPanel  Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Chamfer Abilited"/>
+                <CheckBox IsChecked="{Binding Path=SmussaturaAbilitata}"/>
+            </StackPanel>
+            <StackPanel Margin="10,0" IsEnabled="{Binding Path=SmussaturaAbilitata}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Mill Depth : "/>
+                    <TextBox Text="{Binding Path=ProfonditaFresaSmussatura}" MinWidth="100"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

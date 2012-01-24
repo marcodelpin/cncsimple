@@ -1,0 +1,135 @@
+﻿<Window x:Class="CncConvProg.View.Dialog.ThreadTableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Dialog="clr-namespace:CncConvProg.View.Dialog" xmlns:Dialog1="clr-namespace:CncConvProg.ViewModel.Dialog;assembly=CncConvProg.ViewModel" Title="EditWorkView" MinHeight="600" MinWidth="600"
+        WindowStyle="ToolWindow"
+        WindowState="Normal"
+        Width="1024"
+        Height="768"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="671*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.362*" MinWidth="150" />
+            <ColumnDefinition Width="0.638*" MinWidth="150" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Lista Utensili -->
+        <Border x:Name="Colonna_SX" Grid.RowSpan="1">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <Button Command="{Binding NewThreadTypeCmd}"  CommandParameter="0" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/Images/Gui/addPlus.png"  Width="32"/>
+                            <TextBlock Text="Add Metric Thread" VerticalAlignment="Center" Margin="5" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding NewThreadTypeCmd}"  CommandParameter="1" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/Images/Gui/addPlus.png"  Width="32"/>
+                            <TextBlock Text="Add Inch Thread" VerticalAlignment="Center" Margin="5" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <ListView ItemsSource="{Binding Path=TipologieFilettatura}" SelectionMode="Single" 
+                          SelectedItem="{Binding Path=TipoMaschiaturaSelezionato}" Margin="5"
+                          >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Descrizione}" Width="150"/>
+                            <GridViewColumn Width="50">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="X"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+        </Border>
+
+        <GridSplitter Width="2" Height="250"  />
+        <!-- Dettagli Utensile -->
+        <Border x:Name="Colonna_DX" Grid.Column="1" Margin="2,5,5,5" BorderThickness="2" Grid.RowSpan="1">
+            <DockPanel>
+
+                <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top"
+                               Width="250" Text="{Binding TipoMaschiaturaSelezionato.Descrizione}" FontSize="24" Margin="10,10,0,10" />
+                <StackPanel DockPanel.Dock="Top" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Description : " MinWidth="100" />
+                        <TextBox Text="{Binding Path=TipoMaschiaturaSelezionato.Descrizione}" MinWidth="100" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Coefficient OD : " MinWidth="100" />
+                        <TextBox Text="{Binding Path=TipoMaschiaturaSelezionato.CoefficentOd}" MinWidth="100" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Coefficient ID : " MinWidth="100" />
+                        <TextBox Text="{Binding Path=TipoMaschiaturaSelezionato.CoefficentId}" MinWidth="100" />
+                    </StackPanel>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Top" Command="{Binding AddThreadRowCmd}" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Images/Gui/addPlus.png"  Width="16"/>
+                        <TextBlock Text="Add Table Row" VerticalAlignment="Center" Margin="5" />
+                    </StackPanel>
+                </Button>
+
+                <ContentControl Content="{Binding Path=TipoMaschiaturaSelezionato}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type Dialog1:FilettaturaMetricaViewModel}">
+                            <Dialog:FilettaturaMetricaDataTemplateView/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type Dialog1:FilettaturaInPolliciViewModel}">
+                            <Dialog:FilettaturaInPolliciDataTemplateView/>
+                        </DataTemplate>
+
+                        <!-- <DataGrid Name="dataGrid1" Margin="8" ItemsSource="{Binding Path=Filettature}" AutoGenerateColumns="False"
+                          DockPanel.Dock="Top" CanUserSortColumns="False" CanUserAddRows="False" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Diametro Nominale" Binding="{Binding Path=DiametroNominale}"/>
+                                    <DataGridTextColumn Header="Passo" Binding="{Binding Path=PassoMetrico}"/>
+                                    <DataGridTextColumn Header="Dia. Preforo" Binding="{Binding Path=PreforoDiametro}"/>
+                                    <DataGridTextColumn Header="n° Passate in tornitura" Binding="{Binding Path=NumeroPassateInTornitura}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type Model:FilettaturaInPollici}">
+                            <DataGrid Name="dataGrid1" Margin="8" ItemsSource="{Binding Path=Filettature}" AutoGenerateColumns="False"
+                          DockPanel.Dock="Top" CanUserSortColumns="False" CanUserAddRows="False" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Dia. Nominale[mm]" Binding="{Binding Path=DiametroNominale}"/>
+                                    <DataGridTemplateColumn MinWidth="150" Header="Nomenclatura in Pollici">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Text="{Binding Path=NomenclaturaInPollici}" IsEnabled="{Binding Path=IsPollici}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Filletti Per Pollice" Binding="{Binding Path=FilettaturePerPollice}"/>
+                                    <DataGridTextColumn Header="Dia. Preforo" Binding="{Binding Path=PreforoDiametro}"/>
+                                    <DataGridTextColumn Header="n° Passate in tornitura" Binding="{Binding Path=NumeroPassateInTornitura}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>-->
+                    </ContentControl.Resources>
+                </ContentControl>
+
+            </DockPanel>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Grid.ColumnSpan="2" >
+            <Button Content="Annulla" Width="100" Margin="5" Click="Button_Click_1" />
+            <Button Content="Ok" Width="100" Margin="5" Click="Button_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

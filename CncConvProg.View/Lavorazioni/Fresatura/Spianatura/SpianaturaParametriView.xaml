@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.Fresatura.Spianatura.SpianaturaParametriView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:CustomControl="clr-namespace:CncConvProg.View.Controls" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="154*" />
+        </Grid.ColumnDefinitions>
+        <CustomControl:FocusableListBox SelectedItem="{Binding SelectedItem}" KeyboardNavigation.TabNavigation="Continue" x:Name="lbParameter" BorderBrush="{x:Null}" Grid.ColumnSpan="1">
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPoint.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Zero Point" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <ComboBox x:Name="cbMaterial" 
+            				ItemsSource="{Binding Path=StartPointLookup}"
+            				SelectedValue="{Binding Path=SelectedStartPoint}"
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key" 
+                            Width="100" />
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/MillFaceA.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Height" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Altezza, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/MillFaceB.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Width" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Larghezza, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPointDistance.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Center Distance X : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=OffsetCentroX, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPointDistance.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Center Distance Y : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=OffsetCentroY, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/LevelZOrigin.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Start Z : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/work/milling/sovrametalloZ.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Remove Material : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Sovrametallo, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/work/Milling/sovrametallozfinish.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Finishing Rest Mat. : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SovrametalloFinitura, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/work/Milling/levelZSecure.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Secure Z : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
+
+
+
+        </CustomControl:FocusableListBox>
+
+        <Image VerticalAlignment="Top" MaxWidth="200" MaxHeight="200"  Grid.Column="1" Source="{Binding Path=SelectedItem.Tag}" />
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ParameterViewModels="clr-namespace:CncConvProg.ViewModel.CommonViewModel.ParameterViewModels;assembly=CncConvProg.ViewModel" 
+                    xmlns:ToolViewModels="clr-namespace:CncConvProg.ViewModel.CommonViewModel.ToolViewModels;assembly=CncConvProg.ViewModel" xmlns:ToolDataTemplate="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.ToolDataTemplate" xmlns:ParametriDataTemplate="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.ParametriDataTemplate" xmlns:Common1="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.Common" xmlns:ToolHolder="clr-namespace:CncConvProg.ViewModel.EditWorkDialog.OperationViewModel.ToolHolder;assembly=CncConvProg.ViewModel">
+
+    <!-- Tool Holder DataTemplate -->
+
+    <DataTemplate DataType="{x:Type ToolHolder:LatheToolHolderViewModel }">
+        <Common1:LatheToolHolderView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ToolHolder:MillToolHolderViewModel}">
+        <Common1:MillToolHolderView />
+    </DataTemplate>
+    
+    <!-- Parametri -->
+    <DataTemplate DataType="{x:Type ParameterViewModels:ParametroPuntaViewModel}">
+        <ParametriDataTemplate:ParametroPuntaDataTemplate />
+    </DataTemplate>
+
+    <!--<DataTemplate DataType="{x:Type ParameterViewModels:ParametroFresaFilettareViewModel}">
+        <ParametriDataTemplate:ParametroFresaFilettareDataTemplate />
+    </DataTemplate>-->
+
+
+    <DataTemplate DataType="{x:Type ParameterViewModels:ParametroFresaCandelaViewModel}">
+        <ParametriDataTemplate:ParametroFresaCandelaDataTemplate />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ParameterViewModels:ParametroFresaSpianareViewModel}">
+        <ParametriDataTemplate:ParametroFresaSpianareDataTemplate />
+    </DataTemplate>
+
+
+    <!-- Utensili -->
+
+    <DataTemplate DataType="{x:Type ToolViewModels:PuntaViewModel}">
+        <ToolDataTemplate:PuntaDataTemplate />
+    </DataTemplate>
+
+    <!--<DataTemplate DataType="{x:Type ToolViewModels:FresaFilettareViewModel}">
+        <ToolDataTemplate:FresaCandelaDataTemplate />
+    </DataTemplate>-->
+
+    <DataTemplate DataType="{x:Type ToolViewModels:FresaSpianareViewModel}">
+        <ToolDataTemplate:FresaSpianareDataTemplate />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ToolViewModels:FresaCandelaViewModel}">
+        <ToolDataTemplate:FresaCandelaDataTemplate />
+    </DataTemplate>
+
+
+</ResourceDictionary>
