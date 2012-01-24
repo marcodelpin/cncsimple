@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Markup;
 using CncConvProg.View.AuxClass;
 
-
+// from ious d v2
 namespace CncConvProg.View
 {
     /// <summary>
