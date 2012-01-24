@@ -113,9 +113,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\RibbonControlsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="RptSen">
-      <HintPath>..\Lib\RptSen.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

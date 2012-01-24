@@ -46,54 +46,10 @@ namespace CncConvProg.View
         private void Application_Exit(object sender, EventArgs e)
         {
 #if RELEASE
-            try
-            {
-                WriteReport("Success Ending");
-            }
-            catch (Exception)
-            {
-
-            }
 #endif
         }
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            // If the app is running outside of the debugger then report the exception using
-            // the browser's exception mechanism. On IE this will display it a yellow alert 
-            // icon in the status bar and Firefox will display a script error.
-            //if (!System.Diagnostics.Debugger.IsAttached)
-            {
-#if RELEASE
-                try
-                {
-                    WriteReport(e.ExceptionObject.ToString() + " " + e.ToString());
-
-                    Current.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
-
-                    Current.Shutdown(1);
-
-                }
-                catch (Exception)
-                {
-
-                }
-#endif
-
-            }
-        }
-        private void WriteReport(string error)
-        {
-            if (!RptSen.ReportGenerator.PcId.CheckInternetConnection.IsConnectedToInternet()) return;
-
-            using (var s = new ServiceReference1.Service1Client())
-            {
-                var timeSpan = DateTime.Now.Subtract(_appStart).TotalMinutes;
-
-                var mi = RptSen.ReportGenerator.PcId.GetPcId();
-
-                s.Rep(timeSpan, mi.MacAddress, error, "CncConvProg");
-            }
-
         }
     }
 }
