@@ -1,0 +1,96 @@
+﻿
+/* un altro problema con referenz ae  file e che una volta clonata ( deep copy) di un elemento viene copiato anche tutto  le refernzae
+
+e allora si perde il rif a elemento originale
+
+per ovviare a questo problema occorre fare sistema simile a entityframewoek , guardare unity.. e altro pattern
+
+
+magari fare copia del file in modo da accederci senza problemi durante diclo del programma ( come accade a word , access. ecc)
+
+poi fare singleton per accedere..
+
+poi per evitarte errori solamente guid alle classe per avere referenza , non referenziare la classe.
+
+
+*/
+
+  /*
+     * todo : prendere in considerazione di raggupare tutti elementi che hanno in comune diametro , vt ngiriecc..
+     * 
+     * maschi, frese , punte cosi avrei stessi model e viewmodel
+     */
+/*
+ho deciso di pountare prima su spianatura , fatta come si deve, poi cediamo per il resto.
+
+- mi serve gestione inch / mm
+- finestra nuovo articolo dove decido se mm / inche materiale e ulteriori cose..
+
+-- per ora articolo e materiale e parametri non mi servono.
+
+pero mi serve inch e mm
+
+lo devo mettere su nuovo articolo.. be vedremo..
+
+---- 
+
+--- quasio mi conviene fare un'altro screen.
+
+
+se intendo fare solo spianatura ..
+
+mi basta avere niente lista operazioni..
+
+solo screen spianatura.
+
+niente .. ma lascio cosi.. anzi metto disabled le altre operazioni cosi da fare capire 
+
+comunque mi servono immagini..
+
+
+*/
+
+/*
+implementare controllo per inserimento dato utente. tipo con compensazione raggio e in caso di ut. motorizzato o di comp 01234578 in caso di ut. tornitura..
+*/
+.su apertura edit . caricare anteprima e selezionare primo elemento treeStage.
+
+. associare correttamente l'anteprima con giusto asse..
+
+.. quando levo operazione finitura mi da lavorazine defnita anche se non è definita sgr. su tornitura.
+
+visto le mie ridotte facolta del lunedi mi accingero a sviluppare magazzino utensile..
+
+le classe operazioni e classe parametro sono identiche , sarebbe il caso di trovare op comune.
+
+toolStore -> getDrill(dia, materiale),  ->> drill -> getParameter -> 
+
+  /*
+         * dovro spostare i parametri da le varie derivazioni dell'operazione 
+         * a i vari utensili.
+         * innanzitutto dovro avere magazzino utensile funzionante.
+         */
+
+		 /*
+		 allora incomincerei a buttare dentro codice funzinanamete.
+
+		 prendiamo in esame sfacciatura 
+
+		 ciclo sfacciatura -> ciclo sgrossatura -> ciclo gola..
+
+		 tutti e 3 cicli hanno hanno proprietà in comune.
+
+		 nella scanalatura
+		 prima devo fare offset per utensile.
+
+		 ,poi devo fare offset per raggio utensile . e posizione correttore.
+
+		 per sfacciatura oltre la linea dello 0 è diverso..
+		 */
+
+
+anteprima lavorazione si puo fare se operazione riesce a dare anteprima -
+
+screen operazioni è valido se tutte i screen operazioni sono validi
+
+lavorazione è valida se tutti i screen sono validi

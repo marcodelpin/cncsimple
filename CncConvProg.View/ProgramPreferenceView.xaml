@@ -1,0 +1,45 @@
+﻿<Window x:Class="CncConvProg.View.ProgramPreferenceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Title="Preference Dialog" 
+        WindowStyle="ToolWindow"
+        WindowState="Normal"
+        Width="400"
+        Height="300"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".4*" />
+            <RowDefinition Height=".4*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Program Preference" FontSize="20" />
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Default Measure Unit" Width="150"/>
+                <ComboBox Width="150" ItemsSource="{Binding Path=ComboBoxUnits}" SelectedItem="{Binding Path=UnitSelected}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Rapid Feed Value " Width="150"/>
+                <TextBox Width="150" Text="{Binding Path=RapidSecureFeed}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Secure Distance" Width="150"/>
+                <TextBox Width="150" Text="{Binding Path=SecureDistance}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Default Secure Z " Width="150"/>
+                <TextBox Width="150" Text="{Binding Path=DefaultSecureZ}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Grid.ColumnSpan="2" >
+            <Button Content="Annulla" Width="100" Margin="5" Click="Button_Click_1" />
+            <Button Content="Ok" Width="100" Margin="5" Click="Button_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

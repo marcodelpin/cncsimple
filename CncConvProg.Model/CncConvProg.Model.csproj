@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E14A35D-0BB4-4EED-82BF-430F9EBD659D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CncConvProg.Model</RootNamespace>
+    <AssemblyName>CncConvProg.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\InvisibleEntity.cs">
+      <Link>PreviewEntity\InvisibleEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\IPreviewEntity.cs">
+      <Link>PreviewEntity\IPreviewEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\PreviewArc3D.cs">
+      <Link>PreviewEntity\PreviewArc3D.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\PreviewLine3D.cs">
+      <Link>PreviewEntity\PreviewLine3D.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\PreviewPathBuilder.cs">
+      <Link>PreviewEntity\PreviewPathBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\PreviewPathEntity\TimeHelper.cs">
+      <Link>PreviewEntity\TimeHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Alesatore.cs">
+      <Link>Tool\Drill\Alesatore.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Bareno.cs">
+      <Link>Tool\Drill\Bareno.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Centrino.cs">
+      <Link>Tool\Drill\Centrino.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\DrillTool.cs">
+      <Link>Tool\Drill\DrillTool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Lamatore.cs">
+      <Link>Tool\Drill\Lamatore.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Maschio.cs">
+      <Link>Tool\Drill\Maschio.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Punta.cs">
+      <Link>Tool\Drill\Punta.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Drill\Svasatore.cs">
+      <Link>Tool\Drill\Svasatore.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\LatheTool\UtensileScanalatura.cs">
+      <Link>Tool\LatheTool\UtensileScanalatura.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\LatheTool\UtensileTornitura.cs">
+      <Link>Tool\LatheTool\UtensileTornitura.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaBase.cs">
+      <Link>Tool\Mill\FresaBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaCandela.cs">
+      <Link>Tool\Mill\FresaCandela.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaFilettare.cs">
+      <Link>Tool\Mill\FresaFilettare.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Mill\FresaSpianare.cs">
+      <Link>Tool\Mill\FresaSpianare.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaBase.cs">
+      <Link>Tool\Parametro\ParametroFresaBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaCandela.cs">
+      <Link>Tool\Parametro\ParametroFresaCandela.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaFilettare.cs">
+      <Link>Tool\Parametro\ParametroFresaFilettare.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroFresaSpianare.cs">
+      <Link>Tool\Parametro\ParametroFresaSpianare.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroPunta.cs">
+      <Link>Tool\Parametro\ParametroPunta.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroUtensile.cs">
+      <Link>Tool\Parametro\ParametroUtensile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroUtensileTornitura.cs">
+      <Link>Tool\Parametro\ParametroUtensileTornitura.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MecPrev\CncConvProg.Model\Tool\Parametro\ParametroUtensileTornituraScanalatura.cs">
+      <Link>Tool\Parametro\ParametroUtensileTornituraScanalatura.cs</Link>
+    </Compile>
+    <Compile Include="ConversationalStructure\Abstraction\LavorazioneFresatura.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\LavorazioneTornitura.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\FaseDiLavoro.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\FeedInterfaces.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\IPattern\IForaturaPatternable.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\IPattern\IPatternDrilling.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\IPreviewable.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\IWorkRotable.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\Lavorazione.cs" />
+    <Compile Include="ConversationalStructure\Cs.cs" />
+    <Compile Include="ConversationalStructure\FasiDiLavoro\FaseCentroDiLavoro.cs" />
+    <Compile Include="ConversationalStructure\FasiDiLavoro\FaseTornio.cs" />
+    <Compile Include="ConversationalStructure\FasiDiLavoro\FaseTornio3Assi.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\CheckValueHelper.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Common\SquareShapeHelper.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\DrillBaseClass.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\ForaturaEnum.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\ForaturaEx.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\IDrillDiameter.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\IBarenoAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\ILamaturaAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\IAlesatoreAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\ICentrinoAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\IForaturaAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\IMaschiaturaAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Interface\ISvasaturaAble.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\DrillPatternHelper.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingRc.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingLine.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingArc.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingCircle.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingLatheCenter.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingRectangle.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingXy.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Common\LavorazioniEnumOperazioni.cs" />
+    <Compile Include="FeedAndSpeedHelper.cs" />
+    <Compile Include="Materiale.cs" />
+    <Compile Include="Singleton.cs" />
+    <Compile Include="Tool\IDiametrable.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\MillProgrammingHelper.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\CavaDrittaApertaPattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\TextEngravingModel.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\FresaturaFilettatura.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\FresaturaScanalaturaChiusa.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\FresaturaLato.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\CavaArcoPattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\CavaDrittaPattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\CirclePattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\MillPatternHelper.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\RettangoloPattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\ScanalaturaLinea.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\FresaturaCava.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\FresaturaContornatura.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\FreeProfilePattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\IMillingPattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\IMillingPatternable.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Pattern\RegularPolygonPattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Fresatura\Spianatura.cs" />
+    <Compile Include="ConversationalStructure\Abstraction\IMillLeveable.cs" />
+    <Compile Include="ConversationalStructure\Operazione.cs" />
+    <Compile Include="ConversationalStructure\Operation\IOperationTurnable.cs" />
+    <Compile Include="CycleTimeCollector.cs" />
+    <Compile Include="FileManageUtility\DefaultDataManager.cs" />
+    <Compile Include="FileManageUtility\FileUtility.cs" />
+    <Compile Include="FileManageUtility\PathFolderHelper.cs" />
+    <Compile Include="FileManageUtility\ProgramPreference.cs" />
+    <Compile Include="MachineControl\NumericControl.cs" />
+    <Compile Include="FileModel.cs" />
+    <Compile Include="ThreadTable\CutViewerStock.cs" />
+    <Compile Include="PathGenerator\CodeCreator.cs" />
+    <Compile Include="PathGenerator\MachineProgram.cs" />
+    <Compile Include="PathGenerator\ProgramAction.cs" />
+    <Compile Include="PathGenerator\ProgramPhase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThreadTable\RigaTabellaFilettatura.cs" />
+    <Compile Include="ThreadTable\TabellaFilettature.cs" />
+    <Compile Include="ThreadTable\TipologiaFilettatura.cs" />
+    <Compile Include="ToolMachine\CutViewerHelper.cs" />
+    <Compile Include="ToolMachine\HorizontalLathe2Axis.cs" />
+    <Compile Include="ToolMachine\LatheAxisC.cs" />
+    <Compile Include="ToolMachine\ToolMachine.cs" />
+    <Compile Include="ToolMachine\VerticalMill.cs" />
+    <Compile Include="Tool\MagazzinoUtensile.cs" />
+    <Compile Include="Tool\ToolHolder.cs" />
+    <Compile Include="Tool\Utensile.cs" />
+    <Compile Include="UserInput.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tool\ToolsTODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MecPrev\CncConvProg.Geometry\CncConvProg.Geometry.csproj">
+      <Project>{4A4DE66E-CE74-49F6-B8CD-D45369E25AF7}</Project>
+      <Name>CncConvProg.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MecPrev\MecPrev.Resources\MecPrev.Resources.csproj">
+      <Project>{E1B4B169-6A89-4870-B667-E340EB6DDA3A}</Project>
+      <Name>MecPrev.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>if defined EAZFUSCATOR_NET_HOME (if /I "$(ConfigurationName)" == "Release" Eazfuscator.NET.exe "$(TargetPath)" --msbuild-project-path "$(ProjectPath)" --msbuild-project-configuration "$(ConfigurationName)" --msbuild-project-platform "$(PlatformName)" --msbuild-solution-path "$(SolutionPath)" -n --newline-flush -v 3.2) else (echo Eazfuscator.NET obfuscator is not installed on this machine. Obfuscation will be skipped.)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

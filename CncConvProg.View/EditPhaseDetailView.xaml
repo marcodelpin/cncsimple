@@ -1,0 +1,119 @@
+﻿<Window x:Class="CncConvProg.View.EditPhaseDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" Title="EditWorkView" 
+        MinHeight="200" MinWidth="300"
+        WindowStyle="ToolWindow"
+        WindowState="Normal"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Phase Detail" FontSize="20" />
+        <DockPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <TextBlock Text="Program Title " Width="130" Margin="3" />
+                <TextBox Text="{Binding Path=NomeProgramma}" TextChanged="TextBox_TextChanged" Width="180" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <TextBlock Text="Program Number" Width="130" Margin="3" />
+                <TextBox Text="{Binding Path=NumeroProgramma}" Width="180" />
+            </StackPanel>
+            <GroupBox Header="Work" DockPanel.Dock="Top" Margin="3,10,3,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="G54" Width="30" Margin="3" />
+                            <CheckBox IsChecked="{Binding Path=OriginG54}" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="G55" Width="30" Margin="10,3,0,0" />
+                            <CheckBox IsChecked="{Binding Path=OriginG55}"  VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="G56" Width="30" Margin="10,3,0,0" />
+                            <CheckBox IsChecked="{Binding Path=OriginG56}" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="G57" Width="30" Margin="10,3,0,0" />
+                            <CheckBox IsChecked="{Binding Path=OriginG57}"  VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="G58" Width="30" Margin="10,3,0,0" />
+                            <CheckBox IsChecked="{Binding Path=OriginG58}"  VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="G59" Width="30" Margin="10,3,0,0" />
+                            <CheckBox IsChecked="{Binding Path=OriginG59}"  VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="No Change Tool Secure Z" MinWidth="170" />
+                        <TextBox Text="{Binding Path=NoChangeToolSecureZ}" MinWidth="80" />
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox DockPanel.Dock="Top" Header="Time Calculation Stuff" Margin="3,10,3,0" Padding="5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Setup Fixture Time : [min]" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=SetupFixtureTime}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Setup Tool Time : [min]" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=TempoSetupTool}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Programming Operation : [min]" MinWidth="170" />
+                        <TextBox  ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=TempoProgrammazioneOperazione}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Loading Machine : [sec]" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=LoadingMaterialTime}" MinWidth="80" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox DataContext="{Binding Path=CutViewerStockViewModel}" DockPanel.Dock="Top" Header="Stock Setting" Margin="3,10,3,0" Padding="5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Length [ X ]" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=Larghezza}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Height [ Y ]" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=Altezza}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Width [ Z ]" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=Spessore}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Origin X" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=OriginX}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Origin Y" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=OriginY}" MinWidth="80" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Origin Z" MinWidth="170" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=OriginZ}" MinWidth="80" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </DockPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Grid.ColumnSpan="2" >
+            <Button Content="Cancel" Width="100" Margin="5" Click="Button_Click_1" />
+            <Button Content="Ok" Width="100" Margin="5" Click="Button_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
