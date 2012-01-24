@@ -75,16 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entity\TextFile1.txt" />
-    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OffsetPath\OffsetPath.csproj">
-      <Project>{0E8F67F1-A260-4BD2-98AF-028BA88FA79B}</Project>
-      <Name>OffsetPath</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
