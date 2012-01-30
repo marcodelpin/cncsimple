@@ -9,37 +9,7 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
     [Serializable]
     public abstract class FaseDiLavoro : IEquatable<FaseDiLavoro>
     {
-        #region Time Stuff
 
-        #region Time Calculation Stuff
-
-        /// <summary>
-        /// Tempo medio programmazione operazione 
-        /// Espresso in minuti
-        /// </summary>
-        public int AverageProgrammingOperationTime { get; set; }
-
-        /// <summary>
-        /// Tempo medio preparazione staffaggio.
-        /// Espresso in minuti
-        /// </summary>
-        public int AverageSetupFixtureTime { get; set; }
-
-        /// <summary>
-        /// Tempo Medio Montaggio Utensile
-        /// Espresso in minuti
-        /// </summary>
-        public int AverageMountingToolTime { get; set; }
-
-        /// <summary>
-        /// Tempo Default Caricamento Pezzo
-        /// Espresso in secondi
-        /// </summary>
-        public int MachineLoadingTime { get; set; }
-
-        #endregion
-
-        #endregion
         /*
          * le origini le metto qui nella fase di lavoro,
          * 
@@ -61,9 +31,9 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
 
         public Guid MachineGuid { get; set; }
 
-        public string CommentoProgramma { get; set; }
-
         public string ProgrammaNc { get; set; }
+
+        public string Descrizione { get; set; }
 
         public CutViewerStock Stock { get; set; }
 
@@ -75,7 +45,7 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
 
             Stock = new CutViewerStock();
 
-            CommentoProgramma = "PROGRAM NAME";
+            Descrizione = "PROGRAM NAME";
 
             ProgramNumber = 100;
         }

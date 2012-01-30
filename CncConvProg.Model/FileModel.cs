@@ -26,17 +26,27 @@ namespace CncConvProg.Model
             Lavorazioni = new List<Lavorazione>();
 
             MeasureUnit = measureUnit;
+        }
 
-            StockQuantity = 15;
+
+        public Tool.Materiale Materiale
+        {
+            get
+            {
+                var o = Singleton.Data.GetMaterialeFromGuid(MaterialeGuid);
+                return o;
+            }
+            set
+            {
+                if (value == null)
+                    MaterialeGuid = Guid.Empty;
+                MaterialeGuid = value.MaterialeGuid;
+
+            }
         }
 
         public Guid MaterialeGuid { get; set; }
 
-
-        /// <summary>
-        /// Quantità stock prodotto
-        /// </summary>
-        public int StockQuantity { get; set; }
 
         private List<FaseDiLavoro> FasiDiLavoro { get; set; }
 

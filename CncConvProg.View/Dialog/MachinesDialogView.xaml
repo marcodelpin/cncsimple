@@ -60,34 +60,7 @@
                     <TextBox Text="{Binding Path=MachineName}" MinWidth="100"/>
                 </StackPanel>
 
-                <GroupBox DockPanel.Dock="Top" Header="Default Time" Margin="3,10,3,0" Padding="5">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Hourly Machine Cost" MinWidth="170" />
-                            <TextBox Text="{Binding Path=CostoOrarioMacchina, StringFormat=\{0:c\}}" MinWidth="80" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Setup Fixture Time : [min]" MinWidth="170" />
-                            <TextBox Text="{Binding Path=TempoSetupFixture}" MinWidth="80" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Setup Tool Time : [min]" MinWidth="170" />
-                            <TextBox Text="{Binding Path=TempoSetupTool}" MinWidth="80" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Programming Operation : [min]" MinWidth="170" />
-                            <TextBox Text="{Binding Path=TempoProgrammazioneOperazione}" MinWidth="80" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Loading Machine : [sec]" MinWidth="170" />
-                            <TextBox Text="{Binding Path=TempoCaricamentoMacchina}" MinWidth="80" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Change Tool Time : [sec]" MinWidth="170" />
-                            <TextBox Text="{Binding Path=ChangeToolTime}" MinWidth="80" />
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
+              
             </DockPanel>
         </Border>
 

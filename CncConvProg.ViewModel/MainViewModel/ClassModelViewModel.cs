@@ -16,6 +16,7 @@ using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.PathGenerator;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.ToolMachine;
 using CncConvProg.ViewModel.AuxViewModel;
 using CncConvProg.ViewModel.AuxViewModel.TreeViewModel;
@@ -71,17 +72,33 @@ namespace CncConvProg.ViewModel.MainViewModel
             }
         }
 
-        public int StockQuantity
+
+        public Materiale Materiale
         {
-            get { return _model.StockQuantity; }
+            get
+            {
+                if (Singleton.Instance.Materiale == null)
+                    Singleton.Instance.Materiale = Singleton.Data.GetMateriali(Singleton.Instance.MeasureUnit).FirstOrDefault();
+
+                return Singleton.Instance.Materiale;
+            }
 
             set
             {
-                _model.StockQuantity = value;
-                OnPropertyChanged("StockQuantity");
+                Singleton.Instance.Materiale = value;
+                OnPropertyChanged("Materiale");
             }
         }
 
+
+        public ObservableCollection<Materiale> Materiali
+        {
+            get
+            {
+                var mat = Singleton.Data.GetMateriali(Singleton.Instance.MeasureUnit);
+                return new ObservableCollection<Materiale>(mat);
+            }
+        }
 
         private ObservableCollection<FaseLavoroTreeView> _treeView = new ObservableCollection<FaseLavoroTreeView>();
         public ObservableCollection<FaseLavoroTreeView> TreeView
@@ -660,7 +677,7 @@ namespace CncConvProg.ViewModel.MainViewModel
             var uniProgram = new MachineProgram(Singleton.Instance.MeasureUnit);
 
             uniProgram.ProgramNumber = selectedPhase.ProgramNumber;
-            uniProgram.ProgramComment = selectedPhase.CommentoProgramma;
+            uniProgram.ProgramComment = selectedPhase.Descrizione;
 
             uniProgram.NoChangeToolSecureZ = selectedPhase.NoChangeToolSecureZ;
 
@@ -698,8 +715,6 @@ namespace CncConvProg.ViewModel.MainViewModel
             // ProgText = string.Empty;
 
             ProgText = code.Replace(",", ".").Replace("#", ",");
-
-            UpdateTime();
 
         }
 
@@ -864,158 +879,6 @@ namespace CncConvProg.ViewModel.MainViewModel
 
         #region Update Cycle Time Code
 
-        private ObservableCollection<TreeViewItemViewModel> _reportDetailTreeview;
-        public ObservableCollection<TreeViewItemViewModel> ReportDetailTreeview
-        {
-            get { return _reportDetailTreeview; }
-
-            set
-            {
-                _reportDetailTreeview = value;
-                OnPropertyChanged("ReportDetailTreeview");
-            }
-        }
-
-        private void UpdateReportTreeView(CycleTimeCollector cicleTimeCollector)
-        {
-            /*
-             * - mettere totale nell'elemento root dellìalbero
-             */
-            var rpt = new ObservableCollection<TreeViewItemViewModel>();
-
-            var cnt = 0;
-
-            var programmazioneRoot = new VoceReportTreeview("Programming Time", null);
-            rpt.Add(programmazioneRoot);
-
-            var setupMachineRoot = new VoceReportTreeview("Setup Machine", null);
-            rpt.Add(setupMachineRoot);
-            var setupToolsRoot = new VoceReportTreeview("Mounting Tools", setupMachineRoot);
-            var setupFixtureRoot = new VoceReportTreeview("Setup Fixture", setupMachineRoot);
-
-            var loadingMachineRoot = new VoceReportTreeview("Loading Machine", null);
-            rpt.Add(loadingMachineRoot);
-
-            var machiningTime = new VoceReportTreeview("Machining Time", null);
-            rpt.Add(machiningTime);
-
-            /*
-             * l'albero lo faccio per pezzo singolo,
-             * poi cmq per il totale dello stock faccio totale tempo,
-             * anzi lo inserisco qui
-             */
-
-            var stockQuantity = cicleTimeCollector.StockQuantity;
-            /*
-             * Raccolgo anche il tempo totale
-             */
-            var totalProgramTime = new TimeSpan();
-            var totalSetupMachineTime = new TimeSpan();
-            var totalMountTool = new TimeSpan();
-            var totalSetupFixture = new TimeSpan();
-            var totalLoadingTime = new TimeSpan();
-            var totalMachiningTime = new TimeSpan();
-
-            foreach (var faseDiLavoro in cicleTimeCollector.FasiDiLavoroTime)
-            {
-                cnt++;
-                var numberPhase = FormatTimeHelper.GetFormattedPhaseNumber(cnt);
-                //Tempo Programmazione -
-                var programmazioneTreeview = new VoceReportTreeview(numberPhase, programmazioneRoot);
-                programmazioneTreeview.Voce += FormatTimeHelper.FormatNumberIterationTime(faseDiLavoro.NumeroOperazioni, faseDiLavoro.MinutiProgrammazioneOperazione, " op");
-                var progTime = TimeSpan.FromMinutes(faseDiLavoro.NumeroOperazioni * faseDiLavoro.MinutiProgrammazioneOperazione);
-                totalProgramTime = totalProgramTime.Add(progTime);
-                programmazioneTreeview.Time = progTime;
-
-                //Setup Machine - Tools 
-                //setupTools.Voce = cnt.ToString();
-                //setupTools.Time = FormatTimeHelper.FormatTime(faseDiLavoro.NumeroOperazioni * faseDiLavoro.MinutiMontaggioUtensile);
-
-                var setupTools = new VoceReportTreeview(numberPhase, setupToolsRoot);
-                var usedTool = faseDiLavoro.GetUsedToolCount();
-                setupTools.Voce += FormatTimeHelper.FormatNumberIterationTime(usedTool,
-                                                                              faseDiLavoro.MinutiMontaggioUtensile,
-                                                                              " tool");
-
-                var mountTool = TimeSpan.FromMinutes(usedTool * faseDiLavoro.MinutiMontaggioUtensile);
-                totalMountTool = totalSetupFixture.Add(mountTool);
-                totalSetupMachineTime = totalSetupMachineTime.Add(mountTool);
-                setupTools.Time = mountTool;
-
-
-                //Setup Machine - Fixture 
-                var setupFixture = new VoceReportTreeview(numberPhase, setupFixtureRoot);
-                var setFix = TimeSpan.FromMinutes(faseDiLavoro.MinutiPreparazioneStaffaggio);
-                totalSetupFixture = totalSetupFixture.Add(setFix);
-                totalSetupMachineTime = totalSetupMachineTime.Add(setFix);
-                setupFixture.Time = setFix;
-
-                //Loading Machine - Tempo sia singolo pz che totale
-                var loadingMachine = new VoceReportTreeview(numberPhase, loadingMachineRoot);
-                loadingMachine.Voce += FormatTimeHelper.FormatStockTime(TimeSpan.FromSeconds(faseDiLavoro.SecondiCaricamentoMaterialeGrezzo), stockQuantity);
-                var loadMat = TimeSpan.FromSeconds(faseDiLavoro.SecondiCaricamentoMaterialeGrezzo * stockQuantity);
-                totalLoadingTime = totalLoadingTime.Add(loadMat);
-                loadingMachine.Time = loadMat;
-
-                //Work Time -- per ora metto solamente tempo macchina
-                // poi faro tempo cambio utensile
-                // tempo rapido / lavoro
-                var machining = new VoceReportTreeview(numberPhase, machiningTime);
-                var singleMachineTime = faseDiLavoro.GetTotalMachinigTime();
-                machining.Voce += FormatTimeHelper.FormatStockTime(singleMachineTime, stockQuantity);
-                var machinTime = TimeSpan.FromMilliseconds((int)(singleMachineTime.TotalMilliseconds * stockQuantity));
-                totalMachiningTime = totalMachiningTime.Add(machinTime);
-                machining.Time = machinTime;
-            }
-
-
-            programmazioneRoot.Time = totalProgramTime;
-
-            setupMachineRoot.Time = totalSetupMachineTime;
-            setupFixtureRoot.Time = totalSetupFixture;
-            setupToolsRoot.Time = totalMountTool;
-
-            loadingMachineRoot.Time = totalLoadingTime;
-
-            machiningTime.Time = totalMachiningTime;
-
-            ReportDetailTreeview = rpt;
-
-        }
-
-        private ObservableCollection<TreeViewItemViewModel> _summaryCost;
-        public ObservableCollection<TreeViewItemViewModel> SummaryCost
-        {
-            get { return _summaryCost; }
-
-            set
-            {
-                _summaryCost = value;
-                OnPropertyChanged("SummaryCost");
-            }
-        }
-
-        public double PrezzoCalcolato
-        {
-            get { return Singleton.Instance.PrezzoCalcolto; }
-
-            set
-            {
-                Singleton.Instance.PrezzoCalcolto = value;
-                OnPropertyChanged("PrezzoCalcolato");
-            }
-        }
-
-        public double PrezzoDefinitivo
-        {
-            get { return Singleton.Instance.PrezzoDefinitivo; }
-
-            set
-            {
-                Singleton.Instance.PrezzoDefinitivo = value;
-                OnPropertyChanged("PrezzoDefinitivo");
-            }
-        }
 
         public string Note
         {
@@ -1028,251 +891,6 @@ namespace CncConvProg.ViewModel.MainViewModel
             }
         }
 
-
-        /// <summary>
-        /// Aggiorna Altro TreeView con costi piu generali
-        /// </summary>
-        /// <param name="cicleTimeCollector"></param>
-        private void UpdateSummaryCost(CycleTimeCollector cicleTimeCollector)
-        {
-            var rpt = new ObservableCollection<TreeViewItemViewModel>();
-
-            var cnt = 0;
-
-            var mainRoot = new VoceReportTreeview("Total Cost", null);
-            rpt.Add(mainRoot);
-
-            // anche la macchina la devo prendere con modello simile a quello adottato con operazionii
-            // per questa parte cmq recupaero solo info che mi servono
-
-            var fasiTime = cicleTimeCollector.FasiDiLavoroTime;
-            var stockQuantity = cicleTimeCollector.StockQuantity;
-
-            var stockTotalTime = new TimeSpan();
-            var stockTotalCost = 0.0d;
-
-            foreach (var faseDiLavoroTime in fasiTime)
-            {
-                var totalMachineTime = faseDiLavoroTime.GetTotalMachinigTime().TotalMilliseconds;
-                totalMachineTime *= stockQuantity;
-                var programTime = faseDiLavoroTime.NumeroOperazioni * faseDiLavoroTime.MinutiProgrammazioneOperazione;
-                var setupTools = faseDiLavoroTime.GetUsedToolCount() * faseDiLavoroTime.MinutiMontaggioUtensile;
-                var setupFixture = faseDiLavoroTime.MinutiPreparazioneStaffaggio;
-                var loadingTime = faseDiLavoroTime.SecondiCaricamentoMaterialeGrezzo * stockQuantity;
-
-                var costHour = faseDiLavoroTime.CostoOrarioMacchina;
-
-                var totalTime =
-                    TimeSpan.FromMilliseconds(totalMachineTime).Add(TimeSpan.FromMinutes(programTime)).Add(
-                        TimeSpan.FromMinutes(setupFixture)).Add(TimeSpan.FromMinutes(setupTools)).Add(
-                            TimeSpan.FromSeconds(loadingTime));
-
-                var phaseCost = totalTime.TotalHours * costHour;
-
-                stockTotalCost += phaseCost;
-
-                cnt++;
-                var numberPhase = FormatTimeHelper.GetFormattedPhaseNumber(cnt);
-
-                var phaseTreeview = new VoceReportTreeview(numberPhase, mainRoot);
-
-                phaseTreeview.Voce += FormatTimeHelper.FormatTime(totalTime) + " x " + costHour.ToString("C") + " " + "/h = " + phaseCost;
-
-                stockTotalTime = stockTotalTime.Add(totalTime);
-
-            }
-
-            mainRoot.Time = stockTotalTime;
-            mainRoot.Voce += stockTotalCost.ToString("C");
-
-            PrezzoCalcolato = stockTotalCost / stockQuantity;
-
-            SummaryCost = rpt;
-
-
-        }
-
-
-        RelayCommand _updateTimeCode;
-
-        ///<summary>
-        ///Metodo che aggiorna tempo ciclo.
-        /// La macchina la devo sempre prendere da file aggiornato..
-        ///</summary>
-        private void UpdateTime()
-        {
-            /*
-             * Riaggiornare il riferimeno alle macchine utensili
-             * riaggiornare le lavorazioni.
-             */
-            /*
-          * --Prima itera fra tutte le prese ( fasi di lavorazione )
-          * -- Ogni Fase ha :
-          * - Tempo Setup Utensili = Numero Utensili * TempoMontaggioUtensile
-          * - Tempo Programmazione = TempoMedioProgrammazioneOperazione * NumeroOperazioni
-          * - Tempo CaricamentoPezzo = NumeroPezzi * TempoCaricamento
-          * - Tempo Medio Setup Staffaggio
-          * - Tempo Totale Cambio Utensile 
-          * 
-          * - Ogni fase ha lista di operazioni
-          * - Lista operazioni con dettagli
-          *    -Ogni Operazione ha :
-          *      - Tempo Totale 
-          *      - Tempo Rapido
-          *      - Tempo Lavoro
-          *          
-          * - Lista Utensili 
-          *   - Ogni utensile ha tempo rapido
-          *   - Distanza percorsa totale
-          *      - In Rapido
-          *      - In Lavoro
-          *      - Consumo Money
-          *      
-          * -- Tralasciando per ora materiale e costi vari..
-          * 
-          * ho grafico :
-          * 
-             var costoLavorazioneMacchina = 0.0d;
-             var costoTempoAttrezzaggio = 0.0d;
-             var costoTempoProgrammazione = 0.0d;
-             var costoCaricamentoMacchina = 0.0d;
-             var consumoInserti = 0.0d;
-          * 
-          */
-
-            var model = Singleton.Instance;
-
-            /*
-             * todo : aggiungere tempo cambio utensile.
-             */
-            var fasi = model.GetFasiDiLavoro();
-
-            // Se una o più fasi contengono errori non procedo.
-            if (fasi.Any(f => f.IsValid == false))
-            {
-                MessageBox.Show("Correct Error !", "Correct Error", MessageBoxButton.OK, MessageBoxImage.Warning,
-                                MessageBoxResult.OK);
-                return;
-            }
-            // Classe utile per calcolare i tempi
-            var timeCollector = new CycleTimeCollector();
-
-            timeCollector.StockQuantity = model.StockQuantity;
-
-            foreach (var faseDiLavoro in fasi)
-            {
-                var faseTimeCollector = new FaseDiLavoroTime();
-
-                timeCollector.Add(faseTimeCollector);
-
-                faseTimeCollector.SecondiCaricamentoMaterialeGrezzo = faseDiLavoro.MachineLoadingTime;
-
-                var macchina = faseDiLavoro.GetMacchina();
-
-                faseTimeCollector.TempoCambioUtensile = macchina.TempoCambioUtensile;
-                faseTimeCollector.CostoOrarioMacchina = macchina.CostoOrario;
-                faseTimeCollector.MinutiPreparazioneStaffaggio = faseDiLavoro.AverageSetupFixtureTime;
-                faseTimeCollector.MinutiProgrammazioneOperazione = faseDiLavoro.AverageProgrammingOperationTime;
-                faseTimeCollector.MinutiMontaggioUtensile = faseDiLavoro.AverageMountingToolTime;
-
-
-                var operazioni = model.GetOperationList(faseDiLavoro.FaseDiLavoroGuid);
-
-                faseTimeCollector.NumeroOperazioni = operazioni.Count();
-
-                foreach (var operazione in operazioni)
-                {
-                    // operazione.UpdateProgramPath(macchina); // lo commento in quanto lo ho appena calcolato..
-                    var opTime = operazione.OperationTime;
-                    faseTimeCollector.Add(opTime);
-                }
-
-                var postazioniUtensili = faseTimeCollector.GetListaPostazioniUtensili();
-
-                var toolRpt = new List<ToolCycleViewModel>();
-
-                foreach (var i in postazioniUtensili)
-                {
-                    var t = new ToolCycleViewModel();
-
-                    toolRpt.Add(t);
-
-                    t.ToolNumber = i;
-
-                    t.ToolTotalTime = faseTimeCollector.GetTotalTimeFromToolNumber(i);
-                    t.ToolTotalWear = faseTimeCollector.GetTotalToolWearFromToolNumber(i);
-
-                }
-
-                ToolsReport = new ObservableCollection<ToolCycleViewModel>(toolRpt);
-
-
-                // aggiorno tempi operazioni
-
-                var op = OperationList;
-
-                foreach (var operationMainScreenViewModel in op)
-                {
-                    operationMainScreenViewModel.UpdateTime();
-                }
-
-
-                UpdateReportTreeView(timeCollector);
-
-                UpdateSummaryCost(timeCollector);
-                /*
-                 * ecc... continuo a fare i miei calcoli..
-                 */
-                /*
-                 * ad ogni modo : mi servono in evidenza totali
-                 * costo totale lotto / unitario . Che comprende vari prezzi . come in mp2
-                 * 
-                 * -- Per non perdere spazio questi dati li posso inserire gia dentro il treeview principale
-                 * 
-                 * - Poi in treeview dettagliato come segue.
-                 *  - Fasi
-                 *      - Costi Setup / Caricamento 
-                 *      - Lavorazioni
-                 *          - Operazioni
-                 *          
-                 * - Poi ListView per utensili 
-                 *  - Numero - Nome - Tempo Tot - Consumo 
-                 *  
-                 * -- evito grafico a torta, anche perchè va da cazzo..
-                 */
-
-                //<ListView DockPanel.Dock="Top" ItemsSource="{Binding Path=ToolReport}">
-                // <ListView.View>
-                //     <GridView>
-                //         <GridViewColumn Header="T# " Width="50" DisplayMemberBinding="{Binding Path=ToolNumber}"/>
-                //         <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Path=ToolTotalTime ,StringFormat={}{0:C}}"/>
-                //         <GridViewColumn Header="Wear" Width="100" DisplayMemberBinding="{Binding Path=ToolTotalWear,StringFormat={}{0:C}}"/>
-                //     </GridView>
-                // </ListView.View>
-
-            }
-        }
-
-        private ObservableCollection<ToolCycleViewModel> _toolsReport;
-        public ObservableCollection<ToolCycleViewModel> ToolsReport
-        {
-            get { return _toolsReport; }
-
-            set
-            {
-                _toolsReport = value;
-                OnPropertyChanged("ToolsReport");
-            }
-        }
-
-        public ICommand UpdateTimeCmd
-        {
-            get
-            {
-                return _updateTimeCode ?? (_updateTimeCode = new RelayCommand(param => UpdateTime(),
-                                                                                    param => true));
-            }
-        }
 
         #endregion
 

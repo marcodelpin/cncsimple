@@ -12,7 +12,7 @@ namespace CncConvProg.Model.ConversationalStructure.FasiDiLavoro
         internal FaseTornio3Assi()
             : base()
         {
-            CommentoProgramma = "Lathe 3 Axis Phase";
+            Descrizione = "Lathe 3 Axis Phase";
         }
     }
 }

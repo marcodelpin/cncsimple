@@ -55,10 +55,10 @@ namespace CncConvProg.ViewModel.Dialog
 
         public string NomeProgramma
         {
-            get { return _fase.CommentoProgramma; }
+            get { return _fase.Descrizione; }
             set
             {
-                _fase.CommentoProgramma = value;
+                _fase.Descrizione = value;
                 OnPropertyChanged("NomeProgramma");
             }
         }
@@ -76,50 +76,6 @@ namespace CncConvProg.ViewModel.Dialog
             }
         }
 
-        public int SetupFixtureTime
-        {
-            get
-            {
-                return _fase.AverageSetupFixtureTime;
-            }
-            set
-            {
-                _fase.AverageSetupFixtureTime = value;
-                OnPropertyChanged("SetupFixtureTime");
-            }
-        }
-        public int LoadingMaterialTime
-        {
-            get
-            {
-                return _fase.MachineLoadingTime;
-            }
-            set
-            {
-                _fase.MachineLoadingTime = value;
-                OnPropertyChanged("LoadingMaterialTime");
-            }
-        }
-
-        public int TempoSetupTool
-        {
-            get { return _fase.AverageMountingToolTime; }
-            set
-            {
-                _fase.AverageMountingToolTime = value;
-                OnPropertyChanged("TempoSetupTool");
-            }
-        }
-
-        public int TempoProgrammazioneOperazione
-        {
-            get { return _fase.AverageProgrammingOperationTime; }
-            set
-            {
-                _fase.AverageProgrammingOperationTime = value;
-                OnPropertyChanged("TempoProgrammazioneOperazione");
-            }
-        }
 
         public ToolMachine Machine { get; set; }
 

@@ -95,7 +95,12 @@ namespace CncConvProg.ViewModel.EditWorkDialog
                 editStageTreeViewItem.ExpandChild();
             }
 
-            SelectedScreen = TreeView.FirstOrDefault();
+            var first = TreeView.FirstOrDefault();
+            if (first != null)
+            {
+                SelectedScreen = first;
+                first.IsSelected = true;
+            }
         }
 
 
