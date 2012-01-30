@@ -82,8 +82,12 @@ namespace CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel
             OnItemSelected += EditStageTreeViewItem_OnItemSelected;
         }
 
+        protected bool StageModified;
+
         protected override void OnPropertyChanged(string propertyName)
         {
+            StageModified = true;
+
             if (propertyName != "IsValid")
             {
                 if (this is IValid)

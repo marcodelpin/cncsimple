@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.Linq;
 using CncConvProg.Model;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
 using CncConvProg.Model.Tool.LatheTool;
+using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
@@ -53,33 +55,34 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             }
         }
 
-        private readonly ParametroUtensile _parametro;
-        private readonly MeasureUnit _measureUnit;
-
-        protected ToolParameterViewModel(ParametroUtensile parametroUtensile)
+        public ParametroUtensile Parametro
         {
-            _parametro = parametroUtensile;
-            _measureUnit = _parametro.Utensile.Unit;
+            get { return Utensile.ParametroUtensile; }
         }
 
-        public static ToolParameterViewModel GetViewModel(ParametroUtensile parametroUtensile, MeasureUnit measureUnit)
+        private readonly MeasureUnit _measureUnit;
+
+        public readonly Utensile Utensile;
+
+        protected ToolParameterViewModel(Utensile utensile)
         {
-            /*todo : lo screen per utensile viene rigenerato 10 volte, ogni volta che viene controllato un elemento..*/
+            Utensile = utensile;
+            _measureUnit = Utensile.Unit;
+        }
 
-            if (parametroUtensile is ParametroPunta && parametroUtensile.Utensile is DrillTool)
-                return new ParametroPuntaViewModel(parametroUtensile as ParametroPunta, parametroUtensile.Utensile as DrillTool, measureUnit);
+        public static ToolParameterViewModel GetViewModel(Utensile utensile)
+        {
+            if (utensile is DrillTool)
+                return new ParametroPuntaViewModel(utensile as DrillTool);
 
-            if (parametroUtensile is ParametroUtensileTornitura && parametroUtensile.Utensile is UtensileTornitura)
-                return new ParametroUtensileTornituraViewModel(parametroUtensile as ParametroUtensileTornitura, measureUnit);
+            if (utensile is FresaCandela)
+                return new ParametroFresaCandelaViewModel(utensile as FresaCandela);
 
-            if (parametroUtensile is ParametroFresaCandela)
-                return new ParametroFresaCandelaViewModel(parametroUtensile as ParametroFresaCandela);
+            if (utensile is FresaFilettare)
+                return new ParametroFresaFilettareViewModel(utensile as FresaFilettare);
 
-            if (parametroUtensile is ParametroFresaFilettare)
-                return new ParametroFresaFilettareViewModel(parametroUtensile as ParametroFresaFilettare, measureUnit);
-
-            if (parametroUtensile is ParametroFresaSpianare)
-                return new ParametroFresaSpianareViewModel(parametroUtensile as ParametroFresaSpianare);
+            if (utensile is FresaSpianare)
+                return new ParametroFresaSpianareViewModel(utensile as FresaSpianare);
 
             throw new NotImplementedException();
         }

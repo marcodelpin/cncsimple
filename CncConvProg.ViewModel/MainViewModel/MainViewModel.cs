@@ -244,21 +244,21 @@ namespace CncConvProg.ViewModel.MainViewModel
                     {
                         //var magazzinoUtensile = PathFolderHelper.GetMagazzinoUtensile();
 
-                        //viewModelBase = new MaterialiDialogoViewModel(magazzinoUtensile);
+                        viewModelBase = new MaterialiDialogoViewModel();
 
-                        //dialogKey = Constants.MaterialiModalDialog;
+                        dialogKey = Constants.MaterialiModalDialog;
 
 
                     } break;
 
                 case DialogEnum.UtensiliDialogo:
                     {
+
                         //var magazzinoUtensile = PathFolderHelper.GetMagazzinoUtensile();
 
-                        //viewModelBase = new UtensiliDialogoViewModel(magazzinoUtensile, Singleton.Instance.MeasureUnit);
+                        viewModelBase = new UtensiliDialogoViewModel(Singleton.Instance.MeasureUnit);
 
-                        //dialogKey = Constants.UtensiliModalDialog;
-
+                        dialogKey = Constants.UtensiliModalDialog;
 
                     } break;
 

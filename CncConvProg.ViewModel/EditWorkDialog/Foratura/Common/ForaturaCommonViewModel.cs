@@ -39,7 +39,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Common
         {
             _foratura = foraturaBaseClass;
 
-            StageOperazioni = new ForaturaCommonOperazioniViewModel(foraturaBaseClass, this);
+        //    StageOperazioni = new ForaturaCommonOperazioniViewModel(foraturaBaseClass, this);
 
             if (!_foratura.ForaturaCentraleTornio)
             {
@@ -61,7 +61,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Common
             if (_foraturaPatternSelectionViewModel != null)
                 TreeView.Add(_foraturaPatternSelectionViewModel);
 
-            TreeView.Add(StageOperazioni);
+         //   TreeView.Add(StageOperazioni);
 
             Initialize();
         }

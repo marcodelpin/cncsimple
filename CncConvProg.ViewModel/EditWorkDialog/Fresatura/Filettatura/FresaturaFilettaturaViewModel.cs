@@ -28,7 +28,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
         {
             _fresaturaFilettatura = fresaturaFilettatura;
 
-            StageOperazioni = new FresaturaFilettaturaOperazioniViewModel(fresaturaFilettatura, this);
+        //    StageOperazioni = new FresaturaFilettaturaOperazioniViewModel(fresaturaFilettatura, this);
 
             _foraturaPatternSelectionViewModel = new ForaturaPatternSelectionViewModel(fresaturaFilettatura, this);
 
@@ -46,7 +46,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
 
 
             //TreeView.Add(_stageInputProfile);
-            TreeView.Add(StageOperazioni);
+      //      TreeView.Add(StageOperazioni);
 
             Initialize();
 

@@ -9,7 +9,7 @@
             <Controls:FocusableListBoxItem Tag=""  >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Tool Label " Padding="0,0,2,0" Margin="0,0,2,0" MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=ToolDescription ,ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" TextChanged="TextBox_TextChanged" MinWidth="100" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=ToolName ,ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" TextChanged="TextBox_TextChanged" MinWidth="100" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
             <Controls:FocusableListBoxItem Tag=""  >

@@ -183,6 +183,26 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             return program;
         }
 
+
+        /// <summary>
+        /// Metodo per ottenere miglior utensile fra quelli selezionati.
+        /// </summary>
+        /// <param name="operazione"></param>
+        /// <param name="utensiles"></param>
+        /// <param name="matGuid"></param>
+        /// <returns></returns>
+        public virtual Utensile PickBestTool(Operazione operazione, IEnumerable<Utensile> utensiles, Guid matGuid)
+        {
+            var tool = (from utensile in utensiles
+                        from parametro in utensile.ParametriUtensile
+                        where parametro.MaterialGuid == matGuid
+                        orderby utensile.SaveTime descending
+                        where utensile.OperazioneTipo == operazione.OperationType
+                        select utensile).FirstOrDefault();
+
+            return tool;
+        }
+
         /// <summary>
         /// Metodo astratto dove si genera la parte del programma specifica di ogni lavorazione.
         /// La parte in comune è stata raggruppata nel metodo GetOperationProgram.

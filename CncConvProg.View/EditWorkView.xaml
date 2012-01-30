@@ -26,16 +26,60 @@
             <RowDefinition Height=".5*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TreeView ItemsSource="{Binding Path=TreeView}" Grid.RowSpan="2"  Grid.ColumnSpan="1" Margin="0,0,8,0">
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button Width="100" Margin="5"  Command="{Binding Path=PrevScreenCmd}">
+                <StackPanel >
+                    <TextBlock Text="Prev" TextWrapping="Wrap" HorizontalAlignment="Center" />
+                    <Image Source="pack://application:,,,/CncConvProg.View;component/Images/Gui/back.png" Height="40"/>
+                </StackPanel>
+            </Button>
+            <Button Width="Auto" Margin="5" Command="{Binding Path=UpdatePreviewCmd}" >
+                <StackPanel >
+                    <TextBlock Text="Update Preview" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    <Image Source="pack://application:,,,/CncConvProg.View;component/Images/Gui/refresh.png" Height="40"/>
+                </StackPanel>
+            </Button>
+
+            <Button Width="100" Margin="5" Command="{Binding Path=NextScreenCmd}" >
+                <StackPanel >
+                    <TextBlock Text="Next" TextWrapping="Wrap" HorizontalAlignment="Center" />
+                    <Image Source="pack://application:,,,/CncConvProg.View;component/Images/Gui/next.png" Height="40"/>
+                </StackPanel>
+            </Button>
+            <TextBlock Text="{Binding Path=SelectedScreen.Label}" Grid.Column="2" FontSize="28" DockPanel.Dock="Left" Margin="35,0,0,0" VerticalAlignment="Center" FontWeight="DemiBold"/>
+        </StackPanel>
+
+        <TreeView ItemsSource="{Binding Path=TreeView}" Grid.RowSpan="1"  Grid.ColumnSpan="1" Grid.Row="1" Margin="0,0,8,0">
             <TreeView.Resources>
-                <!--<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="PowderBlue" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="PowderBlue" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
 
                 <HierarchicalDataTemplate DataType="{x:Type MVVM_Library:TreeViewItemViewModel}" ItemsSource="{Binding Children}" >
                     <Border  Margin="2,2,2,0" >
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Label}"/>
-                            <Image Width="16" Height="16" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Image Width="16" Height="16" Margin="0,0,5,0"  HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path= IsSelected}" Value="True">
+                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/currentItem.png" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock Text="{Binding Path=Label}">
+                                <TextBlock.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path= IsSelected}" Value="True">
+                                                <Setter Property="TextBlock.FontWeight" Value="DemiBold" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                            </TextBlock>
+                            <Image Width="16" Height="16" Margin="15,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image.Style>
                                     <Style>
                                         <Style.Triggers>
@@ -63,12 +107,6 @@
             </TreeView.ItemContainerStyle>
         </TreeView>
 
-        <DockPanel  Grid.Column="2" >
-            <TextBlock Text="{Binding Path=SelectedScreen.Label}" Grid.Column="2" FontSize="16" DockPanel.Dock="Left"/>
-            <Button Visibility="Hidden" Command="{Binding Path=SaveWorkDefaultParameterCmd}" Grid.Column="2" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="Set Default Parameter" VerticalAlignment="Top" Height="Auto" Margin="3" Padding="3" Background="OldLace"/>
-        </DockPanel>
-        <!--<Controls:PreviewCanvas DataContext="{Binding Path = Preview}" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="1" />
-        <Button Command="{Binding Path=UpdatePreviewCmd}" Content="Update" Height="40" Width="60" Grid.Column="1" Grid.Row="2" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
         <ContentControl Content="{Binding Path=SelectedScreen}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <ContentControl.Resources>
                 <ResourceDictionary>
@@ -111,14 +149,21 @@
             </TextBlock>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" >
-                <Button Content="Update Preview" Width="100" Height="30" Margin="5" Command="{Binding Path=UpdatePreviewCmd}" />
-                <Button Content="Back" Width="100" Margin="5"  Command="{Binding Path=PrevScreenCmd}"/>
-                <Button Content="Next" Width="100" Margin="5" Command="{Binding Path=NextScreenCmd}" />
-                <Button Content="Cancel" Height="30" Width="100" Margin="5" Click="Button_Click_1" />
-                <Button Content="Ok" Width="100" Margin="5" Click="Button_Click" />
+                <Button Width="100" Margin="5" Click="Button_Click_1" >
+                    <StackPanel >
+                        <TextBlock Text="Cancel" HorizontalAlignment="Center" />
+                        <Image Source="pack://application:,,,/CncConvProg.View;component/Images/Gui/cancel.png" Height="40"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="100" Margin="5" Click="Button_Click" >
+                    <StackPanel >
+                        <TextBlock Text="Ok" HorizontalAlignment="Center" />
+                        <Image Source="pack://application:,,,/CncConvProg.View;component/Images/Gui/ok.png" Height="40"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </DockPanel>
-        <GridSplitter Width="5" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"/>
+        <GridSplitter Width="5" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3"/>
 
         <GridSplitter 
             ResizeDirection="Rows" 

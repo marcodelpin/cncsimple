@@ -32,18 +32,18 @@ namespace CncConvProg.ViewModel.EditWorkDialog
             }
         }
 
-        public EditStageTreeViewItem StageOperazioni;
+        // public EditStageTreeViewItem StageOperazioni;
 
         public void SyncronizeOperation()
         {
-            if (StageOperazioni.Children.Count > 0)
-                StageOperazioni.Children.Clear();
+            //if (StageOperazioni.Children.Count > 0)
+            //    StageOperazioni.Children.Clear();
 
-            foreach (var operazione in Lavorazione.Operazioni.Where(op => op.Abilitata))
+            foreach (var operazione in Lavorazione.Operazioni/*.Where(op => op.Abilitata)*/)
             {
-                var viewModel = OperazioneViewModel.GetViewModel(operazione, StageOperazioni);
+                var viewModel = new OperazioneViewModel(operazione, this);
 
-                StageOperazioni.Children.Add(viewModel);
+                TreeView.Add(viewModel);
             }
         }
 
@@ -103,7 +103,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog
         {
             // UpdatePreview(); // aggiornare solo la preview interessata
 
-           // Lavorazione.SetProgramDirty(); // é s
+            // Lavorazione.SetProgramDirty(); // é s
 
             OnPropertyChanged("IsValid");
         }
@@ -142,11 +142,12 @@ namespace CncConvProg.ViewModel.EditWorkDialog
                 {
                     var rootValid = editStageTreeViewItem.IsTreeViewValid();
 
-                    if (rootValid)
-                        continue;
+                    if (rootValid) continue;
 
                     rslt = false;
+                    break;
                 }
+
                 // Setto flag su model della lavorazione 
 
                 Lavorazione.IsValid = rslt;
@@ -192,7 +193,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog
 
                 if (SelectedScreen is IPreviewable)
                 {
-                    if(SelectedScreen is OperazioneViewModel)
+                    if (SelectedScreen is OperazioneViewModel)
                     {
                         var ovm = SelectedScreen as OperazioneViewModel;
                         if (updateOperation)
@@ -200,16 +201,16 @@ namespace CncConvProg.ViewModel.EditWorkDialog
                     }
                     //if (SelectedScreen is InputProfileViewModel.ProfileEditorViewModel)
                     //{
-                        // con pprofile editor e mt si crea problemi
+                    // con pprofile editor e mt si crea problemi
 
-                        var screenPreviable = SelectedScreen as IPreviewable;
+                    var screenPreviable = SelectedScreen as IPreviewable;
 
-                        var preview = screenPreviable.GetPreview();
+                    var preview = screenPreviable.GetPreview();
 
-                        if (preview != null)
-                            Preview = new ObservableCollection<IEntity3D>(preview);
-                        else
-                            Preview = null;
+                    if (preview != null)
+                        Preview = new ObservableCollection<IEntity3D>(preview);
+                    else
+                        Preview = null;
 
                     //}
                     //else
@@ -234,7 +235,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog
             }
             catch (Exception exception)
             {
-              //  throw;
+                //  throw;
             }
 
         }

@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using CncConvProg.Model;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.AuxViewModel;
@@ -15,25 +15,27 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 {
     public class ParametroFresaFilettareViewModel : ToolParameterViewModel
     {
-        private readonly ParametroFresaFilettare _parametroFresaCandela;
+        private ParametroFresaFilettare ParametroFresaCandela
+        {
+            get { return Parametro as ParametroFresaFilettare; }
+        }
 
-        public ParametroFresaFilettareViewModel(ParametroFresaFilettare parametroFresaCandela, MeasureUnit measureUnit)
+        public ParametroFresaFilettareViewModel(Utensile parametroFresaCandela)
             : base(parametroFresaCandela)
         {
-            _parametroFresaCandela = parametroFresaCandela;
 
-            NumeroGiri = new UserInputViewModel(_parametroFresaCandela.NumeroGiri, GetValidationError, PropNumeroGiri);
-            VelocitaTaglio = new UserInputViewModel(_parametroFresaCandela.VelocitaTaglio, GetValidationError, PropVelocitaTaglio);
+            NumeroGiri = new UserInputViewModel(ParametroFresaCandela.NumeroGiri, GetValidationError, PropNumeroGiri);
+            VelocitaTaglio = new UserInputViewModel(ParametroFresaCandela.VelocitaTaglio, GetValidationError, PropVelocitaTaglio);
 
-            LarghezzaPassata = new UserInputViewModel(_parametroFresaCandela.LarghezzaPassata, GetValidationError, PropLarghezzaPassata);
-            LarghezzaPassataPerc = new UserInputViewModel(_parametroFresaCandela.LarghezzaPassataPerc, GetValidationError, PropLarghezzaPassataPerc);
-            ProfonditaPassata = new UserInputViewModel(_parametroFresaCandela.ProfonditaPassata, GetValidationError, PropProfPassata);
-            ProfonditaPassataPerc = new UserInputViewModel(_parametroFresaCandela.ProfonditaPassataPerc, GetValidationError, PropProfPassataPerc);
+            LarghezzaPassata = new UserInputViewModel(ParametroFresaCandela.LarghezzaPassata, GetValidationError, PropLarghezzaPassata);
+            LarghezzaPassataPerc = new UserInputViewModel(ParametroFresaCandela.LarghezzaPassataPerc, GetValidationError, PropLarghezzaPassataPerc);
+            ProfonditaPassata = new UserInputViewModel(ParametroFresaCandela.ProfonditaPassata, GetValidationError, PropProfPassata);
+            ProfonditaPassataPerc = new UserInputViewModel(ParametroFresaCandela.ProfonditaPassataPerc, GetValidationError, PropProfPassataPerc);
 
-            AvanzamentoSincrono = new UserInputViewModel(_parametroFresaCandela.AvanzamentoSincrono, GetValidationError, PropAvanzamentoSincrono);
-            AvanzamentoAsincrono = new UserInputViewModel(_parametroFresaCandela.AvanzamentoAsincrono, GetValidationError, PropAvanzamentoAsincrono);
-            AvanzamentoSincronoPiantata = new UserInputViewModel(_parametroFresaCandela.AvanzamentoSincronoPiantata, GetValidationError, PropAvanzamentoSincronoPiantata);
-            AvanzamentoAsincronoPiantata = new UserInputViewModel(_parametroFresaCandela.AvanzamentoAsincronoPiantata, GetValidationError, PropAvanzamentoAsincronoPiantata);
+            AvanzamentoSincrono = new UserInputViewModel(ParametroFresaCandela.AvanzamentoSincrono, GetValidationError, PropAvanzamentoSincrono);
+            AvanzamentoAsincrono = new UserInputViewModel(ParametroFresaCandela.AvanzamentoAsincrono, GetValidationError, PropAvanzamentoAsincrono);
+            AvanzamentoSincronoPiantata = new UserInputViewModel(ParametroFresaCandela.AvanzamentoSincronoPiantata, GetValidationError, PropAvanzamentoSincronoPiantata);
+            AvanzamentoAsincronoPiantata = new UserInputViewModel(ParametroFresaCandela.AvanzamentoAsincronoPiantata, GetValidationError, PropAvanzamentoAsincronoPiantata);
 
             NumeroGiri.OnSourceUpdated += UserInput_SourceUpdated;
             VelocitaTaglio.OnSourceUpdated += UserInput_SourceUpdated;
@@ -48,19 +50,6 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             AvanzamentoSincronoPiantata.OnSourceUpdated += UserInput_SourceUpdated;
             AvanzamentoAsincronoPiantata.OnSourceUpdated += UserInput_SourceUpdated;
 
-        }
-
-        private double Diametro
-        {
-            get
-            {
-                var tool = _parametroFresaCandela.Utensile as FresaCandela;
-
-                if (tool != null)
-                    return tool.Diametro;
-
-                throw new NullReferenceException();
-            }
         }
 
         void UserInput_SourceUpdated(object sender, EventArgs e)

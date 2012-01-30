@@ -13,20 +13,17 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 {
-    public class ContornaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class ContornaturaTrimmingViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
     {
         private readonly FresaturaContornatura _contornaturaParametri;
 
-        public ContornaturaParametriViewModel(FresaturaContornatura contornaturaParametri, EditWorkViewModel treeItemParent)
-            : base("Work Parameter", treeItemParent)
+        public ContornaturaTrimmingViewModel(FresaturaContornatura contornaturaParametri, EditStageTreeViewItem treeItemParent)
+            : base("Trimming", treeItemParent)
         {
             _contornaturaParametri = contornaturaParametri;
 
-            RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel(this._contornaturaParametri, this);
 
-            var trimmingViewModel = new ContornaturaTrimmingViewModel(_contornaturaParametri, this);
 
-            Children.Add(trimmingViewModel);
         }
 
         public Dictionary<byte, string> StartPointLookup
@@ -48,60 +45,80 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
             }
         }
 
-        private RotoTraslateWorkViewModel _rotoTraslateWorkViewModel;
-        public RotoTraslateWorkViewModel RotoTraslateWorkViewModel
-        {
-            get { return _rotoTraslateWorkViewModel; }
-            set
-            {
-                _rotoTraslateWorkViewModel = value;
-                OnPropertyChanged("RotoTraslateWorkViewModel");
-            }
-        }
-
-        public double Profondita
+        public byte TrimRectangleStartPoint
         {
             get
             {
-                return _contornaturaParametri.ProfonditaLavorazione;
+                return (byte)_contornaturaParametri.TrimRectangleStartPoint;
             }
             set
             {
-                _contornaturaParametri.ProfonditaLavorazione = value;
-                OnPropertyChanged("Profondita");
+                _contornaturaParametri.TrimRectangleStartPoint = (SquareShapeHelper.SquareShapeStartPoint)value;
+                OnPropertyChanged("TrimRectangleStartPoint");
             }
         }
 
-        public double Sovrametallo
+        public bool TrimPathAbilited
         {
-            get { return _contornaturaParametri.Sovrametallo; }
+            get
+            {
+                return _contornaturaParametri.TrimPathAbilited;
+            }
             set
             {
-                _contornaturaParametri.Sovrametallo = value;
-                OnPropertyChanged("Sovrametallo");
+                _contornaturaParametri.TrimPathAbilited = value;
+                OnPropertyChanged("TrimPathAbilited");
             }
         }
 
-        public double SicurezzaZ
+        public double RectTrimWidth
         {
-            get { return _contornaturaParametri.SicurezzaZ; }
+            get
+            {
+                return _contornaturaParametri.RectTrimWidth;
+            }
             set
             {
-                _contornaturaParametri.SicurezzaZ = value;
-                OnPropertyChanged("SicurezzaZ");
+                _contornaturaParametri.RectTrimWidth = value;
+                OnPropertyChanged("RectTrimWidth");
             }
         }
-
-        public double InizioZ
+        public double RectTrimHeight
         {
-            get { return _contornaturaParametri.InizioLavorazioneZ; }
+            get
+            {
+                return _contornaturaParametri.RectTrimHeight;
+            }
             set
             {
-                _contornaturaParametri.InizioLavorazioneZ = value;
-                OnPropertyChanged("InizioZ");
+                _contornaturaParametri.RectTrimHeight = value;
+                OnPropertyChanged("RectTrimHeight");
             }
         }
-
+        public double RectTrimCenterY
+        {
+            get
+            {
+                return _contornaturaParametri.RectTrimCenterY;
+            }
+            set
+            {
+                _contornaturaParametri.RectTrimCenterY = value;
+                OnPropertyChanged("RectTrimCenterY");
+            }
+        }
+        public double RectTrimCenterX
+        {
+            get
+            {
+                return _contornaturaParametri.RectTrimCenterX;
+            }
+            set
+            {
+                _contornaturaParametri.RectTrimCenterX = value;
+                OnPropertyChanged("RectTrimCenterX");
+            }
+        }
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }
@@ -121,9 +138,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 
 
         protected string[] ValidatedProperties = {
-                                                     "Sovrametallo",
-                                                     "Profondita",
-                                                     "SicurezzaZ",
 
                                                  };
 
@@ -136,27 +150,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 
             switch (propertyName)
             {
-                case "Sovrametallo":
-                    {
-                        error = InputCheck.MaggioreDiZero(Sovrametallo.ToString());
-
-                    }
-                    break;
-
-                case "Profondita":
-                    {
-                        error = InputCheck.MaggioreDiZero(Profondita.ToString());
-
-                    }
-                    break;
-
-                case "SicurezzaZ":
-                    {
-                        if (SicurezzaZ <= InizioZ)
-                            error = "Must be higher than StartZ";
-
-                    }
-                    break;
 
                 default:
                     Debug.Fail("Unexpected property : " + propertyName);

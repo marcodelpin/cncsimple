@@ -209,6 +209,78 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             return rslt;
         }
 
+        private double GetDiameter(LavorazioniEnumOperazioni lavorazioniEnumOperazioni)
+        {
+            switch (lavorazioniEnumOperazioni)
+            {
+                case LavorazioniEnumOperazioni.ForaturaPunta:
+                case LavorazioniEnumOperazioni.ForaturaCentrino:
+                case LavorazioniEnumOperazioni.ForaturaSmusso:
+                case LavorazioniEnumOperazioni.ForaturaAlesatore:
+                    {
+                        var lav = this as Foratura.Maschiatura;
+                        if (lav != null && lav.MaschiaturaSelezionata != null)
+                        {
+                            var d = lav.MaschiaturaSelezionata.Preforo;
+                            return d;
+                        }
+
+                        return DiametroForatura;
+                    } break;
+
+                case LavorazioniEnumOperazioni.ForaturaBareno:
+                    {
+                        var lav = this as Foratura.Barenatura;
+                        if (lav != null) return lav.DiametroBarenatura;
+                    } break;
+
+                case LavorazioniEnumOperazioni.ForaturaLamatore:
+                    {
+                        var lav = this as Foratura.Lamatura;
+                        if (lav != null) return lav.DiametroLamatura;
+                    } break;
+
+                //Maschio
+                case LavorazioniEnumOperazioni.ForaturaMaschiaturaDx:
+                    {
+                        var lav = this as Foratura.Maschiatura;
+                        if (lav != null && lav.MaschiaturaSelezionata != null)
+                        {
+                            //Todo : gestire diametro metrico, oppure creare diametro e basta..
+                            var d = lav.MaschiaturaSelezionata.DiametroMetrico;
+                            return d;
+                        }
+                    } break;
+
+            }
+
+            return 0;
+        }
+        public override Utensile PickBestTool(Operazione operazione, IEnumerable<Utensile> utensiles, Guid matGuid)
+        {
+            var d = GetDiameter(operazione.OperationType);
+
+            /* Fra utensili IDiameter */
+            //  var dias = utensiles.OfType<IDiametrable>();
+
+            // var tools = dias.OrderBy(n => Math.Abs(n.Diametro - d)).First();
+
+            var tool = (from utensile in utensiles
+                        from parametro in utensile.ParametriUtensile
+                        where parametro.MaterialGuid == matGuid
+                        orderby utensile.SaveTime descending
+                        //where utensile.OperazioneTipo == operazione.OperationType
+                        select utensile);
+
+            var t = (from t1 in tool.OfType<IDiametrable>()
+                     orderby Math.Abs(t1.Diametro - d)
+                     select t1).FirstOrDefault();
+
+            if (t == null)
+                base.PickBestTool(operazione, utensiles, matGuid);
+
+            return t as Utensile;
+        }
 
         ///// <summary>
         ///// Metodo per creare actionCollection per lavorazione fori

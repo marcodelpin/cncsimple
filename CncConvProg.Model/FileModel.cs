@@ -30,6 +30,9 @@ namespace CncConvProg.Model
             StockQuantity = 15;
         }
 
+        public Guid MaterialeGuid { get; set; }
+
+
         /// <summary>
         /// Quantità stock prodotto
         /// </summary>

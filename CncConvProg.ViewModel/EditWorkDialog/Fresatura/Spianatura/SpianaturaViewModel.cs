@@ -7,13 +7,13 @@
         public SpianaturaViewModel(Model.ConversationalStructure.Lavorazioni.Fresatura.Spianatura spianatura)
             : base(spianatura)
         {
-            StageOperazioni = new SpianaturaOperazioni(spianatura, this);
+           // StageOperazioni = new SpianaturaOperazioni(spianatura, this);
 
             _spianaturaParametriViewModel = new SpianaturaParametriViewModel(this, spianatura);
 
             TreeView.Add(_spianaturaParametriViewModel);
 
-            TreeView.Add(StageOperazioni);
+            // TreeView.Add(StageOperazioni);
          
             Initialize();
         }

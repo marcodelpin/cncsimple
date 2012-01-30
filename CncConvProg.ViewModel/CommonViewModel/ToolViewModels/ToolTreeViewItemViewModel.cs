@@ -26,13 +26,14 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
     /// </summary>
     public abstract class ToolTreeViewItemViewModel : TreeViewItemViewModel, IValid, IDataErrorInfo
     {
-        private readonly Utensile _tool;
+        public readonly Utensile Tool;
 
-        public ToolTreeViewItemViewModel(Utensile tool, TreeViewItemViewModel parent)
+        protected ToolTreeViewItemViewModel(Utensile tool, TreeViewItemViewModel parent)
             : base(string.Empty, parent)
         {
-            _tool = tool;
+            Tool = tool;
 
+            _modified = true;
             //if (string.IsNullOrWhiteSpace(ToolDescription))
             //    ToolDescription = tool.ToolDescription;
         }
@@ -41,7 +42,7 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
         {
             get
             {
-                return ToolHolderViewModel.GetViewModel(_tool.MillToolHolder, _tool, null);
+                return ToolHolderViewModel.GetViewModel(Tool.MillToolHolder, Tool, null);
             }
         }
 
@@ -49,36 +50,68 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
         {
             get
             {
-                return ToolHolderViewModel.GetViewModel(_tool.LatheToolHolder, _tool, null);
+                return ToolHolderViewModel.GetViewModel(Tool.LatheToolHolder, Tool, null);
             }
         }
 
+        private ToolParameterViewModel _toolParameterViewModel;
         public ToolParameterViewModel ToolParameterViewModel
         {
             get
             {
-                return ToolParameterViewModel.GetViewModel(_tool.ParametroUtensile, _tool.Unit);
+                if (_toolParameterViewModel == null)
+                {
+                    _toolParameterViewModel = ToolParameterViewModel.GetViewModel(Tool);
+                    _toolParameterViewModel.OnUpdated += ChildViewModelUpdated;
+                }
+                return _toolParameterViewModel;
+            }
+
+            set
+            {
+                _toolParameterViewModel = value;
+                OnPropertyChanged("ToolParameterViewModel");
             }
         }
+
+        private bool _isValid;
+
+        private bool _modified = true;
+
+        void ChildViewModelUpdated(object sender, EventArgs e)
+        {
+            _modified = true;
+
+            RequestUpdate(this);
+        }
+
 
         public ToolTreeViewItemViewModel ToolViewModel
         {
             get
             {
-                return ToolTreeViewItemViewModel.GetViewModel(_tool, null);
+                return ToolTreeViewItemViewModel.GetViewModel(Tool, null);
             }
         }
 
-        //public string ToolDescription
-        //{
-        //    get { return _tool.ToolDescription; }
+        public string ToolDescription
+        {
+            get { return Tool.ToolDescription; }
+        }
 
-        //    set
-        //    {
-        //        _tool.ToolDescription = value;
-        //        OnPropertyChanged("ToolDescription");
-        //    }
-        //}
+        public string ToolName
+        {
+            get { return Tool.ToolName; }
+
+            set
+            {
+                if (Tool.ToolName == value) return;
+                Tool.ToolName = value;
+                OnPropertyChanged("ToolDescription");
+                OnPropertyChanged("ToolName");
+
+            }
+        }
 
         public static ToolTreeViewItemViewModel GetViewModel(Utensile tool, TreeViewItemViewModel parent)
         {
@@ -112,7 +145,18 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
         /// </summary>
         public bool IsValid
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            get
+            {
+                if (_modified)
+                {
+                    _isValid = ValidatedProperties.All(property => GetValidationError(property) == null);
+                    _modified = false;
+
+                    if (!ToolParameterViewModel.IsValid)
+                        _isValid = false;
+                }
+                return _isValid;
+            }
         }
 
         protected virtual string[] ValidatedProperties { get { return new[] { "" }; } }
@@ -129,12 +173,12 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
         /// </summary>
         public override string Label
         {
-            get { return _tool.ToolDescription; }
+            get { return Tool.ToolDescription; }
         }
 
         public Guid ToolGuid
         {
-            get { return _tool.ToolGuid; }
+            get { return Tool.ToolGuid; }
         }
 
 
@@ -166,13 +210,13 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
             if (materiale == null)
                 return;
 
-            var parametri = _tool.ParametriUtensile.Where(p => p.MaterialGuid == materiale.MaterialeGuid);
+            var parametri = Tool.ParametriUtensile.Where(p => p.MaterialGuid == materiale.MaterialeGuid);
 
             var list = new ObservableCollection<ToolParameterViewModel>();
 
             foreach (var parametroUtensile in parametri)
             {
-                list.Add(ToolParameterViewModel.GetViewModel(parametroUtensile, measureUnit));
+                list.Add(ToolParameterViewModel.GetViewModel(Tool));
             }
 
             Parametri = list;
@@ -180,6 +224,9 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
 
         protected override void OnPropertyChanged(string propertyName)
         {
+            _modified = true;
+
+
             if (propertyName != "IsValid")
             {
                 // richiedi aggiornamento parent
@@ -189,7 +236,11 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
 
             base.OnPropertyChanged(propertyName);
         }
-
+        internal void UpdateParameterViewModel()
+        {
+            ToolParameterViewModel = ToolParameterViewModel.GetViewModel(Tool);
+            //OnPropertyChanged("ToolParameterViewModel");
+        }
 
     }
 }

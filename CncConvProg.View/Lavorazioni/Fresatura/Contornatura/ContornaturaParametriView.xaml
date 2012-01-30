@@ -7,62 +7,40 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="164*" />
             <RowDefinition Height="136*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock Text="Depth : " MinWidth="100" />
-                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Profondita, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock Text="Mat. To Remove : " MinWidth="100" />
-                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Sovrametallo, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock Text="Start Z : " MinWidth="100" />
-                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock Text="Secure Z : " MinWidth="100" />
-                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock  Text="Trim Path" MinWidth="100" />
-                <CheckBox x:Name="cbAa" IsChecked="{Binding Path=TrimPathAbilited}" VerticalAlignment="Center" Margin="5,0"/>
-            </StackPanel>
-            <GroupBox Margin="20,0" IsEnabled="{Binding Path=TrimPathAbilited}">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock MinWidth="120" Text="Zero Point" Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <ComboBox x:Name="cbMaterial" 
-            				ItemsSource="{Binding Path=StartPointLookup}"
-            				SelectedValue="{Binding Path=TrimRectangleStartPoint}"
-                            DisplayMemberPath="Value"
-                            SelectedValuePath="Key" 
-                            Width="100" />
+        <GroupBox Header="Contour Parameter">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.RowSpan="2">
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Depth : " MinWidth="100" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Profondita, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock MinWidth="120" Text="Coordinate X : " Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimCenterX, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Mat. To Remove : " MinWidth="100" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Sovrametallo, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock MinWidth="120" Text="Coordinate Y : " Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimCenterY, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Start Z : " MinWidth="100" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock MinWidth="120" Text="Width : " Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimWidth, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Secure Z : " MinWidth="100" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock MinWidth="120" Text="Height : " Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimHeight, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                    </StackPanel>
                 </StackPanel>
-            </GroupBox>
-        </StackPanel>
-
-        <Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="1" />
+                <Image Margin="10" Grid.Column="1" Width="Auto" MaxWidth="300"
+                   Source="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/contornaturaParametri.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            </Grid>
+        </GroupBox>
+   
+        <Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="2" />
     </Grid>
 </UserControl>

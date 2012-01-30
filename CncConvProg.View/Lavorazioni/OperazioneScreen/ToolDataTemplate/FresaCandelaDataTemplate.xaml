@@ -9,7 +9,7 @@
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/archivia.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Label " Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox  Text="{Binding Path=ToolDescription ,ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                    <TextBox  Text="{Binding Path=ToolName ,ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/archivia.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >

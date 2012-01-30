@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -42,12 +43,20 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
 
         private readonly MeasureUnit _measureUnit;
 
-        public OperazioneViewModel(Operazione operazione, EditStageTreeViewItem parent)
+        public OperazioneViewModel(Operazione operazione, EditWorkViewModel parent)
             : base(operazione.Descrizione, parent)
         {
             Operazione = operazione;
 
             _measureUnit = Singleton.Instance.MeasureUnit;
+
+            if (operazione.FirstStart)
+            {
+                AutoToolFind();
+                operazione.FirstStart = false;
+            }
+            else
+                LoadCompatibleTools();
         }
 
         /*
@@ -66,23 +75,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
                     _toolHolderViewModel.OnUpdated += ChildViewModelUpdated;
                 }
                 return _toolHolderViewModel;
-            }
-        }
-
-        private ToolParameterViewModel _toolParameterViewModel;
-        public ToolParameterViewModel ToolParameterViewModel
-        {
-            get
-            {
-                //if (_toolParameterViewModel == null)
-                {
-                    _toolParameterViewModel = ToolParameterViewModel.GetViewModel(
-                        Operazione.Utensile.ParametroUtensile, _measureUnit);
-                    _toolParameterViewModel.OnUpdated += ChildViewModelUpdated;
-                }
-                return _toolParameterViewModel;
-
-
             }
         }
 
@@ -130,50 +122,56 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
             get { return Operazione.DescriptionWithTime; }
         }
 
-        protected void SaveParameter()
+        protected void SaveParameter(string param)
         {
-            //try
-            //{
-            //    // magari tenerlo caricato in memoria..
-            //    //var magazzino = FileManageUtility.PathFolderHelper.GetMagazzinoUtensile();
+            try
+            {
+                // Guid del materiale per parametri
+                var matGuid = Singleton.Instance.MaterialeGuid;
 
-            //    ///*
-            //    // * qui succede arcano
-            //    // */
-            //    //var tool = Operazione.Utensile;
+                var tool = UtensileViewModel.Tool;
 
-            //    //if(tool == null)return;
+                tool.OperazioneTipo = Operazione.OperationType;
 
-            //    //var millHolder = Operazione.ToolHolder as MillToolHolder;
-            //    //var latheToolHolder = Operazione.ToolHolder as LatheToolHolder;
+                tool.SaveTime = DateTime.Now;
 
-            //    //if (millHolder != null)
-            //    //{
-            //    //    tool.MillToolHolder.GetToolDefaultData(tool);
+                switch (param)
+                {
+                    case "0":
+                        {
+                            // sovrascrivo parametro per stesso matguid. e aggiungo a lista parametri
 
-            //    //}
-            //    //if (latheToolHolder != null)
-            //    //{
-            //    //    tool.LatheToolHolder.GetToolDefaultData(tool);
-            //    //}
+                            /*
+                             * magari aggiungere operation type in modo da smistare
+                             * se un'utensile faccio più operazioni tipo sgrossatura e sfacciatura  finitura sgrossatura..
+                             * vedere poi
+                             */
+                            tool.AddOrUpdateParametro(tool.ParametroUtensile, matGuid);
 
-            //    //magazzino.SaveTool(tool);
+                            Singleton.Data.AddOrUpdateTool(tool);
+                        } break;
 
-            //    //FileManageUtility.PathFolderHelper.SaveMagazzinoUtensile(magazzino);
+                    case "1":
+                        {
+                            // Qui invece non sovrascrivo niente, clone utensile e salvo
 
+                            var clonedTool = tool.Clone();
 
-            //    ///*
-            //    // * dovrei salvare correttori dentro utensile. usare solamente toolHolderViewModel
-            //    // * 
-            //    // * tagliare via classi toolholder
-            //    // */
+                            clonedTool.AddOrUpdateParametro(tool.ParametroUtensile, matGuid);
 
-            //}
-            //catch (Exception ex)
-            //{
+                            Singleton.Data.AddOrUpdateTool(clonedTool);
 
-            //}
-            // chiede a utensile di cercare fra utensili che gli passo
+                            LoadCompatibleTools();
+                        } break;
+                }
+
+                Singleton.Data.SaveMagazzino();
+
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine("Error in SaveParameter");
+            }
         }
 
         RelayCommand _saveParameterCmd;
@@ -182,61 +180,89 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
         {
             get
             {
-                return _saveParameterCmd ?? (_saveParameterCmd = new RelayCommand(param => SaveParameter(),
+                return _saveParameterCmd ?? (_saveParameterCmd = new RelayCommand(param => SaveParameter((string)param),
                                                                                 param => true));
             }
         }
 
         #endregion
 
+        /// <summary>
+        /// Carica utensili compatibili
+        /// </summary>
+        private void LoadCompatibleTools()
+        {
+            var t = UtensileViewModel.Tool;
+
+            var compatibleTools = Singleton.Data.GetCompatibleTools(t);
+
+            UtensiliCompatibili = new ObservableCollection<Utensile>(compatibleTools.OrderByDescending(o => o.SaveTime));
+        }
         protected void AutoToolFind()
         {
             try
             {
-                // magari tenerlo caricato in memoria..
-                //var magazzino = PathFolderHelper.GetMagazzinoUtensile();
+                var matGuid = Singleton.Instance.MaterialeGuid;
+                /*
+                 * Qui l'utensile è sempre 
+                 */
 
-                //var tools = Operazione.GetCompatibleTools(magazzino);
-
-                //if (tools == null || tools.Count == 0) return;
-
-                ///*devo assicurarmi che utensile sia settato*/
-
-                //UtensiliCompatibili = new ObservableCollection<Utensile>(tools);
-
-
-                //var tool = _utensiliCompatibili.FirstOrDefault();
-
-
-                //Operazione.SetTool(tool);
-
-                //OnPropertyChanged("UtensileViewModel");
-                //OnPropertyChanged("ToolParameterViewModel");
-                //OnPropertyChanged("ToolHolderVm");
+                LoadCompatibleTools();
 
                 /*
-                 * una volta che ho utensili compatibili
+                 * Ora devo scegliere quello più adatto in base al materiale ( e in 2° tempo al tipo di operazione )
+                 * 
+                 * Se non trova niente inserisce il primo della lista degli utensili compatibili.
                  */
 
                 /*
-                 * todo : su apertura screen , e se utensile corrente ha guid 00.00.00 
-                 * allora cercare tool, altrimenti niente.
-                 * 
-                 * ?? aggiorna lista utensili compatibili e seleziona quello più adatto..
-                 * 
-                 * var compatibleTool = abstrat getCompatibleTools(toolStore)
-                 * 
-                 * var selectdtool = selectBestTool(compatibleTool);
+                 * Metodo con il quale sposto la decisione per utensile a lavorazione.
+                 * In modo che in una foratura , venga selezionata la punta con diametro più vicino,
+                 * Oppure in altre lavorazioni
                  */
+                var tool = Operazione.Lavorazione.PickBestTool(Operazione, _utensiliCompatibili, matGuid);
 
 
+
+
+                if (tool == null)
+                    tool = _utensiliCompatibili.FirstOrDefault();
+
+
+                if (tool == null) return;
+
+                SetThisTool(tool);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("OperazioneViewModel.AutoToolFind");
+            }
+        }
+
+        protected void SetThisTool(Utensile tool)
+        {
+
+            try
+            {
+                if (tool == null) return;
+
+                var matGuid = Singleton.Instance.MaterialeGuid;
+
+                tool.SelectParameter(matGuid);
+
+                Operazione.SetTool(tool);
+
+                _utensileViewModel = ToolTreeViewItemViewModel.GetViewModel(Operazione.Utensile, null);
+
+                _utensileViewModel.OnUpdated += ChildViewModelUpdated;
+
+                OnPropertyChanged("UtensileViewModel");
 
             }
             catch (Exception ex)
             {
                 throw new Exception("OperazioneViewModel.AutoToolFind");
             }
-            // chiede a utensile di cercare fra utensili che gli passo
         }
 
         RelayCommand _autoToolFindCmd;
@@ -250,6 +276,16 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
             }
         }
 
+        public bool OperationAbilited
+        {
+            get { return Operazione.Abilitata; }
+            set
+            {
+                Operazione.Abilitata = value;
+                OnPropertyChanged("OperationAbilited");
+            }
+        }
+
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
@@ -257,11 +293,10 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
         {
             get
             {
-                /*
-                 * todo : qui viene rigenerato il viewModel ogni volta che 1 campo viene modificato
-                 * e di conseguenza rivengono controllati tutti i campi.. e rigenerati 10 volte
-                 */
-                return ToolHolderVm.IsValid && ToolParameterViewModel.IsValid && UtensileViewModel.IsValid;
+                if (OperationAbilited)
+                    return UtensileViewModel.IsValid;
+
+                return true;
             }
         }
 
@@ -322,13 +357,13 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
         //    throw new NotImplementedException();
         //}
 
-        internal static EditStageTreeViewItem GetViewModel(Operazione operazione, EditStageTreeViewItem stageOperazioni)
-        {
-            //if (operazione is OperazioneFresaturaTrocoidale)
-            //    return new OperazioneTrocoidaleViewModel(operazione as OperazioneFresaturaTrocoidale, stageOperazioni);
+        //internal static EditStageTreeViewItem GetViewModel(Operazione operazione, EditStageTreeViewItem stageOperazioni)
+        //{
+        //    //if (operazione is OperazioneFresaturaTrocoidale)
+        //    //    return new OperazioneTrocoidaleViewModel(operazione as OperazioneFresaturaTrocoidale, stageOperazioni);
 
-            return new OperazioneViewModel(operazione, stageOperazioni);
-        }
+        //    return new OperazioneViewModel(operazione, stageOperazioni);
+        //}
 
         /// <summary>
         /// 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CncConvProg.Model;
 using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.ThreadTable;
 using CncConvProg.Model.Tool;
@@ -18,23 +19,17 @@ namespace CncConvProg.ViewModel.Dialog
         {
             get
             {
-                //var mat = _magazzinoUtensile.GetMaterials();
+                var mat = Singleton.Data.GetMateriali(Singleton.Instance.MeasureUnit);
 
-                //var rslt = new ObservableCollection<MaterialViewModel>();
+                var rslt = new ObservableCollection<MaterialViewModel>();
 
-                //foreach (var viewModelBase in mat)
-                //{
-                //    rslt.Add(new MaterialViewModel(viewModelBase));
-                //}
+                foreach (var viewModelBase in mat)
+                {
+                    rslt.Add(new MaterialViewModel(viewModelBase));
+                }
 
-                //return rslt;
-                return new ObservableCollection<MaterialViewModel>();
+                return rslt;
             }
-        }
-
-        public MaterialiDialogoViewModel(MagazzinoUtensile magazzinoUtensile)
-        {
-            _magazzinoUtensile = magazzinoUtensile;
         }
 
         private MaterialViewModel _materialeSelezionato;

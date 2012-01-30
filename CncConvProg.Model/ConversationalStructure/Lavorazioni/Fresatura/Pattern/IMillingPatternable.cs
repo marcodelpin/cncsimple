@@ -8,5 +8,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
     public interface IMillingPatternable
     {
         EnumPatternMilling MillingPattern { get; set; }
+
+        IMillingPattern Pattern { get; }
+
     }
 }
