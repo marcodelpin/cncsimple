@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.Fresatura.Contornatura.ContornaturaTrimmingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:Common="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.Common" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="164*" />
+            <RowDefinition Height="136*" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="1">
+            <StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock  Text="Trim Path" MinWidth="100" />
+                    <CheckBox x:Name="cbAa" IsChecked="{Binding Path=TrimPathAbilited}" VerticalAlignment="Center" Margin="5,0"/>
+                </StackPanel>
+                <GroupBox Margin="20,0" IsEnabled="{Binding Path=TrimPathAbilited}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock MinWidth="120" Text="Zero Point" Padding="0,0,2,0" Margin="0,0,2,0" />
+                            <ComboBox x:Name="cbMaterial" 
+            				ItemsSource="{Binding Path=StartPointLookup}"
+            				SelectedValue="{Binding Path=TrimRectangleStartPoint}"
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key" 
+                            Width="100" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock MinWidth="120" Text="Coordinate X : " Padding="0,0,2,0" Margin="0,0,2,0" />
+                            <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimCenterX, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock MinWidth="120" Text="Coordinate Y : " Padding="0,0,2,0" Margin="0,0,2,0" />
+                            <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimCenterY, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock MinWidth="120" Text="Width : " Padding="0,0,2,0" Margin="0,0,2,0" />
+                            <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimWidth, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock MinWidth="120" Text="Height : " Padding="0,0,2,0" Margin="0,0,2,0" />
+                            <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=RectTrimHeight, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+        <Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="2" />
+    </Grid>
+</UserControl>

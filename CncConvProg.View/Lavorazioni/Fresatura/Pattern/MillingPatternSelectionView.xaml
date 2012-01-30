@@ -11,27 +11,34 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height=".5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".5*" />
-            <ColumnDefinition Width=".5*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="RadioButtonList" BorderThickness="0" Background="{x:Null}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="{x:Type ListBoxItem}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <ContentPresenter/>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton1, Mode=OneWay}" Tag="images/pentagono.png">
-                <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+        <GroupBox Header="Pattern Selected" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+                <ListBox Margin="10" x:Name="RadioButtonList" BorderThickness="0" Background="{x:Null}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton1, Mode=OneWay}" 
+                        Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatternPoly.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.PoligonoRegolare}}" 
                         Content="Regular Polygon "
@@ -39,9 +46,10 @@
                         x:Name="RadioButton1"     
                         
                         />
-            </ListBoxItem>
-            <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton2, Mode=OneWay}">
-                <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+                    </ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton2, Mode=OneWay}"
+                        Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatterneditor.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.ProfiloLibero}}" 
                         Content="Profile Editor"
@@ -49,9 +57,10 @@
                         x:Name="RadioButton2" 
                         
                     />
-            </ListBoxItem>
-            <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton3, Mode=OneWay}" Tag="images/arco.png">
-                <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+                    </ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton3, Mode=OneWay}" 
+                        Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatternarc.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.CavaArco}}" 
                         Content="Arc"
@@ -59,9 +68,10 @@
                         x:Name="RadioButton3" 
                         
                     />
-            </ListBoxItem>
-            <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton4, Mode=OneWay}">
-                <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+                    </ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton4, Mode=OneWay}"
+                            Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatterncircle.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.Cerchio}}" 
                         Content="Circle"
@@ -69,9 +79,10 @@
                         x:Name="RadioButton4" 
                         
                     />
-            </ListBoxItem>
-            <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton5, Mode=OneWay}">
-                <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+                    </ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton5, Mode=OneWay}"
+                        Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatternSlot.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.CavaDritta}}" 
                         Content="Slot"
@@ -79,9 +90,10 @@
                         x:Name="RadioButton5" 
                         
                     />
-            </ListBoxItem>
-            <ListBoxItem Visibility="{Binding Path=ShowExternMillingPattern}" IsSelected="{Binding IsChecked, ElementName=RadioButton6, Mode=OneWay}">
-                <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+                    </ListBoxItem>
+                    <ListBoxItem Visibility="{Binding Path=ShowExternMillingPattern}" IsSelected="{Binding IsChecked, ElementName=RadioButton6, Mode=OneWay}"
+                                 Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatternDslot.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.CavaDrittaAperta}}" 
                         Content="D - Slot"
@@ -89,8 +101,20 @@
                         x:Name="RadioButton6" 
                         
                     />
-            </ListBoxItem>
-            <!--<ListBoxItem  Visibility="{Binding Path=ShowExternMillingPattern}" IsSelected="{Binding IsChecked, ElementName=RadioButton7, Mode=OneWay}">
+                    </ListBoxItem>
+
+                    <ListBoxItem Visibility="{Binding Path=ShowExternMillingPattern}" IsSelected="{Binding IsChecked, ElementName=RadioButton7, Mode=OneWay}"
+                                 Tag="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/millingPatternRect.png">
+                        <RadioButton IsChecked="{Binding Path=PatternFresatura,   
+                        Converter={StaticResource EBConverter},   
+                        ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.Rettangolo}}" 
+                        Content="Rectangle"
+                        GroupName="Sgrossatura"
+                        x:Name="RadioButton7" 
+                        
+                    />
+                    </ListBoxItem>
+                    <!--<ListBoxItem  Visibility="{Binding Path=ShowExternMillingPattern}" IsSelected="{Binding IsChecked, ElementName=RadioButton7, Mode=OneWay}">
                 <RadioButton IsChecked="{Binding Path=PatternFresatura,   
                         Converter={StaticResource EBConverter},   
                         ConverterParameter={x:Static Member=Pattern:EnumPatternMilling.CavaDrittaApertaSuCirconferenza}}" 
@@ -100,9 +124,12 @@
                         
                     />
             </ListBoxItem>-->
-        </ListBox>
-
-        <Image Grid.Column="1" Width="200" Source="{Binding SelectedItem.Tag, ElementName=RadioButtonList}" />
-
+                </ListBox>
+                <Image Margin="10" Grid.Column="1" Width="150" Height="150" Source="{Binding SelectedItem.Tag, ElementName=RadioButtonList}" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Pattern Parameter" Grid.Row="1" Grid.ColumnSpan="2">
+            <ContentControl Content="{Binding Path=PatternParameter}"/>
+        </GroupBox>
     </Grid>
 </UserControl>

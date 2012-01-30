@@ -10,13 +10,13 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Lato
         public FresaturaLatoViewModel(Model.ConversationalStructure.Lavorazioni.Fresatura.FresaturaLato fresaturaLato)
             : base(fresaturaLato)
         {
-            StageOperazioni = new CommonMillOperationViewModel(fresaturaLato, this);
+          //  StageOperazioni = new CommonMillOperationViewModel(fresaturaLato, this);
 
             _spianaturaParametriViewModel = new FresaturaLatoParametriViewModel(this, fresaturaLato);
 
             TreeView.Add(_spianaturaParametriViewModel);
 
-            TreeView.Add(StageOperazioni);
+         //   TreeView.Add(StageOperazioni);
          
             Initialize();
         }

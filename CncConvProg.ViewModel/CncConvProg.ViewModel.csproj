@@ -112,6 +112,7 @@
     <Compile Include="EditWorkDialog\Fresatura\Cava\FresaturaCavaOperazioniViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Cava\FresaturaCavaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Cava\FresaturaCavaViewModel.cs" />
+    <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Pattern\CavaPatternViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Pattern\CavaApertaPatternViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniViewModel.cs" />
@@ -132,7 +133,7 @@
     <Compile Include="EditWorkDialog\Fresatura\ScanalaturaLinea\ScanalaturaLineaViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Spianatura\SpianaturaViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Spianatura\SpianaturaOperazioni.cs" />
-    <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaParametriViewModel.cs" />
+    <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaTrimmingViewModel.cs" />
     <Compile Include="EditWorkDialog\Common\LavorazioneViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Contornatura\FresaturaContornaturaViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Spianatura\SpianaturaParametriViewModel.cs" />

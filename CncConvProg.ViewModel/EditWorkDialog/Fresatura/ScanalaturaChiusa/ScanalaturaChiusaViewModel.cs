@@ -25,11 +25,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
         {
             _fresaturaScanalaturaChiusa = fresaturaScanalaturaChiusa;
 
-            StageOperazioni = new CommonMillOperationViewModel(fresaturaScanalaturaChiusa, this);
+           // StageOperazioni = new CommonMillOperationViewModel(fresaturaScanalaturaChiusa, this);
 
             _millingPatternSelectionViewModel = new MillingPatternSelectionViewModel(_fresaturaScanalaturaChiusa, this);
 
-            _millingPatternSelectionViewModel.OnPatternChanged += MillingPatternSelectionViewModelOnPatternChanged;
+          //  _millingPatternSelectionViewModel.OnPatternChanged += MillingPatternSelectionViewModelOnPatternChanged;
 
             _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaScanalaturaChiusa.Pattern);
 
@@ -44,7 +44,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
             TreeView.Add(_contornaturaParametriViewModel);
 
             //TreeView.Add(_stageInputProfile);
-            TreeView.Add(StageOperazioni);
+         //   TreeView.Add(StageOperazioni);
 
             Initialize();
 

@@ -23,6 +23,10 @@
         <Contornatura1:ContornaturaParametriView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type Contornatura:ContornaturaTrimmingViewModel}">
+        <Contornatura1:ContornaturaTrimmingView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type Spianatura:SpianaturaParametriViewModel }">
         <Spianatura1:SpianaturaParametriView />
     </DataTemplate>

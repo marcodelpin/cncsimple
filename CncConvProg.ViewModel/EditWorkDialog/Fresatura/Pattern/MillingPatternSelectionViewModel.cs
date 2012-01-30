@@ -4,6 +4,7 @@ using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern;
 using CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
 {
@@ -11,14 +12,14 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
     {
         private readonly IMillingPatternable _millingPatternable;
 
-        public event EventHandler OnPatternChanged;
+      //  public event EventHandler OnPatternChanged;
 
-        private void RequestPatternChanged()
-        {
-            var handler = OnPatternChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
+        //private void RequestPatternChanged()
+        //{
+        //    var handler = OnPatternChanged;
+        //    if (handler != null)
+        //        handler(this, EventArgs.Empty);
+        //}
 
 
         // sostituire foratura semplice con classe base per forature o in caso con interfaccia
@@ -27,7 +28,19 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
         {
             _millingPatternable = millingPatternable;
 
+            PatternParameter = GetViewModel(_millingPatternable.Pattern);
             
+        }
+
+        private ViewModelBase _patternParameter;
+        public ViewModelBase PatternParameter
+        {
+            get { return _patternParameter; }
+            set
+            {
+                _patternParameter = value;
+                OnPropertyChanged("PatternParameter");
+            }
         }
 
         // Piccolo hack per mostrare anche pattern che in altre lavorazioni non sono abilitate.
@@ -52,7 +65,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
             {
                 _millingPatternable.MillingPattern = value;
 
-                RequestPatternChanged();
+                //RequestPatternChanged();
+
+                PatternParameter = GetViewModel(_millingPatternable.Pattern);
 
                 OnPropertyChanged("PatternFresatura");
             }
@@ -74,6 +89,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
 
             if (patternMilling is CavaDrittaApertaPattern)
                 return new CavaApertaPatternViewModel(patternMilling as CavaDrittaApertaPattern, this);
+
+            //if (patternMilling is RettangoloPattern)
+            //    return new RettangoloPatternViewModel(patternMilling as RettangoloPattern, this);
 
             if (patternMilling is FreeProfilePattern)
             {

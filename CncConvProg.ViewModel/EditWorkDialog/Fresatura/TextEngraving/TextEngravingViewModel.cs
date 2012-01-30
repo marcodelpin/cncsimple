@@ -20,13 +20,13 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.TextEngraving
             _fresaturaContornatura = fresaturaContornatura;
 
             /* Stage Vuoto*/
-            StageOperazioni = new EditStageTreeViewItem("Operation", this);
+           // StageOperazioni = new EditStageTreeViewItem("Operation", this);
 
             _contornaturaParametriViewModel = new TextEngravingParametriViewModel(fresaturaContornatura, this);
 
             TreeView.Add(_contornaturaParametriViewModel);
 
-            TreeView.Add(StageOperazioni);
+          //  TreeView.Add(StageOperazioni);
 
             Initialize();
 

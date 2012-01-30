@@ -54,25 +54,8 @@ namespace CncConvProg.ViewModel.AuxViewModel
                 handler(this, EventArgs.Empty);
         }
 
-        //public double ParsedValue
-        //{
-        //    get
-        //    {
-        //        double parsedValue;
-
-        //        var parsedSuccess = double.TryParse(Value, out parsedValue);
-
-        //        if (parsedSuccess)
-        //            return Math.Round(parsedValue,3);
-        //        else
-        //            return 0;
-        //    }
-        //}
-
         /// <summary>
-        /// Non mi ricordo perche ho messo string.. mettere double 
-        /// la cosa per gestire le stringhe la farei con attached properties..
-        /// HO MESSO STRING PERCHE CON DOUBLE NON RIESCO A IMMETTERE NULL
+        /// 
         /// </summary>
         public double? Value
         {
@@ -86,13 +69,8 @@ namespace CncConvProg.ViewModel.AuxViewModel
 
             set
             {
-                //double parsedValue;
+                if (_userInput.Value == value) return;
 
-                //var parsedSuccess = double.TryParse(value, out parsedValue);
-
-                //if (parsedSuccess)
-                //    _userInput.SetValue(true, parsedValue);
-                //else
                 _userInput.SetValue(true, value);
 
                 OnPropertyChanged("Value");

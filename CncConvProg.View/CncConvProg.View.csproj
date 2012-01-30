@@ -241,6 +241,9 @@
     <Compile Include="Lavorazioni\Fresatura\Contornatura\ContornaturaParametriView.xaml.cs">
       <DependentUpon>ContornaturaParametriView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lavorazioni\Fresatura\Contornatura\ContornaturaTrimmingView.xaml.cs">
+      <DependentUpon>ContornaturaTrimmingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Lavorazioni\Fresatura\Pattern\CavaDrittaPattern.xaml.cs">
       <DependentUpon>CavaDrittaPattern.xaml</DependentUpon>
     </Compile>
@@ -479,6 +482,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lavorazioni\Fresatura\Contornatura\ContornaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\Fresatura\Contornatura\ContornaturaTrimmingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -969,6 +976,36 @@
       <Progid>CncSimple</Progid>
       <DefaultIcon>mecprevico.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\millingPatternArc.png" />
+    <Resource Include="Images\Work\Milling\millingPatternCircle.png" />
+    <Resource Include="Images\Work\Milling\millingPatternDSlot.png" />
+    <Resource Include="Images\Work\Milling\millingPatterneditor.png" />
+    <Resource Include="Images\Work\Milling\millingPatternPoly.png" />
+    <Resource Include="Images\Work\Milling\millingPatternSlot.png" />
+    <Resource Include="Images\Work\Milling\millPatternRect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\tascaApertaHelp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\tasca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Work\Milling\contornaturaParametri.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\back.png" />
+    <Resource Include="Images\Gui\currentItem.png" />
+    <Resource Include="Images\Gui\Exclamation.png" />
+    <Resource Include="Images\Gui\next.png" />
+    <Resource Include="Images\Gui\refresh.png" />
+    <Resource Include="Images\Gui\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gui\cancel.png" />
+    <Resource Include="Images\Gui\ok.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

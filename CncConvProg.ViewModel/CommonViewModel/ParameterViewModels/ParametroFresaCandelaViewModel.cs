@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.AuxViewModel;
@@ -14,12 +15,12 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 {
     public class ParametroFresaCandelaViewModel : ParametroFresaBaseViewModel
     {
-        private readonly ParametroFresaCandela _parametroFresaCandela;
+        //private readonly ParametroFresaCandela _parametroFresaCandela;
 
-        public ParametroFresaCandelaViewModel(ParametroFresaCandela parametroFresaCandela)
+        public ParametroFresaCandelaViewModel(Utensile parametroFresaCandela)
             : base(parametroFresaCandela)
         {
-            _parametroFresaCandela = parametroFresaCandela;
+            //_parametroFresaCandela = parametroFresaCandela;
 
             //AvanzamentoSincronoPiantata = new UserInputViewModel(_parametroFresaCandela.AvanzamentoSincronoPiantata, GetValidationError, PropAvanzamentoSincronoPiantata);
             //AvanzamentoAsincronoPiantata = new UserInputViewModel(_parametroFresaCandela.AvanzamentoAsincronoPiantata, GetValidationError, PropAvanzamentoAsincronoPiantata);

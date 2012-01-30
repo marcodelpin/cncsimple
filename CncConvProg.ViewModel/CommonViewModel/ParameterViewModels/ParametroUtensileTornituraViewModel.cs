@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using CncConvProg.Model;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.AuxViewModel;
@@ -14,10 +14,9 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 
         private readonly ParametroUtensileTornitura _parametroUtensileTornitura;
 
-        public ParametroUtensileTornituraViewModel(ParametroUtensileTornitura parametroUtensileTornitura, MeasureUnit measureUnit)
+        public ParametroUtensileTornituraViewModel(Utensile parametroUtensileTornitura )
             : base(parametroUtensileTornitura)
         {
-            _parametroUtensileTornitura = parametroUtensileTornitura;
 
             //Velocita = new UserInputViewModel(_parametroUtensileTornitura.Velocita, GetValidationError, PropNumeroGiri);
             //VelocitaTaglio = new UserInputViewModel(_parametroUtensileTornitura.VelocitaTaglio, GetValidationError, PropVelocitaTaglio);

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.AuxViewModel;
@@ -16,10 +17,9 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
     {
         private readonly ParametroFresaSpianare _parametroFresaSpianare;
 
-        public ParametroFresaSpianareViewModel(ParametroFresaSpianare parametroFresaSpianare)
+        public ParametroFresaSpianareViewModel(Utensile parametroFresaSpianare)
             : base(parametroFresaSpianare)
         {
-            _parametroFresaSpianare = parametroFresaSpianare;
 
         }
 

@@ -10,13 +10,13 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
         public ScanalaturaLineaViewModel(Model.ConversationalStructure.Lavorazioni.Fresatura.ScanalaturaLinea scanalaturaLinea)
             : base(scanalaturaLinea)
         {
-            StageOperazioni = new ScanalaturaLineaOperazioniViewModel(scanalaturaLinea, this);
+           // StageOperazioni = new ScanalaturaLineaOperazioniViewModel(scanalaturaLinea, this);
 
             _spianaturaParametriViewModel = new ScanalaturaLineaParametriViewModel(this, scanalaturaLinea);
 
             TreeView.Add(_spianaturaParametriViewModel);
 
-            TreeView.Add(StageOperazioni);
+         //   TreeView.Add(StageOperazioni);
          
             Initialize();
         }

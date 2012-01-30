@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
+using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.AuxViewModel;
@@ -14,26 +15,29 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 {
     public class ParametroFresaBaseViewModel : ToolParameterViewModel
     {
-        private readonly ParametroFresaBase _parametroFresaBase;
+        private ParametroFresaBase ParametroFresaBase
+        {
+            get { return Parametro as ParametroFresaBase; }
+        }
 
-        public ParametroFresaBaseViewModel(ParametroFresaBase parametroFresaBase)
+
+        public ParametroFresaBaseViewModel(Utensile parametroFresaBase)
             : base(parametroFresaBase)
         {
-            _parametroFresaBase = parametroFresaBase;
 
-            NumeroGiri = new UserInputViewModel(_parametroFresaBase.NumeroGiri, GetValidationError, PropNumeroGiri);
-            VelocitaTaglio = new UserInputViewModel(_parametroFresaBase.VelocitaTaglio, GetValidationError, PropVelocitaTaglio);
+            NumeroGiri = new UserInputViewModel(ParametroFresaBase.NumeroGiri, GetValidationError, PropNumeroGiri);
+            VelocitaTaglio = new UserInputViewModel(ParametroFresaBase.VelocitaTaglio, GetValidationError, PropVelocitaTaglio);
 
-            LarghezzaPassata = new UserInputViewModel(_parametroFresaBase.LarghezzaPassata, GetValidationError, PropLarghezzaPassata);
-            LarghezzaPassataPerc = new UserInputViewModel(_parametroFresaBase.LarghezzaPassataPerc, GetValidationError, PropLarghezzaPassataPerc);
-            ProfonditaPassata = new UserInputViewModel(_parametroFresaBase.ProfonditaPassata, GetValidationError, PropProfPassata);
-            ProfonditaPassataPerc = new UserInputViewModel(_parametroFresaBase.ProfonditaPassataPerc, GetValidationError, PropProfPassataPerc);
+            LarghezzaPassata = new UserInputViewModel(ParametroFresaBase.LarghezzaPassata, GetValidationError, PropLarghezzaPassata);
+            LarghezzaPassataPerc = new UserInputViewModel(ParametroFresaBase.LarghezzaPassataPerc, GetValidationError, PropLarghezzaPassataPerc);
+            ProfonditaPassata = new UserInputViewModel(ParametroFresaBase.ProfonditaPassata, GetValidationError, PropProfPassata);
+            ProfonditaPassataPerc = new UserInputViewModel(ParametroFresaBase.ProfonditaPassataPerc, GetValidationError, PropProfPassataPerc);
 
-            AvanzamentoSincrono = new UserInputViewModel(_parametroFresaBase.AvanzamentoSincrono, GetValidationError, PropAvanzamentoSincrono);
-            AvanzamentoAsincrono = new UserInputViewModel(_parametroFresaBase.AvanzamentoAsincrono, GetValidationError, PropAvanzamentoAsincrono);
+            AvanzamentoSincrono = new UserInputViewModel(ParametroFresaBase.AvanzamentoSincrono, GetValidationError, PropAvanzamentoSincrono);
+            AvanzamentoAsincrono = new UserInputViewModel(ParametroFresaBase.AvanzamentoAsincrono, GetValidationError, PropAvanzamentoAsincrono);
 
-            AvanzamentoSincronoPiantata = new UserInputViewModel(_parametroFresaBase.AvanzamentoSincronoPiantata, GetValidationError, PropAvanzamentoSincronoPiantata);
-            AvanzamentoAsincronoPiantata = new UserInputViewModel(_parametroFresaBase.AvanzamentoAsincronoPiantata, GetValidationError, PropAvanzamentoAsincronoPiantata);
+            AvanzamentoSincronoPiantata = new UserInputViewModel(ParametroFresaBase.AvanzamentoSincronoPiantata, GetValidationError, PropAvanzamentoSincronoPiantata);
+            AvanzamentoAsincronoPiantata = new UserInputViewModel(ParametroFresaBase.AvanzamentoAsincronoPiantata, GetValidationError, PropAvanzamentoAsincronoPiantata);
 
             AvanzamentoSincronoPiantata.OnSourceUpdated += UserInput_SourceUpdated;
             AvanzamentoAsincronoPiantata.OnSourceUpdated += UserInput_SourceUpdated;
@@ -55,7 +59,7 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
         {
             get
             {
-                var tool = _parametroFresaBase.Utensile as FresaBase;
+                var tool = ParametroFresaBase.Utensile as FresaBase;
 
                 if (tool != null)
                     return tool.Diametro;
@@ -69,7 +73,7 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             if (sender == NumeroGiri)
             {
                 if (NumeroGiri.Value.HasValue)
-                    _parametroFresaBase.SetNumeroGiri(NumeroGiri.Value.Value);
+                    ParametroFresaBase.SetNumeroGiri(NumeroGiri.Value.Value);
 
                 VelocitaTaglio.Update();
             }
@@ -77,7 +81,7 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             else if (sender == VelocitaTaglio)
             {
                 if (VelocitaTaglio.Value.HasValue)
-                    _parametroFresaBase.SetVelocitaTaglio(VelocitaTaglio.Value.Value);
+                    ParametroFresaBase.SetVelocitaTaglio(VelocitaTaglio.Value.Value);
 
                 NumeroGiri.Update();
 
@@ -104,14 +108,14 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             else if (sender == AvanzamentoSincrono)
             {
                 if (AvanzamentoSincrono.Value.HasValue)
-                    _parametroFresaBase.SetFeedSync(AvanzamentoSincrono.Value.Value);
+                    ParametroFresaBase.SetFeedSync(AvanzamentoSincrono.Value.Value);
 
                 AvanzamentoAsincrono.Update();
             }
             else if (sender == AvanzamentoAsincrono)
             {
                 if (AvanzamentoAsincrono.Value.HasValue)
-                    _parametroFresaBase.SetFeedAsync(AvanzamentoAsincrono.Value.Value);
+                    ParametroFresaBase.SetFeedAsync(AvanzamentoAsincrono.Value.Value);
 
                 AvanzamentoSincrono.Update();
             }
@@ -119,14 +123,14 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             else if (sender == AvanzamentoSincronoPiantata)
             {
                 if (AvanzamentoSincronoPiantata.Value.HasValue)
-                    _parametroFresaBase.SetPlungeFeedSync(AvanzamentoSincronoPiantata.Value.Value);
+                    ParametroFresaBase.SetPlungeFeedSync(AvanzamentoSincronoPiantata.Value.Value);
 
                 AvanzamentoAsincronoPiantata.Update();
             }
             else if (sender == AvanzamentoAsincronoPiantata)
             {
                 if (AvanzamentoAsincronoPiantata.Value.HasValue)
-                    _parametroFresaBase.SetPlungeFeedAsync(AvanzamentoAsincronoPiantata.Value.Value);
+                    ParametroFresaBase.SetPlungeFeedAsync(AvanzamentoAsincronoPiantata.Value.Value);
 
                 AvanzamentoSincronoPiantata.Update();
             }

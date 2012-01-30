@@ -51,6 +51,8 @@ namespace CncConvProg.Model.ConversationalStructure
     [Serializable]
     public class Operazione
     {
+        public bool FirstStart = true;
+
         public bool ProgramNeedUpdate { get; set; }
 
         protected ProgramPhase ProgramPhase { get; set; }

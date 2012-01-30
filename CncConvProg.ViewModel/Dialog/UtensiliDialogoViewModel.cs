@@ -39,11 +39,11 @@ namespace CncConvProg.ViewModel.Dialog
         private MagazzinoUtensile _magazzinoUtensile;
         private readonly MeasureUnit _measureUnit;
 
-        public UtensiliDialogoViewModel(MagazzinoUtensile magazzinoUtensile, MeasureUnit measureUnit)
+        public UtensiliDialogoViewModel( MeasureUnit measureUnit)
         {
             _measureUnit = measureUnit;
-            _magazzinoUtensile = magazzinoUtensile;
 
+            _magazzinoUtensile = Singleton.Data.GetMagazzinoUtensile();
             /*
              * ho intenzione di dividere utensili in base a genere .. poi se vedo che non basta fare ulteriore split..
              */
@@ -93,10 +93,15 @@ namespace CncConvProg.ViewModel.Dialog
             {
                 _materialeSelezionato = value;
 
-                if (UtensileSelezionato != null && _materialeSelezionato != null)
-                    UtensileSelezionato.RefreshParameterList(_materialeSelezionato, _measureUnit);
+                if (_utensileSelezionato != null && MaterialeSelezionato != null)
+                {
+                    var t = _utensileSelezionato.Tool;
+                    t.SelectParameter(MaterialeSelezionato.MaterialeGuid);
+                    _utensileSelezionato.UpdateParameterViewModel();
+                }
 
                 OnPropertyChanged("MaterialeSelezionato");
+
             }
         }
 
@@ -104,11 +109,9 @@ namespace CncConvProg.ViewModel.Dialog
         {
             get
             {
-            //    var mat = _magazzinoUtensile.GetMaterials();
-            //    if (mat != null)
-            //        return new ObservableCollection<Materiale>(mat);
+                var mat = _magazzinoUtensile.GetMaterials(_measureUnit);
 
-                return new ObservableCollection<Materiale>();
+                return mat != null ? new ObservableCollection<Materiale>(mat) : new ObservableCollection<Materiale>();
             }
         }
 
@@ -130,32 +133,105 @@ namespace CncConvProg.ViewModel.Dialog
 
         private void UpdateTreeView()
         {
-            if (TreeView.Count > 0)
-                TreeView.Clear();
+            var previousTreeView = TreeView;
 
-            foreach (var keyValuePair in _toolDictName)
+            var newTreeView = new ObservableCollection<TreeViewItemViewModel>();
+
+            var ts = _magazzinoUtensile.GetTools<Utensile>(_measureUnit);
+
+            var tipies = from t in ts
+                         group t by t.GetType()
+                             into tg
+                             select tg;
+
+            foreach (var tipy in tipies)
             {
-                var tools = _magazzinoUtensile.GetTools(keyValuePair.Key, _measureUnit);
+                string groupName;
 
-                var drillTreeItem = new ToolTypeItemViewModel(keyValuePair.Value);
+                _toolDictName.TryGetValue(tipy.Key, out groupName);
 
-                drillTreeItem.OnItemSelected += TOnItemSelected;
+                var toolTypeTreeView = new ToolTypeItemViewModel(groupName);
 
-                foreach (var drillTool in tools)
+                toolTypeTreeView.OnItemSelected += OnItemSelected;
+
+                newTreeView.Add(toolTypeTreeView);
+
+                foreach (var utensile in tipy)
                 {
-                    var t = ToolTreeViewItemViewModel.GetViewModel(drillTool, drillTreeItem);
+                    var t = ToolTreeViewItemViewModel.GetViewModel(utensile, toolTypeTreeView);
 
-                    t.OnItemSelected += TOnItemSelected;
+                    t.OnItemSelected += OnItemSelected;
 
-                    drillTreeItem.Children.Add(t);
+                    toolTypeTreeView.Children.Add(t);
                 }
-
-                TreeView.Add(drillTreeItem);
-
             }
+
+            /*
+             * Ora itero vecchio albero per mantenere struttura,
+             * 
+             */
+
+            foreach (var treeViewItemViewModel in previousTreeView)
+            {
+                foreach (var toolTypeItemViewModel in newTreeView)
+                {
+                    if (treeViewItemViewModel.Label == toolTypeItemViewModel.Label && treeViewItemViewModel.IsExpanded)
+                    {
+                        toolTypeItemViewModel.IsExpanded = true;
+
+                        var oldChildren = treeViewItemViewModel.Children.OfType<ToolTreeViewItemViewModel>();
+                        var newChildre = toolTypeItemViewModel.Children.OfType<ToolTreeViewItemViewModel>();
+
+                        foreach (var oldChild in oldChildren)
+                        {
+                            if (oldChild.IsExpanded)
+                                foreach (var newChild in newChildre)
+                                {
+                                    if (oldChild.Tool.ToolGuid == newChild.Tool.ToolGuid)
+                                    {
+                                        newChild.IsExpanded = true;
+                                    }
+                                }
+                        }
+
+                    }
+                }
+            }
+
+            TreeView = newTreeView;
+
+            //if (TreeView.Count > 0)
+            //    TreeView.Clear();
+
+            //foreach (var keyValuePair in _toolDictName)
+            //{
+            //    var tools = _magazzinoUtensile.GetTools(keyValuePair.Key, _measureUnit);
+
+            //    var drillTreeItem = new ToolTypeItemViewModel(keyValuePair.Value);
+
+            //    drillTreeItem.OnItemSelected += TOnItemSelected;
+
+            //    foreach (var drillTool in tools)
+            //    {
+            //        var t = ToolTreeViewItemViewModel.GetViewModel(drillTool, drillTreeItem);
+
+            //        t.OnItemSelected += TOnItemSelected;
+
+            //        drillTreeItem.Children.Add(t);
+            //    }
+
+            //    TreeView.Add(drillTreeItem);
+
+            //}
 
 
         }
+
+        void OnItemSelected(object sender, EventArgs e)
+        {
+            UtensileSelezionato = sender as ToolTreeViewItemViewModel;
+        }
+
 
         //private object _selectedScreen;
         //public object SelectedScreen
@@ -170,11 +246,6 @@ namespace CncConvProg.ViewModel.Dialog
         //        OnPropertyChanged("SelectedScreen");
         //    }
         //}
-
-        void TOnItemSelected(object sender, EventArgs e)
-        {
-            UtensileSelezionato = sender as ToolTreeViewItemViewModel;
-        }
 
         #region Add Tool
 

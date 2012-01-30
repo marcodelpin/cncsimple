@@ -23,15 +23,15 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
         {
             _fresaturaContornatura = fresaturaContornatura;
 
-            StageOperazioni = new CommonMillOperationViewModel(fresaturaContornatura, this);
+            //StageOperazioni = new CommonMillOperationViewModel(fresaturaContornatura, this);
 
             _millingPatternSelectionViewModel = new MillingPatternSelectionViewModel(_fresaturaContornatura, this);
 
-            _millingPatternSelectionViewModel.OnPatternChanged += MillingPatternSelectionViewModelOnPatternChanged;
+           // _millingPatternSelectionViewModel.OnPatternChanged += MillingPatternSelectionViewModelOnPatternChanged;
 
-            _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaContornatura.Pattern);
+           // _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaContornatura.Pattern);
 
-            _millingPatternSelectionViewModel.Children.Add(_patternScreen);
+           // _millingPatternSelectionViewModel.Children.Add(_patternScreen);
 
             _contornaturaParametriViewModel = new ContornaturaParametriViewModel(fresaturaContornatura, this);
 
@@ -39,7 +39,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 
             TreeView.Add(_contornaturaParametriViewModel);
 
-            TreeView.Add(StageOperazioni);
+         //   TreeView.Add(StageOperazioni);
 
             Initialize();
 
