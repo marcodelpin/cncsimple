@@ -13,7 +13,7 @@ namespace CncConvProg.Model.ConversationalStructure.FasiDiLavoro
         internal FaseCentroDiLavoro()
             : base()
         {
-            CommentoProgramma = "Vertical Mill Phase";
+            Descrizione = "Vertical Mill Phase";
         }
 
         internal override ToolHolder GetToolHolder()

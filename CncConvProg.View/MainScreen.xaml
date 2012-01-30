@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ap="clr-namespace:CncConvProg.View.AttachedProperty"
              xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" 
-             xmlns:MainViewModel="clr-namespace:CncConvProg.ViewModel.MainViewModel;assembly=CncConvProg.ViewModel" xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" xmlns:TreeViewModel="clr-namespace:CncConvProg.ViewModel.AuxViewModel.TreeViewModel;assembly=CncConvProg.ViewModel" xmlns:Controls="clr-namespace:CncConvProg.View.Controls" xmlns:GraphicViewer="clr-namespace:GraphicViewer;assembly=GraphicViewer" xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop" xmlns:Controls1="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" mc:Ignorable="d" 
+             xmlns:MainViewModel="clr-namespace:CncConvProg.ViewModel.MainViewModel;assembly=CncConvProg.ViewModel" xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" xmlns:TreeViewModel="clr-namespace:CncConvProg.ViewModel.AuxViewModel.TreeViewModel;assembly=CncConvProg.ViewModel" xmlns:Controls="clr-namespace:CncConvProg.View.Controls" xmlns:GraphicViewer="clr-namespace:GraphicViewer;assembly=GraphicViewer" xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop" xmlns:Controls1="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock" mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1200" d:DataContext="{Binding Source={StaticResource viewModel}}"
              >
     <UserControl.Resources>
@@ -104,8 +104,6 @@
                                                    ItemsSource="{Binding Path=DataContext.MillMachines, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                    ItemContainerStyle="{StaticResource ResourceKey=newPhaseItemContainerStyle}"  />
                         </ribbon:RibbonMenuButton>
-                        <ribbon:RibbonButton IsEnabled="False" Label="Set Order" SmallImageSource="pack://application:,,,/Images/gui/sortOperation.png"/>
-                        <ribbon:RibbonButton Label="Sort Operation" Command="{Binding Path=SortOperationCmd}" SmallImageSource="pack://application:,,,/Images/gui/setSortOrder.png"/>
                     </ribbon:RibbonGroup>
                     <ribbon:RibbonGroup Header="">
                         <ribbon:RibbonButton Label="Thread Table"
@@ -213,258 +211,212 @@
             </ribbon:RibbonTab>-->
 
             </ribbon:Ribbon>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height=".4*" MinHeight="200" />
-                    <RowDefinition Height=".6*" MinHeight="200" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".25*" MinWidth="250" />
-                    <ColumnDefinition Width=".5*" MinWidth="250" />
-                    <ColumnDefinition Width=".25*" MinWidth="250" />
-                </Grid.ColumnDefinitions>
-                <!--<StackPanel Orientation="Horizontal">
-                <TextBlock Text="Codice Articolo : "/>
-                <TextBox Text="{Binding Path=CodiceArticolo, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Materiale"/>
-                <ComboBox  SelectedItem="{Binding Path=MaterialeSelezionato}" DisplayMemberPath="Descrizione" ItemsSource="{Binding Path=Materiali}" />
-            </StackPanel>-->
 
-                <TreeView ItemsSource="{Binding Path=TreeView}" Grid.Row="1" Margin="0,0,8,0">
-                    <TreeView.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="PowderBlue" />
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-
-                        <HierarchicalDataTemplate DataType="{x:Type TreeViewModel:FaseLavoroTreeView}" ItemsSource="{Binding Children}" >
-                            <Border  Margin="2,2,2,0" >
-                                <Border.Style>
-                                    <Style>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
-                                                <Setter Property="Border.BorderThickness" Value="1"/>
-                                                <Setter Property="Border.BorderBrush" Value="Red"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Path=FaseDiLavoro.CommentoProgramma}"/>
-                                    <Button Content="Edit" 
-                                        Command="{Binding DataContext.EditPhaseDetailCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
-                                        CommandParameter="{Binding}"/>
-                                    <Button Content="Del" 
-                                        Command="{Binding DataContext.DelWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
-                                        CommandParameter="{Binding}"/>
-                                    <Image Width="16" Height="16" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <Image.Style>
-                                            <Style>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
-                                                        <Setter Property="Image.Source" Value="pack://application:,,,/Images/Gui/errorMark_16.png"/>
-                                                    </DataTrigger>
-                                                    <!--<DataTrigger Binding="{Binding Path= IsValid}" Value="True">
-                                                    <Setter Property="Image.Source" Value="pack://application:,,,/Images/Gui/okCheck_16.png"/>
-                                                </DataTrigger>-->
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
-                                </StackPanel>
-                            </Border>
-                        </HierarchicalDataTemplate>
-
-                        <DataTemplate DataType="{x:Type TreeViewModel:LavorazioneTreeView}">
-                            <Border Margin="2,2,2,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Path=LavorazionePosition}"/>
-                                    <Image Source="pack://application:,,,/Images/Work/MillFace_16.png" Height="16" Width="16"/>
-                                    <TextBlock Text="{Binding Path=Lavorazione.Descrizione}"/>
-                                    <Button Content="Edit" 
-                                        Command="{Binding DataContext.EditWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
-                                        CommandParameter="{Binding}"/>
-                                    <Button Content="Del" 
-                                        Command="{Binding DataContext.DelWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
-                                        CommandParameter="{Binding}"/>
-                                    <Button Content="Clone" 
-                                        Command="{Binding DataContext.CloneWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
-                                        CommandParameter="{Binding}"/>
-                                    <Image Width="16" Height="16" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <Image.Style>
-                                            <Style>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
-                                                        <Setter Property="Image.Source" Value="pack://application:,,,/Images/Gui/errorMark_16.png"/>
-                                                    </DataTrigger>
-                                                    <!--<DataTrigger Binding="{Binding Path= IsValid}" Value="True">
-                                                    <Setter Property="Image.Source" Value="pack://application:,,,/Images/Gui/okCheck_16.png"/>
-                                                </DataTrigger>-->
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
-
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </TreeView.Resources>
-                    <TreeView.ItemContainerStyle>
-                        <Style TargetType="{x:Type TreeViewItem}">
-                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </TreeView.ItemContainerStyle>
-
-                </TreeView>
-
-
-                <GridSplitter Width="5" Grid.Row="1" Grid.RowSpan="1" />
-                <DockPanel Grid.RowSpan="1" Margin="0,0,8,0" Grid.Column="1" Grid.Row="1" >
-                    <ListView  ItemsSource="{Binding Path=OperationList}"  x:Name="listViewOperations"  dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                        dd:DragDrop.DropHandler="{Binding}">
-                        <ListView.View>
-                            <GridView  >
-                                <GridViewColumn Header="Op. Description" DisplayMemberBinding="{Binding Path=Descrizione}" Width="130"/>
-                                <GridViewColumn Header="Tool Label" DisplayMemberBinding="{Binding Path=ToolLabel}" Width="130"/>
-                                <GridViewColumn Header="#T" DisplayMemberBinding="{Binding Path=NumeroUtensile}" Width="35"/>
-                                <GridViewColumn Header="#D" DisplayMemberBinding="{Binding Path=CorrettoreDiametro}" Width="35"/>
-                                <GridViewColumn Header="#H" DisplayMemberBinding="{Binding Path=CorrettoreLunghezza}" Width="35"/>
-                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Path=OperationTime}" Width="65"/>
-                                <GridViewColumn Header="Tool Change">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox Visibility="{Binding Path=IsToolChangeOptional}" IsChecked="{Binding Path=ForceToolChange}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </DockPanel>
-                <GridSplitter 
-            ResizeDirection="Rows" 
-            Grid.Column="0" 
-            Grid.ColumnSpan="2"
-            Grid.Row="2" 
-            Width="Auto"
-            Height="6"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Top"
-            Margin="0"/>
-
-
-                <!--<Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderOptions.BitmapScalingMode="HighQuality" Tag="{Binding Path=ImagePath}"  SourceUpdated="Image_SourceUpdated" Source="{Binding Path=ImageSource}" ImageFailed="Image_ImageFailed" Grid.Row="2" Margin="0,8,8,0" MouseDown="Image_MouseDown" />-->
-
-                <GraphicViewer:Viewer3D Grid.Column="0" DataContext="{Binding Path = Preview}" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,8,8,0" />
-
-                <GridSplitter Width="5" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" />
-                <TabControl Grid.Column="2" Grid.RowSpan="3">
-                    <TabItem Header="Text Editor">
-                        <avalonEdit:TextEditor  Name="textEditor1" Margin="5"  ShowLineNumbers="True" ap:AvalonEditorEx.BoundDocument="{Binding Path=ProgText, Mode=TwoWay}" Grid.Column="2" Grid.RowSpan="3" FontStretch="UltraExpanded" FontFamily="Segoe UI" FontStyle="Normal" FontSize="14" />
-                    </TabItem>
-                    <TabItem Header="Time Detail">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height=".25*" />
-                                <RowDefinition Height=".15*" />
-                            </Grid.RowDefinitions>
-                            <GroupBox Grid.Row="1" Header="Time Detail" Grid.RowSpan="1">
-                                <TreeView ItemsSource="{Binding Path=ReportDetailTreeview}" Grid.Row="1" Margin="0,0,8,0" MinHeight="200" >
-                                    <TreeView.Resources>
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="PowderBlue" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-                                        <HierarchicalDataTemplate DataType="{x:Type MainViewModel:VoceReportTreeview}" ItemsSource="{Binding Path=Children}">
-                                            <Border Margin="2,2,2,0">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Path=Voce}" MinWidth="120"/>
-                                                    <TextBlock Text="{Binding Path=Time}"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </HierarchicalDataTemplate>
-
-                                    </TreeView.Resources>
-                                    <TreeView.ItemContainerStyle>
-                                        <Style TargetType="{x:Type TreeViewItem}">
-                                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                        </Style>
-                                    </TreeView.ItemContainerStyle>
-                                </TreeView>
-                            </GroupBox>
-                            <GroupBox Header="Tools Detail" Grid.Row="2"  Grid.RowSpan="2">
-                                <ListView DockPanel.Dock="Top" ItemsSource="{Binding Path=ToolsReport}" MinHeight="100">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="T# " Width="50" DisplayMemberBinding="{Binding Path=ToolNumber}"/>
-                                            <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Path=ToolTotalTime}"/>
-                                            <GridViewColumn Header="Wear" Width="100" DisplayMemberBinding="{Binding Path=ToolTotalWear,StringFormat={}{0:C}}"/>
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
-                            </GroupBox>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Cycle Time Report">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="160" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <GroupBox Grid.Row="1" Header="Detail" Grid.RowSpan="1">
-                                <TreeView ItemsSource="{Binding Path=SummaryCost}" Grid.Row="1" Margin="0,0,8,0" MinHeight="100" >
-                                    <TreeView.Resources>
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="PowderBlue" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-                                        <HierarchicalDataTemplate DataType="{x:Type MainViewModel:VoceReportTreeview}" ItemsSource="{Binding Path=Children}">
-                                            <Border Margin="2,2,2,0">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Path=Voce}" MinWidth="120"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </HierarchicalDataTemplate>
-
-                                    </TreeView.Resources>
-                                    <TreeView.ItemContainerStyle>
-                                        <Style TargetType="{x:Type TreeViewItem}">
-                                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                        </Style>
-                                    </TreeView.ItemContainerStyle>
-                                </TreeView>
-                            </GroupBox>
-                            <Border DockPanel.Dock="Top" Margin="5" Padding="5" Grid.RowSpan="1" Grid.Row="0">
+            <ad:DockingManager x:Name="dockManager" Grid.Row="1" Padding="5">
+                <ad:ResizingPanel Orientation="Horizontal">
+                    <ad:DockablePane ad:ResizingPanel.ResizeWidth=".3*">
+                        <ad:DockableContent>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="Auto"  />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Stock Quantity : " MinWidth="110" VerticalAlignment="Center"/>
-                                                <TextBox Text="{Binding Path=StockQuantity}" MinWidth="70"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="5">
-                                                <TextBlock Text="Result Price : " MinWidth="110"/>
-                                                <TextBlock Text="{Binding Path=PrezzoCalcolato, StringFormat={}{0:C}}" MinWidth="50"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="5">
-                                                <TextBlock Text="User Defined Price : " MinWidth="110"/>
-                                                <TextBox ap:AttachedProperties.AutoSelectText="True" Text="{Binding Path=PrezzoDefinitivo}" MinWidth="50"/>
-                                            </StackPanel>
-                                        </StackPanel>
+                                        <TextBlock Text="Material : " VerticalAlignment="Center" Width="150" TextWrapping="Wrap" FontSize="16" />
+                                        <ComboBox ItemsSource="{Binding Path=Materiali}" SelectedItem="{Binding Path=Materiale}"
+                                                Height="30"
+                                                Margin="2" 
+                                                MinWidth="150">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border >
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image >
+                                                                <Image.Style>
+                                                                    <Style>
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding Path=GruppoMateriale}" Value="0">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_p.png"/>
+                                                                            </DataTrigger>
 
+                                                                            <DataTrigger Binding="{Binding Path= GruppoMateriale}" Value="1">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_m.png"/>
+                                                                            </DataTrigger>
+
+                                                                            <DataTrigger Binding="{Binding Path=GruppoMateriale}" Value="2">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_k.png"/>
+                                                                            </DataTrigger>
+
+                                                                            <DataTrigger Binding="{Binding Path= GruppoMateriale}" Value="3">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_n.png"/>
+                                                                            </DataTrigger>
+
+                                                                            <DataTrigger Binding="{Binding Path=GruppoMateriale}" Value="4">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_h.png"/>
+                                                                            </DataTrigger>
+
+                                                                            <DataTrigger Binding="{Binding Path= GruppoMateriale}" Value="5">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_s.png"/>
+                                                                            </DataTrigger>
+
+                                                                            <DataTrigger Binding="{Binding Path= GruppoMateriale}" Value="6">
+                                                                                <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/Material/mat_n.png"/>
+                                                                            </DataTrigger>
+
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Image.Style>
+                                                            </Image>
+                                                            <TextBlock Text="{Binding Path=Descrizione}" VerticalAlignment="Center" Margin="3"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
                                     </StackPanel>
-                                    <TextBlock Text="Note : "/>
-                                    <TextBox Text="{Binding Path=Note}" AcceptsReturn="True" Height="50" />
-
                                 </StackPanel>
-                            </Border>
+                                <TextBlock Text="Work Cycle :" Grid.Row="1" FontSize="16" Grid.ColumnSpan="2" />
+                                <TreeView Grid.Row="2" ItemsSource="{Binding Path=TreeView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding}" Grid.ColumnSpan="2">
+                                    <TreeView.Resources>
+                                        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
+                                        <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
 
-                        </Grid>
-                    </TabItem>
-                </TabControl>
-            </Grid>
+                                        <HierarchicalDataTemplate DataType="{x:Type TreeViewModel:FaseLavoroTreeView}"  ItemsSource="{Binding Children}" >
+                                            <Border  Margin="2,2,2,0" >
+                                                <Border.Style>
+                                                    <Style>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
+                                                                <Setter Property="Border.BorderThickness" Value="1"/>
+                                                                <Setter Property="Border.BorderBrush" Value="Red"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Label}" FontSize="16" MinWidth="180"/>
+                                                    <Button Content="Edit" 
+                                        Command="{Binding DataContext.EditPhaseDetailCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}"/>
+                                                    <Button Content="Del" 
+                                        Command="{Binding DataContext.DelWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}"/>
+                                                    <Image Width="16" Height="16" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                        <Image.Style>
+                                                            <Style>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
+                                                                        <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/errorMark_16.png"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Image.Style>
+                                                    </Image>
+                                                </StackPanel>
+                                            </Border>
+
+                                        </HierarchicalDataTemplate>
+
+                                        <DataTemplate DataType="{x:Type TreeViewModel:LavorazioneTreeView}">
+                                            <Border Margin="2,2,2,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Orientation="Horizontal" MinWidth="180">
+                                                        <!--<TextBlock Text="{Binding Path=LavorazionePosition}" FontSize="14"/>-->
+                                                        <Image Source="{Binding Path=IconSource}" Height="16" Width="16" Margin="5,0,5,0"/>
+                                                        <TextBlock Text="{Binding Path=Label}"/>
+                                                        <Image Width="16" Height="16" Margin="5,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                            <Image.Style>
+                                                                <Style>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
+                                                                            <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/errorMark_16.png"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                    </StackPanel>
+                                                    <Button Content="Edit" 
+                                        Command="{Binding DataContext.EditWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}"/>
+                                                    <Button Content="Del" 
+                                        Command="{Binding DataContext.DelWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}"/>
+                                                    <Button Content="Clone" 
+                                        Command="{Binding DataContext.CloneWorkCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}"/>
+
+
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </TreeView.Resources>
+                                    <TreeView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type TreeViewItem}">
+                                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        </Style>
+                                    </TreeView.ItemContainerStyle>
+                                </TreeView>
+                            </Grid>
+                        </ad:DockableContent>
+                    </ad:DockablePane>
+                    <ad:DockablePane  ad:ResizingPanel.ResizeWidth=".35*">
+                        <ad:DockableContent Title="Operation" >
+                            <ad:ResizingPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Button Command="{Binding Path=SortOperationCmd}" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/sortOperation.png"/>
+                                            <TextBlock Text="Sort Operation"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <ListView Grid.Row="2" ItemsSource="{Binding Path=OperationList}"  x:Name="listViewOperations"  dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                        dd:DragDrop.DropHandler="{Binding}">
+                                        <ListView.View>
+                                            <GridView  >
+                                                <GridViewColumn Header="Op. Description" DisplayMemberBinding="{Binding Path=Descrizione}" Width="130"/>
+                                                <GridViewColumn Header="Tool Label" DisplayMemberBinding="{Binding Path=ToolLabel}" Width="130"/>
+                                                <GridViewColumn Header="#T" DisplayMemberBinding="{Binding Path=NumeroUtensile}" Width="35"/>
+                                                <GridViewColumn Header="#D" DisplayMemberBinding="{Binding Path=CorrettoreDiametro}" Width="35"/>
+                                                <GridViewColumn Header="#H" DisplayMemberBinding="{Binding Path=CorrettoreLunghezza}" Width="35"/>
+                                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Path=OperationTime}" Width="65"/>
+                                                <GridViewColumn Header="Tool Change">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox Visibility="{Binding Path=IsToolChangeOptional}" IsChecked="{Binding Path=ForceToolChange}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                                <GraphicViewer:Viewer3D Grid.Column="0" DataContext="{Binding Path = Preview}" Grid.Row="2" Grid.ColumnSpan="2" Background="White"/>
+                            </ad:ResizingPanel>
+                        </ad:DockableContent>
+                    </ad:DockablePane>
+                    <ad:DockablePane ad:ResizingPanel.ResizeWidth=".35*">
+                        <ad:DockableContent Title="Editor">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <avalonEdit:TextEditor  Name="textEditor1" Margin="5"  ShowLineNumbers="True" ap:AvalonEditorEx.BoundDocument="{Binding Path=ProgText, Mode=TwoWay}" FontStretch="UltraExpanded" FontFamily="Segoe UI" FontStyle="Normal" FontSize="14" Grid.Column="2" Grid.RowSpan="3" />
+                            </Grid>
+                        </ad:DockableContent>
+                    </ad:DockablePane>
+                </ad:ResizingPanel>
+            </ad:DockingManager>
 
             <StatusBar Grid.Row="2" >
                 <StatusBar.ItemsPanel>

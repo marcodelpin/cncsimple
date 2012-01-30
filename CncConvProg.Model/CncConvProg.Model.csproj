@@ -81,6 +81,7 @@
     <Compile Include="ConversationalStructure\Lavorazioni\Common\LavorazioniEnumOperazioni.cs" />
     <Compile Include="FeedAndSpeedHelper.cs" />
     <Compile Include="Materiale.cs" />
+    <Compile Include="OperationTime.cs" />
     <Compile Include="PreviewEntity\InvisibleEntity.cs" />
     <Compile Include="PreviewEntity\IPreviewEntity.cs" />
     <Compile Include="PreviewEntity\PreviewArc3D.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="ConversationalStructure\Abstraction\IMillLeveable.cs" />
     <Compile Include="ConversationalStructure\Operazione.cs" />
     <Compile Include="ConversationalStructure\Operation\IOperationTurnable.cs" />
-    <Compile Include="CycleTimeCollector.cs" />
     <Compile Include="FileManageUtility\DefaultDataManager.cs" />
     <Compile Include="FileManageUtility\FileUtility.cs" />
     <Compile Include="FileManageUtility\PathFolderHelper.cs" />

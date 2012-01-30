@@ -19,7 +19,6 @@ namespace CncConvProg.Model.ToolMachine
         {
             var fase = new FaseTornio3Assi() { MachineGuid = this.MachineGuid };
 
-            SetDefaultTiming(fase);
 
 
             return fase;

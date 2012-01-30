@@ -14,6 +14,17 @@ namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
 {
     public sealed class FaseLavoroTreeView : TreeViewItemViewModel//, IValid
     {
+        public string Label
+        {
+            get
+            {
+                return FaseDiLavoro.Descrizione;
+            }
+            set
+            {
+                FaseDiLavoro.Descrizione = value;
+            }
+        }
 
         public Guid FaseDiLavoroGuid { get; private set; }
 

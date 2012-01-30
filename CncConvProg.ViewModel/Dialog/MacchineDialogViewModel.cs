@@ -153,64 +153,7 @@ namespace CncConvProg.ViewModel.Dialog
             _machine = machine;
         }
 
-        public double CostoOrarioMacchina
-        {
-            get { return _machine.CostoOrario; }
-            set
-            {
-                _machine.CostoOrario = value;
-                OnPropertyChanged("CostoOrarioMacchina");
-            }
-        }
-
-        public int TempoCaricamentoMacchina
-        {
-            get { return _machine.MachineLoadingTime; }
-            set
-            {
-                _machine.MachineLoadingTime = value;
-                OnPropertyChanged("TempoCaricamentoMacchina");
-            }
-        }
-
-        public int TempoSetupFixture
-        {
-            get { return _machine.AverageSetupFixtureTime; }
-            set
-            {
-                _machine.AverageSetupFixtureTime = value;
-                OnPropertyChanged("TempoSetupFixture");
-            }
-        }
-
-        public int TempoSetupTool
-        {
-            get { return _machine.AverageMountingToolTime; }
-            set
-            {
-                _machine.AverageMountingToolTime = value;
-                OnPropertyChanged("TempoSetupTool");
-            }
-        }
-
-        public int TempoProgrammazioneOperazione
-        {
-            get { return _machine.AverageProgrammingOperationTime; }
-            set
-            {
-                _machine.AverageProgrammingOperationTime = value;
-                OnPropertyChanged("TempoProgrammazioneOperazione");
-            }
-        }
-        public int ChangeToolTime
-        {
-            get { return _machine.ChangeToolTime; }
-            set
-            {
-                _machine.ChangeToolTime = value;
-                OnPropertyChanged("ChangeToolTime");
-            }
-        }
+      
 
         public string MachineName
         {

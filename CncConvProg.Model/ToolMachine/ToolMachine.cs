@@ -41,67 +41,14 @@ namespace CncConvProg.Model.ToolMachine
     [Serializable]
     public abstract class ToolMachine
     {
-        #region Time Calculation Stuff
-        /*
-         * Inserisco campi per tenere memorizzare tempi di default.
-         * Ogni fase potra poi personalizzare il tempo.
-         */
-
-        /// <summary>
-        /// Tempo medio programmazione operazione 
-        /// Espresso in minuti
-        /// </summary>
-        public int AverageProgrammingOperationTime { get; set; }
-
-        /// <summary>
-        /// Tempo medio preparazione staffaggio.
-        /// Espresso in minuti
-        /// </summary>
-        public int AverageSetupFixtureTime { get; set; }
-
-        /// <summary>
-        /// Tempo Medio Montaggio Utensile
-        /// Espresso in minuti
-        /// </summary>
-        public int AverageMountingToolTime { get; set; }
-
-        /// <summary>
-        /// Tempo Default Caricamento Pezzo
-        /// Espresso in secondi
-        /// </summary>
-        public int MachineLoadingTime { get; set; }
-
-        /// <summary>
-        /// Costo Orario Macchina
-        /// </summary>
-        public double CostoOrario { get; set; }
-
-        #endregion
-
         protected ToolMachine()
         {
             MachineGuid = Guid.NewGuid();
-            AverageProgrammingOperationTime = 6;
-            AverageSetupFixtureTime = 20;
-            AverageMountingToolTime = 5;
-            MachineLoadingTime = 30;
-            ChangeToolTime = 6;
-            CostoOrario = 50;
         }
         public string MachineName { get; set; }
         public Guid MachineGuid { get; private set; }
 
         public abstract FaseDiLavoro CreateFaseLavoro();
-
-
-        protected void SetDefaultTiming(FaseDiLavoro faseDiLavoro)
-        {
-            faseDiLavoro.AverageProgrammingOperationTime = AverageProgrammingOperationTime;
-            faseDiLavoro.AverageSetupFixtureTime = AverageSetupFixtureTime;
-            faseDiLavoro.AverageMountingToolTime = AverageMountingToolTime;
-            faseDiLavoro.MachineLoadingTime = MachineLoadingTime;
-        }
-
 
         protected NumericControl NumericControl = new NumericControl(); // per adesso ok cosi . poi fare proprieta cosi da poter modificare..
 
@@ -981,10 +928,6 @@ namespace CncConvProg.Model.ToolMachine
 
             //return op;
         }
-
-        public int TempoCambioUtensile { get; set; }
-
-        public int ChangeToolTime { get; set; }
 
         public double MaxGiri { get; set; }
 

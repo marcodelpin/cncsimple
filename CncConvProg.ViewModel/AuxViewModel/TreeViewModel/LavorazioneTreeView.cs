@@ -1,6 +1,8 @@
 ﻿using System;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
 using System.Windows.Input;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 using Framework.Implementors.Wpf.MVVM;
@@ -9,6 +11,11 @@ namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
 {
     public class LavorazioneTreeView : TreeViewItemViewModel, IValid
     {
+        public string Label
+        {
+            get { return Lavorazione.Descrizione; }
+        }
+
         public Lavorazione Lavorazione { get; private set; }
 
         public LavorazioneTreeView(Lavorazione lavorazione, FaseLavoroTreeView parentFaseLavoro)
@@ -30,6 +37,55 @@ namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
             }
         }
 
+        public string IconSource
+        {
+            get
+            {
+                return GetImageIcon();
+            }
+        }
+
+        public string GetImageIcon()
+        {
+            var p = @"pack://application:,,,/CncConvProg.View;component/Images/work/";
+
+            var imageName = string.Empty;
+            //if (Lavorazione is Tornitura || Lavorazione is TornituraSfacciatura)
+            //    imageName = "turning_small.png";
+
+            //if (Lavorazione is TornituraFilettatura)
+            //    imageName = "thread_small.png";
+
+            //if (Lavorazione is TornituraScanalatura)
+            //    imageName = "groove_small.png";
+
+            if (Lavorazione is Spianatura)
+                imageName = "millface_16.png";
+
+            if (Lavorazione is FresaturaLato)
+                imageName = "millface_16.png";
+
+            if (Lavorazione is FresaturaScanalaturaChiusa)
+                imageName = "millScanaCerchio_16.png";
+
+            if (Lavorazione is FresaturaContornatura)
+                imageName = "millCont_16.png";
+
+            if (Lavorazione is DrillBaseClass)
+                imageName = "drill_small.png";
+
+            if (Lavorazione is FresaturaCava)
+                imageName = "caveMillSmall.png";
+
+            if (Lavorazione is ScanalaturaLinea)
+                imageName = "millscan.png";
+
+            if (imageName != string.Empty)
+                return p + imageName;
+
+            return string.Empty;
+
+        }
         //#region _ Edit Command _
 
         //RelayCommand _editCommand;

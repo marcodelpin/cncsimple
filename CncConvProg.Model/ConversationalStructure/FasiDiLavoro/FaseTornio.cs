@@ -15,7 +15,7 @@ namespace CncConvProg.Model.ConversationalStructure.FasiDiLavoro
         internal FaseTornio()
             : base()
         {
-            CommentoProgramma = "Lathe 2 Axis Phase";
+            Descrizione = "Lathe 2 Axis Phase";
         }
 
         internal override ToolHolder GetToolHolder()
