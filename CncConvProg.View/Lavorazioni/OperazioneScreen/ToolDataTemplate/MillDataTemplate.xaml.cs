@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CncConvProg.View.Lavorazioni.OperazioneScreen.Common
+namespace CncConvProg.View.Lavorazioni.OperazioneScreen.ToolDataTemplate
 {
     /// <summary>
-    /// Logica di interazione per RotateWork.xaml
+    /// Interaction logic for PuntaDataTemplate.xaml
     /// </summary>
-    public partial class RotateWorkView : UserControl
+    public partial class MillDataTemplate : UserControl
     {
-        public RotateWorkView()
+        public MillDataTemplate()
         {
             InitializeComponent();
         }
