@@ -74,6 +74,38 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
             }
         }
 
+        public bool FinishWithCompensation
+        {
+            get { return _fresaturaCava.FinishWithCompensation; }
+
+            set
+            {
+                _fresaturaCava.FinishWithCompensation = value;
+                OnPropertyChanged("FinishWithCompensation");
+
+            }
+        }
+
+        public double SovrametalloFinitura
+        {
+            get { return _fresaturaCava.SovrametalloFinituraProfilo; }
+            set
+            {
+                _fresaturaCava.SovrametalloFinituraProfilo = value;
+                OnPropertyChanged("SovrametalloFinitura");
+            }
+        }
+
+        public double ProfonditaFresaSmussatura
+        {
+            get { return _fresaturaCava.ProfonditaFresaSmussatura; }
+            set
+            {
+                _fresaturaCava.ProfonditaFresaSmussatura = value;
+                OnPropertyChanged("ProfonditaFresaSmussatura");
+            }
+        }
+
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }

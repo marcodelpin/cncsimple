@@ -53,6 +53,48 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Spianatura
             }
         }
 
+        public Dictionary<byte, string> MillingStrategy
+        {
+            get
+            {
+                var lookup = new Dictionary<byte, string>
+                                 {
+                                     {0, "Traditional"},
+                                     {1, "Spiral"},
+
+                                 };
+
+                return lookup;
+
+            }
+        }
+
+        public byte FinishSelectedStrategy
+        {
+            get
+            {
+                return (byte)_spianatura.ModoFinitura;
+            }
+            set
+            {
+                _spianatura.ModoFinitura = (SpiantaturaMetodologia)value;
+                OnPropertyChanged("FinishSelectedStrategy");
+            }
+        }
+
+        public byte RoughingSelectedStrategy
+        {
+            get
+            {
+                return (byte)_spianatura.ModoSgrossatura;
+            }
+            set
+            {
+                _spianatura.ModoSgrossatura = (SpiantaturaMetodologia)value;
+                OnPropertyChanged("RoughingSelectedStrategy");
+            }
+        }
+
         public byte SelectedStartPoint
         {
             get

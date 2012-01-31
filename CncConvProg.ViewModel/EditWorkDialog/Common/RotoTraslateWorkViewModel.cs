@@ -8,12 +8,13 @@ using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Common
 {
-    public class RotoTraslateWorkViewModel : ViewModelBase
+    public class RotoTraslateWorkViewModel : EditStageTreeViewItem
     {
         private readonly Lavorazione _lavorazione;
         private readonly EditStageTreeViewItem _parentViewModel;
 
         public RotoTraslateWorkViewModel(Lavorazione lavorazione, EditStageTreeViewItem parent)
+            : base("Roto Translate Profile", parent)
         {
             _lavorazione = lavorazione;
             _parentViewModel = parent;

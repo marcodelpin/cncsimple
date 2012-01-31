@@ -35,7 +35,5 @@
                 <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Larghezza, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
         </StackPanel>
-        <Image Margin="10" Grid.Column="1" Width="Auto" MaxWidth="400"
-                   Source="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/tasca.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
     </Grid>
 </UserControl>

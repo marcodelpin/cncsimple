@@ -22,8 +22,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
         {
             _contornaturaParametri = contornaturaParametri;
 
-            RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel(this._contornaturaParametri, this);
-
             var trimmingViewModel = new ContornaturaTrimmingViewModel(_contornaturaParametri, this);
 
             Children.Add(trimmingViewModel);
@@ -45,17 +43,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 
                 return lookup;
 
-            }
-        }
-
-        private RotoTraslateWorkViewModel _rotoTraslateWorkViewModel;
-        public RotoTraslateWorkViewModel RotoTraslateWorkViewModel
-        {
-            get { return _rotoTraslateWorkViewModel; }
-            set
-            {
-                _rotoTraslateWorkViewModel = value;
-                OnPropertyChanged("RotoTraslateWorkViewModel");
             }
         }
 
@@ -102,6 +89,37 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
             }
         }
 
+        public bool FinishWithCompensation
+        {
+            get { return _contornaturaParametri.FinishWithCompensation; }
+
+            set
+            {
+                _contornaturaParametri.FinishWithCompensation = value;
+                OnPropertyChanged("FinishWithCompensation");
+
+            }
+        }
+
+        public double SovrametalloFinitura
+        {
+            get { return _contornaturaParametri.SovrametalloFinituraProfilo; }
+            set
+            {
+                _contornaturaParametri.SovrametalloFinituraProfilo = value;
+                OnPropertyChanged("SovrametalloFinitura");
+            }
+        }
+
+        public double ProfonditaFresaSmussatura
+        {
+            get { return _contornaturaParametri.ProfonditaFresaSmussatura; }
+            set
+            {
+                _contornaturaParametri.ProfonditaFresaSmussatura = value;
+                OnPropertyChanged("ProfonditaFresaSmussatura");
+            }
+        }
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }

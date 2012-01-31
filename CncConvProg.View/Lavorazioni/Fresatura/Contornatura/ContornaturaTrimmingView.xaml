@@ -49,6 +49,5 @@
                 </GroupBox>
             </StackPanel>
         </GroupBox>
-        <Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="2" />
     </Grid>
 </UserControl>

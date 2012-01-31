@@ -8,6 +8,10 @@
     <DataTemplate DataType="{x:Type TreeViewViewModel:EditStageTreeViewItem }">
         <Lavorazioni:EmptyEditStageView />
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type Common:RotoTraslateWorkViewModel }">
+        <Common1:RotoTraslateWorkView />
+    </DataTemplate>
 
     <!-- Fresatura -->
 
@@ -45,45 +49,6 @@
 
     <DataTemplate DataType="{x:Type TextEngraving:TextEngravingParametriViewModel }">
         <TextEngraving1:TextEngravingParametriView />
-    </DataTemplate>
-
-    <!--Operazioni -->
-
-    <DataTemplate DataType="{x:Type Cava:FresaturaCavaOperazioniViewModel}">
-        <Cava1:FresaturaCavaOperazioniView />
-    </DataTemplate>
-
-    <!--<DataTemplate DataType="{x:Type ScanalaturaChiusa1:FresaturaScanalaturaChiusaOperazioniViewModel}">
-        <ScanalaturaChiusa:ScanalaturaChiusaOperazioniView />
-    </DataTemplate>-->
-
-    <!--<DataTemplate DataType="{x:Type Lato:FresaturaLatoOperazioniViewModel}">
-        <FresaturaLato:FresaturaLatoOperazioniView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type Contornatura:ContornaturaOperazioniViewModel}">
-        <Fresatura:ContornaturaOperazioniView />
-    </DataTemplate>-->
-
-    <DataTemplate DataType="{x:Type Common2:ForaturaCommonOperazioniViewModel}">
-        <OperazioniDataTemplate:OperazioniCommonScreenView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type Spianatura:SpianaturaOperazioni}">
-        <Spianatura1:SpianaturaOperazioniView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type Common:CommonMillOperationViewModel}">
-        <Fresatura:CommonMillOperationView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type ScanalaturaLinea1:ScanalaturaLineaOperazioniViewModel}">
-        <ScanalaturaLinea:ScanalaturaLineaOperazioniView />
-    </DataTemplate>
-
-
-    <DataTemplate DataType="{x:Type Filettatura:FresaturaFilettaturaOperazioniViewModel}">
-        <Filettatura1:FresaturaFilettaturaOperazioniView />
     </DataTemplate>
 
     <!-- Patter Fresatura -->

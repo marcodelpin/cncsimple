@@ -152,6 +152,37 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
             }
         }
 
+        public bool FinishWithCompensation
+        {
+            get { return _scanalaturaLinea.FinishWithCompensation; }
+
+            set
+            {
+                _scanalaturaLinea.FinishWithCompensation = value;
+                OnPropertyChanged("FinishWithCompensation");
+
+            }
+        }
+
+        public double SovrametalloFinitura
+        {
+            get { return _scanalaturaLinea.SovrametalloFinituraProfilo; }
+            set
+            {
+                _scanalaturaLinea.SovrametalloFinituraProfilo = value;
+                OnPropertyChanged("SovrametalloFinitura");
+            }
+        }
+
+        public double ProfonditaFresaSmussatura
+        {
+            get { return _scanalaturaLinea.ProfonditaFresaSmussatura; }
+            set
+            {
+                _scanalaturaLinea.ProfonditaFresaSmussatura = value;
+                OnPropertyChanged("ProfonditaFresaSmussatura");
+            }
+        }
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }

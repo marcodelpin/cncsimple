@@ -58,13 +58,13 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
             {
                 var opList = new List<Operazione>();
 
-                if (Sgrossatura.Abilitata)
+                //if (Sgrossatura.Abilitata)
                     opList.Add(Sgrossatura);
 
-                if (Finitura.Abilitata)
+                //if (Finitura.Abilitata)
                     opList.Add(Finitura);
 
-                if (Smussatura.Abilitata)
+                //if (Smussatura.Abilitata)
                     opList.Add(Smussatura);
 
                 return opList;

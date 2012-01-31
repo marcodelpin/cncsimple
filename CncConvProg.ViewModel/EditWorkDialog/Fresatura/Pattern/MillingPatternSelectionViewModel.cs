@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
@@ -12,7 +14,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
     {
         private readonly IMillingPatternable _millingPatternable;
 
-      //  public event EventHandler OnPatternChanged;
+        //  public event EventHandler OnPatternChanged;
 
         //private void RequestPatternChanged()
         //{
@@ -29,9 +31,22 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
             _millingPatternable = millingPatternable;
 
             PatternParameter = GetViewModel(_millingPatternable.Pattern);
-            
+
+            RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel((Lavorazione)millingPatternable, this);
+
+            Children.Add(RotoTraslateWorkViewModel);
         }
 
+        private RotoTraslateWorkViewModel _rotoTraslateWorkViewModel;
+        public RotoTraslateWorkViewModel RotoTraslateWorkViewModel
+        {
+            get { return _rotoTraslateWorkViewModel; }
+            set
+            {
+                _rotoTraslateWorkViewModel = value;
+                OnPropertyChanged("RotoTraslateWorkViewModel");
+            }
+        }
         private ViewModelBase _patternParameter;
         public ViewModelBase PatternParameter
         {

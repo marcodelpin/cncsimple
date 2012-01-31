@@ -35,7 +35,7 @@
     <!-- Utensili -->
 
     <DataTemplate DataType="{x:Type ToolViewModels:PuntaViewModel}">
-        <ToolDataTemplate:PuntaDataTemplate />
+        <ToolDataTemplate:DrillToolDataTemplate />
     </DataTemplate>
 
     <!--<DataTemplate DataType="{x:Type ToolViewModels:FresaFilettareViewModel}">
@@ -43,11 +43,11 @@
     </DataTemplate>-->
 
     <DataTemplate DataType="{x:Type ToolViewModels:FresaSpianareViewModel}">
-        <ToolDataTemplate:FresaSpianareDataTemplate />
+        <ToolDataTemplate:FaceMillDataTemplate />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type ToolViewModels:FresaCandelaViewModel}">
-        <ToolDataTemplate:FresaCandelaDataTemplate />
+        <ToolDataTemplate:MillDataTemplate />
     </DataTemplate>
 
 

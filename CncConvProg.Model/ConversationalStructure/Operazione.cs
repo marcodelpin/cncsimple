@@ -142,7 +142,7 @@ namespace CncConvProg.Model.ConversationalStructure
                 if (Lavorazione == null)
                     throw new NullReferenceException();
 
-                var l = Lavorazione.Operazioni.Where(o => o.Abilitata).ToList();
+                var l = Lavorazione.Operazioni.ToList();
 
                 if (!l.Contains(this))
                     throw new Exception();

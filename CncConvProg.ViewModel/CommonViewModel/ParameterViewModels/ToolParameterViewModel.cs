@@ -87,6 +87,15 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             throw new NotImplementedException();
         }
 
+        public Materiale Materiale
+        {
+            get
+            {
+                var m = Singleton.Data.GetMateriale(Parametro.MaterialGuid);
+                return m;
+            }
+        }
+
         public event EventHandler OnUpdated;
 
         protected void RequestUpdate(ViewModelBase caller)
