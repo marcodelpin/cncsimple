@@ -17,9 +17,9 @@ namespace CncConvProg.View.Lavorazioni.OperazioneScreen.ToolDataTemplate
     /// <summary>
     /// Interaction logic for PuntaDataTemplate.xaml
     /// </summary>
-    public partial class PuntaDataTemplate : UserControl
+    public partial class DrillToolDataTemplate : UserControl
     {
-        public PuntaDataTemplate()
+        public DrillToolDataTemplate()
         {
             InitializeComponent();
         }
