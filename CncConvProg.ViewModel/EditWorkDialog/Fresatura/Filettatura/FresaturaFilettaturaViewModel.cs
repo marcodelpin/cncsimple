@@ -16,8 +16,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
 
         private readonly FresaturaFilettaturaParametriViewModel _contornaturaParametriViewModel;
 
-        private EditStageTreeViewItem _patternScreen;
-
         private readonly FresaturaFilettatura _fresaturaFilettatura;
 
         private readonly ForaturaPatternSelectionViewModel _foraturaPatternSelectionViewModel;
@@ -28,15 +26,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
         {
             _fresaturaFilettatura = fresaturaFilettatura;
 
-        //    StageOperazioni = new FresaturaFilettaturaOperazioniViewModel(fresaturaFilettatura, this);
-
             _foraturaPatternSelectionViewModel = new ForaturaPatternSelectionViewModel(fresaturaFilettatura, this);
-
-            _foraturaPatternSelectionViewModel.OnPatternChanged += ForaturaPatternSelectionViewModelOnPatternChanged;
-
-            _patternScreen = ForaturaPatternSelectionViewModel.GetViewModel(_fresaturaFilettatura.PatternDrilling, _foraturaPatternSelectionViewModel);
-
-            _foraturaPatternSelectionViewModel.Children.Add(_patternScreen);
 
             _contornaturaParametriViewModel = new FresaturaFilettaturaParametriViewModel(fresaturaFilettatura, this);
 
@@ -51,19 +41,5 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
             Initialize();
 
         }
-
-        void ForaturaPatternSelectionViewModelOnPatternChanged(object sender, EventArgs e)
-        {
-            if (_foraturaPatternSelectionViewModel.Children.Contains(_patternScreen))
-                _foraturaPatternSelectionViewModel.Children.Remove(_patternScreen);
-
-            _patternScreen = ForaturaPatternSelectionViewModel.GetViewModel(_fresaturaFilettatura.PatternDrilling, _foraturaPatternSelectionViewModel);
-            _patternScreen.OnSourceUpdated += EditStageTreeViewItemOnSourceUpdated;
-
-            _foraturaPatternSelectionViewModel.Children.Add(_patternScreen);
-        }
-
-      
-
     }
 }

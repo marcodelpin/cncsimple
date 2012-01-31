@@ -232,15 +232,8 @@
     <Compile Include="Lavorazioni\Foratura\ParameterScreen\ForaturaSempliceParametriView.xaml.cs">
       <DependentUpon>ForaturaSempliceParametriView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\Fresatura\Cava\FresaturaCavaOperazioniView.xaml.cs">
-      <DependentUpon>FresaturaCavaOperazioniView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Lavorazioni\Fresatura\Cava\FresaturaCavaParametriView.xaml.cs">
       <DependentUpon>FresaturaCavaParametriView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Fresatura\CommonMillOperationView.xaml.cs">
-      <DependentUpon>CommonMillOperationView.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lavorazioni\Fresatura\Contornatura\ContornaturaParametriView.xaml.cs">
       <DependentUpon>ContornaturaParametriView.xaml</DependentUpon>
@@ -262,9 +255,6 @@
     </Compile>
     <Compile Include="Lavorazioni\Fresatura\TextEngraving\TextEngravingParametriView.xaml.cs">
       <DependentUpon>TextEngravingParametriView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaOperazioniView.xaml.cs">
-      <DependentUpon>FresaturaFilettaturaOperazioniView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaParametriView.xaml.cs">
       <DependentUpon>FresaturaFilettaturaParametriView.xaml</DependentUpon>
@@ -289,12 +279,6 @@
     </Compile>
     <Compile Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml.cs">
       <DependentUpon>RotoTraslateWorkView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\OperazioneScreen\Common\TranslateWorkView.xaml.cs">
-      <DependentUpon>TranslateWorkView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\OperazioneScreen\Common\RotateWorkView.xaml.cs">
-      <DependentUpon>RotateWorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lavorazioni\EmptyEditStageView.xaml.cs">
       <DependentUpon>EmptyEditStageView.xaml</DependentUpon>
@@ -329,14 +313,14 @@
     <Compile Include="Lavorazioni\Fresatura\Spianatura\SpianaturaOperazioniView.xaml.cs">
       <DependentUpon>SpianaturaOperazioniView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaSpianareDataTemplate.xaml.cs">
-      <DependentUpon>FresaSpianareDataTemplate.xaml</DependentUpon>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FaceMillDataTemplate.xaml.cs">
+      <DependentUpon>FaceMillDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaCandelaDataTemplate.xaml.cs">
-      <DependentUpon>FresaCandelaDataTemplate.xaml</DependentUpon>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\MillDataTemplate.xaml.cs">
+      <DependentUpon>MillDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\PuntaDataTemplate.xaml.cs">
-      <DependentUpon>PuntaDataTemplate.xaml</DependentUpon>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\DrillToolDataTemplate.xaml.cs">
+      <DependentUpon>DrillToolDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -473,17 +457,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lavorazioni\Fresatura\Cava\FresaturaCavaOperazioniView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Lavorazioni\Fresatura\Cava\FresaturaCavaParametriView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Fresatura\CommonMillOperationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lavorazioni\Fresatura\Contornatura\ContornaturaParametriView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -510,10 +486,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Lavorazioni\Fresatura\TextEngraving\TextEngravingParametriView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Fresatura\Filettatura\FresaturaFilettaturaOperazioniView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -548,14 +520,6 @@
     <Page Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\OperazioneScreen\Common\TranslateWorkView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\OperazioneScreen\Common\RotateWorkView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lavorazioni\EmptyEditStageView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -617,15 +581,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaSpianareDataTemplate.xaml">
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FaceMillDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\FresaCandelaDataTemplate.xaml">
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\MillDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\PuntaDataTemplate.xaml">
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\DrillToolDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

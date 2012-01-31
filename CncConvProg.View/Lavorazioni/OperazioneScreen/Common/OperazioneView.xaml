@@ -79,16 +79,16 @@
                 <MenuItem Header="Select Tool" ItemsSource="{Binding Path=UtensiliCompatibili}" ItemContainerStyle="{StaticResource ResourceKey=newPhaseItemContainerStyle}">
                 </MenuItem>
             </Menu>
-            <GroupBox Header="Tool Detail" Margin="5" Grid.Row="2" HorizontalAlignment="Left" MinWidth="200">
+            <GroupBox Header="Tool Detail" VerticalAlignment="Top" Margin="5" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Left" MinWidth="200">
                 <ContentControl Content="{Binding Path=UtensileViewModel}"/>
             </GroupBox>
 
             <Image Grid.Column="1" Grid.Row="2" Height="150" MaxWidth="200" VerticalAlignment="Top" Source="{Binding Path= SelectedItem.Tag}" Grid.RowSpan="1" HorizontalAlignment="Right"/>
 
-            <GroupBox Grid.Row="3" Grid.Column="1"  Margin="5" HorizontalAlignment="Right">
+            <GroupBox Grid.Row="2" Grid.RowSpan="2" VerticalAlignment="Bottom" Grid.Column="1"  Margin="5" HorizontalAlignment="Right">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Style="{StaticResource ResourceKey=ImageStyle}" DataContext="{Binding Path=ToolParameterViewModel.Materiale}" Height="22"  Width="22" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom"/>
+                        <Image Style="{StaticResource ResourceKey=ImageStyle}" DataContext="{Binding Path=UtensileViewModel.ToolParameterViewModel.Materiale}" Height="22"  Width="22" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom"/>
                         <TextBlock Text="Tool Parameter" VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </GroupBox.Header>

@@ -381,7 +381,7 @@ namespace CncConvProg.Model.PathGenerator
             //if (!Actions.Contains(programAction))
             Actions.Add(programAction);
         }
-        public Dictionary<MoveType, ParametroVelocita> FeedDictionary { get; private set; }
+        public Dictionary<MoveType, ParametroVelocita> FeedDictionary = new Dictionary<MoveType, ParametroVelocita>();
 
         //private double _currentFeed;
 

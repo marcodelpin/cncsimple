@@ -18,19 +18,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Cava
         {
             _fresaturaCava = fresaturaCava;
 
-            RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel(this._fresaturaCava, this);
         }
-
-        private RotoTraslateWorkViewModel _rotoTraslateWorkViewModel;
-        public RotoTraslateWorkViewModel RotoTraslateWorkViewModel
-        {
-            get { return _rotoTraslateWorkViewModel; }
-            set
-            {
-                _rotoTraslateWorkViewModel = value;
-                OnPropertyChanged("RotoTraslateWorkViewModel");
-            }
-        }
+        
         public double Profondita
         {
             get
@@ -61,6 +50,38 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Cava
             {
                 _fresaturaCava.InizioLavorazioneZ = value;
                 OnPropertyChanged("InizioZ");
+            }
+        }
+
+        public bool FinishWithCompensation
+        {
+            get { return _fresaturaCava.FinishWithCompensation; }
+
+            set
+            {
+                _fresaturaCava.FinishWithCompensation = value;
+                OnPropertyChanged("FinishWithCompensation");
+
+            }
+        }
+
+        public double SovrametalloFinitura
+        {
+            get { return _fresaturaCava.SovrametalloFinituraProfilo; }
+            set
+            {
+                _fresaturaCava.SovrametalloFinituraProfilo = value;
+                OnPropertyChanged("SovrametalloFinitura");
+            }
+        }
+
+        public double ProfonditaFresaSmussatura
+        {
+            get { return _fresaturaCava.ProfonditaFresaSmussatura; }
+            set
+            {
+                _fresaturaCava.ProfonditaFresaSmussatura = value;
+                OnPropertyChanged("ProfonditaFresaSmussatura");
             }
         }
 

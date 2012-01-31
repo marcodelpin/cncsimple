@@ -51,7 +51,12 @@
                 </StackPanel>
             </CustomControl:FocusableListBoxItem>
 
-
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/work/Milling/levelZSecure.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                    <TextBlock Text="Secure Z : " MinWidth="120" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
 
             <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/LevelZOrigin.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
@@ -74,13 +79,29 @@
                     <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SovrametalloFinitura, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
                 </StackPanel>
             </CustomControl:FocusableListBoxItem>
-
-            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/work/Milling/levelZSecure.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Secure Z : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            <CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/Work/Milling/zeroPoint.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Roughing Strategy" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <ComboBox x:Name="cbRoughingType" 
+            				ItemsSource="{Binding Path=MillingStrategy}"
+            				SelectedValue="{Binding Path=RoughingSelectedStrategy}"
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key" 
+                            Width="100" />
                 </StackPanel>
             </CustomControl:FocusableListBoxItem>
+            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="120" Text="Finish Strategy" Padding="0,0,2,0" Margin="0,0,2,0" />
+                    <ComboBox x:Name="cbFinishingType" 
+            				ItemsSource="{Binding Path=MillingStrategy}"
+            				SelectedValue="{Binding Path=FinishSelectedStrategy}"
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key" 
+                            Width="100" />
+                </StackPanel>
+            </CustomControl:FocusableListBoxItem>
+
 
 
 

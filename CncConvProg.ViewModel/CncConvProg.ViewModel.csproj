@@ -109,7 +109,6 @@
     <Compile Include="EditWorkDialog\Foratura\Pattern\ForaturaPatternSelectionViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\Pattern\RectanglePatternViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\ParameterScreen\ForaturaSempliceParametriViewModel.cs" />
-    <Compile Include="EditWorkDialog\Fresatura\Cava\FresaturaCavaOperazioniViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Cava\FresaturaCavaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Cava\FresaturaCavaViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaParametriViewModel.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="EditWorkDialog\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\TextEngraving\TextEngravingParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\TextEngraving\TextEngravingViewModel.cs" />
-    <Compile Include="EditWorkDialog\Fresatura\Filettatura\FresaturaFilettaturaOperazioniViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Filettatura\FresaturaFilettaturaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Filettatura\FresaturaFilettaturaViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\ScanalaturaChiusa\ScanalaturaChiusaParametriViewModel.cs" />

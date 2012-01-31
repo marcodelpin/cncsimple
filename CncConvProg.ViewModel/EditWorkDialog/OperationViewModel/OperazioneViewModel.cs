@@ -265,6 +265,17 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
             }
         }
 
+        RelayCommand _setThisToolCmd;
+
+        public ICommand SetThisToolCmd
+        {
+            get
+            {
+                return _setThisToolCmd ?? (_setThisToolCmd = new RelayCommand(param => SetThisTool(param as Utensile),
+                                                                                param => true));
+            }
+        }
+
         RelayCommand _autoToolFindCmd;
 
         public ICommand AutoToolFindCmd

@@ -16,7 +16,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Common
     {
         private readonly EditStageTreeViewItem _foraturaParametriViewModel;
         private readonly ForaturaPatternSelectionViewModel _foraturaPatternSelectionViewModel;
-        private EditStageTreeViewItem _patternScreen;
         private readonly DrillBaseClass _foratura;
         /*
          * qui ho lo schermo per 
@@ -44,14 +43,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Common
             if (!_foratura.ForaturaCentraleTornio)
             {
                 _foraturaPatternSelectionViewModel = new ForaturaPatternSelectionViewModel(foraturaBaseClass, this);
-
-                _foraturaPatternSelectionViewModel.OnPatternChanged += ForaturaPatternSelectionViewModelOnPatternChanged;
-
-                _patternScreen = ForaturaPatternSelectionViewModel.GetViewModel(foraturaBaseClass.PatternDrilling,
-                                                                                _foraturaPatternSelectionViewModel);
-
-                _foraturaPatternSelectionViewModel.Children.Add(_patternScreen);
-
             }
 
             _foraturaParametriViewModel = GetParameterViewModel(foraturaBaseClass);
@@ -85,16 +76,5 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Common
 
             throw new NotImplementedException();
         }
-        void ForaturaPatternSelectionViewModelOnPatternChanged(object sender, EventArgs e)
-        {
-            if (_foraturaPatternSelectionViewModel.Children.Contains(_patternScreen))
-                _foraturaPatternSelectionViewModel.Children.Remove(_patternScreen);
-
-            _patternScreen = ForaturaPatternSelectionViewModel.GetViewModel(_foratura.PatternDrilling, _foraturaPatternSelectionViewModel);
-            _patternScreen.OnSourceUpdated += EditStageTreeViewItemOnSourceUpdated;
-
-            _foraturaPatternSelectionViewModel.Children.Add(_patternScreen);
-        }
-
     }
 }

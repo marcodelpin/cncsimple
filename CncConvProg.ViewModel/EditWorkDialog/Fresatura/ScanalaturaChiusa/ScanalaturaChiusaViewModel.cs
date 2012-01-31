@@ -12,8 +12,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
 
         private readonly ScanalaturaChiusaParametriViewModel _contornaturaParametriViewModel;
 
-        private EditStageTreeViewItem _patternScreen;
-
         private readonly ProfileEditorViewModel _stageInputProfile;
 
         private readonly MillingPatternSelectionViewModel _millingPatternSelectionViewModel;
@@ -25,17 +23,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
         {
             _fresaturaScanalaturaChiusa = fresaturaScanalaturaChiusa;
 
-           // StageOperazioni = new CommonMillOperationViewModel(fresaturaScanalaturaChiusa, this);
-
             _millingPatternSelectionViewModel = new MillingPatternSelectionViewModel(_fresaturaScanalaturaChiusa, this);
-
-          //  _millingPatternSelectionViewModel.OnPatternChanged += MillingPatternSelectionViewModelOnPatternChanged;
-
-            _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaScanalaturaChiusa.Pattern);
-
-            _millingPatternSelectionViewModel.Children.Add(_patternScreen);
-
-           // _stageInputProfile = new ProfileEditorViewModel(fresaturaContornatura.Profile, this, ProfileEditorViewModel.AxisSystem.Xy);
 
             _contornaturaParametriViewModel = new ScanalaturaChiusaParametriViewModel(fresaturaScanalaturaChiusa, this);
 
@@ -43,22 +31,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
 
             TreeView.Add(_contornaturaParametriViewModel);
 
-            //TreeView.Add(_stageInputProfile);
-         //   TreeView.Add(StageOperazioni);
-
             Initialize();
 
-        }
-
-        void MillingPatternSelectionViewModelOnPatternChanged(object sender, System.EventArgs e)
-        {
-            if (_millingPatternSelectionViewModel.Children.Contains(_patternScreen))
-                _millingPatternSelectionViewModel.Children.Remove(_patternScreen);
-
-            _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaScanalaturaChiusa.Pattern);
-            _patternScreen.OnSourceUpdated += EditStageTreeViewItemOnSourceUpdated;
-
-            _millingPatternSelectionViewModel.Children.Add(_patternScreen);
         }
     }
 }
