@@ -13,42 +13,22 @@ using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.Tool;
 using CncConvProg.ViewModel.CommonViewModel.ParameterViewModels;
 using CncConvProg.ViewModel.CommonViewModel.ToolViewModels;
-using CncConvProg.ViewModel.EditWorkDialog.OperationViewModel.ToolHolder;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
 {
-    /*
-     * allora , per personalizzare in modo migliore immissione dei parametri ,
-     * 
-     * devo creare..
-     * 
-     * esistono alcuni casi speciali dove non posso risolvere con comandi particolari ..
-     * 
-     * o dove l'immissione deve essere più guidata..
-     * 
-     * per trocoidale > 2dc sarebbe anche ok--
-     * 
-     * potrei mettere w e ap dentro operazioni 
-     * 
-     * e creare maniera per disabilitare parametro utensile 
-     * 
-     * determinati parametri utensile..
-     * 
-     */
-    public class OperazioneViewModel : EditStageTreeViewItem, IPreviewable, IValid
+    /// <summary>
+    /// 
+    /// </summary>
+    public class OperazioneViewModel : EditStageTreeViewItem, IPreviewable
     {
         protected readonly Operazione Operazione;
-
-        private readonly MeasureUnit _measureUnit;
 
         public OperazioneViewModel(Operazione operazione, EditWorkViewModel parent)
             : base(operazione.Descrizione, parent)
         {
             Operazione = operazione;
-
-            _measureUnit = Singleton.Instance.MeasureUnit;
 
             if (operazione.FirstStart)
             {
@@ -57,25 +37,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
             }
             else
                 LoadCompatibleTools();
-        }
-
-        /*
-         * per aggiornare le 3 proprieta sotto o creo metodo update nel viewModel
-         *  
-         * oppure ricreo il viewModel. scelgo questa quest'ultima
-         */
-        private ToolHolderViewModel _toolHolderViewModel;
-        public ToolHolderViewModel ToolHolderVm
-        {
-            get
-            {
-                //if (_toolHolderViewModel == null)
-                {
-                    _toolHolderViewModel = ToolHolderViewModel.GetViewModel(Operazione.ToolHolder, Operazione.Utensile, this);
-                    _toolHolderViewModel.OnUpdated += ChildViewModelUpdated;
-                }
-                return _toolHolderViewModel;
-            }
         }
 
         private ToolTreeViewItemViewModel _utensileViewModel;
@@ -297,18 +258,12 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
             }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public virtual bool IsValid
+        public override bool? ValidateStage()
         {
-            get
-            {
-                if (OperationAbilited)
-                    return UtensileViewModel.IsValid;
+            if (OperationAbilited)
+                return UtensileViewModel.IsValid;
 
-                return true;
-            }
+            return true;
         }
 
         public IEnumerable<IEntity3D> GetPreview()
@@ -333,7 +288,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
                  *         stampo anche lavorazione
                  */
 
-                if (IsValid)
+                if (IsValid.HasValue && IsValid.Value)
                 {
                     /*
                      * piccolo hack . aggiorno le preferenze in questo putno.. todo gestire meglio..

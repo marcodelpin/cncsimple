@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel
 {
-    public class EditStageTreeViewItem : TreeViewItemViewModel
+    public abstract class EditStageTreeViewItem : TreeViewItemViewModel, IValidable
     {
         public event EventHandler OnSourceUpdated;
 
@@ -79,18 +79,25 @@ namespace CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel
             EditWorkParent = viewModelEditWorkParent;
 
             Label = label;
+
             OnItemSelected += EditStageTreeViewItem_OnItemSelected;
         }
 
-        protected bool StageModified;
+        public EditStageTreeViewItem(string label, EditStageTreeViewItem parent)
+            : base(parent, false)
+        {
+            Label = label;
+
+            OnItemSelected += EditStageTreeViewItem_OnItemSelected;
+
+        }
 
         protected override void OnPropertyChanged(string propertyName)
         {
-            StageModified = true;
+            _stageModified = true;
 
             if (propertyName != "IsValid")
             {
-                if (this is IValid)
                     OnPropertyChanged("IsValid");
             }
 
@@ -113,10 +120,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel
             EditWorkParent.SelectedScreen = sender as EditStageTreeViewItem;
         }
 
-        public EditStageTreeViewItem(string label, EditStageTreeViewItem parent)
+        public EditStageTreeViewItem(string label, EditStageTreeViewItem parent, bool stageValid)
             : base(parent, false)
         {
             Label = label;
+            _stageValid = stageValid;
         }
 
         //protected void RequestUpdatePreview()
@@ -127,23 +135,46 @@ namespace CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel
         //        _parent.UpdatePreview();
         //}
 
-        private bool ThisIsValid()
+        /// <summary>
+        /// Flag che indica se il stage è stato modificato da ultimo ricalcolo
+        /// </summary>
+        private bool _stageModified = true;
+
+        /// <summary>
+        /// Flag che indica se lo stage è valido
+        /// </summary>
+        private bool? _stageValid;
+
+        /// <summary>
+        /// Se lo stage risulta modificato , ricalcolo il valore di valid e restituisco.
+        /// </summary>
+        public bool? IsValid
         {
-            if (this is IValid)
+            get
             {
-                var va = this as IValid;
+                if (_stageModified || _stageValid == null)
+                {
+                    _stageValid = ValidateStage();
+                }
 
-                if (va != null) return va.IsValid;
+                return _stageValid;
             }
-
-            return true;
         }
+
+        public abstract bool? ValidateStage();
+        /// <summary>
+        /// Se stage è IValid,
+        ///     se non è modificato ritorna valore memorizzato.
+        ///     se stage è modificato ricalcola il valore
+        /// </summary>
+        /// <returns></returns>
+        /// 
 
         internal bool IsTreeViewValid()
         {
-            var rslt = ThisIsValid();
+            var rslt = IsValid;
 
-            if (!rslt)
+            if (rslt == false)
                 return false;
 
             foreach (var treeViewItemViewModel in Children.OfType<EditStageTreeViewItem>())

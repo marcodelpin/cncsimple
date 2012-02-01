@@ -7,12 +7,13 @@ using CncConvProg.Model.Tool.Drill;
 using CncConvProg.Model.Tool.LatheTool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 {
-    public abstract class ToolParameterViewModel : ViewModelBase, IValid, IDataErrorInfo
+    public abstract class ToolParameterViewModel : ViewModelValidable, IDataErrorInfo
     {
 
         public string VelocitaTaglioLabel
@@ -124,12 +125,9 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
         protected abstract string[] ValidatedProperties { get; }

@@ -13,7 +13,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 {
-    public class ContornaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class ContornaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly FresaturaContornatura _contornaturaParametri;
 
@@ -129,13 +129,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
 
         protected string[] ValidatedProperties = {

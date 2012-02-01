@@ -5,12 +5,13 @@ using System.Text;
 using CncConvProg.Model.ConversationalStructure.Abstraction.IPattern;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Pattern;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
 {
-    public sealed class ForaturaPatternSelectionViewModel : EditStageTreeViewItem, IValid
+    public sealed class ForaturaPatternSelectionViewModel : EditStageTreeViewItem
     {
         private readonly IForaturaPatternable _foraturaSemplice;
 
@@ -53,31 +54,32 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
         }
 
 
-        public static EditStageTreeViewItem GetViewModel(IPatternDrilling patternDrilling)
+        public static ViewModelValidable GetViewModel(IPatternDrilling patternDrilling)
         {
             if (patternDrilling is PatternDrillingCircle)
-                return new CirclePatternViewModel(patternDrilling as PatternDrillingCircle, null);
+                return new CirclePatternViewModel(patternDrilling as PatternDrillingCircle);
 
             if (patternDrilling is PatternDrillingRectangle)
-                return new RectanglePatternViewModel(patternDrilling as PatternDrillingRectangle, null);
+                return new RectanglePatternViewModel(patternDrilling as PatternDrillingRectangle);
 
             if (patternDrilling is PatternDrillingXy)
-                return new XyPatternViewModel(patternDrilling as PatternDrillingXy, null);
+                return new XyPatternViewModel(patternDrilling as PatternDrillingXy);
 
             if (patternDrilling is PatternDrillingLine)
-                return new LinePatternViewModel(patternDrilling as PatternDrillingLine, null);
+                return new LinePatternViewModel(patternDrilling as PatternDrillingLine);
 
             if (patternDrilling is PatternDrillingRc)
-                return new RcPatternViewModel(patternDrilling as PatternDrillingRc, null);
+                return new RcPatternViewModel(patternDrilling as PatternDrillingRc);
 
             if (patternDrilling is PatternDrillingArc)
-                return new ArcPatternViewModel(patternDrilling as PatternDrillingArc, null);
+                return new ArcPatternViewModel(patternDrilling as PatternDrillingArc);
 
             throw new NotImplementedException("ForaturaSempliceViewModel.GetViewModel");
         }
-        public bool IsValid
+
+        public override bool? ValidateStage()
         {
-            get { return true; }
+            return null;
         }
     }
 }

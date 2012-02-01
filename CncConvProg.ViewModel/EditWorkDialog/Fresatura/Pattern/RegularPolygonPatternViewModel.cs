@@ -4,16 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
 {
-    public class RegularPolygonPatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class RegularPolygonPatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly RegularPolygonPattern _patternCerchio;
 
-        public RegularPolygonPatternViewModel(RegularPolygonPattern patternCerchio, EditStageTreeViewItem parent)
-            : base("Polygon", parent)
+        public RegularPolygonPatternViewModel(RegularPolygonPattern patternCerchio)
         {
             _patternCerchio = patternCerchio;
         }
@@ -93,12 +94,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
         protected string[] ValidatedProperties = {

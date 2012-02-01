@@ -20,14 +20,9 @@ namespace CncConvProg.Model.Tool
 
             ParametriUtensile = new List<ParametroUtensile>();
 
-
-            // per ora il discorso toolholder decade
-            MillToolHolder = new MillToolHolder();
-            LatheToolHolder = new LatheToolHolder();
-            MillToolHolder.NumeroPostazione = 1;
-            MillToolHolder.NumeroCorrettoreLunghezza = "1";
-            MillToolHolder.NumeroCorrettoreRaggio = "1";
-            LatheToolHolder.NumeroCorrettore = 1;
+            NumeroPostazione = 1;
+            NumeroCorrettoreLunghezza = "1";
+            NumeroCorrettoreRaggio = "1";
 
         }
 
@@ -53,9 +48,23 @@ namespace CncConvProg.Model.Tool
                 ParametroUtensile = parameter;
         }
 
-        public LatheToolHolder LatheToolHolder { get; set; }
+        public int NumeroPostazione { get; set; }
 
-        public MillToolHolder MillToolHolder { get; set; }
+        public bool CoolantOn { get; set; }
+
+        public string NumeroCorrettoreLunghezza { get; set; }
+        public string NumeroCorrettoreRaggio { get; set; }
+
+        public void GetToolDefaultData(Utensile tool)
+        {
+            NumeroPostazione = tool.NumeroPostazione;
+            NumeroCorrettoreLunghezza = tool.NumeroCorrettoreLunghezza;
+            NumeroCorrettoreRaggio = tool.NumeroCorrettoreRaggio;
+        }
+
+        // Cancello il tool holder per semplificare..
+        //public LatheToolHolder LatheToolHolder { get; set; }
+        //public MillToolHolder MillToolHolder { get; set; }
 
         /// <summary>
         /// Serve per assegnare ad ogni utensile il tipo di lavorazione che andrà a fare..

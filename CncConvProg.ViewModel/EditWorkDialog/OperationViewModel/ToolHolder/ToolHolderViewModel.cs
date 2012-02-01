@@ -3,13 +3,14 @@ using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.Tool;
 using CncConvProg.ViewModel.AuxViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 using System;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel.ToolHolder
 {
-    public abstract class ToolHolderViewModel : ViewModelBase, IValid, IDataErrorInfo
+    public abstract class ToolHolderViewModel : ViewModelValidable, IDataErrorInfo
     {
         #region IDataErrorInfo Members
 
@@ -23,10 +24,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel.ToolHolder
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
         protected abstract string[] ValidatedProperties { get; }
 
@@ -115,7 +117,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel.ToolHolder
         private readonly LatheToolHolder _latheToolHolder;
 
         public LatheToolHolderViewModel(OperazioneViewModel parent, LatheToolHolder holder, Utensile tool)
-            : base(holder,tool, parent)
+            : base(holder, tool, parent)
         {
             _latheToolHolder = holder;
         }

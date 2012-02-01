@@ -1,9 +1,10 @@
-﻿using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
+﻿using System;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
 {
-    public class ScanalaturaLineaOperazioniViewModel : Common.CommonMillOperationViewModel
+    public class ScanalaturaLineaOperazioniViewModel : EditStageTreeViewItem
     {
         private readonly Model.ConversationalStructure.Lavorazioni.Fresatura.ScanalaturaLinea _scanalaturaLinea;
 
@@ -38,6 +39,74 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
             }
         }
 
+        public bool FinishWithCompensation
+        {
+            get { return _scanalaturaLinea.FinishWithCompensation; }
+
+            set
+            {
+                _scanalaturaLinea.FinishWithCompensation = value;
+                OnPropertyChanged("FinishWithCompensation");
+
+            }
+        }
+
+        public double SovrametalloFinitura
+        {
+            get { return _scanalaturaLinea.SovrametalloFinituraProfilo; }
+            set
+            {
+                _scanalaturaLinea.SovrametalloFinituraProfilo = value;
+                OnPropertyChanged("SovrametalloFinitura");
+            }
+        }
+
+        public double ProfonditaFresaSmussatura
+        {
+            get { return _scanalaturaLinea.ProfonditaFresaSmussatura; }
+            set
+            {
+                _scanalaturaLinea.ProfonditaFresaSmussatura = value;
+                OnPropertyChanged("ProfonditaFresaSmussatura");
+            }
+        }
+
+        public bool SgrossaturaAbilitata
+        {
+            get { return _scanalaturaLinea.Sgrossatura.Abilitata; }
+
+            set
+            {
+                _scanalaturaLinea.Sgrossatura.Abilitata = value;
+                EditWorkParent.SyncronizeOperation();
+                OnPropertyChanged("SgrossaturaAbilitata");
+
+            }
+        }
+
+        public bool FinituraAbilitata
+        {
+            get { return _scanalaturaLinea.Finitura.Abilitata; }
+
+            set
+            {
+                _scanalaturaLinea.Finitura.Abilitata = value;
+                EditWorkParent.SyncronizeOperation();
+                OnPropertyChanged("FinituraAbilitata");
+            }
+        }
+
+        public bool SmussaturaAbilitata
+        {
+            get { return _scanalaturaLinea.Smussatura.Abilitata; }
+
+            set
+            {
+                _scanalaturaLinea.Smussatura.Abilitata = value;
+                EditWorkParent.SyncronizeOperation();
+                OnPropertyChanged("SmussaturaAbilitata");
+            }
+        }
         //public int ModoFinitura
         //{
         //    get
@@ -52,5 +121,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
         //        OnPropertyChanged("ModoFinitura");
         //    }
         //}
+        public override bool? ValidateStage()
+        {
+            return null;
+        }
     }
 }

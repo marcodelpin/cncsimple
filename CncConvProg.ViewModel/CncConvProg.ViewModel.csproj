@@ -91,10 +91,9 @@
     <Compile Include="Dialog\MaterialiDialogoViewModel.cs" />
     <Compile Include="Dialog\MacchineDialogViewModel.cs" />
     <Compile Include="Dialog\TabellaFilettaturaViewModel.cs" />
-    <Compile Include="EditWorkDialog\Common\CommonMillOperationViewModel.cs" />
     <Compile Include="EditWorkDialog\Common\RotoTraslateWorkViewModel.cs" />
+    <Compile Include="EditWorkDialog\Common\ViewModelValidable.cs" />
     <Compile Include="EditWorkDialog\Foratura\Common\OperazioniExViewModel.cs" />
-    <Compile Include="EditWorkDialog\Foratura\Common\ForaturaCommonOperazioniViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\Common\ForaturaCommonViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\ParameterScreen\CommonDrillParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\ParameterScreen\LamaturaParametriViewModel.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Pattern\CavaPatternViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Pattern\CavaApertaPatternViewModel.cs" />
-    <Compile Include="EditWorkDialog\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\TextEngraving\TextEngravingParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\TextEngraving\TextEngravingViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Filettatura\FresaturaFilettaturaParametriViewModel.cs" />
@@ -130,7 +128,6 @@
     <Compile Include="EditWorkDialog\Fresatura\ScanalaturaLinea\ScanalaturaLineaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\ScanalaturaLinea\ScanalaturaLineaViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Spianatura\SpianaturaViewModel.cs" />
-    <Compile Include="EditWorkDialog\Fresatura\Spianatura\SpianaturaOperazioni.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaTrimmingViewModel.cs" />
     <Compile Include="EditWorkDialog\Common\LavorazioneViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Contornatura\FresaturaContornaturaViewModel.cs" />
@@ -144,9 +141,8 @@
     <Compile Include="EditWorkDialog\InputProfileViewModel\RawLineViewModel.cs" />
     <Compile Include="EditWorkDialog\EditWorkViewModel.cs" />
     <Compile Include="EditWorkDialog\OperationViewModel\OperazioneViewModel.cs" />
-    <Compile Include="EditWorkDialog\OperationViewModel\ToolHolder\ToolHolderViewModel.cs" />
     <Compile Include="EditWorkDialog\TreeViewViewModel\EditStageTreeViewItem.cs" />
-    <Compile Include="EditWorkDialog\TreeViewViewModel\IValid.cs" />
+    <Compile Include="EditWorkDialog\TreeViewViewModel\IValidable.cs" />
     <Compile Include="MainViewModel\ClassModelViewModel.cs" />
     <Compile Include="MainViewModel\DummyMainPageViewModel.cs" />
     <Compile Include="MainViewModel\IDialog.cs" />

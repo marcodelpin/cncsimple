@@ -9,7 +9,7 @@ using Framework.Implementors.Wpf.MVVM;
 
 namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
 {
-    public class LavorazioneTreeView : TreeViewItemViewModel, IValid
+    public class LavorazioneTreeView : TreeViewItemViewModel, IValidable
     {
         public string Label
         {
@@ -29,7 +29,8 @@ namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
         {
             get { return Lavorazione.LavorazionePosition; }
         }
-        public bool IsValid
+
+        public bool? IsValid
         {
             get
             {
@@ -125,5 +126,9 @@ namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
 
         //#endregion
 
+        public bool? ValidateStage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -186,7 +186,7 @@ namespace CncConvProg.Model.ConversationalStructure
         public Utensile Utensile { get; private set; }
         //public ParametroUtensile ParametroUtensile { get; private set; }
         public Lavorazione Lavorazione { get; private set; }
-        public ToolHolder ToolHolder { get; private set; }
+       // public ToolHolder ToolHolder { get; private set; }
 
         public string NumberedDescription
         {
@@ -275,7 +275,7 @@ namespace CncConvProg.Model.ConversationalStructure
             if (parent.FaseDiLavoro == null)
                 throw new NotImplementedException();
 
-            ToolHolder = parent.FaseDiLavoro.GetToolHolder();
+            //ToolHolder = parent.FaseDiLavoro.GetToolHolder();
         }
 
         //public Operazione(Lavorazioni.Fresatura.ScanalaturaLinea scanalaturaLinea, int p)
@@ -302,19 +302,14 @@ namespace CncConvProg.Model.ConversationalStructure
             return Utensile != null ? Utensile.ToolDescription : "NotDefined";
         }
 
-        internal int GetToolNumber()
+        public int GetToolPosition()
         {
-            return ToolHolder != null ? ToolHolder.NumeroPostazione : 0;
+            return Utensile.NumeroPostazione;
         }
 
         internal int GetLatheToolCorrector()
         {
-            var latheToolHolder = ToolHolder as LatheToolHolder;
-
-            if (latheToolHolder == null)
-                return 0;
-
-            return latheToolHolder.NumeroCorrettore;
+            return Utensile.NumeroPostazione;
         }
 
         internal ModalitaVelocita GetSpeedType()
@@ -360,7 +355,7 @@ namespace CncConvProg.Model.ConversationalStructure
 
             Utensile = tool;
 
-            ToolHolder.GetToolDefaultData(tool);
+            Utensile.GetToolDefaultData(tool);
 
             //try
             //{
@@ -396,40 +391,19 @@ namespace CncConvProg.Model.ConversationalStructure
             throw new NullReferenceException();
         }
 
-        public int GetToolPosition()
-        {
-            return ToolHolder != null ? ToolHolder.NumeroPostazione : 0;
-        }
-
         public string GetToolDiameterCorrecto()
         {
-            if (ToolHolder != null && ToolHolder is MillToolHolder)
-                return ((MillToolHolder)ToolHolder).NumeroCorrettoreRaggio;
-
-            return "00";
-
+            return Utensile.NumeroCorrettoreRaggio;
         }
 
         public string GetToolHeightCorrector()
         {
-            if (ToolHolder != null && ToolHolder is MillToolHolder)
-                return ((MillToolHolder)ToolHolder).NumeroCorrettoreLunghezza;
-
-            return "00";
-
+            return Utensile.NumeroCorrettoreLunghezza;
         }
 
         internal bool GetCoolant()
         {
-            return ToolHolder.CoolantOn;
-        }
-
-        internal string GetMillHeightCorrector()
-        {
-            if (ToolHolder != null && ToolHolder is MillToolHolder)
-                return ((MillToolHolder)ToolHolder).NumeroCorrettoreLunghezza;
-
-            return "00";
+            return Utensile.CoolantOn;
         }
 
         /// <summary>
@@ -452,12 +426,6 @@ namespace CncConvProg.Model.ConversationalStructure
         /// Se utensile cambia : false
         /// </summary>
         public bool OutputDisimpegnoCorto { get; set; }
-
-        public int NumeroUtensile
-        {
-            get { return GetToolPosition(); }
-        }
-
     }
 }
 

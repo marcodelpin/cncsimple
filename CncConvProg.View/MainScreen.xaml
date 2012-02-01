@@ -330,7 +330,7 @@
                                                             <Image.Style>
                                                                 <Style>
                                                                     <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding Path= IsValid}" Value="False">
+                                                                        <DataTrigger Binding="{Binding Path= IsValid_d}" Value="False">
                                                                             <Setter Property="Image.Source" Value="pack://application:,,,/CncConvProg.View;component/Images/Gui/errorMark_16.png"/>
                                                                         </DataTrigger>
                                                                     </Style.Triggers>

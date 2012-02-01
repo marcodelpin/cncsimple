@@ -4,16 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
-using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
+using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
 {
-    public class CirclePatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class CirclePatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly CirclePattern _patternCerchio;
 
-        public CirclePatternViewModel(CirclePattern patternCerchio, EditStageTreeViewItem parent)
-            : base("Circle", parent)
+        public CirclePatternViewModel(CirclePattern patternCerchio)
         {
             _patternCerchio = patternCerchio;
         }
@@ -70,12 +70,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
         protected string[] ValidatedProperties = {

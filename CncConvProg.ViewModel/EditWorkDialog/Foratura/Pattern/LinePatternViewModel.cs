@@ -10,17 +10,16 @@ using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
-using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
 {
-    public class LinePatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class LinePatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly PatternDrillingLine _patternCerchio;
 
-        public LinePatternViewModel(PatternDrillingLine patternCerchio, EditStageTreeViewItem parent)
-            : base("Line", parent)
+        public LinePatternViewModel(PatternDrillingLine patternCerchio)
         {
             _patternCerchio = patternCerchio;
         }
@@ -127,10 +126,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
         protected string[] ValidatedProperties = {
                                                     "Passo"

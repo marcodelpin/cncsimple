@@ -4,16 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
 {
-    public class CavaPatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class CavaPatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly CavaDrittaPattern _patternCerchio;
 
-        public CavaPatternViewModel(CavaDrittaPattern patternCerchio, EditStageTreeViewItem parent)
-            : base("Slot", parent)
+        public CavaPatternViewModel(CavaDrittaPattern patternCerchio)
         {
             _patternCerchio = patternCerchio;
         }
@@ -114,9 +115,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
         protected string[] ValidatedProperties = {
@@ -144,7 +145,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
                         error = InputCheck.MaggioreDiZero(Raggio.ToString());
                     }
                     break;
-              
+
 
                 default:
                     Debug.Fail("Unexpected property : " + propertyName);

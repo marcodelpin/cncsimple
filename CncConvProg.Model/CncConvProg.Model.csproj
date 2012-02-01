@@ -155,12 +155,8 @@
     <Compile Include="Tool\Parametro\ParametroUtensile.cs" />
     <Compile Include="Tool\Parametro\ParametroUtensileTornitura.cs" />
     <Compile Include="Tool\Parametro\ParametroUtensileTornituraScanalatura.cs" />
-    <Compile Include="Tool\ToolHolder.cs" />
     <Compile Include="Tool\Utensile.cs" />
     <Compile Include="UserInput.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Tool\ToolsTODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

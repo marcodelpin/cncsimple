@@ -9,7 +9,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.TextEngraving
 {
-    public class TextEngravingParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class TextEngravingParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly TextEngravingModel _textEngravingModel;
 
@@ -164,13 +164,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.TextEngraving
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
 
         protected string[] ValidatedProperties = {

@@ -151,5 +151,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Common
             }
         }
 
+        public override bool? ValidateStage()
+        {
+            return null;
+        }
     }
 }

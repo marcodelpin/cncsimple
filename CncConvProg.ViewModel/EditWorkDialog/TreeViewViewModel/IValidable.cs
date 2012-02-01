@@ -5,8 +5,13 @@ using System.Text;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel
 {
-    interface IValid
+    internal interface IValid
     {
-        bool IsValid { get; }
+        bool? IsValid { get; }
+    }
+
+    interface IValidable : IValid
+    {
+        bool? ValidateStage();
     }
 }

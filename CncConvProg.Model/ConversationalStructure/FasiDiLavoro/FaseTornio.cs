@@ -18,10 +18,10 @@ namespace CncConvProg.Model.ConversationalStructure.FasiDiLavoro
             Descrizione = "Lathe 2 Axis Phase";
         }
 
-        internal override ToolHolder GetToolHolder()
-        {
-            return new LatheToolHolder();
-        }
+        //internal override ToolHolder GetToolHolder()
+        //{
+        //    return new LatheToolHolder();
+        //}
 
         public override TipoFaseLavoro TipoFase
         {

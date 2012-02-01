@@ -8,23 +8,19 @@ using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.ViewModel.CommonViewModel.ParameterViewModels;
-using CncConvProg.ViewModel.EditWorkDialog.OperationViewModel.ToolHolder;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
 {
-    /*
-     * todo : c'è confusione fra i i vari viewModel . ma cmq funzione ok . posticipo l'aggiustaggio
-     * 
-     * il viewModel .ToolTreeViewItemViewModel è la viewModel utensile, ma contiene anche il vm dei parametri e toolholder
-     * 
-     * dovrebbe invece esserci un viewModel sup. che contiene i 3 viewModel..
-     * */
     /// <summary>
-    /// Dentro il view Model ci sono i vari viewModel
+    /// Tool View Model 
+    ///    Contiene :
+    ///     - Parametro
+    ///     - Dati Utensile
+    ///     - Dati PortaUtensile
     /// </summary>
-    public abstract class ToolTreeViewItemViewModel : TreeViewItemViewModel, IValid, IDataErrorInfo
+    public abstract class ToolTreeViewItemViewModel : TreeViewItemViewModel, IValidable, IDataErrorInfo
     {
         public readonly Utensile Tool;
 
@@ -36,22 +32,6 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
             _modified = true;
             //if (string.IsNullOrWhiteSpace(ToolDescription))
             //    ToolDescription = tool.ToolDescription;
-        }
-
-        public ToolHolderViewModel MillToolHolderVm
-        {
-            get
-            {
-                return ToolHolderViewModel.GetViewModel(Tool.MillToolHolder, Tool, null);
-            }
-        }
-
-        public ToolHolderViewModel LatheToolHolderVm
-        {
-            get
-            {
-                return ToolHolderViewModel.GetViewModel(Tool.LatheToolHolder, Tool, null);
-            }
         }
 
         private ToolParameterViewModel _toolParameterViewModel;
@@ -74,24 +54,29 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
             }
         }
 
-        private bool _isValid;
+        private bool? _isValid;
 
         private bool _modified = true;
+
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            _modified = true;
+
+            if (propertyName != "IsValid")
+            {
+                // richiedi aggiornamento parent
+                OnPropertyChanged("IsValid");
+                RequestUpdate(this);
+            }
+
+            base.OnPropertyChanged(propertyName);
+        }
 
         void ChildViewModelUpdated(object sender, EventArgs e)
         {
             _modified = true;
 
             RequestUpdate(this);
-        }
-
-
-        public ToolTreeViewItemViewModel ToolViewModel
-        {
-            get
-            {
-                return ToolTreeViewItemViewModel.GetViewModel(Tool, null);
-            }
         }
 
         public string ToolDescription
@@ -139,25 +124,31 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
         {
             get { return GetValidationError(propertyName); }
         }
-
         /// <summary>
-        /// Returns true if this object has no validation errors.
+        /// Se lo stage risulta modificato , ricalcolo il valore di valid e restituisco.
         /// </summary>
-        public bool IsValid
+        public bool? IsValid
         {
             get
             {
-                if (_modified)
+                if (_modified || _isValid == null)
                 {
-                    _isValid = ValidatedProperties.All(property => GetValidationError(property) == null);
-                    _modified = false;
-
-                    if (!ToolParameterViewModel.IsValid)
-                        _isValid = false;
+                    _isValid = ValidateStage();
                 }
+
                 return _isValid;
             }
         }
+
+        public bool? ValidateStage()
+        {
+            _isValid = (ValidatedProperties.All(property => GetValidationError(property) == null) &&
+                        (ToolParameterViewModel.IsValid.HasValue && ToolParameterViewModel.IsValid.Value));
+
+            return _isValid;
+
+        }
+
 
         protected virtual string[] ValidatedProperties { get { return new[] { "" }; } }
 
@@ -222,20 +213,7 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
             Parametri = list;
         }
 
-        protected override void OnPropertyChanged(string propertyName)
-        {
-            _modified = true;
 
-
-            if (propertyName != "IsValid")
-            {
-                // richiedi aggiornamento parent
-                OnPropertyChanged("IsValid");
-                RequestUpdate(this);
-            }
-
-            base.OnPropertyChanged(propertyName);
-        }
         internal void UpdateParameterViewModel()
         {
             ToolParameterViewModel = ToolParameterViewModel.GetViewModel(Tool);
