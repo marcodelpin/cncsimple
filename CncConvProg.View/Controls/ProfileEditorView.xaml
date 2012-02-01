@@ -55,24 +55,26 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height=".3*" />
-            <RowDefinition Height=".7*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width=".4*" />
         </Grid.ColumnDefinitions>
 
-
-        <Border BorderThickness="2" Margin="5" Padding="5" CornerRadius="5" Grid.RowSpan="3" BorderBrush="BlanchedAlmond">
-            <DockPanel>
-                <StackPanel Margin="0,80">
-                    <Image Source="pack://application:,,,/Images/gui/ArrowUp.png" Width="32" />
-                    <Image Source="pack://application:,,,/Images/gui/keyPageUp.png" Width="50"/>
-                    <Image Source="pack://application:,,,/Images/gui/keyPageDown.png" Width="50"/>
-                    <Image Source="pack://application:,,,/Images/gui/ArrowDown.png" Width="32"/>
-                </StackPanel>
-                <ListView Background="Transparent" BorderThickness="0" ItemsSource="{Binding Path=MoveListViewModels}" SelectedItem="{Binding Path=SelectedMoveViewModel}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
+        <Border BorderThickness="2" Margin="5" Padding="5" CornerRadius="5" Grid.RowSpan="3" BorderBrush="BlanchedAlmond" Width="80">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/ArrowUp.png" Width="32" DockPanel.Dock="Top"/>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyPageUp.png" Width="40" Grid.Row="1"/>
+                <ListView HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" ItemsSource="{Binding Path=MoveListViewModels}" SelectedItem="{Binding Path=SelectedMoveViewModel}" Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" DockPanel.Dock="Top">
                     <ListView.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrush}" Color="Transparent" />
@@ -82,7 +84,7 @@
                         <!--<SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />-->
                         <Style x:Key="borderStyle" TargetType="{x:Type Border}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding   RelativeSource={    RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},    Path=IsSelected}" Value="True">
+                                <DataTrigger Binding="{Binding   RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},    Path=IsSelected}" Value="True">
                                     <Setter Property="Border.BorderBrush" Value="Green"/>
                                     <Setter Property="Border.Background" Value="LemonChiffon"/>
                                     <Setter Property="Border.BorderThickness" Value="1"/>
@@ -93,30 +95,31 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border Style="{StaticResource ResourceKey=borderStyle}" CornerRadius="5" BorderBrush="Black" BorderThickness=".5" Padding="5" Margin="2">
-                                <Image Width="25" Height="25" Source="{Binding Path=Orientation, 
+                                <Image Width="12" Height="12" Source="{Binding Path=Orientation, 
                         Converter={StaticResource EIConverter}}" />
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </DockPanel>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/ArrowDown.png" Width="32" DockPanel.Dock="Bottom" Grid.Row="4"/>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyPageDown.png" Width="50" Height="40" DockPanel.Dock="Bottom" Grid.Row="3"/>
+            </Grid>
         </Border>
-
-        <ContentControl Content="{Binding Path=SelectedMoveViewModel}" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Border Grid.Column="3" Grid.ColumnSpan="2" BorderThickness="2" CornerRadius="5" BorderBrush="BlanchedAlmond" Margin="5">
-            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.ColumnSpan="2" Margin="10">
-                <Image Source="pack://application:,,,/Images/gui/keyAlt.png" Width="60" VerticalAlignment="Top"/>
-                <TextBlock Text="+" FontSize="40" VerticalAlignment="Top" FontWeight="Bold"/>
-                <StackPanel Margin="10,0">
-                    <Image Source="pack://application:,,,/Images/gui/keyL.png" Width="50"/>
+        <ContentControl Content="{Binding Path=SelectedMoveViewModel}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="5"/>
+        <Border Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="2" CornerRadius="5" BorderBrush="BlanchedAlmond" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.ColumnSpan="2" Margin="10">
+                <Image Source="pack://application:,,,/Images/gui/keyAlt.png" Width="40" VerticalAlignment="Top"/>
+                <TextBlock Text="+" FontSize="20" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <StackPanel Margin="10,10" Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Images/gui/keyL.png" Width="40"/>
                     <Button Command="{Binding Path=AddEntityCmd}" CommandParameter="1" Content="Add Line" Height="40" Width="60" Margin="3" />
                 </StackPanel>
-                <StackPanel Margin="10,0">
-                    <Image Source="pack://application:,,,/Images/gui/keyA.png" Width="50"/>
+                <StackPanel Margin="10,10" Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Images/gui/keyA.png" Width="40"/>
                     <Button Command="{Binding Path=AddEntityCmd}" CommandParameter="2" Content="Add Arc" Height="40" Width="60" Margin="3" />
                 </StackPanel>
-                <StackPanel Margin="10,0">
-                    <Image Source="pack://application:,,,/Images/gui/keyCanc.png" Width="50"/>
+                <StackPanel Margin="10,10" Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Images/gui/keyCanc.png" Width="40"/>
                     <Button Command="{Binding Path=DelEntityCmd}" Content="Delete" Height="40" Width="60" Margin="3" />
                 </StackPanel>
             </StackPanel>

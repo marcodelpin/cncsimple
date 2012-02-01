@@ -16,10 +16,10 @@ namespace CncConvProg.Model.ConversationalStructure.FasiDiLavoro
             Descrizione = "Vertical Mill Phase";
         }
 
-        internal override ToolHolder GetToolHolder()
-        {
-            return new MillToolHolder();
-        }
+        //internal override ToolHolder GetToolHolder()
+        //{
+        //    return new MillToolHolder();
+        //}
 
         public override FaseDiLavoro.TipoFaseLavoro TipoFase
         {

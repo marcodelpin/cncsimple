@@ -62,14 +62,14 @@ namespace CncConvProg.Model.PathGenerator
 
             ToolLabel = operazione.GetToolDescriptionName();
             IsRotaryTool = operazione.IsRotaryTool;
-            NumberTool = operazione.GetToolNumber();
+            NumberTool = operazione.GetToolPosition();
             Speed = operazione.GetSpeed();
             Coolant = operazione.GetCoolant();
             /*
              * prendo sia numero postazioni che correttori centro di lavoro.
              */
             LatheToolCorrector = operazione.GetLatheToolCorrector();
-            MillHeightCorrector = operazione.GetMillHeightCorrector();
+            MillHeightCorrector = operazione.GetToolHeightCorrector();
             ModalitaVelocita = operazione.GetSpeedType();
             SpindleRotation = operazione.SpindleRotation;
         }

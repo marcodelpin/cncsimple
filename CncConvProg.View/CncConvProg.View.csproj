@@ -280,9 +280,6 @@
     <Compile Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml.cs">
       <DependentUpon>RotoTraslateWorkView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\EmptyEditStageView.xaml.cs">
-      <DependentUpon>EmptyEditStageView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ProgramPreferenceView.xaml.cs">
       <DependentUpon>ProgramPreferenceView.xaml</DependentUpon>
     </Compile>
@@ -518,10 +515,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\EmptyEditStageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -14,7 +14,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
  */
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
 {
-    public class ScanalaturaLineaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class ScanalaturaLineaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly Model.ConversationalStructure.Lavorazioni.Fresatura.ScanalaturaLinea _scanalaturaLinea;
 
@@ -192,13 +192,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
         protected string[] ValidatedProperties = {       
                                                     "LunghezzaCava",
@@ -219,7 +217,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
 
                 case "LarghezzaCava":
                     {
-                           error = InputCheck.MaggioreDiZero(LarghezzaCava);
+                        error = InputCheck.MaggioreDiZero(LarghezzaCava);
                     }
                     break;
 
@@ -238,10 +236,10 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
 
                 case "LunghezzaCava":
                     {
-                            error = InputCheck.MaggioreDiZero(LunghezzaCava);
+                        error = InputCheck.MaggioreDiZero(LunghezzaCava);
 
                     } break;
-        
+
                 default:
                     Debug.Fail("Unexpected property : " + propertyName);
                     break;

@@ -10,7 +10,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
     /// <summary>
     /// Classe base per screen parametri nelle lavorazioni di foratura
     /// </summary>
-    public class CommonDrillParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class CommonDrillParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly DrillBaseClass _drillBaseClass;
 
@@ -72,13 +72,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
         protected virtual string[] ValidatedProperties
         {
@@ -122,5 +120,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
         }
 
         #endregion
+
+
     }
 }

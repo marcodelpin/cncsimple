@@ -12,7 +12,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
 {
-    public class FresaturaFilettaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class FresaturaFilettaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly FresaturaFilettatura _fresaturaFilettatura;
 
@@ -46,7 +46,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
 
                 OnPropertyChanged("IsEsterna");
                 OnPropertyChanged("MaschiaturaSelezionata");
-               
+
             }
         }
 
@@ -192,10 +192,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Filettatura
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
 
         protected string[] ValidatedProperties = {

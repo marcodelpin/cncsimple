@@ -10,17 +10,16 @@ using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
-using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
 {
-    public class RcPatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class RcPatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly PatternDrillingRc _patternCerchio;
 
-        public RcPatternViewModel(PatternDrillingRc patternCerchio, EditStageTreeViewItem parent)
-            : base("Radius - Angle ", parent)
+        public RcPatternViewModel(PatternDrillingRc patternCerchio)
         {
             _patternCerchio = patternCerchio;
         }
@@ -129,13 +128,10 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+      public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
-        }
+           return ValidatedProperties.All(property => GetValidationError(property) == null); }
+        
 
         protected string[] ValidatedProperties = {
                                                     "Radius"

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using CncConvProg.Geometry.Entity;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern;
@@ -10,7 +12,7 @@ using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
 {
-    public sealed class MillingPatternSelectionViewModel : EditStageTreeViewItem
+    public sealed class MillingPatternSelectionViewModel : EditStageTreeViewItem, IPreviewable
     {
         private readonly IMillingPatternable _millingPatternable;
 
@@ -88,22 +90,22 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
             }
         }
 
-        public EditStageTreeViewItem GetViewModel(IMillingPattern patternMilling)
+        public ViewModelBase GetViewModel(IMillingPattern patternMilling)
         {
             if (patternMilling is RegularPolygonPattern)
-                return new RegularPolygonPatternViewModel(patternMilling as RegularPolygonPattern, this);
+                return new RegularPolygonPatternViewModel(patternMilling as RegularPolygonPattern);
 
             if (patternMilling is CavaArcoPattern)
-                return new CavaArcoPatternViewModel(patternMilling as CavaArcoPattern, this);
+                return new CavaArcoPatternViewModel(patternMilling as CavaArcoPattern);
 
             if (patternMilling is CirclePattern)
-                return new CirclePatternViewModel(patternMilling as CirclePattern, this);
+                return new CirclePatternViewModel(patternMilling as CirclePattern);
 
             if (patternMilling is CavaDrittaPattern)
-                return new CavaPatternViewModel(patternMilling as CavaDrittaPattern, this);
+                return new CavaPatternViewModel(patternMilling as CavaDrittaPattern);
 
             if (patternMilling is CavaDrittaApertaPattern)
-                return new CavaApertaPatternViewModel(patternMilling as CavaDrittaApertaPattern, this);
+                return new CavaApertaPatternViewModel(patternMilling as CavaDrittaApertaPattern);
 
             //if (patternMilling is RettangoloPattern)
             //    return new RettangoloPatternViewModel(patternMilling as RettangoloPattern, this);
@@ -115,6 +117,27 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
                 return new ProfileEditorViewModel(rawProfile, this, ProfileEditorViewModel.AxisSystem.Xy);
             }
             throw new NotImplementedException("MillingPatternSelection.GetViewModel");
+        }
+
+        public override bool? ValidateStage()
+        {
+            return null;
+        }
+
+        public IEnumerable<IEntity3D> GetPreview()
+        {
+            if (PatternParameter is ProfileEditorViewModel)
+            {
+                var p = PatternParameter as ProfileEditorViewModel;
+
+                return p.GetPreview();
+            }
+            var lav = _millingPatternable as Lavorazione;
+
+            if (lav != null)
+                return lav.GetPreview();
+
+            return null;
         }
     }
 }

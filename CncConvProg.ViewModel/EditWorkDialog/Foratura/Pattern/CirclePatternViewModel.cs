@@ -10,17 +10,16 @@ using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
-using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
 {
-    public class CirclePatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class CirclePatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly PatternDrillingCircle _patternCerchio;
 
-        public CirclePatternViewModel(PatternDrillingCircle patternCerchio, EditStageTreeViewItem parent)
-            : base("Circle", parent)
+        public CirclePatternViewModel(PatternDrillingCircle patternCerchio)
         {
             _patternCerchio = patternCerchio;
         }
@@ -110,13 +109,10 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+      public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
-        }
+           return ValidatedProperties.All(property => GetValidationError(property) == null); }
+        
 
         protected string[] ValidatedProperties = {
                                                     "Radius"
@@ -149,21 +145,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
         #endregion
 
 
-        /////
-        ///// Questo metodo è uguale in tutti il viewModel per i dati di taglio,
-        ///// se si fare classe base implementarlo li..
-        ///// <returns></returns>
-        //public IEnumerable<IEntity2D> GetPreview()
-        //{
-        //    // todo_ se non è valida cercare di restiruire null.
+      
 
-        //    if (!IsValid) return new List<IEntity2D>();
-
-        //    //return _patternCerchio.GetPreview();
-        //    // todo : in questo punto non è ancora noto diametro
-        //    // fare che ritorna croci o qualcosa ..
-        //    return new List<IEntity2D>();
-        //}
     }
 
 

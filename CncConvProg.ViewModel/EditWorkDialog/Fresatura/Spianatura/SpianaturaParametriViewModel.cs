@@ -22,7 +22,7 @@ using CncConvProg.ViewModel.MVVM_Library;
  */
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Spianatura
 {
-    public class SpianaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class SpianaturaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly Model.ConversationalStructure.Lavorazioni.Fresatura.Spianatura _spianatura;
 
@@ -108,13 +108,13 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Spianatura
             }
         }
 
-        public SpianaturaParametriViewModel(EditStageTreeViewItem parent, Model.ConversationalStructure.Lavorazioni.Fresatura.Spianatura spianatura) :
-            base("Face Milling Parameter", parent)
-        {
-            parent.Children.Add(this);
+        //public SpianaturaParametriViewModel(EditWorkViewModel parent, Model.ConversationalStructure.Lavorazioni.Fresatura.Spianatura spianatura) :
+        //    base("Face Milling Parameter", parent)
+        //{
+        //    parent.Children.Add(this);
 
-            _spianatura = spianatura;
-        }
+        //    _spianatura = spianatura;
+        //}
 
         public double Sovrametallo
         {
@@ -211,12 +211,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Spianatura
             }
         }
 
-        protected override void OnPropertyChanged(string propertyName)
-        {
-
-            base.OnPropertyChanged(propertyName);
-        }
-
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }
@@ -226,12 +220,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Spianatura
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
         protected string[] ValidatedProperties = {       

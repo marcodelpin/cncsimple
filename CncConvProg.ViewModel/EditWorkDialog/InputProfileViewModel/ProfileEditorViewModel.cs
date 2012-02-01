@@ -432,5 +432,10 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
             }
 
         }
+
+        public override bool? ValidateStage()
+        {
+            return null;
+        }
     }
 }

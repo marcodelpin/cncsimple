@@ -8,11 +8,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 {
     public class FresaturaContornaturaViewModel : EditWorkViewModel
     {
-        //private readonly IProfileEditorViewModel _profileEditorViewModel;
-
         private readonly ContornaturaParametriViewModel _contornaturaParametriViewModel;
-
-        private EditStageTreeViewItem _patternScreen;
 
         private readonly MillingPatternSelectionViewModel _millingPatternSelectionViewModel;
 
@@ -23,15 +19,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
         {
             _fresaturaContornatura = fresaturaContornatura;
 
-            //StageOperazioni = new CommonMillOperationViewModel(fresaturaContornatura, this);
-
             _millingPatternSelectionViewModel = new MillingPatternSelectionViewModel(_fresaturaContornatura, this);
-
-           // _millingPatternSelectionViewModel.OnPatternChanged += MillingPatternSelectionViewModelOnPatternChanged;
-
-           // _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaContornatura.Pattern);
-
-           // _millingPatternSelectionViewModel.Children.Add(_patternScreen);
 
             _contornaturaParametriViewModel = new ContornaturaParametriViewModel(fresaturaContornatura, this);
 
@@ -39,21 +27,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Contornatura
 
             TreeView.Add(_contornaturaParametriViewModel);
 
-         //   TreeView.Add(StageOperazioni);
-
             Initialize();
 
-        }
-
-        void MillingPatternSelectionViewModelOnPatternChanged(object sender, System.EventArgs e)
-        {
-            if (_millingPatternSelectionViewModel.Children.Contains(_patternScreen))
-                _millingPatternSelectionViewModel.Children.Remove(_patternScreen);
-
-            _patternScreen = _millingPatternSelectionViewModel.GetViewModel(_fresaturaContornatura.Pattern);
-            _patternScreen.OnSourceUpdated += EditStageTreeViewItemOnSourceUpdated;
-
-            _millingPatternSelectionViewModel.Children.Add(_patternScreen);
         }
     }
 }

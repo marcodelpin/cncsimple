@@ -313,7 +313,7 @@ namespace CncConvProg.ViewModel.MainViewModel
 
             foreach (var operationMainScreenViewModel in operaziones)
             {
-                var currentToolNumber = operationMainScreenViewModel.NumeroUtensile;
+                var currentToolNumber = operationMainScreenViewModel.GetToolPosition();
 
                 if (toolNumber.HasValue && toolNumber.Value == currentToolNumber)
                     operationMainScreenViewModel.ToolChangeOptional = true;

@@ -14,7 +14,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
  */
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Lato
 {
-    public class FresaturaLatoParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class FresaturaLatoParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly Model.ConversationalStructure.Lavorazioni.Fresatura.FresaturaLato _fresaturaLato;
 
@@ -193,10 +193,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Lato
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
         protected string[] ValidatedProperties = {       
                                                     "Sovrametallo",
@@ -224,7 +225,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Lato
 
                 case "Sovrametallo":
                     {
-                           error = InputCheck.MaggioreDiZero(Sovrametallo);
+                        error = InputCheck.MaggioreDiZero(Sovrametallo);
                     }
                     break;
 
@@ -244,8 +245,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Lato
                 case "ProfonditaLavorazioneZ":
                     {
                         error = InputCheck.MaggioreDiZero(ProfonditaLavorazioneZ);
-                        
-                    }break;
+
+                    } break;
 
                 default:
                     Debug.Fail("Unexpected property : " + propertyName);

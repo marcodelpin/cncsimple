@@ -9,7 +9,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Cava
 {
-    public class FresaturaCavaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class FresaturaCavaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly FresaturaCava _fresaturaCava;
 
@@ -19,7 +19,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Cava
             _fresaturaCava = fresaturaCava;
 
         }
-        
+
         public double Profondita
         {
             get
@@ -97,9 +97,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Cava
         /// <summary>
         /// Returns true if this object has no validation errors.
         /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
 
@@ -139,5 +139,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Cava
         }
 
         #endregion
+
     }
 }

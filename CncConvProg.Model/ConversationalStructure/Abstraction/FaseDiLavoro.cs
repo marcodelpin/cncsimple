@@ -55,12 +55,12 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             return other.FaseDiLavoroGuid == FaseDiLavoroGuid;
         }
 
-        /// <summary>
-        /// Restituisce porta utensile.
-        /// Non lo implemento nella classe macchina perchè potrebbe non essere selezionata
-        /// </summary>
-        /// <returns></returns>
-        internal abstract Tool.ToolHolder GetToolHolder();
+        ///// <summary>
+        ///// Restituisce porta utensile.
+        ///// Non lo implemento nella classe macchina perchè potrebbe non essere selezionata
+        ///// </summary>
+        ///// <returns></returns>
+        //internal abstract Tool.ToolHolder GetToolHolder();
 
         public bool IsValid { get; set; }
 

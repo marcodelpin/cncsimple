@@ -9,7 +9,7 @@ using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
 {
-    public class ScanalaturaChiusaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class ScanalaturaChiusaParametriViewModel : EditStageTreeViewItem, IDataErrorInfo
     {
         private readonly FresaturaScanalaturaChiusa _fresaturaCava;
 
@@ -115,13 +115,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
+
 
 
         protected string[] ValidatedProperties = {

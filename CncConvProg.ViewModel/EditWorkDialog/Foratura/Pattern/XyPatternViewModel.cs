@@ -10,30 +10,19 @@ using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Pattern;
 using CncConvProg.ViewModel.AuxViewModel;
+using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 
 namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
 {
-    public class XyPatternViewModel : EditStageTreeViewItem, IDataErrorInfo, IValid
+    public class XyPatternViewModel : ViewModelValidable, IDataErrorInfo
     {
         private readonly PatternDrillingXy _patternCerchio;
 
-        public XyPatternViewModel(PatternDrillingXy patternCerchio, EditStageTreeViewItem parent)
-            : base("X Y Coordinate", parent)
+        public XyPatternViewModel(PatternDrillingXy patternCerchio)
         {
             _patternCerchio = patternCerchio;
-        }
-
-        protected override void OnPropertyChanged(string propertyName)
-        {
-            if (propertyName != "IsValid")
-            {
-                OnPropertyChanged("IsValid");
-                //SourceUpdated(); // messo in classe base
-            }
-
-            base.OnPropertyChanged(propertyName);
         }
 
         public double CenterX
@@ -129,12 +118,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
             get { return GetValidationError(propertyName); }
         }
 
-        /// <summary>
-        /// Returns true if this object has no validation errors.
-        /// </summary>
-        public bool IsValid
+        public override bool? ValidateStage()
         {
-            get { return ValidatedProperties.All(property => GetValidationError(property) == null); }
+            return ValidatedProperties.All(property => GetValidationError(property) == null);
         }
 
         protected string[] ValidatedProperties = {
@@ -197,9 +183,6 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Pattern
             }
         }
 
-        /*
-         * magari fare anteprima con cerchio evidenziato
-         */
     }
 
 
