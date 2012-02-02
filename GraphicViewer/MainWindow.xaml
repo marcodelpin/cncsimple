@@ -1,0 +1,8 @@
+﻿<Window x:Class="GraphicViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:GraphicViewer="clr-namespace:GraphicViewer" Title="MainWindow" Height="300" Width="300">
+    <Grid>
+        <GraphicViewer:Viewer3D />
+        
+    </Grid>
+</Window>

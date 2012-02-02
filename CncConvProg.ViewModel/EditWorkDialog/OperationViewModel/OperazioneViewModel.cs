@@ -181,7 +181,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.OperationViewModel
                  * In modo che in una foratura , venga selezionata la punta con diametro più vicino,
                  * Oppure in altre lavorazioni
                  */
-                var tool = Operazione.Lavorazione.PickBestTool(Operazione, _utensiliCompatibili, matGuid);
+                var tool = Operazione.Lavorazione.PickBestTool(Operazione, UtensiliCompatibili, matGuid);
 
 
 

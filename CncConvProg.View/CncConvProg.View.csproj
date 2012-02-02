@@ -97,10 +97,6 @@
     <Reference Include="GongSolutions.Wpf.DragDrop">
       <HintPath>..\Lib\GongSolutions.Wpf.DragDrop.dll</HintPath>
     </Reference>
-    <Reference Include="GraphicViewer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\GraphicViewer.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.AvalonEdit">
       <HintPath>..\Lib\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
@@ -140,6 +136,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperty\AutoSelectTextBoxNoCalc.cs" />
     <Compile Include="AuxClass\DragDropHelper\DragDropHelper.cs" />
     <Compile Include="AuxClass\DragDropHelper\DraggedAdorner.cs" />
     <Compile Include="AuxClass\DragDropHelper\InsertionAdorner.cs" />
@@ -702,6 +699,10 @@
     <ProjectReference Include="..\Framework.Implementors.Wpf\Framework.Implementors.Wpf.csproj">
       <Project>{3C6F35FD-D88E-4BFC-92F7-F4C28648770E}</Project>
       <Name>Framework.Implementors.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphicViewer\GraphicViewer.csproj">
+      <Project>{FFAB55F2-43CD-48E6-8EA6-F090824420B4}</Project>
+      <Name>GraphicViewer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

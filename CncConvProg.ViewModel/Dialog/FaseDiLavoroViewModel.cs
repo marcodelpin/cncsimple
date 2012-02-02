@@ -37,8 +37,9 @@ namespace CncConvProg.ViewModel.Dialog
             _fase = fase;
 
             CutViewerStockViewModel = new CutViewerStockViewModel(_fase.Stock);
-            // caricare lista macchine..
+
         }
+
 
         public string DescrizioneFase { get; set; }
 
@@ -160,6 +161,18 @@ namespace CncConvProg.ViewModel.Dialog
         }
 
 
+    }
+
+
+    public class StockCube
+    {
+        public double Length;
+        public double Height;
+        public double Width;
+
+        public double X;
+        public double Y;
+        public double Z;
     }
 }
 

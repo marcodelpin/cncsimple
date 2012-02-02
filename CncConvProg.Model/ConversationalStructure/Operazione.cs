@@ -344,37 +344,11 @@ namespace CncConvProg.Model.ConversationalStructure
 
         public void SetTool(Utensile tool)
         {
-            /*
-             * con materiale setto il parametro adatta 
-             * 
-             * per ora mi limito a settare toolHolder
-             * parameter e tool
-             * 
-             */
             if (tool == null) return;
 
-            Utensile = tool;
+            var clonedTool = FileManageUtility.FileUtility.DeepCopy(tool);
 
-            Utensile.GetToolDefaultData(tool);
-
-            //try
-            //{
-            //    if (tool == null) return;
-
-            //    // todo : clonare , non reference
-            //    Utensile = tool;
-
-            //    var mat = Lavorazione.FaseDiLavoro.Model.Materiale;
-
-            //    if (mat != null)
-            //        Utensile.SelectParametroFromMaterial(mat);
-            //}
-            //catch (Exception)
-            //{
-
-            //}
-
-
+            Utensile = clonedTool;
         }
 
         internal T1 GetParametro<T1>() where T1 : ParametroUtensile
