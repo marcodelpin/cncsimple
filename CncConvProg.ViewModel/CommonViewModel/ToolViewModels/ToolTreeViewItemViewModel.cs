@@ -98,6 +98,52 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
             }
         }
 
+        public int NumeroPostazione
+        {
+            get { return Tool.NumeroPostazione; }
+            set
+            {
+                Tool.NumeroPostazione = value;
+                OnPropertyChanged("NumeroPostazione");
+            }
+
+        }
+
+
+        public bool CoolantOn
+        {
+            get { return Tool.CoolantOn; }
+            set
+            {
+                Tool.CoolantOn = value;
+
+                OnPropertyChanged("CoolantOn");
+            }
+        }
+
+        public string NumeroCorrettoreRaggio
+        {
+            get { return Tool.NumeroCorrettoreRaggio; }
+
+            set
+            {
+                Tool.NumeroCorrettoreRaggio = value;
+                OnPropertyChanged("NumeroCorrettoreRaggio");
+            }
+        }
+
+        public string NumeroCorrettoreLunghezza
+        {
+            get { return Tool.NumeroCorrettoreLunghezza; }
+
+            set
+            {
+                Tool.NumeroCorrettoreLunghezza = value;
+                OnPropertyChanged("NumeroCorrettoreLunghezza");
+            }
+        }
+
+
         public static ToolTreeViewItemViewModel GetViewModel(Utensile tool, TreeViewItemViewModel parent)
         {
             if (tool is DrillTool)

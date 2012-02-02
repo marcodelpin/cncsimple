@@ -55,12 +55,12 @@ namespace CncConvProg.Model.Tool
         public string NumeroCorrettoreLunghezza { get; set; }
         public string NumeroCorrettoreRaggio { get; set; }
 
-        public void GetToolDefaultData(Utensile tool)
-        {
-            NumeroPostazione = tool.NumeroPostazione;
-            NumeroCorrettoreLunghezza = tool.NumeroCorrettoreLunghezza;
-            NumeroCorrettoreRaggio = tool.NumeroCorrettoreRaggio;
-        }
+        //public void GetToolDefaultData(Utensile tool)
+        //{
+        //    NumeroPostazione = tool.NumeroPostazione;
+        //    NumeroCorrettoreLunghezza = tool.NumeroCorrettoreLunghezza;
+        //    NumeroCorrettoreRaggio = tool.NumeroCorrettoreRaggio;
+        //}
 
         // Cancello il tool holder per semplificare..
         //public LatheToolHolder LatheToolHolder { get; set; }

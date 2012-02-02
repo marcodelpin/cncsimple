@@ -175,6 +175,6 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
             Margin="0"/>
-        <GraphicViewer:Viewer3D DataContext="{Binding Path = Preview}" Grid.Row="2" Margin="0,8,8,0" Grid.ColumnSpan="1" />
+        <GraphicViewer:Viewer3D  DataContext="{Binding Path = Preview}" Grid.Row="2" Margin="0,8,8,0" Grid.ColumnSpan="1" />
     </Grid>
 </Window>

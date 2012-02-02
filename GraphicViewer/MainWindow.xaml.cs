@@ -9,21 +9,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CncConvProg.View.Lavorazioni.OperazioneScreen.ToolDataTemplate
+namespace GraphicViewer
 {
     /// <summary>
-    /// Interaction logic for PuntaDataTemplate.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class FaceMillDataTemplate : UserControl
+    public partial class MainWindow : Window
     {
-        public FaceMillDataTemplate()
+        public MainWindow()
         {
             InitializeComponent();
         }
-
-
     }
 }
