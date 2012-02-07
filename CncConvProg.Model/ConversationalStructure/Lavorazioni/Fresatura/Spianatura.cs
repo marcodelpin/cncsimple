@@ -15,26 +15,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
     [Serializable]
     public sealed class Spianatura : LavorazioneFresatura
     {
-        public Spianatura(Guid parent)
-            : base(parent)
+        public Spianatura()
         {
-            var fract = 1.0d;
-
-            //if (parent.Model.MeasureUnit == MeasureUnit.Inch)
-            //    fract = 25.4;
-
-            //Larghezza = Math.Round(250 / fract, 3);
-            //Altezza = Math.Round(250 / fract, 3);
-
-            //Sovrametallo = Math.Round(8 / fract, 3);
-
-            //SicurezzaZ = Math.Round(50 / fract, 3);
-
-            LivelloZ = 0;
-
-            PuntoStartX = 0;
-            PuntoStartY = 0;
-
             StartPoint = SquareShapeHelper.SquareShapeStartPoint.Center;
 
             Sgrossatura = new Operazione(this, LavorazioniEnumOperazioni.FresaturaSpianaturaSgrossatura);

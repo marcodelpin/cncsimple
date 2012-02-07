@@ -13,6 +13,131 @@ namespace CncConvProg.Geometry
 {
     public static class GeometryHelper
     {
+        public static bool Entity2DIntersection(IEntity2D entity, Line2D line2D, out Point2D intersectionPoint)
+        {
+            var l = entity as Line2D;
+            var a = entity as Arc2D;
+
+            if (l != null)
+            {
+                return SegmentIntersection(l, line2D, out intersectionPoint);
+            }
+
+            if (a != null)
+            {
+                return ArcSegmentIntersection(a, line2D, out intersectionPoint);
+            }
+
+            intersectionPoint = null;
+            return false;
+        }
+
+        private static bool ArcSegmentIntersection(Arc2D a, Line2D line2D, out Point2D intersectionPoint)
+        {
+            Point2D firstC;
+            Point2D secondC;
+
+            var rslt = FindLineCircleIntersections(a.Center.X, a.Center.Y, a.Radius, line2D.Start,
+                                                   line2D.End, out firstC, out secondC);
+
+            if (rslt == 0)
+            {
+                intersectionPoint = null;
+                return false;
+            }
+
+            /*
+             * devo controllare se i punto trovati stanno dentro angolo del'arco
+             */
+            var angleStart = GetPositiveAngle(a.Start.X - a.Center.X, a.Start.Y - a.Center.Y);
+            var angleEnd = GetPositiveAngle(a.End.X - a.Center.X, a.End.Y - a.Center.Y);
+
+            if (rslt == 1)
+            {
+                if (firstC != null)
+                {
+                    var angolo = GetPositiveAngle(firstC.X - a.Center.X, firstC.Y - a.Center.Y);
+                    if (AngoloRisiedeDentroRange(angolo, angleStart, angleEnd))
+                    {
+                        intersectionPoint = firstC;
+                        return true;
+                    }
+                }
+            }
+
+
+            if (rslt == 2)
+            {
+                if (firstC != null)
+                {
+                    var angolo = GetPositiveAngle(firstC.X - a.Center.X, firstC.Y - a.Center.Y);
+                    if (AngoloRisiedeDentroRange(angolo, angleStart, angleEnd))
+                    {
+                        intersectionPoint = firstC;
+                        return true;
+                    }
+                }
+                if (secondC != null)
+                {
+                    var angolo = GetPositiveAngle(secondC.X - a.Center.X, secondC.Y - a.Center.Y);
+                    if (AngoloRisiedeDentroRange(angolo, angleStart, angleEnd))
+                    {
+                        intersectionPoint = secondC;
+                        return true;
+                    }
+                }
+            }
+
+            intersectionPoint = null;
+            return false;
+        }
+
+        private static bool AngoloRisiedeDentroRange(double angle, double rangeMin, double rangeMax)
+        {
+            if (rangeMin > rangeMax)
+            {
+                return angle <= rangeMin && angle >= rangeMax;
+
+            }
+            return angle >= rangeMin && angle <= rangeMax;
+        }
+
+        // altro metodo per intersezione segmenti.
+        public static bool SegmentIntersection(Line2D line1, Line2D line2, out Point2D intersectionPoint)
+        {
+            intersectionPoint = null;
+            Point2D start1 = line1.Start;
+            Point2D end1 = line1.End;
+            Point2D start2 = line2.Start;
+            Point2D end2 = line2.End;
+
+            var denom = ((end1.X - start1.X) * (end2.Y - start2.Y)) - ((end1.Y - start1.Y) * (end2.X - start2.X));
+
+            //  AB & CD are parallel 
+            if (denom == 0)
+                return false;
+
+            var numer = ((start1.Y - start2.Y) * (end2.X - start2.X)) - ((start1.X - start2.X) * (end2.Y - start2.Y));
+
+            var r = numer / denom;
+
+            var numer2 = ((start1.Y - start2.Y) * (end1.X - start1.X)) - ((start1.X - start2.X) * (end1.Y - start1.Y));
+
+            var s = numer2 / denom;
+
+            if ((r < 0 || r > 1) || (s < 0 || s > 1))
+                return false;
+
+            // Find intersection point
+            var result = new Point2D
+            {
+                X = start1.X + (r * (end1.X - start1.X)),
+                Y = start1.Y + (r * (end1.Y - start1.Y))
+            };
+            intersectionPoint = result;
+            return true;
+        }
+
         //http://blog.csharphelper.com/2010/01/04/reverse-a-polygons-orientation-in-c.aspx
         public static class PolygonHelper
         {
@@ -78,41 +203,7 @@ namespace CncConvProg.Geometry
         {
             return Math.Sqrt(Math.Pow(ipo, 2) - Math.Pow(l1, 2));
         }
-        // altro metodo per intersezione segmenti.
-        public static bool SegmentIntersection(Line2D line1, Line2D line2, out Point2D intersectionPoint)
-        {
-            intersectionPoint = null;
-            Point2D start1 = line1.Start;
-            Point2D end1 = line1.End;
-            Point2D start2 = line2.Start;
-            Point2D end2 = line2.End;
-
-            var denom = ((end1.X - start1.X) * (end2.Y - start2.Y)) - ((end1.Y - start1.Y) * (end2.X - start2.X));
-
-            //  AB & CD are parallel 
-            if (denom == 0)
-                return false;
-
-            var numer = ((start1.Y - start2.Y) * (end2.X - start2.X)) - ((start1.X - start2.X) * (end2.Y - start2.Y));
-
-            var r = numer / denom;
-
-            var numer2 = ((start1.Y - start2.Y) * (end1.X - start1.X)) - ((start1.X - start2.X) * (end1.Y - start1.Y));
-
-            var s = numer2 / denom;
-
-            if ((r < 0 || r > 1) || (s < 0 || s > 1))
-                return false;
-
-            // Find intersection point
-            var result = new Point2D
-            {
-                X = start1.X + (r * (end1.X - start1.X)),
-                Y = start1.Y + (r * (end1.Y - start1.Y))
-            };
-            intersectionPoint = result;
-            return true;
-        }
+   
 
         /// <summary>
         /// Calcola punto finale su arco .

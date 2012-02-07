@@ -40,21 +40,6 @@
                    Source="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/contornaturaParametri.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
             </Grid>
         </GroupBox>
-        <StackPanel Margin="10,0" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
-                <TextBlock Text="Compesation Cnc : "/>
-                <CheckBox IsChecked="{Binding Path=FinishWithCompensation}" VerticalAlignment="Center" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
-                <TextBlock Text="Rest. Finish Material : "/>
-                <TextBox Text="{Binding Path=SovrametalloFinitura}" MinWidth="100"/>
-            </StackPanel>
-            <StackPanel Margin="10,0" IsEnabled="{Binding Path=SmussaturaAbilitata}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Mill Depth : "/>
-                    <TextBox Text="{Binding Path=ProfonditaFresaSmussatura}" MinWidth="100"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
+        <Common:CommonFinishParameter Grid.Row="1" />
     </Grid>
 </UserControl>

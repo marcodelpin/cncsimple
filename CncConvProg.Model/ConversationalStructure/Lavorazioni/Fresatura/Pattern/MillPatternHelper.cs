@@ -47,6 +47,13 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
 
                     } break;
 
+
+                case EnumPatternMilling.Rettangolo:
+                    {
+                        return new RettangoloPattern();
+
+                    } break;
+
                 default:
                     throw new NotImplementedException("FresaturaContornatura.UpdatePattern");
             }

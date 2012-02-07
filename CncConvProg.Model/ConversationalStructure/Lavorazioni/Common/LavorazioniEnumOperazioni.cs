@@ -4,7 +4,7 @@
     {
         TornituraSgrossatura,
         TornituraFinitura,
-        TornituraScanalatura,
+        TornituraScanalaturaSgrossatura,
         TornituraFilettatura,
 
         FresaturaSpianaturaSgrossatura,
@@ -19,12 +19,14 @@
         ForaturaPunta,
         ForaturaSmusso,
         ForaturaMaschiaturaDx,
+        ForaturaMaschiaturaSx,
         ForaturaAlesatore,
         ForaturaLamatore,
         ForaturaBareno,
-        ForaturaMaschiaturaSx,
-        SgrossaturaTrocoidale,
         FresaturaFilettare,
         AllargaturaBareno,
+        TornituraScanalaturaFinitura,
+        TornituraSfacciaturaSgrossatura,
+        TornituraSfacciaturaFinitura,
     }
 }

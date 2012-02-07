@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace CncConvProg.View.Lavorazioni
+namespace CncConvProg.View.Lavorazioni.Fresatura.Pattern
 {
     /// <summary>
     /// Interaction logic for ContornaturaParametriView.xaml
     /// </summary>
-    public partial class EmptyEditStageView : UserControl
+    public partial class RettangoloPatternView : UserControl
     {
-        public EmptyEditStageView()
+        public RettangoloPatternView()
         {
             InitializeComponent();
         }

@@ -79,8 +79,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
         public double PassoMetrico { get; set; }
 
-        public FresaturaFilettatura(Guid parent)
-            : base(parent)
+        public FresaturaFilettatura()
         {
             Pattern = PatternForatura.Circolare;
 

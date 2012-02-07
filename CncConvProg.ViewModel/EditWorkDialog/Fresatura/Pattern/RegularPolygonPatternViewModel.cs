@@ -85,6 +85,26 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
                 OnPropertyChanged("SideCount");
             }
         }
+
+        public double ChamferValue
+        {
+            get { return _patternCerchio.Chamfer; }
+            set
+            {
+                _patternCerchio.Chamfer = value;
+                OnPropertyChanged("ChamferValue");
+            }
+        }
+
+        public bool ChamferAbilited
+        {
+            get { return _patternCerchio.ChamferAbilited; }
+            set
+            {
+                _patternCerchio.ChamferAbilited = value;
+                OnPropertyChanged("ChamferAbilited");
+            }
+        }
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }

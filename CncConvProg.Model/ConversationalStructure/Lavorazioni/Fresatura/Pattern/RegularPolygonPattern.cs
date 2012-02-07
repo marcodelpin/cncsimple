@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using CncConvProg.Geometry;
 using CncConvProg.Geometry.Entity;
+using CncConvProg.Geometry.RawProfile2D;
 
 namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Pattern
 {
@@ -22,9 +23,9 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
 
         public double AngleInclination { get; set; }
 
-        public double ChamferValue { get; set; }
+        public double Chamfer { get; set; }
 
-        public bool Chamfer { get; set; }
+        public bool ChamferAbilited { get; set; }
 
         public Profile2D GetClosedProfile()
         {
@@ -32,26 +33,73 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
 
             var pntList = GeometryHelper.CalculatePoygonInscribed(SideNumber, new Point2D(CentroX, CentroY), raggio);
 
-            var profile2D = new Profile2D();
+            var p = new RawProfile(false);
 
 
-            // devo mettere metodo , finalize o cose cosi nell'inserimento profilo
-            foreach (var point2D in pntList)
+            var iniPoint2D = new Point2D();
+
+            for (int i = 0; i < pntList.Count; i++)
             {
-                profile2D.AddPnt(point2D);
+                var point = pntList[i];
+
+                // Initial point
+                if (i == 0)
+                {
+                    iniPoint2D = point;
+
+                    var ini = new RawInitPoint2D(p);
+                    ini.X.SetValue(true, iniPoint2D.X + CentroX);
+                    ini.Y.SetValue(true, iniPoint2D.Y + CentroY);
+                    p.Add(ini);
+                    continue;
+                }
+
+                var p1 = new RawLine2D(p);
+                p1.X.SetValue(true, point.X + CentroX);
+                p1.Y.SetValue(true, point.Y + CentroY);
+                p.Add(p1);
+
+                if (Chamfer > 0 && ChamferAbilited)
+                {
+                    p1.Chamfer.SetValue(true, Chamfer);
+                }
+                else if (Chamfer > 0 && !ChamferAbilited)
+                {
+                    p1.EndRadius.SetValue(true, Chamfer);
+                }
             }
 
-            profile2D.AddPnt(pntList.FirstOrDefault());
+            var end = new RawLine2D(p);
+            end.X.SetValue(true, iniPoint2D.X + CentroX);
+            end.Y.SetValue(true, iniPoint2D.Y + CentroY);
+            p.Add(end);
 
-            profile2D.SetPlotStyle();
-            /*
-             * todo : 
-             * per calcolare anche raggi fare rawProfile e poi ottenere rawProfile..
-             * 
-             * magari in rawProfile fare metodi addPnt e addChamfer o cose cosi..
-             */
+            if (Chamfer > 0 && ChamferAbilited)
+            {
+                end.Chamfer.SetValue(true, Chamfer);
+            }
+            else if (Chamfer > 0 && !ChamferAbilited)
+            {
+                end.EndRadius.SetValue(true, Chamfer);
+            }
 
-            return profile2D;
+            //var profile2D = new Profile2D();
+
+            //// devo mettere metodo , finalize o cose cosi nell'inserimento profilo
+            //foreach (var point2D in pntList)
+            //{
+            //    if(point2D == pntList.FirstOrDefault())
+            //    profile2D.AddPnt(point2D);
+            //}
+
+            //profile2D.AddPnt(pntList.FirstOrDefault());
+
+            //profile2D.SetPlotStyle();
+
+            var rslt = p.GetProfileResult(true);
+            rslt.SetPlotStyle();
+
+            return rslt;
         }
     }
 }

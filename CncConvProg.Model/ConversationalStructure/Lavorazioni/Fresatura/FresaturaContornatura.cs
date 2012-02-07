@@ -19,8 +19,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
     [Serializable]
     public sealed class FresaturaContornatura : LavorazioneFresatura, IMillingPatternable, IMillWorkable
     {
-        public FresaturaContornatura(Guid parent)
-            : base(parent)
+        public FresaturaContornatura()
         {
             MillingPattern = EnumPatternMilling.PoligonoRegolare;
 

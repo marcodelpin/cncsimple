@@ -47,13 +47,13 @@ namespace CncConvProg.Model.Tool
             AddPrice(Alu, "Base", 3.5);
 
             //Utensili tornitura
-            //AddTurningTool("CNMG", LavorazioniEnumOperazioni.TornituraSgrossatura, FeedTorniSgr, 3, 1);
-            //AddTurningTool("CNMG Fron.", LavorazioniEnumOperazioni.TornituraSfacciaturaSgrossatura, FeedTorniSgr, 1, 1);
-            //AddTurningTool("TNMG", LavorazioniEnumOperazioni.TornituraFinitura, FeedTorniFin, 1, 2);
-            //AddTurningTool("TNMG Fron.", LavorazioniEnumOperazioni.TornituraSfacciaturaFinitura, FeedTorniFin, 1, 2);
-            //AddGrooveTool("GX24", LavorazioniEnumOperazioni.TornituraScanalaturaSgrossatura, 3, .1, 3);
-            //AddGrooveTool("GX24 Fin", LavorazioniEnumOperazioni.TornituraScanalaturaFinitura, 3, .1, 3);
-            //AddThreadTool("266 Insert", LavorazioniEnumOperazioni.TornituraScanalaturaFinitura, 4);
+            AddTurningTool("CNMG", LavorazioniEnumOperazioni.TornituraSgrossatura, FeedTorniSgr, 3, 1);
+            AddTurningTool("CNMG Fron.", LavorazioniEnumOperazioni.TornituraSfacciaturaSgrossatura, FeedTorniSgr, 1, 1);
+            AddTurningTool("TNMG", LavorazioniEnumOperazioni.TornituraFinitura, FeedTorniFin, 1, 2);
+            AddTurningTool("TNMG Fron.", LavorazioniEnumOperazioni.TornituraSfacciaturaFinitura, FeedTorniFin, 1, 2);
+            AddGrooveTool("GX24", LavorazioniEnumOperazioni.TornituraScanalaturaSgrossatura, 3, .1, 3);
+            AddGrooveTool("GX24 Fin", LavorazioniEnumOperazioni.TornituraScanalaturaFinitura, 3, .1, 3);
+            AddThreadTool("266 Insert", LavorazioniEnumOperazioni.TornituraScanalaturaFinitura, 4);
 
             // Punte 
             AddPuntaSet("HSS", 1, 30, 1, .12);
@@ -81,7 +81,98 @@ namespace CncConvProg.Model.Tool
 
 
         }
+       
 
+       
+
+        private void AddGrooveTool(string toolName, LavorazioniEnumOperazioni lavorazioniEnumOperazioni, double toolW, double feed, int pos)
+        {
+            var matC40 = GetMaterialByName(C40, MeasureUnit.Millimeter);
+            var matInoxMm = GetMaterialByName(Aisi, MeasureUnit.Millimeter);
+            var matAluMm = GetMaterialByName(Alu, MeasureUnit.Millimeter);
+
+            var larghe = (toolW * 80) / 100;
+
+            var tMm = new UtensileScanalatura(MeasureUnit.Millimeter) { OperazioneTipo = lavorazioniEnumOperazioni, ToolName = toolName, ToolPosition = pos, LarghezzaUtensile = toolW };
+
+            AddParametro(tMm, matC40, VelTaglioC40, feed, larghe);
+            AddParametro(tMm, matInoxMm, VelTaglioInox, feed, larghe);
+            AddParametro(tMm, matAluMm, VelTaglioAlluminio, feed, larghe);
+
+            _mag.AddOrUpdateTool(tMm);
+
+            var matC40Inc = GetMaterialByName(C40, MeasureUnit.Inch);
+            var matInoxI = GetMaterialByName(Aisi, MeasureUnit.Inch);
+            var matAluI = GetMaterialByName(Alu, MeasureUnit.Inch);
+
+            var tI = new UtensileScanalatura(MeasureUnit.Inch) { OperazioneTipo = lavorazioniEnumOperazioni, ToolName = toolName, ToolPosition = pos, LarghezzaUtensile = FeedAndSpeedHelper.GetInchFromMm(toolW) };
+
+            AddParametro(tI, matC40Inc, FeedAndSpeedHelper.GetInchSpeedCut(VelTaglioC40), FeedAndSpeedHelper.GetInchFromMm(feed), FeedAndSpeedHelper.GetInchFromMm(larghe));
+            AddParametro(tI, matInoxI, FeedAndSpeedHelper.GetInchSpeedCut(VelTaglioInox), FeedAndSpeedHelper.GetInchFromMm(feed), FeedAndSpeedHelper.GetInchFromMm(larghe));
+            AddParametro(tI, matAluI, FeedAndSpeedHelper.GetInchSpeedCut(VelTaglioAlluminio), FeedAndSpeedHelper.GetInchFromMm(feed), FeedAndSpeedHelper.GetInchFromMm(larghe));
+
+            _mag.AddOrUpdateTool(tI);
+        }
+
+        /// <summary>
+        /// Aggiunge utensile tornitura.
+        /// </summary>
+        private void AddTurningTool(string toolName, LavorazioniEnumOperazioni lavorazioniEnumOperazioni, double feed, double profPass, int pos)
+        {
+            var matC40 = GetMaterialByName(C40, MeasureUnit.Millimeter);
+            var matInoxMm = GetMaterialByName(Aisi, MeasureUnit.Millimeter);
+            var matAluMm = GetMaterialByName(Alu, MeasureUnit.Millimeter);
+
+            var tMm = new UtensileTornitura(MeasureUnit.Millimeter) { OperazioneTipo = lavorazioniEnumOperazioni, ToolName = toolName, ToolPosition = pos };
+
+
+            AddParametro(tMm, matC40, VelTaglioC40, feed, profPass);
+            AddParametro(tMm, matInoxMm, VelTaglioInox, feed, profPass);
+            AddParametro(tMm, matAluMm, VelTaglioAlluminio, feed, profPass);
+
+            _mag.AddOrUpdateTool(tMm);
+
+            var matC40Inc = GetMaterialByName(C40, MeasureUnit.Inch);
+            var matInoxI = GetMaterialByName(Aisi, MeasureUnit.Inch);
+            var matAluI = GetMaterialByName(Alu, MeasureUnit.Inch);
+
+            var tI = new UtensileTornitura(MeasureUnit.Inch) { OperazioneTipo = lavorazioniEnumOperazioni, ToolName = toolName, ToolPosition = pos };
+
+            AddParametro(tI, matC40Inc, FeedAndSpeedHelper.GetInchSpeedCut(VelTaglioC40), FeedAndSpeedHelper.GetInchFromMm(feed), FeedAndSpeedHelper.GetInchFromMm(profPass));
+            AddParametro(tI, matInoxI, FeedAndSpeedHelper.GetInchSpeedCut(VelTaglioInox), FeedAndSpeedHelper.GetInchFromMm(feed), FeedAndSpeedHelper.GetInchFromMm(profPass));
+            AddParametro(tI, matAluI, FeedAndSpeedHelper.GetInchSpeedCut(VelTaglioAlluminio), FeedAndSpeedHelper.GetInchFromMm(feed), FeedAndSpeedHelper.GetInchFromMm(profPass));
+
+            _mag.AddOrUpdateTool(tI);
+        }
+
+        private static void AddParametro(UtensileTornitura tornitura, Materiale materiale, double vel, double feed, double proPa)
+        {
+            var par = new ParametroUtensileTornitura(tornitura)
+            {
+                ModalitaVelocita = ModalitaVelocita.VelocitaTaglio,
+                Velocita = vel,
+                AvanzamentoSincrono = feed,
+                MaterialGuid = (materiale.MaterialeGuid),
+                ProfonditaPassata = proPa
+            };
+
+            tornitura.AddOrUpdateParametro(par, materiale.MaterialeGuid);
+
+        }
+        private static void AddParametro(UtensileScanalatura tornitura, Materiale materiale, double vel, double feed, double larghezza)
+        {
+            var par = new ParametroUtensileTornituraScanalatura(tornitura)
+            {
+                ModalitaVelocita = ModalitaVelocita.VelocitaTaglio,
+                Velocita = vel,
+                AvanzamentoSincrono = feed,
+                MaterialGuid = (materiale.MaterialeGuid),
+                LarghezzaPassata = larghezza,
+            };
+
+            tornitura.AddOrUpdateParametro(par, materiale.MaterialeGuid);
+
+        }
         private void AddBareniSet(string toolName, int[] diaList, double feed)
         {
             var matC40 = GetMaterialByName(C40, MeasureUnit.Millimeter);
@@ -783,505 +874,7 @@ namespace CncConvProg.Model.Tool
         }
     }
 
-    //[Serializable]
-    //public class MagazzinoUtensile
-    //{
-    //    private readonly List<Utensile> _tools = new List<Utensile>();
-
-    //    public MagazzinoUtensile()
-    //    {
-    //        AddDefaultData();
-    //    }
-
-    //    /// <summary>
-    //    /// Setta valori di default su nuovo magazzino creato
-    //    /// </summary>
-    //    private void AddDefaultData()
-    //    {
-    //        // frese 
-    //        var fresaSpianareMm = CreateFresaSpianare("Face Mill", 50, 55, 10, MeasureUnit.Millimeter);
-    //        var freseSpianareInch = CreateFresaSpianare("Face Mill", 2, 2.2, .4, MeasureUnit.Inch);
-    //        var fresaCandela20Mm = CreateFresaCandela("Mill", 20, MeasureUnit.Millimeter);
-    //        var fresaCandela8Mm = CreateFresaCandela("Mill", 8, MeasureUnit.Millimeter);
-    //        var fresaCandela20Inch = CreateFresaCandela("Mill", 0.3, MeasureUnit.Inch);
-    //        var fresaCandela8Inch = CreateFresaCandela("Mill", 0.8, MeasureUnit.Inch);
-
-    //        _tools.Add(fresaSpianareMm);
-    //        _tools.Add(freseSpianareInch);
-    //        _tools.Add(fresaCandela8Mm);
-    //        _tools.Add(fresaCandela20Mm);
-    //        _tools.Add(fresaCandela8Inch);
-    //        _tools.Add(fresaCandela20Inch);
-
-    //        // punte centrini svasatori . magari con metodi aux. per crearne set e reimplementare dialogo utensili.
-    //        _tools.AddRange(CreateCentrino());
-    //        _tools.AddRange(CreateSvasaturi());
-    //        _tools.AddRange(CreatePuntaSet("Drill HSS", 2, 10, .1, MeasureUnit.Millimeter, 20, .1, 1));
-    //        _tools.AddRange(CreatePuntaSet("Drill HSS", .08, .4, .04, MeasureUnit.Inch, 20, .04, 3));
-
-    //    }
-
-    //    #region Punte Set
-
-    //    private static IEnumerable<Punta> CreatePuntaSet(string drillName, double diameterIni, double diameterFin, double increment, MeasureUnit measureUnit, double velTag, double feedAsync, int round)
-    //    {
-    //        var rslt = new List<Punta>();
-
-    //        for (var i = diameterIni; i < diameterFin; i += increment)
-    //        {
-    //            var p = new Punta(measureUnit) { ToolName = drillName, Diametro = Math.Round(i, round) };
-
-    //            p.ParametroPunta.Step = i;
-
-    //            p.MillToolHolder.CoolantOn = true;
-
-    //            p.LatheToolHolder.CoolantOn = true;
-
-    //            p.ParametroPunta.SetVelocitaTaglio(velTag);
-
-    //            p.ParametroPunta.SetFeedSync(feedAsync);
-
-    //            rslt.Add(p);
-
-    //        }
-    //        return rslt;
-    //    }
-
-    //    #endregion
-
-    //    private static List<Svasatore> CreateSvasaturi()
-    //    {
-    //        var l = new List<Svasatore>();
-
-    //        var s = new Svasatore(MeasureUnit.Millimeter) { Diametro = 1 };
-    //        var s1 = new Svasatore(MeasureUnit.Inch) { Diametro = 0.01 };
-
-    //        s.ParametroPunta.SetVelocitaTaglio(20);
-    //        s.ParametroPunta.SetFeedSync(.1);
-
-    //        s1.ParametroPunta.SetVelocitaTaglio(20);
-    //        s1.ParametroPunta.SetFeedSync(.1);
-
-    //        l.Add(s);
-    //        l.Add(s1);
-
-    //        return l;
-    //    }
-
-    //    private static List<Centrino> CreateCentrino()
-    //    {
-    //        var l = new List<Centrino>();
-
-    //        var c = new Centrino(MeasureUnit.Millimeter) { Diametro = 1 };
-    //        var c1 = new Centrino(MeasureUnit.Inch) { Diametro = 0.01 };
-
-    //        c.ParametroPunta.SetVelocitaTaglio(20);
-    //        c.ParametroPunta.SetFeedSync(.1);
-
-    //        c1.ParametroPunta.SetVelocitaTaglio(20);
-    //        c1.ParametroPunta.SetFeedSync(.1);
-
-    //        l.Add(c);
-    //        l.Add(c1);
-    //        return l;
-    //    }
-
-    //    private static FresaCandela CreateFresaCandela(string millName, double diameter, MeasureUnit measureUnit)
-    //    {
-    //        var candela = new FresaCandela(measureUnit) { ToolName = millName, Diametro = diameter, };
-
-    //        if (measureUnit == MeasureUnit.Millimeter)
-    //        {
-    //            candela.ParametroFresaCandela.SetVelocitaTaglio(200);
-    //            candela.ParametroFresaCandela.SetFeedAsync(800);
-    //            candela.ParametroFresaCandela.SetPlungeFeedAsync(200);
-    //        }
-    //        else
-    //        {
-    //            candela.ParametroFresaCandela.SetVelocitaTaglio(900);
-    //            candela.ParametroFresaCandela.SetFeedAsync(50);
-    //            candela.ParametroFresaCandela.SetPlungeFeedAsync(10);
-    //        }
-
-    //        candela.ParametroFresaCandela.SetLarghPassataPerc(30);
-    //        candela.ParametroFresaCandela.SetProfPassataPerc(20);
-
-    //        return candela;
-    //    }
-
-    //    private static FresaSpianare CreateFresaSpianare(string millName, double diameter, double diameterMax, double altezza, MeasureUnit measureUnit)
-    //    {
-    //        var fresaSpianare = new FresaSpianare(measureUnit) { ToolName = millName, Diametro = diameter, DiametroIngombroFresa = diameterMax, Altezza = altezza };
-
-    //        if (measureUnit == MeasureUnit.Millimeter)
-    //        {
-    //            fresaSpianare.ParametroFresaSpianare.SetVelocitaTaglio(200);
-    //            fresaSpianare.ParametroFresaSpianare.SetFeedAsync(800);
-    //        }
-    //        else
-    //        {
-    //            fresaSpianare.ParametroFresaSpianare.SetVelocitaTaglio(900);
-    //            fresaSpianare.ParametroFresaSpianare.SetFeedAsync(150);
-    //        }
-
-    //        fresaSpianare.ParametroFresaSpianare.SetLarghPassataPerc(70);
-    //        fresaSpianare.ParametroFresaSpianare.SetProfPassataPerc(5);
-
-    //        return fresaSpianare;
-    //    }
-
-    //    public IEnumerable<TRet> GetTools<TRet>(MeasureUnit measureUnit) where TRet : Utensile
-    //    {
-    //        var rslt = _tools.OfType<TRet>().Where(t => t.Unit == measureUnit);
-    //        return rslt;
-    //    }
-
-
-
-
-    //    public List<Materiale> GetMaterials()
-    //    {
-    //        return null;
-    //    }
-
-    //    /// <summary>
-    //    /// Salva modifiche utensile , se non esiste lo aggiunge
-    //    /// </summary>
-    //    /// <param name="utensile"></param>
-    //    public void SaveTool(Utensile utensile)
-    //    {
-    //        var saved = false;
-    //        for (int i = 0; i < _tools.Count; i++)
-    //        {
-    //            if (_tools[i].ToolGuid == utensile.ToolGuid)
-    //            {
-    //                _tools[i] = utensile;
-    //                saved = true;
-    //                break;
-    //            }
-    //        }
-
-    //        if (!saved)
-    //            _tools.Add(utensile);
-    //    }
-
-
-    //    public List<Utensile> GetTools(Type type, MeasureUnit measureUnit)
-    //    {
-    //        var t = from utensile in _tools
-    //                where utensile.GetType() == type
-    //                where utensile.Unit == measureUnit
-    //                select utensile;
-
-    //        return t.ToList();
-    //    }
-    //}
-
-
-
-    // 07/07/2011
-    //[Serializable]
-    //public class MagazzinoUtensile
-    //{
-    //    private readonly List<Utensile> _tools = new List<Utensile>();
-    //    private readonly List<Materiale> _materials = new List<Materiale>();
-
-
-    //    public MagazzinoUtensile()
-    //    {
-    //        AddDefaultData();
-    //    }
-
-    //    /// <summary>
-    //    /// Setta valori di default su nuovo magazzino creato
-    //    /// </summary>
-    //    private void AddDefaultData()
-    //    {
-    //        // todo : per internazzio mettere nomi su resource 
-
-    //        var iron = new Materiale { Descrizione = "Ferro", MaterialType = EnumMaterialType.P };
-    //        var inox = new Materiale { Descrizione = "Inox", MaterialType = EnumMaterialType.M };
-    //        var bronzo = new Materiale { Descrizione = "Bronzo", MaterialType = EnumMaterialType.N };
-    //        var alluminio = new Materiale { Descrizione = "Alluminio", MaterialType = EnumMaterialType.H };
-    //        var ghisa = new Materiale { Descrizione = "Ghisa", MaterialType = EnumMaterialType.K };
-    //        var temprato = new Materiale { Descrizione = "Temprato", MaterialType = EnumMaterialType.H };
-
-    //        /*
-    //         *  todo : salvare correttamente quando si apre ,
-    //         *  altrimenti si ottengono dei valori per materiale e differenti quando si generano utensili.
-    //         * non viene salvato allora rigenera sempre altri valori di guid per materiale 
-    //         */
-
-    //        _materials.Add(iron);
-    //        _materials.Add(inox);
-    //        _materials.Add(bronzo);
-    //        _materials.Add(alluminio);
-    //        _materials.Add(ghisa);
-    //        _materials.Add(temprato);
-
-    //        var drills = CreatePuntaSet("Punta Hss", 1, 10, MeasureUnit.Millimeter);
-
-    //        SetParameter(drills, iron, 20);
-
-    //        SetParameter(drills, inox, 12);
-
-    //        SetParameter(drills, alluminio, 35);
-
-    //        _tools.AddRange(drills);
-
-    //        var mills = CreateFresaCandelSet("Fresa Hss", 3, 12, 1, MeasureUnit.Inch);
-
-    //        SetParameter(mills, iron, 20);
-
-    //        SetParameter(mills, inox, 12);
-
-    //        SetParameter(mills, alluminio, 35);
-
-    //        _tools.AddRange(mills);
-
-    //        // Frese Spianare
-
-
-    //        var freseSpianare = CreateFresaSpianare("Fresa Spianare", 63, MeasureUnit.Millimeter);
-
-    //        SetParameter(freseSpianare, iron, 200);
-
-    //        _tools.Add(freseSpianare);
-
-    //    }
-
-    //    private void SetParameter(FresaSpianare freseSpianare, Materiale materiale, int vt)
-    //    {
-    //        var parm = new ParametroFresaSpianare(freseSpianare);
-
-    //        parm.SetMateriale(materiale);
-    //        parm.SetVelocitaTaglio(vt);
-    //    }
-
-    //    private FresaSpianare CreateFresaSpianare(string millName, int diameter, MeasureUnit measureUnit)
-    //    {
-    //        var fresaSpianare = new FresaSpianare(measureUnit) { ToolName = millName, DiametroFresa = diameter };
-
-    //        return fresaSpianare;
-    //    }
-
-    //    //private static List<DrillTool> CreatePuntaSet(string drillName, IEnumerable<double> diameter)
-    //    //{
-    //    //    return diameter.Select(d => new DrillTool(measureUnit) { Diameter = d, ToolName = drillName }).ToList();
-    //    //}
-
-    //    private static IEnumerable<FresaCandela> CreateFresaCandelSet(string millName, double diameterIni, double diameterFin, double increment, MeasureUnit measureUnit)
-    //    {
-    //        var rslt = new List<FresaCandela>();
-
-    //        for (double i = diameterIni; i < diameterFin; i += increment)
-    //        {
-    //            rslt.Add(new FresaCandela(measureUnit) { ToolName = millName, DiametroFresa = Math.Round(i, 1) });
-    //        }
-    //        return rslt;
-    //    }
-
-    //    private static IEnumerable<DrillTool> CreatePuntaSet(string drillName, double diameterIni, double diameterFin, MeasureUnit measureUnit)
-    //    {
-    //        var rslt = new List<DrillTool>();
-
-    //        for (double i = diameterIni; i < diameterFin; i += .1)
-    //        {
-    //            rslt.Add(new DrillTool(measureUnit) { ToolName = drillName, Diameter = Math.Round(i, 1) });
-    //        }
-    //        return rslt;
-    //    }
-
-    //    private static void SetParameter(IEnumerable<DrillTool> drills, Materiale materiale, double velocitaTaglio)
-    //    {
-    //        foreach (var drillTool in drills)
-    //        {
-    //            var par = drillTool.CreateParametro() as ParametroPunta;
-
-    //            if (par == null)
-    //                continue;
-
-    //            par.SetMateriale(materiale);
-
-    //            par.SetVelocitaTaglio(velocitaTaglio);
-
-    //            par.SetFeedSync(.1);
-
-    //            drillTool.ParametriUtensile.Add(par);
-    //        }
-
-    //    }
-
-    //    private static void SetParameter(IEnumerable<FresaCandela> drills, Materiale materiale, double velocitaTaglio)
-    //    {
-    //        foreach (var drillTool in drills)
-    //        {
-    //            var par = drillTool.CreateParametro() as ParametroFresaCandela;
-
-    //            if (par == null)
-    //                continue;
-
-    //            par.SetMateriale(materiale);
-
-    //            par.SetVelocitaTaglio(velocitaTaglio);
-
-    //            par.SetFeedSync(.1);
-
-    //            drillTool.ParametriUtensile.Add(par);
-    //        }
-
-    //    }
-    //    /*
-    //     * importante è avere mag utensile intelligente.
-    //     * 
-    //     * voglio che mi dia utensile e il suo parametro..
-    //     * 
-    //     * 
-    //     * nel caso di fresa voglio chiedere fresa 10mm inox
-    //     * 
-    //     * 
-    //     * -> mill.
-    //     * -> parametri.
-    //     */
-
-
-    //    public void GetDrill(double dia, Materiale mat, out DrillTool drillTool, out ParametroPunta parametroPunta, MeasureUnit measureUnit)
-    //    {
-    //        var guidMat = mat.MaterialeGuid;
-
-    //        //var drills = _materials.OfType<DrillTool>().Where(d => d.Diameter == dia);
-
-    //        var correctDrill = (from drill in _tools
-    //                            from parametroUtensile in drill.ParametriUtensile
-    //                            where drill is DrillTool
-    //                            where drill.Unit == measureUnit
-    //                            where parametroUtensile is ParametroPunta
-    //                            where parametroUtensile.MaterialGuid == guidMat
-    //                            where ((DrillTool)drill).Diameter == dia
-
-    //                            /*aggiungere altre condizioni per filtrare*/
-
-    //                            select new { Utensile = drill as DrillTool, Parametro = parametroUtensile as ParametroPunta }).FirstOrDefault();
-
-    //        // non restituisce niente anche nel caso che trovi la punta , ma non il parametro
-    //        // non trovato niente
-    //        if (correctDrill == null)
-    //        {
-    //            drillTool = new DrillTool(measureUnit);
-    //            parametroPunta = drillTool.CreateParametro() as ParametroPunta;
-    //        }
-    //        else
-    //        {
-    //            drillTool = correctDrill.Utensile;
-    //            parametroPunta = correctDrill.Parametro;
-    //        }
-    //    }
-
-    //    public List<Utensile> GetDrill(double dia, MeasureUnit measureUnit)
-    //    {
-    //        var drillSelection = from drill in _tools.OfType<DrillTool>()
-    //                             where drill.Unit == measureUnit
-    //                             where drill.Diameter == dia
-    //                             select drill;
-
-    //        // non restituisce niente anche nel caso che trovi la punta , ma non il parametro
-    //        // non trovato niente
-    //        if (drillSelection.Count() == 0)
-    //            return new List<Utensile> { new DrillTool(measureUnit) { Diameter = dia, ToolName = "Punta New" } };
-
-    //        return drillSelection.Cast<Utensile>().ToList();
-    //    }
-
-    //    //public DrillTool GetDrill(double dia, Materiale mat)
-    //    //{
-    //    //    var guidMat = mat.MaterialGuid;
-
-    //    //    var drills = (from drillTool in _tools
-    //    //                  from parametroUtensile in drillTool.ParametriUtensile
-    //    //                  where parametroUtensile.MaterialGuid == guidMat
-    //    //                  where drillTool is DrillTool
-    //    //                  select drillTool).Cast<DrillTool>();
-
-
-    //    //    if (drills.Count() == 0)
-    //    //        return new DrillTool();
-
-    //    //    return drills.FirstOrDefault();
-    //    //}
-
-    //    public List<Materiale> GetMaterials()
-    //    {
-    //        return _materials;
-    //    }
-
-    //    public void SaveMaterials()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //    /*
-    //     * 
-    //     * ok.
-    //     * 
-    //     * un utensile può avere diversi parametri per tipo di materiale.
-    //     * 
-    //     */
-
-    //    /*
-    //     * un'altro problema è che non dovrei avere 2 classi differenti per contenere i parametri utensile..
-    //     * 
-    //     * la classe operazione ha utensile ( che viene copiato al momento )
-    //     *      la classe utensile contiene il parametro.
-    //     *      
-    //     * l'operazione è sempre visibile , solo che può venire abilitata o meno,
-    //     * se non è abilita la cancello dall'elenco.
-    //     * 
-    //     * nella scelta degli utensili.
-    //     * 
-    //     * la classe operazione non ha le varie derivazioni.
-    //     * 
-    //     * contiene solo 
-    //     *          enumTipo  ok
-    //     *          utensile  ok
-    //     *          attiva    ok
-    //     *          abilitata ok
-    //     * 
-    //     * insorge problema scelta utensile.
-    //     * 
-    //     *  se faccio copia utensile ( ovvero copia clone . del label .. ecc. ecc.. )
-    //     *  
-    //     * come faccio a ricaricare i vari utensile nella combo box ?
-    //     * 
-    //     * me ne sbatto . 
-    //     * 
-    //     * ricarico tutti i vari tool..
-    //     * 
-    //     * nel combo box non viene selezionato niente faccio solo su cambio utensile.
-    //     * al posto del combobox con griglia 
-    //     * e su cambio utensile 
-    //     * 
-    //     * magazzino utensile -> cb >  su cambio copia i valori.
-    //     * 
-    //     * 
-    //     */
-
-    //    public void AddMaterial(Materiale mat)
-    //    {
-    //        _materials.Add(mat);
-    //    }
-
-    //    public Materiale GetMaterial(Guid value)
-    //    {
-    //        return (from materiale in _materials
-    //                where materiale.MaterialeGuid == value
-    //                select materiale).FirstOrDefault();
-    //    }
-
-    //    public IEnumerable<TRet> GetTools<TRet>()
-    //    {
-    //        return _tools.OfType<TRet>();
-    //    }
-
-    //}
+    
 }
 
 

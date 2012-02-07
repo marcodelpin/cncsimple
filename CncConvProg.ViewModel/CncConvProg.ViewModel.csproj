@@ -67,6 +67,8 @@
     <Compile Include="CommonViewModel\ParameterViewModels\ParametroFresaCandelaViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommonViewModel\ParameterViewModels\ParametroUtensileTornituraFilettaturaViewModel.cs" />
+    <Compile Include="CommonViewModel\ParameterViewModels\ParametroUtensileTornituraScanalaturaViewModel.cs" />
     <Compile Include="CommonViewModel\ParameterViewModels\ParametroUtensileTornituraViewModel.cs" />
     <Compile Include="CommonViewModel\ToolViewModels\FresaCandelaViewModel.cs">
       <SubType>Code</SubType>
@@ -80,6 +82,9 @@
     <Compile Include="CommonViewModel\ToolViewModels\PuntaViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommonViewModel\ToolViewModels\UtensileFilettaturaViewModel.cs" />
+    <Compile Include="CommonViewModel\ToolViewModels\UtensileTornituraScanalaturaViewModel.cs" />
+    <Compile Include="CommonViewModel\ToolViewModels\UtensileTornituraViewModel.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Dialog\FaseDiLavoroViewModel.cs" />
     <Compile Include="CommonViewModel\ParameterViewModels\ParametroPuntaViewModel.cs" />
@@ -113,6 +118,7 @@
     <Compile Include="EditWorkDialog\Fresatura\Contornatura\ContornaturaParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Pattern\CavaPatternViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Pattern\CavaApertaPatternViewModel.cs" />
+    <Compile Include="EditWorkDialog\Fresatura\Pattern\RettangoloPatternViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\TextEngraving\TextEngravingParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\TextEngraving\TextEngravingViewModel.cs" />
     <Compile Include="EditWorkDialog\Fresatura\Filettatura\FresaturaFilettaturaParametriViewModel.cs" />
@@ -141,6 +147,13 @@
     <Compile Include="EditWorkDialog\InputProfileViewModel\RawLineViewModel.cs" />
     <Compile Include="EditWorkDialog\EditWorkViewModel.cs" />
     <Compile Include="EditWorkDialog\OperationViewModel\OperazioneViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Filettatura\TornituraFilettaturaParametriViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Filettatura\TornituraFilettaturaViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Scanalatura\TornituraScanalaturaCommonViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Scanalatura\TornituraScanalaturaViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Tornitura\ProfiloLibero\TornituraProfiloLiberoViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Tornitura\Sfacciatura\TornituraSfacciaturaParametriViewModel.cs" />
+    <Compile Include="EditWorkDialog\TornituraGenerale\Tornitura\Sfacciatura\TornituraSfacciaturaViewModel.cs" />
     <Compile Include="EditWorkDialog\TreeViewViewModel\EditStageTreeViewItem.cs" />
     <Compile Include="EditWorkDialog\TreeViewViewModel\IValidable.cs" />
     <Compile Include="MainViewModel\ClassModelViewModel.cs" />

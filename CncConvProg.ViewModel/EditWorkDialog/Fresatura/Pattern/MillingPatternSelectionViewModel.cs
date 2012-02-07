@@ -107,8 +107,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.Pattern
             if (patternMilling is CavaDrittaApertaPattern)
                 return new CavaApertaPatternViewModel(patternMilling as CavaDrittaApertaPattern);
 
-            //if (patternMilling is RettangoloPattern)
-            //    return new RettangoloPatternViewModel(patternMilling as RettangoloPattern, this);
+            if (patternMilling is RettangoloPattern)
+                return new RettangoloPatternViewModel(patternMilling as RettangoloPattern);
 
             if (patternMilling is FreeProfilePattern)
             {

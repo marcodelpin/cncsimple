@@ -74,6 +74,34 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
             UpdateMoveListOrientation();
 
         }
+        public ProfileEditorViewModel(RawProfile profile, EditWorkViewModel workViewModel, AxisSystem axisSystem)
+            : base("Input Profile", workViewModel)
+        {
+
+          //  EditWorkParent = workViewModel;
+
+            _rawProfile = profile;
+
+            _axisSystem = axisSystem;
+
+            MoveListViewModels = new ObservableCollection<RawItemViewModel>();
+
+            var moveList = profile.GetMoveList();
+
+            foreach (var rawEntity2D in moveList)
+            {
+                //MoveListViewModels.Add(RawItemViewModel.GetViewModel(rawEntity2D, axisSystem));
+                MoveListViewModels.Add(GetViewModel(rawEntity2D));
+
+            }
+
+            SelectedMoveViewModel = MoveListViewModels.LastOrDefault();
+
+            UpdatePreview();
+
+            UpdateMoveListOrientation();
+
+        }
 
 
         ///// <summary>

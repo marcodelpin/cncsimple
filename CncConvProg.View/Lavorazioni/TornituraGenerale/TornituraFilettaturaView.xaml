@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.TornituraGenerale.TornituraFilettaturaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:CustomControl="clr-namespace:CncConvProg.View.Controls" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" xmlns:Resources="clr-namespace:MecPrev.Resources;assembly=MecPrev.Resources" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ValueConverter:EnumToBoolConverter x:Key="EBConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="179*" />
+            <RowDefinition Height="121*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.RowSpan="2">
+
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="{x:Static Resources:EditWorkRes.zStart}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ZIniziale, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="100" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="{x:Static Resources:EditWorkRes.Length}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=LunghezzaFiletto,  ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="100" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="{x:Static Resources:EditWorkRes.Thread}" MinWidth="100" />
+                <ComboBox SelectedItem="{Binding Path=MaschiaturaSelezionata}" DisplayMemberPath="Descrizione" ItemsSource="{Binding Path=ListaMaschiature}" MinWidth="150" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="{x:Static Resources:EditWorkRes.Pitch}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Passo, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="100" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="{x:Static Resources:EditWorkRes.NumeroPassate}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=NumeroPassate,  ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="100" />
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

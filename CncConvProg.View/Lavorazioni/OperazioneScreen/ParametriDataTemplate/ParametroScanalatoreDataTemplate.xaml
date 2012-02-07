@@ -10,31 +10,31 @@
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/sampleImage.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Diametro" MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox Text="{Binding Path=Diametro, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    <TextBox Text="{Binding Path=Diametro, ValidatesOnDataErrors=True}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/sampleImage.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Numero Giri" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=NumeroGiri}" Text="{Binding Path=Value, StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                    <TextBox DataContext="{Binding Path=NumeroGiri}" Text="{Binding Path=Value, StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                     <TextBlock Text="Velocita Taglio" MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=VelocitaTaglio}" Text="{Binding Path=Value, StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=VelocitaTaglio}" Text="{Binding Path=Value, StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/archivia.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Plunge Feed Async" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=AvanzamentoAsincronoPiantata}" Text="{Binding Path=Value,StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=AvanzamentoAsincronoPiantata}" Text="{Binding Path=Value,StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                     <TextBlock Text=" Sync " MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=AvanzamentoSincronoPiantata}" Text="{Binding Path=Value, StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=AvanzamentoSincronoPiantata}" Text="{Binding Path=Value, StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/archivia.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Feed Async" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=AvanzamentoAsincrono}" Text="{Binding Path=Value, StringFormat=F0,  ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=AvanzamentoAsincrono}" Text="{Binding Path=Value, StringFormat=F0,  ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                     <TextBlock Text=" Sync " MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=AvanzamentoSincrono}" Text="{Binding Path=Value,StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=AvanzamentoSincrono}" Text="{Binding Path=Value,StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
 
@@ -42,17 +42,17 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Profondità Passata" Padding="0,0,2,0" Margin="0,0,2,0" />
                     <TextBlock Text="[% Dia]" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=ProfonditaPassataPerc}" Text="{Binding Path=Value, StringFormat=F1, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=ProfonditaPassataPerc}" Text="{Binding Path=Value, StringFormat=F1, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                     <TextBlock Text=" [mm] " MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=ProfonditaPassata}" Text="{Binding Path=Value, StringFormat=F3,  ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=ProfonditaPassata}" Text="{Binding Path=Value, StringFormat=F3,  ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/archivia.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Larghezza Passata [% Dia]" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=LarghezzaPassataPerc}" Text="{Binding Path=Value, StringFormat=F1, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=LarghezzaPassataPerc}" Text="{Binding Path=Value, StringFormat=F1, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                     <TextBlock Text=" [mm] " MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox DataContext="{Binding Path=LarghezzaPassata}" Text="{Binding Path=Value,StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{StaticResource TextBoxStyle1Dialog}" />
+                    <TextBox DataContext="{Binding Path=LarghezzaPassata}" Text="{Binding Path=Value,StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
         </Controls:FocusableListBox>

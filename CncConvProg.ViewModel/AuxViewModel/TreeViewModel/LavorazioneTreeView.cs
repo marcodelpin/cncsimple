@@ -3,6 +3,7 @@ using CncConvProg.Model.ConversationalStructure.Abstraction;
 using System.Windows.Input;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
 using Framework.Implementors.Wpf.MVVM;
@@ -51,14 +52,14 @@ namespace CncConvProg.ViewModel.AuxViewModel.TreeViewModel
             var p = @"pack://application:,,,/CncConvProg.View;component/Images/work/";
 
             var imageName = string.Empty;
-            //if (Lavorazione is Tornitura || Lavorazione is TornituraSfacciatura)
-            //    imageName = "turning_small.png";
+            if (Lavorazione is Tornitura || Lavorazione is TornituraSfacciatura)
+                imageName = "turning_small.png";
 
-            //if (Lavorazione is TornituraFilettatura)
-            //    imageName = "thread_small.png";
+            if (Lavorazione is TornituraFilettatura)
+                imageName = "thread_small.png";
 
-            //if (Lavorazione is TornituraScanalatura)
-            //    imageName = "groove_small.png";
+            if (Lavorazione is TornituraScanalatura)
+                imageName = "groove_small.png";
 
             if (Lavorazione is Spianatura)
                 imageName = "millface_16.png";

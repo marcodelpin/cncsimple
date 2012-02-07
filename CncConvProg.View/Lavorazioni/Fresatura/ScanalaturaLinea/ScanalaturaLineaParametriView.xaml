@@ -3,110 +3,100 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:CustomControl="clr-namespace:CncConvProg.View.Controls" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Common="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.Common" mc:Ignorable="d" 
+             xmlns:CustomControl="clr-namespace:CncConvProg.View.Controls" 
+             xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Common="clr-namespace:CncConvProg.View.Lavorazioni.OperazioneScreen.Common" 
+             xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="500" >
+    <UserControl.Resources>
+        <ValueConverter:EnumToBoolConverter x:Key="EBConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="278*" />
-            <RowDefinition Height="322*" />
-            <RowDefinition Height="322*" />
-
+            <RowDefinition Height=".5*" />
+            <RowDefinition Height=".5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="154*" />
+            <ColumnDefinition Width=".5*" />
+            <ColumnDefinition Width=".5*" />
         </Grid.ColumnDefinitions>
 
-        <CustomControl:FocusableListBox SelectedItem="{Binding SelectedItem}" KeyboardNavigation.TabNavigation="Continue" x:Name="lbParameter" BorderBrush="{x:Null}" Grid.RowSpan="1">
-
-            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Initial Point X : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=PuntoInizialeX,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-            <CustomControl:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Initial Point Y : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=PuntoInizialeY,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-            <CustomControl:FocusableListBoxItem  Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Angle Direction : " MinWidth="120" />
-                    <TextBox Text="{Binding Path=OrientationAngle}" ab:AttachedProperties.AutoSelectText="True"  Style="{DynamicResource TextBoxStyle1Dialog}" />
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock MinWidth="120" Text="Length" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=LunghezzaCava, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock MinWidth="120" Text="Width" Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=LarghezzaCava, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Depth : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ProfonditaLavorazioneZ,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-         
-
-            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Start Z : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioLavorazioneZ,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-
-
-
-
-            <!--<CustomControl:FocusableListBoxItem Tag="pack://application:,,,/Images/millFaceC.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Finishing Rest Mat. : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SovrametalloPerFinitura,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>-->
-            <CustomControl:FocusableListBoxItem Style="{DynamicResource FocusableListBoxItemStyle1}" >
-                <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                    <TextBlock Text="Secure Z : " MinWidth="120" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
-                </StackPanel>
-            </CustomControl:FocusableListBoxItem>
-        </CustomControl:FocusableListBox>
-
-        <Image VerticalAlignment="Top" MaxWidth="200" MaxHeight="200"  Grid.Column="1" Source="{Binding Path=SelectedItem.Tag}" />
-
-        <Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="2" />
-
-<StackPanel Margin="10,0" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
-                <TextBlock Text="Compesation Cnc : "/>
-                <CheckBox IsChecked="{Binding Path=FinishWithCompensation}" VerticalAlignment="Center" />
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Initial Point X : " MinWidth="120" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=PuntoInizialeX,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
-                <TextBlock Text="Rest. Finish Material : "/>
-                <TextBox Text="{Binding Path=SovrametalloFinitura}" MinWidth="100"/>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Initial Point Y : " MinWidth="120" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=PuntoInizialeY,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
-            <StackPanel Margin="10,0" IsEnabled="{Binding Path=SmussaturaAbilitata}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Mill Depth : "/>
-                    <TextBox Text="{Binding Path=ProfonditaFresaSmussatura}" MinWidth="100"/>
-                </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Angle Direction : " MinWidth="120" />
+                <TextBox Text="{Binding Path=OrientationAngle}" ab:AttachedProperties.AutoSelectText="True"  Style="{DynamicResource TextBoxStyle1Dialog}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock MinWidth="120" Text="Length" Padding="0,0,2,0" Margin="0,0,2,0" />
+                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=LunghezzaCava, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock MinWidth="120" Text="Width" Padding="0,0,2,0" Margin="0,0,2,0" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=LarghezzaCava, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Depth : " MinWidth="120" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ProfonditaLavorazioneZ,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Start Z : " MinWidth="120" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioLavorazioneZ,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Secure Z : " MinWidth="120" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
         </StackPanel>
+
+        <Image Grid.Column="2" Source="{Binding Path=SelectedItem.Tag}" />
+
+        <Common:CommonFinishParameter Grid.Row="1" Grid.ColumnSpan="1" />
+        <GroupBox Header="Roughing Strategy" Grid.Column="1" Grid.Row="1">
+            <ListBox x:Name="RadioButtonList" IsEnabled="{Binding Path=IsChecked, ElementName=cbSgr}" BorderThickness="0" Background="{x:Null}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton1, Mode=OneWay}">
+                    <RadioButton IsChecked="{Binding Path=ModoSgrossatura,   
+                        Converter={StaticResource EBConverter},   
+                        ConverterParameter=0}" Content="Traditional"
+                        GroupName="Sgrossatura"
+                        x:Name="RadioButton1"     
+                        />
+                </ListBoxItem>
+                <ListBoxItem IsSelected="{Binding IsChecked, ElementName=RadioButton2, Mode=OneWay}">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton IsChecked="{Binding Path=ModoSgrossatura,   
+                        Converter={StaticResource EBConverter},   
+                        ConverterParameter=1}" Content="Trochidal"
+                        GroupName="Sgrossatura"
+                        x:Name="RadioButton2" 
+                                     
+                    />
+                        <TextBlock Text=" - Step % : "/>
+                        <StackPanel>
+                            <TextBox Text="{Binding Path=TrochoidalStep}" MinWidth="60" IsEnabled="{Binding IsChecked, ElementName=RadioButton2, Mode=OneWay}"/>
+                            <TextBlock Text=" 8% ~ 10%  x Dc "/>
+                        </StackPanel>
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+        </GroupBox>
 
     </Grid>
 </UserControl>

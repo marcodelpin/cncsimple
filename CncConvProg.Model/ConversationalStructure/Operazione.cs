@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using CncConvProg.Geometry.Entity;
@@ -263,19 +264,24 @@ namespace CncConvProg.Model.ConversationalStructure
             Lavorazione = parent;
             OperationType = enumOperationType;
 
-            Descrizione = parent.GetOperationDescription(enumOperationType);
+            Descrizione = Lavorazione.GetOperationDescription(enumOperationType);
 
-            Utensile = parent.CreateTool(enumOperationType);
+            Utensile = Lavorazione.CreateTool(enumOperationType, Singleton.Instance.MeasureUnit);
 
             if (Utensile == null)
                 throw new NotImplementedException();
 
-            Utensile.ParametroUtensile = Utensile.CreateParametro();
+            try
+            {
+                var matGuid = Singleton.Instance.MaterialeGuid;
 
-            if (parent.FaseDiLavoro == null)
-                throw new NotImplementedException();
+                Utensile.SetMaterial(matGuid);
+            }
+            catch (Exception)
+            {
 
-            //ToolHolder = parent.FaseDiLavoro.GetToolHolder();
+                Trace.WriteLine("Errore nel creare parametro utensile ");
+            }
         }
 
         //public Operazione(Lavorazioni.Fresatura.ScanalaturaLinea scanalaturaLinea, int p)

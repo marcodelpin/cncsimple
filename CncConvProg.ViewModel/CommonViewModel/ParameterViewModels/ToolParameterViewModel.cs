@@ -76,6 +76,15 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             if (utensile is DrillTool)
                 return new ParametroPuntaViewModel(utensile as DrillTool);
 
+            if (utensile is UtensileTornitura)
+                return new ParametroUtensileTornituraViewModel(utensile);
+
+            if (utensile is UtensileFilettare)
+                return new ParametroUtensileTornituraFilettaturaViewModel(utensile);
+
+            if (utensile is UtensileScanalatura)
+                return new ParametroUtensileTornituraScanalaturaViewModel(utensile);
+
             if (utensile is FresaCandela)
                 return new ParametroFresaCandelaViewModel(utensile as FresaCandela);
 

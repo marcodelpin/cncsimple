@@ -26,6 +26,14 @@
                 <TextBlock Text="Side Number : " Width="100" />
                 <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SideCount, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Chamfer / Radius" MinWidth="120" />
+                <CheckBox IsChecked="{Binding Path=ChamferAbilited}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock Text="Chamfer Value" MinWidth="120" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ChamferValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

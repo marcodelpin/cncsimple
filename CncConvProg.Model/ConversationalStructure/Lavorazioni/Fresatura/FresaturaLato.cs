@@ -25,23 +25,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
     [Serializable]
     public sealed class FresaturaLato : LavorazioneFresatura, IMillLeveable, IMillWorkable
     {
-        public FresaturaLato(Guid parent)
-            : base(parent)
+        public FresaturaLato()
         {
-            var fract = 1.0d;
-
-            //if (parent.Model.MeasureUnit == MeasureUnit.Inch)
-            //    fract = 25.4;
-
-            //Sovrametallo = Math.Round(20 / fract, 3);
-
-            //ProfonditaLavorazione = Math.Round(20 / fract, 3);
-
-            //Lunghezza = Math.Round(80 / fract, 3);
-
-            //SicurezzaZ = Math.Round(50 / fract, 3);
-
-            //InizioLavorazioneZ = 0;
 
             Sgrossatura = new Operazione(this, LavorazioniEnumOperazioni.Sgrossatura);
 
