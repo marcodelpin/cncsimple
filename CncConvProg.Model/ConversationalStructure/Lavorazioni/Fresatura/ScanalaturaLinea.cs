@@ -51,28 +51,11 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
     [Serializable]
     public sealed class ScanalaturaLinea : LavorazioneFresatura, IMillWorkable
     {
-        public ScanalaturaLinea(Guid parent)
-            : base(parent)
+        public ScanalaturaLinea()
         {
-            var fract = 1.0d;
-
             TrochoidalStep = 10;
-            ////if (parent.Model.MeasureUnit == MeasureUnit.Inch)
-            ////    fract = 25.4;
-
-            ////LarghezzaCava = Math.Round(20 / fract, 3);
-
-            ////ProfonditaLavorazione = Math.Round(20 / fract, 3);
-
-            ////LunghezzaCava = Math.Round(80 / fract, 3);
-
-            ////SicurezzaZ = Math.Round(50 / fract, 3);
-
-            ////InizioLavorazioneZ = 0;
 
             Sgrossatura = new Operazione(this, LavorazioniEnumOperazioni.Sgrossatura);
-
-            SgrossaturaTrocoidale = new Operazione(this, LavorazioniEnumOperazioni.SgrossaturaTrocoidale);
 
             Finitura = new Operazione(this, LavorazioniEnumOperazioni.Finitura);
 
@@ -86,15 +69,17 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
                 var opList = new List<Operazione>();
 
                 //if (Sgrossatura.Abilitata)
-                    opList.Add(ModoSgrossatura == ScanalaturaCavaMetodoLavorazione.Trocoidale
-                                   ? SgrossaturaTrocoidale
-                                   : Sgrossatura);
+                //opList.Add(ModoSgrossatura == ScanalaturaCavaMetodoLavorazione.Trocoidale
+                //? SgrossaturaTrocoidale
+                //: Sgrossatura);
+                opList.Add(Sgrossatura);
+
 
                 //if (Finitura.Abilitata)
-                    opList.Add(Finitura);
+                opList.Add(Finitura);
 
                 //if (Smussatura.Abilitata)
-                    opList.Add(Smussatura);
+                opList.Add(Smussatura);
 
                 return opList;
             }
@@ -102,7 +87,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
         public Operazione Sgrossatura { get; set; }
 
-        public Operazione SgrossaturaTrocoidale { get; set; }
+        //public Operazione SgrossaturaTrocoidale { get; set; }
 
         public Operazione Finitura { get; set; }
 
@@ -116,7 +101,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
         public ScanalaturaCavaMetodoLavorazione ModoSgrossatura { get; set; }
 
-        public ScanalaturaCavaMetodoLavorazione ModoFinitura { get; set; }
+        //public ScanalaturaCavaMetodoLavorazione ModoFinitura { get; set; }
 
         public double InizioLavorazioneZ { get; set; }
 
@@ -340,86 +325,91 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
             switch (operazione.OperationType)
             {
-                case LavorazioniEnumOperazioni.SgrossaturaTrocoidale:
-                    {
-
-
-
-                        var par = operazione.GetParametro<ParametroFresaCandela>();
-
-                        if (par == null)
-                            throw new NullReferenceException();
-
-                        var profPassata = par.GetProfonditaPassata();
-
-                        //                        var larghPassat = par.GetLarghezzaPassata();
-
-                        var larghPassat = (TrochoidalStep * dia.Diametro) / 100;
-
-                        /*
-                         * la larghezza passata sarebbe step.
-                         */
-
-
-
-
-
-                        if (LarghezzaCava <= par.DiametroFresa * 2)
-                        {
-                            ProcessTrochoidalMilling(programPhase, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava, LunghezzaCava, OrientationAngle,
-                                                   larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ, ProfonditaLavorazione, SicurezzaZ, ExtraCorsa);
-
-                            //ProcessArcTrochoidalMilling(program, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava,
-                            //                            LunghezzaCava, OrientationAngle,
-                            //                            larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ,
-                            //                            ProfonditaLavorazione, SicurezzaZ,
-                            //                            GeometryHelper.DegreeToRadian(135),
-                            //                            GeometryHelper.DegreeToRadian(60), new Point2D(0, 0), 52.5);
-
-                            //ProcessArcTrochoidalMilling(program, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava,
-                            //                            LunghezzaCava, OrientationAngle,
-                            //                            larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ,
-                            //                            ProfonditaLavorazione, SicurezzaZ,
-                            //                            GeometryHelper.DegreeToRadian(135 + 120),
-                            //                            GeometryHelper.DegreeToRadian(60), new Point2D(0, 0), 52.5);
-
-                            //ProcessArcTrochoidalMilling(program, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava,
-                            //                            LunghezzaCava, OrientationAngle,
-                            //                            larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ,
-                            //                            ProfonditaLavorazione, SicurezzaZ,
-                            //                            GeometryHelper.DegreeToRadian(135 + 240),
-                            //                            GeometryHelper.DegreeToRadian(60), new Point2D(0, 0), 52.5);
-                        }
-
-                        else
-                            ProcessTrochoidalMillingLarge(programPhase, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava, LunghezzaCava, OrientationAngle,
-                                                   larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ, ProfonditaLavorazione, SicurezzaZ, ExtraCorsa);
-
-
-
-
-
-                    } break;
-
                 case LavorazioniEnumOperazioni.Sgrossatura:
                     {
+                        switch (ModoSgrossatura)
+                        {
+                            case ScanalaturaCavaMetodoLavorazione.Trocoidale:
+                                {
+                                    var par = operazione.GetParametro<ParametroFresaCandela>();
 
-                        var par = operazione.GetParametro<ParametroFresaCandela>();
+                                    if (par == null)
+                                        throw new NullReferenceException();
 
-                        if (par == null)
-                            throw new NullReferenceException();
+                                    var profPassata = par.GetProfonditaPassata();
 
-                        var profPassat = par.GetProfonditaPassata();
+                                    //                        var larghPassat = par.GetLarghezzaPassata();
 
-                        var larghPassat = par.GetLarghezzaPassata();
+                                    var larghPassat = (TrochoidalStep * dia.Diametro) / 100;
 
-                        /*
-                         * aggiungere sovrametallo xy
-                         */
+                                    /*
+                                     * la larghezza passata sarebbe step.
+                                     */
 
-                        ProcessRoughLineMilling(moveList, PuntoInizialeX, PuntoInizialeY, OrientationAngle, LunghezzaCava, LarghezzaCava, ProfonditaLavorazione,
-                            profPassat, larghPassat, par.DiametroFresa, SicurezzaZ, ExtraCorsa, InizioLavorazioneZ);
+                                    if (LarghezzaCava <= par.DiametroFresa * 2)
+                                    {
+                                        ProcessTrochoidalMilling(programPhase, moveList, PuntoInizialeX, PuntoInizialeY,
+                                                                 LarghezzaCava, LunghezzaCava, OrientationAngle,
+                                                                 larghPassat, par.DiametroFresa, profPassata,
+                                                                 InizioLavorazioneZ, ProfonditaLavorazione, SicurezzaZ,
+                                                                 ExtraCorsa);
 
+                                        //ProcessArcTrochoidalMilling(program, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava,
+                                        //                            LunghezzaCava, OrientationAngle,
+                                        //                            larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ,
+                                        //                            ProfonditaLavorazione, SicurezzaZ,
+                                        //                            GeometryHelper.DegreeToRadian(135),
+                                        //                            GeometryHelper.DegreeToRadian(60), new Point2D(0, 0), 52.5);
+
+                                        //ProcessArcTrochoidalMilling(program, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava,
+                                        //                            LunghezzaCava, OrientationAngle,
+                                        //                            larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ,
+                                        //                            ProfonditaLavorazione, SicurezzaZ,
+                                        //                            GeometryHelper.DegreeToRadian(135 + 120),
+                                        //                            GeometryHelper.DegreeToRadian(60), new Point2D(0, 0), 52.5);
+
+                                        //ProcessArcTrochoidalMilling(program, moveList, PuntoInizialeX, PuntoInizialeY, LarghezzaCava,
+                                        //                            LunghezzaCava, OrientationAngle,
+                                        //                            larghPassat, par.DiametroFresa, profPassata, InizioLavorazioneZ,
+                                        //                            ProfonditaLavorazione, SicurezzaZ,
+                                        //                            GeometryHelper.DegreeToRadian(135 + 240),
+                                        //                            GeometryHelper.DegreeToRadian(60), new Point2D(0, 0), 52.5);
+                                    }
+
+                                    else
+                                        ProcessTrochoidalMillingLarge(programPhase, moveList, PuntoInizialeX,
+                                                                      PuntoInizialeY, LarghezzaCava, LunghezzaCava,
+                                                                      OrientationAngle,
+                                                                      larghPassat, par.DiametroFresa, profPassata,
+                                                                      InizioLavorazioneZ, ProfonditaLavorazione,
+                                                                      SicurezzaZ, ExtraCorsa);
+                                }
+                                break;
+
+                            case ScanalaturaCavaMetodoLavorazione.Tradizionale:
+                                {
+                                    var par = operazione.GetParametro<ParametroFresaCandela>();
+
+                                    if (par == null)
+                                        throw new NullReferenceException();
+
+                                    var profPassat = par.GetProfonditaPassata();
+
+                                    var larghPassat = par.GetLarghezzaPassata();
+
+                                    /*
+                                     * aggiungere sovrametallo xy
+                                     */
+
+                                    ProcessRoughLineMilling(moveList, PuntoInizialeX, PuntoInizialeY, OrientationAngle,
+                                                            LunghezzaCava, LarghezzaCava, ProfonditaLavorazione,
+                                                            profPassat, larghPassat, par.DiametroFresa, SicurezzaZ,
+                                                            ExtraCorsa, InizioLavorazioneZ);
+
+                                }
+                                break;
+
+                        }
                     } break;
 
                 case LavorazioniEnumOperazioni.Finitura:

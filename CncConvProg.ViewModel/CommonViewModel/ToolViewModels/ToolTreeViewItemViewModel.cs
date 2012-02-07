@@ -6,6 +6,7 @@ using CncConvProg.Model;
 using CncConvProg.Model.ConversationalStructure;
 using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
+using CncConvProg.Model.Tool.LatheTool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.ViewModel.CommonViewModel.ParameterViewModels;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
@@ -157,6 +158,15 @@ namespace CncConvProg.ViewModel.CommonViewModel.ToolViewModels
 
             if (tool is FresaSpianare)
                 return new FresaSpianareViewModel(tool as FresaSpianare, parent);
+
+            if (tool is UtensileTornitura)
+                return new UtensileTornituraViewModel(tool as UtensileTornitura, parent);
+
+            if (tool is UtensileScanalatura)
+                return new UtensileTornituraScanalaturaViewModel(tool as UtensileScanalatura, parent);
+
+            if (tool is UtensileFilettare)
+                return new UtensileFilettaturaViewModel(tool as UtensileFilettare, parent);
 
             throw new NotImplementedException();
 

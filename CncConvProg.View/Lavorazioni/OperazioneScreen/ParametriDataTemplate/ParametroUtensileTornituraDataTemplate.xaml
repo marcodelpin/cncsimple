@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.OperazioneScreen.ParametriDataTemplate.ParametroUtensileTornituraDataTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" xmlns:Controls="clr-namespace:CncConvProg.View.Controls" xmlns:ConversationalStructure="clr-namespace:CncConvProg.Model.ConversationalStructure;assembly=CncConvProg.Model" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:Resources="clr-namespace:MecPrev.Resources;assembly=MecPrev.Resources" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"  >
+    <UserControl.Resources>
+        <ValueConverter:EnumToBoolConverter x:Key="EBConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{x:Static Resources:GuiRes.Velocity}" MinWidth="100" />
+                    <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Velocita, ValidatesOnDataErrors=True}" MinWidth="100" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock MinWidth="100"/>
+                    <StackPanel>
+                        <RadioButton IsChecked="{Binding Path=ModalitaVelocita,    
+                            Converter={StaticResource EBConverter},    
+                            ConverterParameter={x:Static ConversationalStructure:ModalitaVelocita.VelocitaTaglio}}" Content="{x:Static Resources:GuiRes.CutSpeed}"/>
+                        <RadioButton IsChecked="{Binding Path=ModalitaVelocita,    
+                            Converter={StaticResource EBConverter},    
+                            ConverterParameter={x:Static ConversationalStructure:ModalitaVelocita.GiriFissi}}" Content="{x:Static Resources:GuiRes.RevMin}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static Resources:GuiRes.Feed}" MinWidth="100"/>
+                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=AvanzamentoSincrono, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" MinWidth="100" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static Resources:GuiRes.CutDepth}" Width="100" TextWrapping="Wrap" />
+                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ProfonditaPassata, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" MinWidth="100" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+
+
+</UserControl>

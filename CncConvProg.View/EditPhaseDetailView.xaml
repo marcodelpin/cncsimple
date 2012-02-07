@@ -24,6 +24,10 @@
                 <TextBlock Text="Program Number" Width="130" Margin="3" />
                 <TextBox Text="{Binding Path=NumeroProgramma}" Width="180" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <TextBlock Text="Selected Machine" Width="130" Margin="3" />
+                <ComboBox SelectedItem="{Binding Path=MacchinaSelezionata}" DisplayMemberPath="MachineName" ItemsSource="{Binding Path=MachineList}" MinWidth="150" />
+            </StackPanel>
             <GroupBox Header="Work" DockPanel.Dock="Top" Margin="3,10,3,0">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" >

@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using CncConvProg.Model.ConversationalStructure.Abstraction;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.ViewModel.AuxViewModel;
 using CncConvProg.ViewModel.EditWorkDialog.Common;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
@@ -28,7 +30,11 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
 
             EditWorkParent = parent;
 
-            RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel(this._scanalaturaLinea, this);
+
+            RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel(_scanalaturaLinea, this);
+
+            Children.Add(RotoTraslateWorkViewModel);
+            //RotoTraslateWorkViewModel = new RotoTraslateWorkViewModel(this._scanalaturaLinea, this);
         }
 
         private RotoTraslateWorkViewModel _rotoTraslateWorkViewModel;
@@ -181,6 +187,30 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea
             {
                 _scanalaturaLinea.ProfonditaFresaSmussatura = value;
                 OnPropertyChanged("ProfonditaFresaSmussatura");
+            }
+        }
+
+        public double TrochoidalStep
+        {
+            get { return _scanalaturaLinea.TrochoidalStep; }
+            set
+            {
+                _scanalaturaLinea.TrochoidalStep = value;
+                OnPropertyChanged("TrochoidalStep");
+            }
+        }
+
+        public int ModoSgrossatura
+        {
+            get
+            {
+                return (int)_scanalaturaLinea.ModoSgrossatura;
+            }
+
+            set
+            {
+                _scanalaturaLinea.ModoSgrossatura = (ScanalaturaCavaMetodoLavorazione)value;
+                OnPropertyChanged("ModoSgrossatura");
             }
         }
         #region IDataErrorInfo Members

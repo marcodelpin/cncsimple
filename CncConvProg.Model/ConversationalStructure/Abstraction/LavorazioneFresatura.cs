@@ -25,19 +25,14 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
     [Serializable]
     public abstract class LavorazioneFresatura : Lavorazione
     {
-        protected LavorazioneFresatura(Guid faseLavorGuid)
-            : base(faseLavorGuid)
-        {
-        }
-
         public override FaseDiLavoro.TipoFaseLavoro[] FasiCompatibili
         {
             get
             {
                 return new[]
                            {
-                               Abstraction.FaseDiLavoro.TipoFaseLavoro.Centro,
-                               Abstraction.FaseDiLavoro.TipoFaseLavoro.Tornio3Assi
+                               FaseDiLavoro.TipoFaseLavoro.Centro,
+                               FaseDiLavoro.TipoFaseLavoro.Tornio3Assi
                            };
             }
         }

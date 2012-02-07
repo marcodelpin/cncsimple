@@ -79,6 +79,13 @@
     <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingRectangle.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingXy.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Common\LavorazioniEnumOperazioni.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\GolePattern\GroovePatterns.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\GolePattern\IGroovePattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\Tornitura.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\TornituraFilettatura.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\TornituraScanalatura.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\TornituraSfacciatura.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\TurnProgrammingHelper.cs" />
     <Compile Include="FeedAndSpeedHelper.cs" />
     <Compile Include="Materiale.cs" />
     <Compile Include="OperationTime.cs" />
@@ -120,7 +127,6 @@
     <Compile Include="ConversationalStructure\Abstraction\IMillLeveable.cs" />
     <Compile Include="ConversationalStructure\Operazione.cs" />
     <Compile Include="ConversationalStructure\Operation\IOperationTurnable.cs" />
-    <Compile Include="FileManageUtility\DefaultDataManager.cs" />
     <Compile Include="FileManageUtility\FileUtility.cs" />
     <Compile Include="FileManageUtility\PathFolderHelper.cs" />
     <Compile Include="FileManageUtility\ProgramPreference.cs" />

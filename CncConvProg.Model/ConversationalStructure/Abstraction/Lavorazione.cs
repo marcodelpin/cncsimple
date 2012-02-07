@@ -11,9 +11,11 @@ using CncConvProg.Model.PathGenerator;
 using CncConvProg.Model.PreviewPathEntity;
 using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
+using CncConvProg.Model.Tool.LatheTool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.Model.ToolMachine;
+using MecPrev.Resources;
 
 namespace CncConvProg.Model.ConversationalStructure.Abstraction
 {
@@ -76,12 +78,11 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             }
         }
 
-        protected Lavorazione(Guid faseLavorGuid)
+        protected Lavorazione()
         {
             /*
              * Questa lavorazione la inserisco nelle lavorazione del parent solo su ok del dialogo
              */
-            FaseDiLavoroGuid = faseLavorGuid;
 
             LavorazioneGuid = Guid.NewGuid();
 
@@ -360,28 +361,14 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             return rslt;
         }
 
-        // public abstract IEnumerable<IEntity2D> GetOperationPreview(int enumOperationType);
-
-        /// <summary>
-        /// todo:  Non fare questo metodo abstract
-        /// </summary>
-        /// <param name="enumOp"></param>
-        /// <returns></returns>
-        internal string GetOperationDescription(LavorazioniEnumOperazioni enumOp)
+        internal static string GetOperationDescription(LavorazioniEnumOperazioni enumOp)
         {
             switch (enumOp)
             {
-                case LavorazioniEnumOperazioni.SgrossaturaTrocoidale:
-                    {
-                        return "Trochoidal Roughing";
-
-                    }
-                    break;
-
                 case LavorazioniEnumOperazioni.FresaturaSpianaturaSgrossatura:
                 case LavorazioniEnumOperazioni.Sgrossatura:
                     {
-                        return "Roughing";
+                        return EditWorkRes.Roughing;
 
                     }
                     break;
@@ -389,90 +376,104 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
                 case LavorazioniEnumOperazioni.FresaturaSpianaturaFinitura:
                 case LavorazioniEnumOperazioni.Finitura:
                     {
-                        return "Finishing";
+                        return EditWorkRes.Finishing;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.Smussatura:
                     {
-                        return "Chamfering";
+                        return EditWorkRes.Chamfering;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.FresaturaFilettare:
                     {
-                        return "Thread Milling";
+                        return GuiRes.MillThreadOp;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.AllargaturaBareno:
                     {
-                        return "Roughing Hole Pre-Bore";
+                        return EditWorkRes.Roughing;
                     }
                     break;
                 case LavorazioniEnumOperazioni.ForaturaPunta:
                     {
-                        return "Drill";
+                        return GuiRes.Drill;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.ForaturaCentrino:
                     {
-                        return "Center Drill";
+                        return GuiRes.CenterDrill;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.ForaturaSmusso:
                     {
-                        return "Chamfer";
+                        return GuiRes.Chamfer;
                     }
                     break;
 
-                case LavorazioniEnumOperazioni.ForaturaMaschiaturaSx:
                 case LavorazioniEnumOperazioni.ForaturaMaschiaturaDx:
                     {
-                        return "Tap";
+                        return GuiRes.Tapping;
                     }
                     break;
                 case LavorazioniEnumOperazioni.ForaturaLamatore:
                     {
-                        return "CounterBore";
+                        return GuiRes.Counterboring;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.ForaturaAlesatore:
                     {
-                        return "Reamer";
+                        return GuiRes.Reamering;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.ForaturaBareno:
                     {
-                        return "Bore";
+                        return GuiRes.Boring;
                     }
                     break;
 
+                case LavorazioniEnumOperazioni.TornituraSfacciaturaSgrossatura:
+                    {
+                        return GuiRes.FaceTurning + " " + EditWorkRes.Roughing;
+
+                    } break;
+                case LavorazioniEnumOperazioni.TornituraSfacciaturaFinitura:
+                    {
+                        return GuiRes.FaceTurning + " " + EditWorkRes.Finishing; ;
+
+                    } break;
                 case LavorazioniEnumOperazioni.TornituraSgrossatura:
                     {
-                        return "Turn Rough";
+                        return EditWorkRes.Roughing;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.TornituraFinitura:
                     {
-                        return "Turn Finish";
+                        return EditWorkRes.Finishing;
                     }
                     break;
 
-                case LavorazioniEnumOperazioni.TornituraScanalatura:
+                case LavorazioniEnumOperazioni.TornituraScanalaturaFinitura:
                     {
-                        return "Turn Groove";
+                        return GuiRes.TurnGroove + " " + EditWorkRes.Finishing;
+                    }
+                    break;
+                case LavorazioniEnumOperazioni.TornituraScanalaturaSgrossatura:
+                    {
+                        return GuiRes.TurnGroove + " " + EditWorkRes.Roughing;
                     }
                     break;
 
                 case LavorazioniEnumOperazioni.TornituraFilettatura:
                     {
-                        return "Turn Thread";
+                        return GuiRes.TurnThreadingOp;
                     }
                     break;
 
@@ -504,46 +505,54 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             return toolMachine.GetPreview(programPhase);
         }
 
-        internal Utensile CreateTool(LavorazioniEnumOperazioni enumOperationType)
+        internal static Utensile CreateTool(LavorazioniEnumOperazioni enumOperationType, MeasureUnit unit)
         {
-            var unit = Singleton.Instance.MeasureUnit;
-
             switch (enumOperationType)
             {
+                case LavorazioniEnumOperazioni.TornituraScanalaturaSgrossatura:
+                case LavorazioniEnumOperazioni.TornituraScanalaturaFinitura:
+                    return new UtensileScanalatura(unit);
+
                 case LavorazioniEnumOperazioni.FresaturaSpianaturaFinitura:
                 case LavorazioniEnumOperazioni.FresaturaSpianaturaSgrossatura:
                     return new FresaSpianare(unit);
 
-
-
                 case LavorazioniEnumOperazioni.AllargaturaBareno:
                 case LavorazioniEnumOperazioni.Sgrossatura:
                 case LavorazioniEnumOperazioni.Finitura:
-                case LavorazioniEnumOperazioni.SgrossaturaTrocoidale:
                 case LavorazioniEnumOperazioni.FresaturaFilettare:
                     return new FresaCandela(unit);
 
                 case LavorazioniEnumOperazioni.ForaturaCentrino:
-                    return new Centrino(MeasureUnit);
+                    return new Centrino(unit);
 
                 case LavorazioniEnumOperazioni.ForaturaPunta:
-                    return new Punta(MeasureUnit);
+                    return new Punta(unit);
 
                 case LavorazioniEnumOperazioni.Smussatura:
                 case LavorazioniEnumOperazioni.ForaturaSmusso:
-                    return new Svasatore(MeasureUnit);
+                    return new Svasatore(unit);
 
                 case LavorazioniEnumOperazioni.ForaturaMaschiaturaDx:
-                    return new Maschio(MeasureUnit);
+                    return new Maschio(unit);
 
                 case LavorazioniEnumOperazioni.ForaturaBareno:
-                    return new Bareno(MeasureUnit);
+                    return new Bareno(unit);
 
                 case LavorazioniEnumOperazioni.ForaturaAlesatore:
-                    return new Alesatore(MeasureUnit);
+                    return new Alesatore(unit);
 
                 case LavorazioniEnumOperazioni.ForaturaLamatore:
-                    return new Lamatore(MeasureUnit);
+                    return new Lamatore(unit);
+
+                case LavorazioniEnumOperazioni.TornituraSgrossatura:
+                case LavorazioniEnumOperazioni.TornituraFinitura:
+                case LavorazioniEnumOperazioni.TornituraSfacciaturaSgrossatura:
+                case LavorazioniEnumOperazioni.TornituraSfacciaturaFinitura:
+                    return new UtensileTornitura(unit);
+
+                case LavorazioniEnumOperazioni.TornituraFilettatura:
+                    return new UtensileFilettare(unit);
             }
 
             throw new NotImplementedException();
@@ -581,7 +590,7 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
                 case LavorazioniEnumOperazioni.AllargaturaBareno:
                 case LavorazioniEnumOperazioni.Sgrossatura:
                 case LavorazioniEnumOperazioni.Finitura:
-                case LavorazioniEnumOperazioni.SgrossaturaTrocoidale:
+                //case LavorazioniEnumOperazioni.SgrossaturaTrocoidale:
                 case LavorazioniEnumOperazioni.FresaturaFilettare:
                     tools = magazzino.GetTools<FresaCandela>(MeasureUnit);
                     break;
@@ -691,6 +700,16 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             {
                 operazione.ProgramNeedUpdate = true;
             }
+        }
+
+        public bool IsCompatible(Lavorazione lavorazioneTarget)
+        {
+            foreach (var tipoFaseLavoro in FasiCompatibili)
+            {
+                if (lavorazioneTarget.FasiCompatibili.Contains(tipoFaseLavoro))
+                    return true;
+            }
+            return false;
         }
     }
 }

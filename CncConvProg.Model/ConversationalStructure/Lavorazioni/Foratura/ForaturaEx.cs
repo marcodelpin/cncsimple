@@ -31,8 +31,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
         }
 
-        public ForaturaSemplice(Guid faseDiLavoroParent, bool foraturaCentraleTornio)
-            : base(faseDiLavoroParent, foraturaCentraleTornio)
+        public ForaturaSemplice(bool foraturaCentraleTornio)
+            : base(foraturaCentraleTornio)
         {
 
             DiametroForatura = 10;
@@ -81,8 +81,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             set { MaschiaturaMaschioOp.Abilitata = value; }
         }
 
-        public Maschiatura(Guid faseDiLavoroParent, bool foroCentraleTornio)
-            : base(faseDiLavoroParent, foroCentraleTornio)
+        public Maschiatura(bool foroCentraleTornio)
+            : base(foroCentraleTornio)
         {
             MaschiaturaMaschioOp = new Operazione(this, LavorazioniEnumOperazioni.ForaturaMaschiaturaDx);
 
@@ -164,8 +164,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
         }
 
-        public Lamatura(Guid faseDiLavoroParent, bool foraturaCentraleTornio)
-            : base(faseDiLavoroParent, foraturaCentraleTornio)
+        public Lamatura(bool foraturaCentraleTornio)
+            : base(foraturaCentraleTornio)
         {
 
             DiametroForatura = 10;
@@ -224,8 +224,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
         }
 
-        public Alesatura(Guid faseDiLavoroParent, bool foraturaCentraleTornio)
-            : base(faseDiLavoroParent, foraturaCentraleTornio)
+        public Alesatura(bool foraturaCentraleTornio)
+            : base(foraturaCentraleTornio)
         {
 
             DiametroForatura = 10;
@@ -279,8 +279,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
         }
 
-        public Barenatura(Guid faseDiLavoroParent, bool foraturaCentraleTornio)
-            : base(faseDiLavoroParent, foraturaCentraleTornio)
+        public Barenatura(bool foraturaCentraleTornio)
+            : base(foraturaCentraleTornio)
         {
 
             DiametroForatura = 10;

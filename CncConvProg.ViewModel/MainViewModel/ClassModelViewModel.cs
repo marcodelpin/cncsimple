@@ -14,6 +14,7 @@ using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Common;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura;
 using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.PathGenerator;
 using CncConvProg.Model.Tool;
@@ -31,6 +32,10 @@ using CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaChiusa;
 using CncConvProg.ViewModel.EditWorkDialog.Fresatura.ScanalaturaLinea;
 using CncConvProg.ViewModel.EditWorkDialog.Fresatura.Spianatura;
 using CncConvProg.ViewModel.EditWorkDialog.Fresatura.TextEngraving;
+using CncConvProg.ViewModel.EditWorkDialog.TornituraGenerale.Filettatura;
+using CncConvProg.ViewModel.EditWorkDialog.TornituraGenerale.Scanalatura;
+using CncConvProg.ViewModel.EditWorkDialog.TornituraGenerale.Tornitura.ProfiloLibero;
+using CncConvProg.ViewModel.EditWorkDialog.TornituraGenerale.Tornitura.Sfacciatura;
 using CncConvProg.ViewModel.MVVM_Library;
 using Framework.Abstractions.Wpf.Intefaces;
 using Framework.Abstractions.Wpf.ServiceLocation;
@@ -196,24 +201,81 @@ namespace CncConvProg.ViewModel.MainViewModel
 
         public void Drop(DropInfo dropInfo)
         {
-            var op = (OperationMainScreenViewModel)dropInfo.TargetItem;
-            var opData = (OperationMainScreenViewModel)dropInfo.Data;
-            //var destIndex = OperationList.IndexOf(opData);
-            var partIndex = OperationList.IndexOf(op);
+            var opTarget = dropInfo.TargetItem as OperationMainScreenViewModel;
+            var opData = dropInfo.Data as OperationMainScreenViewModel;
 
-            OperationList.Remove(opData);
-            OperationList.Insert(partIndex, opData);
-
-            // riaggiorno opIndex.
-            var opInd = 0;
-
-            foreach (var operationMainScreenViewModel in _operationList)
+            if (opTarget != null && opData != null)
             {
-                operationMainScreenViewModel.OrderIndex = opInd;
-                opInd++;
+                //var destIndex = OperationList.IndexOf(opData);
+                var partIndex = OperationList.IndexOf(opTarget);
+
+                OperationList.Remove(opData);
+                OperationList.Insert(partIndex, opData);
+
+                // riaggiorno opIndex.
+                var opInd = 0;
+
+                foreach (var operationMainScreenViewModel in _operationList)
+                {
+                    operationMainScreenViewModel.OrderIndex = opInd;
+                    opInd++;
+                }
+
+                UpdateChangeToolOptional(OperationList);
             }
 
-            UpdateChangeToolOptional(OperationList);
+            var lavTarget = dropInfo.TargetItem as LavorazioneTreeView;
+            var lav = dropInfo.Data as LavorazioneTreeView;
+            var faseTarget = dropInfo.TargetItem as FaseLavoroTreeView;
+
+            if (faseTarget != null && lav != null)
+            {
+                if (faseTarget.FaseDiLavoro.IsCompatible(lav.Lavorazione))
+                {
+                    faseTarget.FaseDiLavoro.AddLavorazione(lav.Lavorazione);
+                    UpdateTreeView();
+                }
+            }
+            else if (lav != null && lavTarget != null)
+            {
+                if (!lavTarget.Lavorazione.IsCompatible(lav.Lavorazione)) return;
+
+                /* Ora o modificato la lista nel treeview, 
+                * Devo persisterla nel model.
+                */
+                var faseT = TreeView.Where(t => t.Children.Contains(lavTarget)).FirstOrDefault();
+
+                if (faseT == null) return;
+
+                var lavorazioniVm = faseT.Children.OfType<LavorazioneTreeView>().ToList();
+
+                var faseModel = faseT.FaseDiLavoro;
+
+                var partIndex = lavorazioniVm.IndexOf(lavTarget);
+
+                var cIndex = lavorazioniVm.IndexOf(lav);
+
+                var removed = lavorazioniVm.Remove(lav);
+
+                lavorazioniVm.Insert(partIndex, lav);
+
+                /* itero fra le operazioni vm e riaggiorno index e fase di lavoro guid.*/
+                var opInd = 1;
+                foreach (var treeViewItemViewModel in lavorazioniVm)
+                {
+                    var lavModel = Singleton.Instance.GetLavorazione(treeViewItemViewModel.Lavorazione.LavorazioneGuid);
+
+                    lavModel.LavorazionePosition = opInd;
+
+                    opInd++;
+
+                    faseModel.AddLavorazione(lavModel);
+                }
+
+                faseModel.ResetLavorazioniNumeration();
+
+                UpdateTreeView();
+            }
         }
 
         public void DragOver(DropInfo dropInfo)
@@ -223,9 +285,69 @@ namespace CncConvProg.ViewModel.MainViewModel
                 dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
                 dropInfo.Effects = System.Windows.DragDropEffects.Move;
             }
+
+            var fase = dropInfo.TargetItem as FaseLavoroTreeView;
+            var lavorazioneTarget = dropInfo.TargetItem as LavorazioneTreeView;
+            var lavorazione = dropInfo.Data as LavorazioneTreeView;
+
+            if (lavorazione != null && fase != null)
+            {
+                if (fase.FaseDiLavoro.IsCompatible(lavorazione.Lavorazione))
+                {
+                    dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
+                    dropInfo.Effects = System.Windows.DragDropEffects.Move;
+                }
+                else
+                {
+                    dropInfo.Effects = System.Windows.DragDropEffects.None;
+                }
+            }
+
+            if (lavorazione != null && lavorazioneTarget != null)
+            {
+                if (lavorazione.Lavorazione.IsCompatible(lavorazioneTarget.Lavorazione))
+                {
+                    dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
+                    dropInfo.Effects = System.Windows.DragDropEffects.Move;
+                }
+            }
         }
 
         #endregion
+        //#region Operation List DragDrop
+
+        //public void Drop(DropInfo dropInfo)
+        //{
+        //    var op = (OperationMainScreenViewModel)dropInfo.TargetItem;
+        //    var opData = (OperationMainScreenViewModel)dropInfo.Data;
+        //    //var destIndex = OperationList.IndexOf(opData);
+        //    var partIndex = OperationList.IndexOf(op);
+
+        //    OperationList.Remove(opData);
+        //    OperationList.Insert(partIndex, opData);
+
+        //    // riaggiorno opIndex.
+        //    var opInd = 0;
+
+        //    foreach (var operationMainScreenViewModel in _operationList)
+        //    {
+        //        operationMainScreenViewModel.OrderIndex = opInd;
+        //        opInd++;
+        //    }
+
+        //    UpdateChangeToolOptional(OperationList);
+        //}
+
+        //public void DragOver(DropInfo dropInfo)
+        //{
+        //    if (dropInfo.Data is OperationMainScreenViewModel && dropInfo.TargetItem is OperationMainScreenViewModel)
+        //    {
+        //        dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
+        //        dropInfo.Effects = System.Windows.DragDropEffects.Move;
+        //    }
+        //}
+
+        //#endregion
 
         RelayCommand _cloneWorkCmd;
 
@@ -693,8 +815,8 @@ namespace CncConvProg.ViewModel.MainViewModel
             var stock = selectedPhase.Stock;
 
             uniProgram.CutViewerStockSettingStr = CutViewerHelper.PrintStockBlock(stock.Larghezza, stock.Altezza,
-                                                                                  stock.Spessore, stock.OriginX,
-                                                                                  stock.OriginY, stock.Spessore + stock.OriginZ);
+                                                                                  stock.Spessore, stock.OriginX + stock.Larghezza / 2,
+                                                                                  stock.OriginY + stock.Altezza / 2, stock.Spessore + stock.OriginZ);
             foreach (var operazione in operation)
             {
                 var programPhase = operazione.GetProgramPhase(machine, true);
@@ -762,28 +884,23 @@ namespace CncConvProg.ViewModel.MainViewModel
 
         RelayCommand _addPhase;
 
-        private void AddPhase(ToolMachine machine)
+        private Guid AddPhase(ToolMachine machine)
         {
-            // parametro che mi indica che fase aggiungere
-
             var fase = Singleton.Instance.CreateFaseDiLavoro(machine);
 
-            // Al limite lo posso inserire su creazione fase di lavoro.
-          //todo:  fase.NoChangeToolSecureZ = Singleton.Preference.GetSecureNoChangeToolZ(Singleton.Instance.MeasureUnit);
+            var prefernce = Singleton.Preference.GetPreference(Singleton.Instance.MeasureUnit);
+
+            fase.NoChangeToolSecureZ = prefernce.MillingSecureZNoChangeTool;
 
             Singleton.Instance.AddFaseDiLavoro(fase);
-
-            // aggiungo al model principale , quello che andrà serializzato..
-
-            // faccio un refresh del treeView
-
-            //_model.AddFaseLavoro(fase);
 
             UpdateTreeView();
 
             UpdateOperationsList();
 
             UpdatePreview();
+
+            return fase.FaseDiLavoroGuid;
         }
 
         public ICommand AddPhaseCmd
@@ -987,17 +1104,23 @@ namespace CncConvProg.ViewModel.MainViewModel
             if (lavorazione is DrillBaseClass)
                 return new ForaturaCommonViewModel(lavorazione as DrillBaseClass);
 
-            //if (lavorazione is ForaturaSemplice)
-            //    return new ForaturaSempliceViewModel(lavorazione as ForaturaSemplice);
-
-            //if (lavorazione is Maschiatura)
-            //    return new MaschiaturaViewModel(lavorazione as Maschiatura);
-
             if (lavorazione is ScanalaturaLinea)
                 return new ScanalaturaLineaViewModel(lavorazione as ScanalaturaLinea);
 
             if (lavorazione is FresaturaLato)
                 return new FresaturaLatoViewModel(lavorazione as FresaturaLato);
+
+            if (lavorazione is TornituraScanalatura)
+                return new TornituraScanalaturaViewModel(lavorazione as TornituraScanalatura);
+
+            if (lavorazione is Tornitura)
+                return new TornituraProfiloLiberoViewModel(lavorazione as Tornitura);
+
+            if (lavorazione is TornituraSfacciatura)
+                return new TornituraSfacciaturaViewModel(lavorazione as TornituraSfacciatura);
+
+            if (lavorazione is TornituraFilettatura)
+                return new TornituraFilettaturaViewModel(lavorazione as TornituraFilettatura);
 
             throw new NotImplementedException("MainViewModel.GetViewModel");
         }
@@ -1144,152 +1267,123 @@ namespace CncConvProg.ViewModel.MainViewModel
 
         private void NewWorkDialog(EnumWork enumWork)
         {
-            //var enumWork = (EnumWork)Convert.ToInt32(param);
-            //var enumWork = (EnumWork)Convert.ToInt32(param);
-
-            //if(!enumWork1.HasValue) return;
-
-            //var enumWork = (EnumWork)enumWork1.Value ;
             Lavorazione lavorazione = null;
-
-            var faseParentGuid = Guid.Empty;
-
-            if (FaseSelectedViewModel != null)
-                faseParentGuid = FaseSelectedViewModel.FaseDiLavoroGuid;
-
-            if (faseParentGuid == Guid.Empty)
-            {
-                var mills = PathFolderHelper.GetToolMachines();
-
-                var mil = mills.OfType<VerticalMill>();
-
-                if (mil == null || mil.Count() == 0)
-                    return;
-
-                var mill = mil.FirstOrDefault();
-
-                if (mill == null)
-                    throw new NotImplementedException();
-
-                AddPhase(mill);
-
-                var firstPhase = TreeView.FirstOrDefault();
-
-                if (firstPhase != null)
-                    faseParentGuid = firstPhase.FaseDiLavoro.FaseDiLavoroGuid;
-                else
-                {
-                    return;
-                }
-
-            }
 
             switch (enumWork)
             {
-                //case EnumWork.TornituraSfacciatura:
-                //    {
-                //        lavorazione = new TornituraSfacciatura(faseSelezionata);
-                //    } break;
-
+                // Fresatura
                 case EnumWork.FresaturaContornatura:
                     {
-                        lavorazione = new FresaturaContornatura(faseParentGuid);
+                        lavorazione = new FresaturaContornatura();
                     } break;
 
                 case EnumWork.FresaturaCava:
                     {
-                        lavorazione = new FresaturaCava(faseParentGuid);
+                        lavorazione = new FresaturaCava();
                     } break;
 
 
                 case EnumWork.FresaturaLato:
                     {
-                        lavorazione = new FresaturaLato(faseParentGuid);
+                        lavorazione = new FresaturaLato();
                     } break;
 
                 case EnumWork.FresaturaSpianatura:
                     {
-                        lavorazione = new Spianatura(faseParentGuid);
+                        lavorazione = new Spianatura();
                     } break;
 
                 case EnumWork.FresaturaScanalaturaLinea:
                     {
-                        lavorazione = new ScanalaturaLinea(faseParentGuid);
+                        lavorazione = new ScanalaturaLinea();
                     } break;
 
                 case EnumWork.FresaturaScanalaturaChiusa:
                     {
-                        lavorazione = new FresaturaScanalaturaChiusa(faseParentGuid);
+                        lavorazione = new FresaturaScanalaturaChiusa();
                     } break;
 
                 case EnumWork.FresaturaFilettare:
                     {
-                        lavorazione = new FresaturaFilettatura(faseParentGuid);
+                        lavorazione = new FresaturaFilettatura();
                     } break;
 
                 case EnumWork.TextEngraving:
                     {
-                        lavorazione = new TextEngravingModel(faseParentGuid);
+                        lavorazione = new TextEngravingModel();
                     } break;
 
                 // Cicli Foratura 
 
                 case EnumWork.ForaturaSemplice:
                     {
-                        lavorazione = new ForaturaSemplice(faseParentGuid, false);
+                        lavorazione = new ForaturaSemplice(false);
                     } break;
 
                 case EnumWork.Alesatura:
                     {
-                        lavorazione = new Alesatura(faseParentGuid, false);
+                        lavorazione = new Alesatura(false);
                     } break;
 
                 case EnumWork.Barenatura:
                     {
-                        lavorazione = new Barenatura(faseParentGuid, false);
+                        lavorazione = new Barenatura(false);
                     } break;
 
                 case EnumWork.Lamatura:
                     {
-                        lavorazione = new Lamatura(faseParentGuid, false);
+                        lavorazione = new Lamatura(false);
                     } break;
 
                 case EnumWork.Maschiatura:
                     {
-                        lavorazione = new Maschiatura(faseParentGuid, false);
+                        lavorazione = new Maschiatura(false);
                     } break;
 
-                //case EnumWork.TornituraScanalaturaInterna:
-                //    {
-                //        //lavorazione = new TornituraScanalaturaInterna(faseParentGuid);
-                //    } break;
 
-                //case EnumWork.TornituraScanalaturaFrontale:
-                //    {
-                //        //lavorazione = new TornituraScanalaturaEsterna(faseParentGuid);
-                //    } break;
+                // Tornitura 
+                case EnumWork.TornituraScanalaturaEsterna:
+                    {
+                        lavorazione = new TornituraScanalatura(TornituraScanalatura.TipoScanalatura.Esterna);
+                    } break;
 
-                //case EnumWork.TornituraEsterna:
-                //    {
-                //        lavorazione = new TornituraSfacciatura(faseSelezionata);
-                //    } break;
+                case EnumWork.TornituraScanalaturaInterna:
+                    {
+                        lavorazione = new TornituraScanalatura(TornituraScanalatura.TipoScanalatura.Interna);
 
-                //case EnumWork.ForaturaSemplice:
-                //    {
-                //        lavorazione = new ForaturaSemplice(faseSelezionata, false);
-                //    } break;
+                    } break;
 
-                //case EnumWork.Maschiatura:
-                //    {
-                //        lavorazione = new Maschiatura(faseSelezionata, false);
-                //    } break;
+                case EnumWork.TornituraScanalaturaFrontale:
+                    {
+                        lavorazione = new TornituraScanalatura(TornituraScanalatura.TipoScanalatura.Frontale);
+
+                    } break;
+                case EnumWork.TornituraInterna:
+                    {
+                        lavorazione = new Tornitura(Tornitura.TipoTornitura.Interna);
+                    } break;
+
+                case EnumWork.TornituraEsterna:
+                    {
+                        lavorazione = new Tornitura(Tornitura.TipoTornitura.Esterna);
+                    } break;
+
+                case EnumWork.TornituraSfacciatura:
+                    {
+                        lavorazione = new TornituraSfacciatura();
+                    } break;
+
+                case EnumWork.TornituraFilettatura:
+                    {
+                        lavorazione = new TornituraFilettatura();
+                    } break;
 
                 case EnumWork.TornioForaturaCentraleAlesatura:
                 case EnumWork.TornioForaturaCentraleMaschiatura:
                 case EnumWork.TornioForaturaCentraleLamatura:
                 case EnumWork.TornioForaturaCentraleSemplice:
                     {
-                        lavorazione = new ForaturaSemplice(faseParentGuid, true);
+                        lavorazione = new ForaturaSemplice(true);
                     } break;
 
                 default:
@@ -1297,22 +1391,52 @@ namespace CncConvProg.ViewModel.MainViewModel
                         throw new NotImplementedException("MainViewModel.NewWorkDialog");
                     }
                     return;
+
             }
+
+            var faseParentGuid = Guid.Empty;
 
             /*
-             * cerco di caricare lavorazione di default dello stesso tipo
+             * Per determinare fase di lavoro , prima provo quella selezionata.
+             * Poi prova ultima in ordine di inserimento 
+             * Se non ho trovato niente ne creo una nuova
              */
-            var ddm = DefaultDataManager.Load();
-
-            var measureUnit = Singleton.Instance.MeasureUnit;
-
-            if (ddm != null)
+            if (FaseSelectedViewModel != null && FaseSelectedViewModel.FaseDiLavoro.IsCompatible(lavorazione))
             {
-                var defaultLav = ddm.GetLavorazione(measureUnit, faseParentGuid, lavorazione.GetType());
-
-                if (defaultLav != null)
-                    lavorazione = defaultLav;
+                faseParentGuid = FaseSelectedViewModel.FaseDiLavoro.FaseDiLavoroGuid;
             }
+            else if (TreeView.LastOrDefault() != null && TreeView.LastOrDefault().FaseDiLavoro.IsCompatible(lavorazione))
+            {
+                faseParentGuid = TreeView.LastOrDefault().FaseDiLavoroGuid;
+            }
+
+            if (faseParentGuid == Guid.Empty)
+            {
+                /* Se la fase non era compatibile ne devo creare una compatibile.*/
+
+                var machineCompatible = GetCompatibleMachine(lavorazione, true);
+
+                if (machineCompatible != null)
+                {
+                    faseParentGuid = AddPhase(machineCompatible);
+
+                }
+
+            }
+
+            if (faseParentGuid == Guid.Empty)
+            {
+                /*
+                 * se arriva qui significa che c'è stato problema. 
+                 */
+                MessageBox.Show("Tool Machine not defined");
+
+                return;
+            }
+
+            var fase = Singleton.Instance.GetFaseDiLavoro(faseParentGuid);
+
+            fase.AddLavorazione(lavorazione);
 
             var viewModel = GetViewModel(lavorazione);
 
@@ -1327,6 +1451,59 @@ namespace CncConvProg.ViewModel.MainViewModel
                 return _newWorkCmd ?? (_newWorkCmd = new RelayCommand(param => NewWorkDialog((EnumWork)param),
                                                                           param => true));
             }
+        }
+        private static ToolMachine GetCompatibleMachine(Lavorazione lavorazione, bool createNewMachine = false)
+        {
+            var machines = PathFolderHelper.GetToolMachines();
+
+            var tipoFaseLavoro = lavorazione.FasiCompatibili.FirstOrDefault();
+
+            IEnumerable<ToolMachine> ms = null;
+            switch (tipoFaseLavoro)
+            {
+                case FaseDiLavoro.TipoFaseLavoro.Tornio3Assi:
+                    ms = machines.OfType<LatheAxisC>();
+                    break;
+
+                case FaseDiLavoro.TipoFaseLavoro.Tornio2Assi:
+                    ms = machines.OfType<HorizontalLathe2Axis>();
+                    break;
+
+                case FaseDiLavoro.TipoFaseLavoro.Centro:
+                    ms = machines.OfType<VerticalMill>();
+                    break;
+
+            }
+
+            if (ms != null && ms.Count() > 0)
+                return ms.First();
+
+            if (!createNewMachine) return null;
+
+            ToolMachine machine = null;
+
+            /*Non è stata trovata nessuna macchina compatibile,
+             Ne creo una standard */
+            switch (tipoFaseLavoro)
+            {
+                case FaseDiLavoro.TipoFaseLavoro.Tornio3Assi:
+                    machine = new LatheAxisC();
+                    break;
+
+                case FaseDiLavoro.TipoFaseLavoro.Tornio2Assi:
+                    machine = new HorizontalLathe2Axis();
+                    break;
+
+                case FaseDiLavoro.TipoFaseLavoro.Centro:
+                    machine = new VerticalMill();
+                    break;
+            }
+
+            machines.Add(machine);
+
+            Singleton.Data.AddMacchina(machine);
+
+            return machine;
         }
 
         #endregion

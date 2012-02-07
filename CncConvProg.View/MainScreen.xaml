@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ap="clr-namespace:CncConvProg.View.AttachedProperty"
              xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" 
-             xmlns:MainViewModel="clr-namespace:CncConvProg.ViewModel.MainViewModel;assembly=CncConvProg.ViewModel" xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" xmlns:TreeViewModel="clr-namespace:CncConvProg.ViewModel.AuxViewModel.TreeViewModel;assembly=CncConvProg.ViewModel" xmlns:Controls="clr-namespace:CncConvProg.View.Controls" xmlns:GraphicViewer="clr-namespace:GraphicViewer;assembly=GraphicViewer" xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop" xmlns:Controls1="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock" mc:Ignorable="d" 
+             xmlns:MainViewModel="clr-namespace:CncConvProg.ViewModel.MainViewModel;assembly=CncConvProg.ViewModel" xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" xmlns:TreeViewModel="clr-namespace:CncConvProg.ViewModel.AuxViewModel.TreeViewModel;assembly=CncConvProg.ViewModel" xmlns:Controls="clr-namespace:CncConvProg.View.Controls" xmlns:GraphicViewer="clr-namespace:GraphicViewer;assembly=GraphicViewer" xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop" xmlns:Controls1="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock" xmlns:Resources="clr-namespace:MecPrev.Resources;assembly=MecPrev.Resources" mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1200" d:DataContext="{Binding Source={StaticResource viewModel}}"
              >
     <UserControl.Resources>
@@ -76,13 +76,8 @@
                         <ribbon:RibbonButton  SmallImageSource="pack://application:,,,/Images/gui/save.png" Label="Save As" Command="{Binding Path=SaveFileDialogCmd}"/>
                     </ribbon:RibbonGroup>
                     <ribbon:RibbonGroup Header="Article">
-                        <!--<ribbon:RibbonButton Label="Article Detail"
-                                         LargeImageSource="pack://application:,,,/Images/gui/ArticleDetail.png"
-                                         Command="{Binding Path=OpenDialogCmd}"
-                                         CommandParameter="{x:Static Member=MainViewModel:DialogEnum.DettagliArticolo}"
-                                         />-->
-                        <ribbon:RibbonMenuButton Label="New Phase"
-                                        LargeImageSource="pack://application:,,,/Images/gui/addPhase.png"
+                        <ribbon:RibbonMenuButton Label="{x:Static Resources:GuiRes.NewPhase}"
+                                        LargeImageSource="pack://application:,,,/CncConvProg.View;component/Images/gui/addPhase.png"
                                         >
                             <ribbon:RibbonMenuButton.Resources>
                                 <Style x:Key="newPhaseItemContainerStyle">
@@ -90,20 +85,18 @@
                                     <Setter Property="MenuItem.Command" Value="{Binding DataContext.AddPhaseCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Controls1:BusyIndicator}, Mode=FindAncestor}}"/>
                                     <Setter Property="MenuItem.CommandParameter" Value="{Binding}"/>
                                 </Style>
-
-                                <!--<DataTemplate x:Key="phaseMenuItem">
-
-                                <ribbon:RibbonMenuItem Header="{Binding Path=MachineName}" Command="{Binding Path=AddPhaseCmd}" CommandParameter="{Binding}"/>
-                            </DataTemplate>-->
                             </ribbon:RibbonMenuButton.Resources>
-                            <!--<ribbon:RibbonMenuItem Header="Tornio 2 Assi" ItemsSource="{Binding Path=HorizontalLatheMachines}" ItemContainerStyle="{StaticResource ResourceKey=newPhaseItemContainerStyle}" />-->
-                            <ribbon:RibbonMenuItem Header="-" 
+                            <ribbon:RibbonMenuItem Header="{x:Static Resources:GuiRes.Lathe2Ax}" 
+                                                   ItemsSource="{Binding Path=DataContext.HorizontalLatheMachines, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                   ItemContainerStyle="{StaticResource ResourceKey=newPhaseItemContainerStyle}"  />
+                            <ribbon:RibbonMenuItem Header="{x:Static Resources:GuiRes.Lathe3Ax}" 
                                                    ItemsSource="{Binding Path=DataContext.Lathe3AxisMachines, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                    ItemContainerStyle="{StaticResource ResourceKey=newPhaseItemContainerStyle}"  />
-                            <ribbon:RibbonMenuItem Header="Vertical Mill"
+                            <ribbon:RibbonMenuItem Header="{x:Static Resources:GuiRes.VerticalMill}"
                                                    ItemsSource="{Binding Path=DataContext.MillMachines, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                    ItemContainerStyle="{StaticResource ResourceKey=newPhaseItemContainerStyle}"  />
                         </ribbon:RibbonMenuButton>
+
                     </ribbon:RibbonGroup>
                     <ribbon:RibbonGroup Header="">
                         <ribbon:RibbonButton Label="Thread Table"
@@ -123,23 +116,54 @@
                         </ribbon:RibbonButton>
                         <ribbon:RibbonButton Label="Machines"
                                         SmallImageSource="pack://application:,,,/Images/gui/ttools.png"
-                                         Command="{Binding Path=DataContext.OpenDialogCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                        Command="{Binding Path=DataContext.OpenDialogCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                         CommandParameter="{x:Static Member=MainViewModel:DialogEnum.MacchineDialogo}"
                                             >
 
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroup>
 
-                    <ribbon:RibbonGroup Header="Drilling">
-                        <ribbon:RibbonMenuButton Label="Drill" LargeImageSource="pack://application:,,,/Images/Work/drill.png">
-                            <ribbon:RibbonMenuItem Header="Simple Drilling"  Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.ForaturaSemplice}" />
-                            <ribbon:RibbonMenuItem Header="Tapping" Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.Maschiatura}" />
-                            <ribbon:RibbonMenuItem Header="Reamer" Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.Alesatura}" />
-                            <ribbon:RibbonMenuItem Header="Boring" Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.Barenatura}" />
-                            <ribbon:RibbonMenuItem Header="Counterbore" Command="{Binding Path=NewWorkCmd}"  CommandParameter="{x:Static Member=MainViewModel:EnumWork.Lamatura}" />
-                        </ribbon:RibbonMenuButton>
-                    </ribbon:RibbonGroup>
+                    
 
+                    <ribbon:RibbonGroup Header="{x:Static Resources:GuiRes.TurningOp}">
+                        <ribbon:RibbonMenuButton 
+                                        Label="{x:Static Resources:GuiRes.TurningOp}"
+                                         LargeImageSource="pack://application:,,,/CncConvProg.View;component/Images/Work/Turning.png"
+                                         >
+                            <ribbon:RibbonMenuItem  
+                                            Header="{x:Static Resources:GuiRes.Extern}"
+                                            Command="{Binding Path=NewWorkCmd}"
+                                            CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraEsterna}" />
+                            <ribbon:RibbonMenuItem  
+                                            Header="{x:Static Resources:GuiRes.Intern}"
+                                            Command="{Binding Path=NewWorkCmd}"
+                                            CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraInterna}" />
+                            <ribbon:RibbonMenuItem  
+                                            Header="{x:Static Resources:GuiRes.FaceTurning}"
+                                            Command="{Binding Path=NewWorkCmd}"
+                                            CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraSfacciatura}" />
+                        </ribbon:RibbonMenuButton>
+
+                        <ribbon:RibbonMenuButton Label="{x:Static Resources:GuiRes.GroovingOp}"
+                                         LargeImageSource="pack://application:,,,/CncConvProg.View;component/Images/Work/groove.png"
+                                         >
+                            <ribbon:RibbonMenuItem  
+                                            Header="{x:Static Resources:GuiRes.Extern}"
+                                            Command="{Binding Path=NewWorkCmd}"
+                                            CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraScanalaturaEsterna}" />
+                            <ribbon:RibbonMenuItem  
+                                            Header="{x:Static Resources:GuiRes.Intern}"
+                                            Command="{Binding Path=NewWorkCmd}"
+                                            CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraScanalaturaInterna}" />
+                            <ribbon:RibbonMenuItem  
+                                            Header="{x:Static Resources:GuiRes.FaceGroove}"
+                                            Command="{Binding Path=NewWorkCmd}"
+                                            CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraScanalaturaFrontale}" />
+                        </ribbon:RibbonMenuButton>
+                        <ribbon:RibbonButton Label="{x:Static Resources:GuiRes.TurnThreadingOp}" LargeImageSource="pack://application:,,,/CncConvProg.View;component/Images/Work/thread.png" Command="{Binding Path=NewWorkCmd}" 
+                                             CommandParameter="{x:Static Member=MainViewModel:EnumWork.TornituraFilettatura}" 
+                                             />
+                    </ribbon:RibbonGroup>
 
                     <ribbon:RibbonGroup Header="Milling">
                         <ribbon:RibbonButton Label="Face Milling"
@@ -196,6 +220,16 @@
                                         Command="{Binding Path=NewWorkCmd}" 
                                         CommandParameter="{x:Static Member=MainViewModel:EnumWork.TextEngraving}"
                                         />
+                    </ribbon:RibbonGroup>
+
+                    <ribbon:RibbonGroup Header="Drilling">
+                        <ribbon:RibbonMenuButton Label="Drill" LargeImageSource="pack://application:,,,/Images/Work/drill.png">
+                            <ribbon:RibbonMenuItem Header="Simple Drilling"  Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.ForaturaSemplice}" />
+                            <ribbon:RibbonMenuItem Header="Tapping" Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.Maschiatura}" />
+                            <ribbon:RibbonMenuItem Header="Reamer" Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.Alesatura}" />
+                            <ribbon:RibbonMenuItem Header="Boring" Command="{Binding Path=NewWorkCmd}" CommandParameter="{x:Static Member=MainViewModel:EnumWork.Barenatura}" />
+                            <ribbon:RibbonMenuItem Header="Counterbore" Command="{Binding Path=NewWorkCmd}"  CommandParameter="{x:Static Member=MainViewModel:EnumWork.Lamatura}" />
+                        </ribbon:RibbonMenuButton>
                     </ribbon:RibbonGroup>
 
                     <ribbon:RibbonGroup Header="Result">

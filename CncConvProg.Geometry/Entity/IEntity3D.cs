@@ -82,6 +82,13 @@ namespace CncConvProg.Geometry.Entity
 
             return rslt;
         }
+        public static void SetPlotStyle(IEnumerable<IEntity3D> l, EnumPlotStyle enumPlotStyle = EnumPlotStyle.Element)
+        {
+            foreach (var entity2D in l)
+            {
+                entity2D.PlotStyle = enumPlotStyle;
+            }
+        }
     }
     public interface IEntity3D
     {

@@ -132,7 +132,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
 
             var profile = SquareShapeHelper.GetSquareProfile(centerPoint.X, centerPoint.Y, lunghezzaPolygono, altezzaPoly);
 
-            profile.SetPlotStyle(EnumPlotStyle.Element);
+            profile.SetPlotStyle();
 
 
             return profile;

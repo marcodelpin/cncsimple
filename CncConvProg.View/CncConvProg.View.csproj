@@ -35,7 +35,7 @@
     <SuiteName>Cnc Simple</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -101,10 +101,13 @@
       <HintPath>..\Lib\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\Lib\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\RibbonControlsLibrary.dll</HintPath>
+      <HintPath>..\Lib\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -247,8 +250,8 @@
     <Compile Include="Lavorazioni\Fresatura\Pattern\MillingPatternSelectionView.xaml.cs">
       <DependentUpon>MillingPatternSelectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniView.xaml.cs">
-      <DependentUpon>ScanalaturaLineaOperazioniView.xaml</DependentUpon>
+    <Compile Include="Lavorazioni\Fresatura\Pattern\RettangoloPatternView.xaml.cs">
+      <DependentUpon>RettangoloPatternView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lavorazioni\Fresatura\TextEngraving\TextEngravingParametriView.xaml.cs">
       <DependentUpon>TextEngravingParametriView.xaml</DependentUpon>
@@ -274,8 +277,32 @@
     <Compile Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaParametriView.xaml.cs">
       <DependentUpon>ScanalaturaLineaParametriView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\Common\CommonFinishParameter.xaml.cs">
+      <DependentUpon>CommonFinishParameter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml.cs">
       <DependentUpon>RotoTraslateWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroUtensileTornituraDataTemplate.xaml.cs">
+      <DependentUpon>ParametroUtensileTornituraDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroUtensileTornituraFilettaturaDataTemplate.xaml.cs">
+      <DependentUpon>ParametroUtensileTornituraFilettaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\UtensileTornituraDataTemplate.xaml.cs">
+      <DependentUpon>UtensileTornituraDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\UtensileTornituraScanalaturaDataTemplate.xaml.cs">
+      <DependentUpon>UtensileTornituraScanalaturaDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaEsternaView.xaml.cs">
+      <DependentUpon>ScanalaturaEsternaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\SfacciaturaParametriView.xaml.cs">
+      <DependentUpon>SfacciaturaParametriView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\TornituraFilettaturaView.xaml.cs">
+      <DependentUpon>TornituraFilettaturaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProgramPreferenceView.xaml.cs">
       <DependentUpon>ProgramPreferenceView.xaml</DependentUpon>
@@ -475,7 +502,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lavorazioni\Fresatura\ScanalaturaLinea\ScanalaturaLineaOperazioniView.xaml">
+    <Page Include="Lavorazioni\Fresatura\Pattern\RettangoloPatternView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -511,7 +538,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\Common\CommonFinishParameter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Lavorazioni\OperazioneScreen\Common\RotoTraslateWorkView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroUtensileTornituraDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ParametriDataTemplate\ParametroUtensileTornituraFilettaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\UtensileTornituraDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\UtensileTornituraScanalaturaDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaEsternaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\SfacciaturaParametriView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\TornituraFilettaturaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -703,6 +762,10 @@
     <ProjectReference Include="..\GraphicViewer\GraphicViewer.csproj">
       <Project>{FFAB55F2-43CD-48E6-8EA6-F090824420B4}</Project>
       <Name>GraphicViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MecPrev.Resources\MecPrev.Resources.csproj">
+      <Project>{E1B4B169-6A89-4870-B667-E340EB6DDA3A}</Project>
+      <Name>MecPrev.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -968,6 +1031,18 @@
   <ItemGroup>
     <Resource Include="Images\Gui\cancel.png" />
     <Resource Include="Images\Gui\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="AvalonDock">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

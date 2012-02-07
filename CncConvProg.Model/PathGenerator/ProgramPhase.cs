@@ -20,7 +20,7 @@ namespace CncConvProg.Model.PathGenerator
 
             var rotatedCenterArc = Geometry.GeometryHelper.MultiplyPoint(new Geometry.Point3D(center.X, center.Y, 0), rotationMatrix);
 
-            var moveAction = new ArcMoveAction(axisAbilited, moveType) { Radius = radius, ClockWise = clockWise, Center = new Point2D(rotatedCenterArc.X, rotatedCenterArc.Y), Feed = feed, CncCompensationState = cncCompensationState };
+            var moveAction = new ArcMoveAction(axisAbilited, moveType) { Radius = radius, ClockWise = clockWise, Center = new Point2D(rotatedCenterArc.X, rotatedCenterArc.Y), CncCompensationState = cncCompensationState };
 
             moveAction.Z = z;
 
@@ -28,35 +28,13 @@ namespace CncConvProg.Model.PathGenerator
             _y = moveAction.Y = rotatedEndPnt.Y;
 
             this.Add(moveAction);
-            //switch (axisAbilited)
-            //{
-            //    case AxisAbilited.Z:
-            //        {
-            //            moveAction.Z = z;
-
-            //        } break;
-
-            //    case AxisAbilited.Xy:
-            //        {
-            //            moveAction.X = x;
-            //            moveAction.Y = y;
-
-            //        } break;
-
-            //    default:
-            //        {
-            //            throw new NotImplementedException();
-            //        } break;
-            //}
-
-            //  Actions.Add(moveAction);
         }
 
         public void AddArcMove(AxisAbilited axisAbilited, double? x, double? y, double? z, double radius, bool clockWise, Point2D center, double? feed = null, CncCompensationState cncCompensationState = CncCompensationState.NoChange)
         {
             var moveType = clockWise ? MoveType.Cw : MoveType.Ccw;
 
-            var moveAction = new ArcMoveAction(axisAbilited, moveType) { Radius = radius, ClockWise = clockWise, Center = center, Feed = feed, CncCompensationState = cncCompensationState };
+            var moveAction = new ArcMoveAction(axisAbilited, moveType) { Radius = radius, ClockWise = clockWise, Center = center, CncCompensationState = cncCompensationState };
 
             moveAction.Z = z;
 
@@ -121,8 +99,11 @@ namespace CncConvProg.Model.PathGenerator
 
                 default:
                     {
-                        throw new NotImplementedException();
+                        _x = moveAction.X = x;
+                        _y = moveAction.Y = y;
+                        moveAction.Z = z;
                     } break;
+
             }
 
             this.Add(moveAction);
@@ -421,7 +402,7 @@ namespace CncConvProg.Model.PathGenerator
         {
             var ops = Actions.OfType<ChangeToolAction>().FirstOrDefault();
 
-            if(ops == null)return;
+            if (ops == null) return;
 
             ops.CambioUtensile = cambioUtensile;
         }

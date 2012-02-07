@@ -2,8 +2,11 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using CncConvProg.Model;
+using CncConvProg.Model.ConversationalStructure;
 using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
+using CncConvProg.Model.Tool.LatheTool;
 using CncConvProg.Model.Tool.Parametro;
 using CncConvProg.ViewModel.AuxViewModel;
 
@@ -11,107 +14,71 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 {
     public class ParametroUtensileTornituraViewModel : ToolParameterViewModel
     {
-
-        private readonly ParametroUtensileTornitura _parametroUtensileTornitura;
-
-        public ParametroUtensileTornituraViewModel(Utensile parametroUtensileTornitura )
-            : base(parametroUtensileTornitura)
+        private ParametroUtensileTornitura ParametroUtensileTornitura
         {
-
-            //Velocita = new UserInputViewModel(_parametroUtensileTornitura.Velocita, GetValidationError, PropNumeroGiri);
-            //VelocitaTaglio = new UserInputViewModel(_parametroUtensileTornitura.VelocitaTaglio, GetValidationError, PropVelocitaTaglio);
-
-            //AvanzamentoSincrono = new UserInputViewModel(_parametroUtensileTornitura.AvanzamentoSincrono, GetValidationError, PropAvanzamentoSincrono);
-            //AvanzamentoAsincrono = new UserInputViewModel(_parametroUtensileTornitura.AvanzamentoAsincrono, GetValidationError, PropAvanzamentoAsincrono);
-
-            //Velocita.OnSourceUpdated += UserInput_SourceUpdated;
-            //VelocitaTaglio.OnSourceUpdated += UserInput_SourceUpdated;
-
-            //AvanzamentoSincrono.OnSourceUpdated += UserInput_SourceUpdated;
-            //AvanzamentoAsincrono.OnSourceUpdated += UserInput_SourceUpdated;
+            get { return Parametro as ParametroUtensileTornitura; }
         }
 
-        //void UserInput_SourceUpdated(object sender, EventArgs e)
-        //{
-        //    // ESSENDO BINDATO CON DOUBLE .  QUANDO NON IMMETTO NIENTE VIENE SEGNALATO ERRORE.
-        //    if (sender == Velocita)
-        //    {
-        //        var numeroGiri = Velocita.Value;
-        //        var velocitaTaglio = (numeroGiri * Diametro * Math.PI) / 1000;
-
-        //        VelocitaTaglio.SetValue(false, velocitaTaglio);
-        //    }
-
-        //    else if (sender == VelocitaTaglio)
-        //    {
-        //        var vt = VelocitaTaglio.Value;
-        //        var numeroGiri = (vt * 1000) / (Math.PI * Diametro);
-
-        //        Velocita.SetValue(false, numeroGiri);
-        //    }
-
-        //    else if (sender == AvanzamentoSincrono)
-        //    {
-        //        AvanzamentoAsincrono.SetValue(false, AvanzamentoSincrono.Value * Velocita.Value);
-        //    }
-        //    else if (sender == AvanzamentoAsincrono)
-        //    {
-        //        AvanzamentoSincrono.SetValue(false, AvanzamentoAsincrono.Value / Velocita.Value);
-        //    }
-
-        //    OnPropertyChanged("IsValid");
-        //}
-
-        #region PropertyName
-
-        private const string PropNumeroGiri = "NumeroGiri";
-        private const string PropVelocitaTaglio = "VelocitaTaglio";
-        private const string PropAvanzamentoSincrono = "AvanzamentoSincrono";
-        private const string PropAvanzamentoAsincrono = "AvanzamentoAsincrono";
-
-        #endregion
+        public ParametroUtensileTornituraViewModel(Utensile parametroUtensileTornitura)
+            : base(parametroUtensileTornitura)
+        {
+        }
 
         #region Property
 
         public double Velocita
         {
-            get { return _parametroUtensileTornitura.Velocita; }
+            get { return ParametroUtensileTornitura.Velocita; }
             set
             {
-                _parametroUtensileTornitura.Velocita = value;
+                if (ParametroUtensileTornitura.Velocita == value) return;
+                ParametroUtensileTornitura.Velocita = value;
 
                 OnPropertyChanged("Velocita");
             }
         }
 
-        public double ProfPassata
+        public double ProfonditaPassata
         {
-            get { return _parametroUtensileTornitura.ProfonditaPassata; }
+            get { return ParametroUtensileTornitura.ProfonditaPassata; }
             set
             {
-                _parametroUtensileTornitura.ProfonditaPassata = value;
+                if (ParametroUtensileTornitura.ProfonditaPassata == value) return;
+                ParametroUtensileTornitura.ProfonditaPassata = value;
 
-                OnPropertyChanged("ProfPassata");
+                OnPropertyChanged("ProfonditaPassata");
             }
         }
 
 
-        public double Avanzamento
+        public double AvanzamentoSincrono
         {
-            get { return _parametroUtensileTornitura.AvanzamentoSincrono; }
+            get { return ParametroUtensileTornitura.AvanzamentoSincrono; }
             set
             {
-                _parametroUtensileTornitura.AvanzamentoSincrono = value;
+                if (ParametroUtensileTornitura.AvanzamentoSincrono == value) return;
 
-                OnPropertyChanged("Avanzamento");
+                ParametroUtensileTornitura.AvanzamentoSincrono = value;
+
+                OnPropertyChanged("AvanzamentoSincrono");
             }
         }
 
+        public ModalitaVelocita ModalitaVelocita
+        {
+            get { return ParametroUtensileTornitura.ModalitaVelocita; }
+
+            set
+            {
+                if (ParametroUtensileTornitura.ModalitaVelocita == value) return;
+
+                ParametroUtensileTornitura.ModalitaVelocita = value;
+                OnPropertyChanged("ModalitaVelocita");
+            }
+        }
 
 
         #endregion
-
-
         #region IDataErrorInfo Members
 
 
@@ -121,10 +88,10 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
             {
                 return new string[]
                            {
-                               PropNumeroGiri,
-                                                     PropVelocitaTaglio,
-                                                     PropAvanzamentoSincrono,
-                                                     PropAvanzamentoAsincrono,
+                               "Velocita",
+                               "AvanzamentoSincrono",
+                                "ProfonditaPassata",
+                                "Velocita",
                                
             };
             }
@@ -140,21 +107,26 @@ namespace CncConvProg.ViewModel.CommonViewModel.ParameterViewModels
 
             switch (propertyName)
             {
+                case "Velocita":
+                    {
+                        error = InputCheck.MaggioreDiZero(Velocita);
+                    }
+                    break;
 
-                //case PropNumeroGiri:
-                //    {
-                //        error = InputCheck.MaggioreDiZero(Velocita);
-                //    }
-                //    break;
+                case "AvanzamentoSincrono":
+                    {
+                        error = InputCheck.MaggioreDiZero(AvanzamentoSincrono);
+                    } break;
 
-                //case PropAvanzamentoSincrono:
-                //    {
-                //        error = InputCheck.MaggioreDiZero(Avanzamento);
-                //    } break;
+                case "ProfonditaPassata":
+                    {
+                        error = InputCheck.MaggioreDiZero(ProfonditaPassata);
+                    } break;
 
-                //default:
-                //    Debug.Fail("Unexpected property : " + propertyName);
-                //    break;
+
+                default:
+                    Debug.Fail("Unexpected property : " + propertyName);
+                    break;
             }
 
             return error;

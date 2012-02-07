@@ -28,22 +28,7 @@
                 <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Margin="10,0" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
-                <TextBlock Text="Compesation Cnc : "/>
-                <CheckBox IsChecked="{Binding Path=FinishWithCompensation}" VerticalAlignment="Center" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=FinituraAbilitata}">
-                <TextBlock Text="Rest. Finish Material : "/>
-                <TextBox Text="{Binding Path=SovrametalloFinitura}" MinWidth="100"/>
-            </StackPanel>
-            <StackPanel Margin="10,0" IsEnabled="{Binding Path=SmussaturaAbilitata}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Mill Depth : "/>
-                    <TextBox Text="{Binding Path=ProfonditaFresaSmussatura}" MinWidth="100"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
+        <Common:CommonFinishParameter Grid.Row="1" />
         <Common:RotoTraslateWorkView DataContext="{Binding Path=RotoTraslateWorkViewModel}" Grid.Row="2" />
     </Grid>
 </UserControl>

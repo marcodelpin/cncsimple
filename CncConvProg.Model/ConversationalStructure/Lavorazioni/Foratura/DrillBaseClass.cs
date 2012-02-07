@@ -124,8 +124,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
         public bool ForaturaCentraleTornio { get; private set; }
 
-        protected DrillBaseClass(Guid faseDiLavoroParent, bool foraturaCentraleTornio)
-            : base(faseDiLavoroParent)
+        protected DrillBaseClass(bool foraturaCentraleTornio)
         {
             ForaturaCentraleTornio = foraturaCentraleTornio;
 

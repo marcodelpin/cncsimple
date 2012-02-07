@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
+using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.ToolMachine;
 using CncConvProg.ViewModel.CommonViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
@@ -38,7 +40,53 @@ namespace CncConvProg.ViewModel.Dialog
 
             CutViewerStockViewModel = new CutViewerStockViewModel(_fase.Stock);
 
+            var ms = PathFolderHelper.GetToolMachines();
+
+            /* Carico lista macchine */
+            switch (_fase.TipoFase)
+            {
+                case FaseDiLavoro.TipoFaseLavoro.Centro:
+                    MachineList = new ObservableCollection<ToolMachine>(ms.OfType<VerticalMill>());
+                    break;
+                case FaseDiLavoro.TipoFaseLavoro.Tornio3Assi:
+                    MachineList = new ObservableCollection<ToolMachine>(ms.OfType<LatheAxisC>());
+                    break;
+                case FaseDiLavoro.TipoFaseLavoro.Tornio2Assi:
+                    MachineList = new ObservableCollection<ToolMachine>(ms.OfType<HorizontalLathe2Axis>());
+                    break;
+            }
+
         }
+
+        public ToolMachine MacchinaSelezionata
+        {
+            get
+            {
+                return MachineList.Where(m => m.MachineGuid == _fase.MachineGuid).FirstOrDefault();
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _fase.MachineGuid = value.MachineGuid;
+                }
+            }
+        }
+
+        private ObservableCollection<ToolMachine> _machineList;
+        public ObservableCollection<ToolMachine> MachineList
+        {
+            get
+            {
+                return _machineList;
+            }
+            set
+            {
+                _machineList = value;
+                OnPropertyChanged("MachineList");
+            }
+        }
+
 
 
         public string DescrizioneFase { get; set; }
@@ -76,11 +124,6 @@ namespace CncConvProg.ViewModel.Dialog
                 OnPropertyChanged("NumeroProgramma");
             }
         }
-
-
-        public ToolMachine Machine { get; set; }
-
-        public List<ToolMachine> MachineList { get; set; }
 
         /*
          * Per ora metto le origini nella classe base per la fase , poi dovrei metterle solamente 

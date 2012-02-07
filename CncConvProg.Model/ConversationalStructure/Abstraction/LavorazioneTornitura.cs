@@ -25,8 +25,47 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
     [Serializable]
     public abstract class LavorazioneTornitura : Lavorazione
     {
-        protected LavorazioneTornitura(Guid faseLavorGuid) : base(faseLavorGuid)
+        public override FaseDiLavoro.TipoFaseLavoro[] FasiCompatibili
         {
+            get
+            {
+                return new[]
+                           {
+                               FaseDiLavoro.TipoFaseLavoro.Tornio3Assi,
+                               FaseDiLavoro.TipoFaseLavoro.Tornio2Assi
+                           };
+            }
         }
+
+        //internal override ProgramPhase GetOperationProgram(Operazione operazione)
+        //{
+        //    /*
+        //     * - init program
+        //     * - toolChange ( poi in fase di calcolo programma vedo se saltarlo o meno )
+        //     * - settaggio feed. ( vedere meglio)
+        //     * 
+        //     * -- calcolo programma ( questo è l'unica parte diversa )
+        //     * 
+        //     * - rototraslazione operazioni
+        //     */
+
+        //    var preference = Singleton.Preference.GetPreference(MeasureUnit);
+
+        //    var program = new ProgramPhase();
+
+        //    ExtraCorsa = preference.TurningSecureDistance;
+
+        //    RapidSecureFeed = preference.TurningRapidSecureFeedSync;
+
+        //    var changeToolAction = new ChangeToolAction(program, operazione);
+
+        //    var rapidFeed = FaseDiLavoro.GetRapidFeed();
+
+        //    operazione.Utensile.ParametroUtensile.SetFeed(program, rapidFeed, RapidSecureFeed, FeedType.Sync);
+
+        //    CreateSpecificProgram(program, operazione);
+
+        //    return program;
+        //}
     }
 }

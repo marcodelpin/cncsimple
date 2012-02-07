@@ -10,11 +10,6 @@
         <ParametriDataTemplate:ParametroPuntaDataTemplate />
     </DataTemplate>
 
-    <!--<DataTemplate DataType="{x:Type ParameterViewModels:ParametroFresaFilettareViewModel}">
-        <ParametriDataTemplate:ParametroFresaFilettareDataTemplate />
-    </DataTemplate>-->
-
-
     <DataTemplate DataType="{x:Type ParameterViewModels:ParametroFresaCandelaViewModel}">
         <ParametriDataTemplate:ParametroFresaCandelaDataTemplate />
     </DataTemplate>
@@ -23,9 +18,34 @@
         <ParametriDataTemplate:ParametroFresaSpianareDataTemplate />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type ParameterViewModels:ParametroUtensileTornituraViewModel}">
+        <ParametriDataTemplate:ParametroUtensileTornituraDataTemplate />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ParameterViewModels:ParametroUtensileTornituraFilettaturaViewModel}">
+        <ParametriDataTemplate:ParametroUtensileTornituraFilettaturaDataTemplate />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ParameterViewModels:ParametroUtensileTornituraScanalaturaViewModel}">
+        <ParametriDataTemplate:ParametroScanalatoreDataTemplate />
+    </DataTemplate>
+
+
 
     <!-- Utensili -->
 
+    <DataTemplate DataType="{x:Type ToolViewModels:UtensileTornituraScanalaturaViewModel}">
+        <ToolDataTemplate:UtensileTornituraScanalaturaDataTemplate />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ToolViewModels:UtensileTornituraViewModel}">
+        <ToolDataTemplate:UtensileTornituraDataTemplate />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ToolViewModels:UtensileFilettaturaViewModel}">
+        <ToolDataTemplate:UtensileTornituraDataTemplate />
+    </DataTemplate>
+    
     <DataTemplate DataType="{x:Type ToolViewModels:PuntaViewModel}">
         <ToolDataTemplate:DrillToolDataTemplate />
     </DataTemplate>

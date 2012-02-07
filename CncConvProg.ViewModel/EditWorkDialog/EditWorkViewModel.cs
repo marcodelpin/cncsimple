@@ -501,34 +501,5 @@ namespace CncConvProg.ViewModel.EditWorkDialog
 
         #endregion
 
-
-        #region Save Work Parameter
-
-        RelayCommand _saveWorkDefaultParameterCmd;
-
-        private void SaveWorkDefaultParameter()
-        {
-            var ddm = DefaultDataManager.Load();
-
-            if (ddm == null) return;
-
-            var measureUnit = Singleton.Instance.MeasureUnit;
-
-            ddm.AddLavorazione(measureUnit, Lavorazione);
-
-            ddm.Save();
-        }
-
-        public ICommand SaveWorkDefaultParameterCmd
-        {
-            get
-            {
-                return _saveWorkDefaultParameterCmd ?? (_saveWorkDefaultParameterCmd = new RelayCommand(param => SaveWorkDefaultParameter(),
-                                                                      param => true));
-            }
-        }
-
-        #endregion
-
     }
 }

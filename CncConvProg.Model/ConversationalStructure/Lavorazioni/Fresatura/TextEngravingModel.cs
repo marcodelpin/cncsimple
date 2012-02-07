@@ -28,26 +28,9 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
     [Serializable]
     public sealed class TextEngravingModel : LavorazioneFresatura, IMillLeveable
     {
-        public TextEngravingModel(Guid parent)
-            : base(parent)
+        public TextEngravingModel()
         {
-            //if (parent.Model.MeasureUnit == MeasureUnit.Millimeter)
-            //{
-            //    ProfonditaLavorazione = .1;
-            //    SicurezzaZ = 30;
-            //    RadiusCircle = 30;
-            //    FontHeight = 10;
-
-            //}
-            //else
-            //{
-            //    ProfonditaLavorazione = .005;
-            //    SicurezzaZ = 1;
-            //    RadiusCircle = 1.2;
-
-            //    FontHeight = 0.4;
-            //}
-
+         
             AngleStart = -180;
 
             AngleWidth = 180;
