@@ -114,7 +114,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
             get { return MecPrev.Resources.GuiRes.TurnThread; }
         }
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             var diaExt = MaschiaturaSelezionata.DiametroMetrico;
             var passo = MaschiaturaSelezionata.Passo;
@@ -170,7 +170,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             foreach (var variable in moveCollection)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
 

@@ -8,6 +8,7 @@ using CncConvProg.Geometry.PreviewPathEntity;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Common;
 using CncConvProg.Model.PathGenerator;
+using CncConvProg.Model.PreviewEntity;
 using CncConvProg.Model.PreviewPathEntity;
 using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Parametro;
@@ -56,7 +57,7 @@ namespace CncConvProg.Model.ConversationalStructure
 
         public bool ProgramNeedUpdate { get; set; }
 
-        protected ProgramPhase ProgramPhase { get; set; }
+        protected ProgramOperation ProgramPhase { get; set; }
 
         protected List<IPreviewEntity> PathPreview { get; set; }
 
@@ -75,7 +76,7 @@ namespace CncConvProg.Model.ConversationalStructure
         /// Questo è il metodo che restituisce il Program in formato universale.
         /// </summary>
         /// <returns></returns>
-        public ProgramPhase GetProgramPhase(ToolMachine.ToolMachine toolMachine, bool forceUpdate = false)
+        public ProgramOperation GetProgramPhase(ToolMachine.ToolMachine toolMachine, bool forceUpdate = false)
         {
             if (ProgramNeedUpdate || forceUpdate)
             {

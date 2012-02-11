@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media.Media3D;
 using CncConvProg.Geometry.Entity;
@@ -14,15 +12,14 @@ namespace CncConvProg.Model.PathGenerator
 {
     /// <summary>
     /// Classe base per azione programma.
-    /// da questa derivera ogni cosa 
-    /// cambioUtensile : ProgramActrion
+    /// Da questa classe derivano tutte le altre azioni ( spostamento utensile, macro foratura, richiamo utensile )
     /// </summary>
     [Serializable]
-    public class ProgramAction
+    public abstract class ProgramAction
     {
         public ParametroVelocita ParametroVelocita { get; set; }
 
-        public ProgramAction(ProgramPhase programPhase)
+        protected ProgramAction(ProgramOperation programPhase)
         {
             if (programPhase != null)
                 programPhase.AddAction(this);
@@ -36,88 +33,89 @@ namespace CncConvProg.Model.PathGenerator
          */
     }
 
+    public enum VelocitaType
+    {
+        Sync,
+        ASync
+    }
+
+    /// <summary>
+    /// Contiene i dati riguardanti avanzamento e velocità
+    /// </summary>
     [Serializable]
-    public class ChangeToolAction : ProgramAction
+    public class ParametroVelocita
+    {
+        // 0 giri fissi 1 giri variabili
+        public VelocitaType ModoVelocita { get; set; }
+
+        // 0 mm/min 1 mm/giro
+        public VelocitaType ModoAvanzamento { get; set; }
+
+        public double ValoreVelocita { get; set; }
+
+        public double ValoreFeed { get; set; }
+    }
+
+    /// <summary>
+    /// Classe Specializzata per il cambio utensile
+    /// 
+    /// </summary>
+    [Serializable]
+    public class CambiaUtensileAction : ProgramAction
     {
 
         #region Ctor
-        //public ChangeToolAction(OperazioneFresaCandela operazioneFresaCandela)
-        //{
-        //    SpindleRotation = operazioneFresaCandela.SpindleRotation;
-        //    IsRotaryTool = operazioneFresaCandela.IsRotaryTool;
-        //    ToolLabel = operazioneFresaCandela.GetToolName();
-        //    LatheToolCorrector = operazioneFresaCandela.GetLatheToolCorrector();
-        //    NumberTool = operazioneFresaCandela.GetToolNumber();
-        //    ModalitaVelocita = operazioneFresaCandela.GetSpeedType();
-        //    Speed = operazioneFresaCandela.GetNumeroGiri();
-
-        //}
 
         public bool CambioUtensile { get; set; }
-        public ChangeToolAction(ProgramPhase parent, Operazione operazione)
+
+        public CambiaUtensileAction(ProgramOperation parent, Operazione operazione)
             : base(parent)
         {
             // todo:  gestire meglio secure z
-            SecureZ = parent.SecureZ;
+            SicurezzaZ = parent.SecureZ;
 
-            ToolLabel = operazione.GetToolDescriptionName();
-            IsRotaryTool = operazione.IsRotaryTool;
-            NumberTool = operazione.GetToolPosition();
-            Speed = operazione.GetSpeed();
-            Coolant = operazione.GetCoolant();
+            EtichettaUtensile = operazione.GetToolDescriptionName();
+            IsUtensileRotante = operazione.IsRotaryTool;
+            NumeroUtensile = operazione.GetToolPosition();
+            Velocità = operazione.GetSpeed();
+            Refrigerante = operazione.GetCoolant();
             /*
              * prendo sia numero postazioni che correttori centro di lavoro.
              */
-            LatheToolCorrector = operazione.GetLatheToolCorrector();
-            MillHeightCorrector = operazione.GetToolHeightCorrector();
+            CorrettoreUtensileTornio = operazione.GetLatheToolCorrector();
+            CorrettoreUtensileAltezzaCentro = operazione.GetToolHeightCorrector();
             ModalitaVelocita = operazione.GetSpeedType();
-            SpindleRotation = operazione.SpindleRotation;
+            RotazioneMandrino = operazione.SpindleRotation;
         }
-
-        //public ChangeToolAction(OperazioneMaschiatura operazione)
-        //{
-        //    ToolLabel = operazione.GetToolName();
-        //    IsRotaryTool = operazione.IsRotaryTool;
-        //    NumberTool = operazione.GetToolNumber();
-        //    Speed = operazione.GetSpeed();
-        //    LatheToolCorrector = operazione.GetLatheToolCorrector();
-        //    ModalitaVelocita = operazione.GetSpeedType();
-        //    SpindleRotation = operazione.SpindleRotation;
-        //}
-
-        //public ChangeToolAction(OperazioneUtensileTornitura operazione)
-        //{
-        //    // TODO: Complete member initialization
-        //    this.operazione = operazione;
-        //}
 
         #endregion
 
-        public bool Coolant { get; set; }
+        public bool Refrigerante { get; set; }
 
-        public int NumberTool { get; set; }
+        public int NumeroUtensile { get; set; }
 
-        public double Speed { get; set; }
+        public double Velocità { get; set; }
 
-        public int LatheToolCorrector { get; set; }
+        public int CorrettoreUtensileTornio { get; set; }
 
-        public string MillHeightCorrector { get; set; }
+        public string CorrettoreUtensileAltezzaCentro { get; set; }
 
-
-        public string ToolLabel { get; set; }
+        public string EtichettaUtensile { get; set; }
 
         public ModalitaVelocita ModalitaVelocita { get; set; }
 
-        public SpindleRotation SpindleRotation { get; set; }
+        public SpindleRotation RotazioneMandrino { get; set; }
 
-        public bool IsRotaryTool { get; set; }
+        public bool IsUtensileRotante { get; set; }
 
-        public double SecureZ { get; set; }
-
+        public double SicurezzaZ { get; set; }
 
         public string CutViewerToolInfo { get; set; }
     }
 
+    /// <summary>
+    /// Questa classe contiene dati per movimenti lineari
+    /// </summary>
     [Serializable]
     public class LinearMoveAction : ProgramAction
     {
@@ -174,6 +172,9 @@ namespace CncConvProg.Model.PathGenerator
         }
     }
 
+    /// <summary>
+    /// Questa classe contiene dati per interpolazioni circolari
+    /// </summary>
     [Serializable]
     public class ArcMoveAction : LinearMoveAction
     {
@@ -220,10 +221,13 @@ namespace CncConvProg.Model.PathGenerator
 
     }
 
+    /// <summary>
+    /// Macro per tornitura 
+    /// </summary>
     [Serializable]
     public class MacroLongitudinalTurningAction : ProgramAction
     {
-        public MacroLongitudinalTurningAction(ProgramPhase programPhase)
+        public MacroLongitudinalTurningAction(ProgramOperation programPhase)
             : base(programPhase)
         {
 
@@ -240,17 +244,12 @@ namespace CncConvProg.Model.PathGenerator
     }
 
     /// <summary>
-    /// Magari fare classe base per tutte le macro di foratura..
-    /// comue punti
-    /// inizio
-    /// fine
-    /// sicurezza
-    /// profondita.
+    /// Azione che si occupa di contenere tutti i dati riguardo la macro di foratura da eseguire
     /// </summary>
     [Serializable]
-    public class MacroDrillingAction : ProgramAction
+    public class MacroForaturaAzione : ProgramAction
     {
-        public MacroDrillingAction(ProgramPhase phase)
+        public MacroForaturaAzione(ProgramOperation phase)
             : base(phase)
         {
             MoveActionCollection = new MoveActionCollection();
@@ -258,43 +257,53 @@ namespace CncConvProg.Model.PathGenerator
 
         public MoveActionCollection MoveActionCollection { get; set; }
 
+        /// <summary>
+        /// Memorizza il tipo di lavorazione.
+        /// es . Foratura Semplice , Maschiatura, Barenatura..
+        /// </summary>
         public LavorazioniEnumOperazioni TipologiaLavorazione { get; set; }
 
-        public IEnumerable<Point2D> DrillPoints { get; set; }
+        /// <summary>
+        /// Contiene tutti i punti di dove verrà eseguita la lavorazione
+        /// </summary>
+        public IEnumerable<Point2D> PuntiForatura { get; set; }
 
+        /// <summary>
+        /// Contiene modalità di foratura.
+        /// Semplice, Scarico Truciolo.
+        /// </summary>
         public ModalitaForatura ModalitaForatura { get; set; }
 
-        public double PuntoR { get; set; }
+        /// <summary>
+        /// Punto Ritorno
+        /// </summary>
+        public double PuntoRitorno { get; set; }
 
+        /// <summary>
+        /// Step
+        /// </summary>
         public double Step { get; set; }
 
-        public double SecureZ { get; set; }
+        /// <summary>
+        /// Z di Sicurezza
+        /// </summary>
+        public double SicurezzaZ { get; set; }
 
+        /// <summary>
+        /// Punto iniziale lavorazione
+        /// </summary>
         public double StartZ { get; set; }
 
+        /// <summary>
+        /// Profondità in Z della lavorazione da eseguire
+        /// </summary>
         public double EndZ { get; set; }
 
-        public double Dweel { get; set; }
+        /// <summary>
+        /// Sosta
+        /// </summary>
+        public double Sosta { get; set; }
 
         public int MacroFeed { get; set; }
     }
-
-    //[Serializable]
-    //public class MacroThreadingAction : ProgramAction
-    //{
-    //    public MacroThreadingAction(ProgramPhase phase)
-    //        : base(phase)
-    //    {
-
-    //    }
-    //    public List<Point2D> DrillPoints { get; set; }
-
-    //    public double SecureZ { get; set; }
-
-    //    public double StartZ { get; set; }
-
-    //    public double EndZ { get; set; }
-
-    //    public double Dweel { get; set; }
-    //}
 }

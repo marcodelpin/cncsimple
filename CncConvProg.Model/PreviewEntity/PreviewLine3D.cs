@@ -1,8 +1,8 @@
 ﻿using System;
 using CncConvProg.Geometry.Entity;
-using CncConvProg.Geometry.PreviewPathEntity;
+using CncConvProg.Model.PathGenerator;
 
-namespace CncConvProg.Model.PreviewPathEntity
+namespace CncConvProg.Model.PreviewEntity
 {
     [Serializable]
 

@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel;
 
 namespace CncConvProg.View.Controls
 {
@@ -44,48 +45,103 @@ namespace CncConvProg.View.Controls
 
         void RawLineInputView_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.X)
+            var registredKey = e.Key;
+
+            var d = DataContext as RawItemViewModel;
+
+            if (d != null)
+            {
+                var keys = d.KeyboardDictionary;
+
+                var finded = keys.TryGetValue(e.Key, out registredKey);
+
+                if (!finded)
+                    registredKey = e.Key;
+            }
+
+            if (registredKey == Key.X)
             {
                 xTb.Focus();
                 e.Handled = true;
             }
 
-            else if (e.Key == Key.Y)
+
+            else if (registredKey == Key.X)
+            {
+                xTb.Focus();
+                e.Handled = true;
+            }
+
+            else if (registredKey == Key.Y)
             {
                 yTb.Focus();
                 e.Handled = true;
             }
 
-            else if (e.Key == Key.U)
+            else if (registredKey == Key.U)
             {
                 uTb.Focus();
                 e.Handled = true;
             }
 
-            else if (e.Key == Key.V)
+            else if (registredKey == Key.V)
             {
                 vTb.Focus();
                 e.Handled = true;
 
             }
-            else if (e.Key == Key.R)
+            else if (registredKey == Key.R)
             {
                 rTb.Focus();
                 e.Handled = true;
             }
 
-            else if (e.Key == Key.C)
+            else if (registredKey == Key.C)
             {
                 cTb.Focus();
                 e.Handled = true;
 
             }
-            else if (e.Key == Key.A)
+            else if (registredKey == Key.A)
             {
                 aTb.Focus();
                 e.Handled = true;
-
             }
         }
+
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            var i = sender as Image;
+
+            if (i == null) return;
+
+            var d = DataContext as RawItemViewModel;
+
+
+
+            if (d == null) return;
+
+
+            var imageSource = d.GetImageUri(i.Tag);
+
+
+
+            if (string.IsNullOrWhiteSpace(imageSource)) return;
+
+
+
+            var uriSource = new Uri(imageSource, UriKind.RelativeOrAbsolute);
+
+            i.Source = new BitmapImage(uriSource);
+
+        }
+
+        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }

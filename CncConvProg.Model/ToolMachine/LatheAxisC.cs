@@ -28,7 +28,7 @@ namespace CncConvProg.Model.ToolMachine
         {
             CurrentWorkPlane = WorkPlane.XZ;
 
-            NumericControl = new MachineControl.NumericControl();
+           // NumericControl = new MachineControl.NumericControl();
         }
 
 
@@ -53,10 +53,10 @@ namespace CncConvProg.Model.ToolMachine
         }
 
 
-        protected override void CreateCodeFromAction(ChangeToolAction programAction, ref StringBuilder code)
+        protected override void CreateCodeFromAction(CambiaUtensileAction programAction, ref StringBuilder code)
         {
             // se è utensile rotante creo codice abilitando i parametri per attivazione asse c
-            if (programAction.IsRotaryTool)
+            if (programAction.IsUtensileRotante)
             {
                 // fermo mandrino
                 code.AppendLine("M5");
@@ -74,23 +74,23 @@ namespace CncConvProg.Model.ToolMachine
                 code.AppendLine("G0G28H0");
 
                 // Etichetta Utensile
-                var toolLabel = programAction.ToolLabel;
+                var toolLabel = programAction.EtichettaUtensile;
 
                 code.AppendLine(FormatComment(toolLabel));
 
 
                 // Numero e correttore
-                var toolNumber = programAction.NumberTool;
+                var toolNumber = programAction.NumeroUtensile;
 
-                var latheToolCorrector = programAction.LatheToolCorrector;
+                var latheToolCorrector = programAction.CorrettoreUtensileTornio;
 
                 code.AppendLine("G0" + NumericControl.CharToolCode +
                                 toolNumber.ToString("00") +
                                 latheToolCorrector.ToString("00"));
 
                 // Parametri
-                var speed = programAction.Speed;
-                var spindleRotation = programAction.SpindleRotation;
+                var speed = programAction.Velocità;
+                var spindleRotation = programAction.RotazioneMandrino;
 
                 // Attivo Parametri 
                 code.Append("G97" + "S" + FormatSpeed(speed) + "M13");
@@ -105,7 +105,7 @@ namespace CncConvProg.Model.ToolMachine
                     G97S200M13
                  */
 
-                Avvicinamento(ref code, programAction.SecureZ);
+                Avvicinamento(ref code, programAction.SicurezzaZ);
 
             }
             else
@@ -351,7 +351,7 @@ namespace CncConvProg.Model.ToolMachine
         }
 
 
-        protected override void CreateCodeFromAction(MacroDrillingAction macro, ref StringBuilder code)
+        protected override void CreateCodeFromAction(MacroForaturaAzione macro, ref StringBuilder code)
         {
             //if (drillingAction.DrillPoints == null)
             //    throw new NullReferenceException();
@@ -393,7 +393,7 @@ namespace CncConvProg.Model.ToolMachine
             code.AppendLine(macroCode + "P" + dwell);
         }
 
-        internal List<IEntity2D> CreatePreview(MacroDrillingAction drillingAction)
+        internal List<IEntity2D> CreatePreview(MacroForaturaAzione foraturaAzione)
         {
             //var rslt = new List<IEntity2D>();
 

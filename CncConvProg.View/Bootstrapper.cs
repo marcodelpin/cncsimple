@@ -33,7 +33,7 @@ namespace CncConvProg.View
             //SimpleServiceLocator.Instance.Register<IModalWindow, MaterialsDialogView>(Constants.MaterialiModalDialog);
             SimpleServiceLocator.Instance.Register<IModalWindow, ToolsDialogView>(Constants.UtensiliModalDialog);
             SimpleServiceLocator.Instance.Register<IModalWindow, EditPhaseDetailView>(Constants.PhaseDetailEditModalDialog);
-            SimpleServiceLocator.Instance.Register<IModalWindow, ProgramPreferenceView>(Constants.PreferenceModalDialog);
+            SimpleServiceLocator.Instance.Register<IModalWindow, SelectionUnitView>(Constants.PreferenceModalDialog);
 
 
 

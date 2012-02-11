@@ -9,6 +9,7 @@ using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.ThreadTable;
 using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
+using CncConvProg.Model.Tool.LatheTool;
 using CncConvProg.Model.Tool.Mill;
 using CncConvProg.ViewModel.CommonViewModel.ToolViewModels;
 using CncConvProg.ViewModel.EditWorkDialog.TreeViewViewModel;
@@ -117,17 +118,21 @@ namespace CncConvProg.ViewModel.Dialog
 
         readonly Dictionary<Type, string> _toolDictName = new Dictionary<Type, string> 
                                    {
-                                       {typeof (Punta), "Drill"},
-                                       {typeof (Svasatore), "Chamfer"},
-                                       {typeof (Alesatore), "Reamer"},
-                                       {typeof (Centrino), "Center Drill"},
-                                       {typeof (Lamatore), "Counterbore"},
-                                       {typeof (Bareno), "Bore"},
-                                       {typeof (Maschio), "Tap"},
+                                       {typeof (Punta), MecPrev.Resources.GuiRes.Drill},
+                                       {typeof (Svasatore), MecPrev.Resources.GuiRes.Chamfer},
+                                       {typeof (Alesatore), MecPrev.Resources.GuiRes.Reamer},
+                                       {typeof (Centrino), MecPrev.Resources.GuiRes.CenterDrill},
+                                       {typeof (Lamatore), MecPrev.Resources.GuiRes.Counterbore},
+                                       {typeof (Bareno), MecPrev.Resources.GuiRes.Bore},
+                                       {typeof (Maschio), MecPrev.Resources.GuiRes.Tap},
 
-                                       {typeof (FresaCandela), "Mill"},
-                                       {typeof (FresaSpianare), "Face Mill"},
-                                       {typeof (FresaFilettare), "Thread Mill"},
+                                       {typeof (FresaCandela), MecPrev.Resources.GuiRes.Mill},
+                                       {typeof (FresaSpianare), MecPrev.Resources.GuiRes.FaceMill},
+                                       {typeof (FresaFilettare), MecPrev.Resources.GuiRes.ThreadMill},
+
+                                       {typeof (UtensileTornitura), MecPrev.Resources.GuiRes.TurnTool},
+                                       {typeof (UtensileScanalatura), MecPrev.Resources.GuiRes.TurnGroove},
+                                       {typeof (UtensileFilettare), MecPrev.Resources.GuiRes.TurnThread},
                                        
                                    };
 

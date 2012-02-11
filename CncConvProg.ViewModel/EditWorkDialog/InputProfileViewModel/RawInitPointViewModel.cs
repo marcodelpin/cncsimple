@@ -17,8 +17,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
         /*
          * la gestione del axisLabel può essere raggruppata in classe abstract
          */
-        public RawInitPointViewModel(RawInitPoint2D rawPoint2D, ProfileEditorViewModel.AxisSystem axisSystem)
-            : base(rawPoint2D, axisSystem)
+           public RawInitPointViewModel(RawInitPoint2D rawPoint2D, ProfileEditorViewModel.AxisSystem axisSystem, ProfileEditorViewModel parent)
+            : base(rawPoint2D, axisSystem, parent)
         {
             _rawPoint2D = rawPoint2D;
 

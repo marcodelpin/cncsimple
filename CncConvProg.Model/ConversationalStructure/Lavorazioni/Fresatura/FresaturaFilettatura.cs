@@ -112,7 +112,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
         public Operazione ForaturaApertura { get; set; }
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             /*
              * utensile e parametro lo prendo all'interno del cambio switch..
@@ -192,7 +192,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
             foreach (var variable in mm)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
 

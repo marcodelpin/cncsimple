@@ -83,19 +83,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
                 end.EndRadius.SetValue(true, Chamfer);
             }
 
-            //var profile2D = new Profile2D();
-
-            //// devo mettere metodo , finalize o cose cosi nell'inserimento profilo
-            //foreach (var point2D in pntList)
-            //{
-            //    if(point2D == pntList.FirstOrDefault())
-            //    profile2D.AddPnt(point2D);
-            //}
-
-            //profile2D.AddPnt(pntList.FirstOrDefault());
-
-            //profile2D.SetPlotStyle();
-
             var rslt = p.GetProfileResult(true);
             rslt.SetPlotStyle();
 

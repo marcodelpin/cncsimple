@@ -134,7 +134,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
         }
 
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             var diametrable = operazione.Utensile as IDiametrable;
 
@@ -197,7 +197,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
             foreach (var variable in mm)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
 
         }

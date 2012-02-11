@@ -173,7 +173,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
             return SquareShapeHelper.GetCenterPoint(StartPoint, PuntoStartX, PuntoStartY, Larghezza, Altezza);
         }
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             var parametro = operazione.GetParametro<ParametroFresaSpianare>();
 
@@ -270,7 +270,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
             foreach (var variable in mm)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
         //internal override ProgramPhase GetOperationProgram(Operazione operazione)

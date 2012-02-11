@@ -44,7 +44,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
             }
         }
 
-        private readonly AxisSystem _axisSystem;
+        public readonly AxisSystem CurrentAxisSystem;
 
         private readonly RawProfile _rawProfile;
 
@@ -54,7 +54,9 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
 
             _rawProfile = profile;
 
-            _axisSystem = axisSystem;
+            CurrentAxisSystem = axisSystem;
+
+            DictionaryKey = CreateKeyboardShortcuts(CurrentAxisSystem);
 
             MoveListViewModels = new ObservableCollection<RawItemViewModel>();
 
@@ -74,18 +76,18 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
             UpdateMoveListOrientation();
 
         }
+
         public ProfileEditorViewModel(RawProfile profile, EditWorkViewModel workViewModel, AxisSystem axisSystem)
             : base("Input Profile", workViewModel)
         {
 
-          //  EditWorkParent = workViewModel;
-
             _rawProfile = profile;
 
-            _axisSystem = axisSystem;
+            CurrentAxisSystem = axisSystem;
 
             MoveListViewModels = new ObservableCollection<RawItemViewModel>();
 
+            DictionaryKey = CreateKeyboardShortcuts(CurrentAxisSystem);
             var moveList = profile.GetMoveList();
 
             foreach (var rawEntity2D in moveList)
@@ -102,6 +104,62 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
             UpdateMoveListOrientation();
 
         }
+
+        public Dictionary<Key, Key> DictionaryKey;
+
+        private static Dictionary<Key, Key> CreateKeyboardShortcuts(AxisSystem axisSystem)
+        {
+
+            switch (axisSystem)
+            {
+
+                case AxisSystem.Xz:
+                    {
+
+                        var d = new Dictionary<Key, Key>();
+
+
+
+                        /*
+
+                         * sistema diametro - z 
+
+                         */
+
+
+
+                        d.Add(Key.Z, Key.X);
+
+                        d.Add(Key.X, Key.Y);
+
+                        d.Add(Key.U, Key.V);
+
+                        d.Add(Key.W, Key.U);
+
+
+
+                        return d;
+
+
+
+                    } break;
+
+                default:
+
+                case AxisSystem.Xy:
+                    {
+
+                        return new Dictionary<Key, Key>();
+
+                    }
+
+
+
+            }
+
+        }
+
+
 
 
         ///// <summary>
@@ -195,21 +253,21 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
             // todo , creare rispettivi viewModel
             if (entity2D is RawInitPoint2D)
             {
-                var vm = new RawInitPointViewModel(entity2D as RawInitPoint2D, _axisSystem);
+                var vm = new RawInitPointViewModel(entity2D as RawInitPoint2D, CurrentAxisSystem, this);
                 vm.OnSourceUpdated += VmOnSourceUpdated;
                 return vm;
             }
 
             if (entity2D is RawLine2D)
             {
-                var vm = new RawLineViewModel(entity2D as RawLine2D, _axisSystem);
+                var vm = new RawLineViewModel(entity2D as RawLine2D, CurrentAxisSystem, this);
                 vm.OnSourceUpdated += VmOnSourceUpdated;
                 return vm;
             }
 
             if (entity2D is RawArc2D)
             {
-                var vm = new RawArcViewModel(entity2D as RawArc2D, _axisSystem);
+                var vm = new RawArcViewModel(entity2D as RawArc2D, CurrentAxisSystem, this);
                 vm.OnSourceUpdated += VmOnSourceUpdated;
                 return vm;
             }

@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Framework.Abstractions.Wpf.Intefaces;
 
-namespace CncConvProg.View
+namespace CncConvProg.View.Dialog
 {
     /// <summary>
     /// Interaction logic for EditWorkView.xaml
     /// </summary>
-    public partial class ProgramPreferenceView : Window , IModalWindow
+    public partial class SelectionUnitView : Window , IModalWindow
     {
-        public ProgramPreferenceView()
+        public SelectionUnitView()
         {
             InitializeComponent();
 

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CncConvProg.Model.PreviewPathEntity;
+using CncConvProg.Model.PathGenerator;
 
-namespace CncConvProg.Geometry.PreviewPathEntity
+namespace CncConvProg.Model.PreviewEntity
 {
     /// <summary>
     /// Quando nel programma c'è un elemento che non si può vedere nell'anteprima ma prende tempo.
@@ -13,7 +10,10 @@ namespace CncConvProg.Geometry.PreviewPathEntity
     [Serializable]
     public class InvisibleEntity : IPreviewEntity
     {
-        public double SecondsStop { get; set; }
+        /// <summary>
+        /// Secondi
+        /// </summary>
+        public double TimeStop { get; set; }
 
         public ParametroVelocita ParametroVelocita
         {
@@ -33,7 +33,7 @@ namespace CncConvProg.Geometry.PreviewPathEntity
 
         public TimeSpan GetTimeSpan()
         {
-            return TimeSpan.FromSeconds(SecondsStop);
+            return TimeSpan.FromSeconds(TimeStop);
         }
     }
 }

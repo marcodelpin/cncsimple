@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using CncConvProg.Geometry.RawProfile2D;
 using CncConvProg.ViewModel.AuxViewModel;
 using CncConvProg.ViewModel.MVVM_Library;
@@ -10,19 +11,43 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
 {
     public abstract class RawItemViewModel : ViewModelBase
     {
-        public static RawItemViewModel GetViewModel(RawEntity2D rawEntity2D, ProfileEditorViewModel.AxisSystem axisSystem)
+
+        public Dictionary<Key, Key> KeyboardDictionary
         {
-            if (rawEntity2D is RawInitPoint2D)
-                return new RawInitPointViewModel(rawEntity2D as RawInitPoint2D, axisSystem);
-
-            if (rawEntity2D is RawLine2D)
-                return new RawLineViewModel(rawEntity2D as RawLine2D, axisSystem);
-
-            if (rawEntity2D is RawArc2D)
-                return new RawArcViewModel(rawEntity2D as RawArc2D, axisSystem);
-
-            throw new NotImplementedException("RawItemViewModel.GetViewModel");
+            get { return Parent.DictionaryKey; }
         }
+
+        public readonly ProfileEditorViewModel Parent;
+
+        protected RawItemViewModel(RawEntity2D rawEntity2D, ProfileEditorViewModel.AxisSystem axisSystem, ProfileEditorViewModel parent)
+        {
+            RawEntity = rawEntity2D;
+
+            switch (axisSystem)
+            {
+                case ProfileEditorViewModel.AxisSystem.Xy:
+                    {
+                        XLabel = "X";
+                        YLabel = "Y";
+                        DeltaXLabel = "Incre. X";
+                        DeltaYLabel = "Incre. Y";
+                        CenterXLabel = "Center X";
+                        CenterYLabel = "Center Y";
+                    } break;
+
+                case ProfileEditorViewModel.AxisSystem.Xz:
+                    {
+                        XLabel = "Z";
+                        YLabel = "X";
+                        DeltaXLabel = "Incre. Z";
+                        DeltaYLabel = "Incre. X";
+                        CenterXLabel = "Center X";
+                        CenterYLabel = "Center C";
+                    } break;
+            }
+            this.Parent = parent;
+        }
+
         public RawEntity2D.RawEntityOrientation Orientation
         {
             get
@@ -56,37 +81,60 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
 
         public RawEntity2D RawEntity { private set; get; }
 
-        protected RawItemViewModel(RawEntity2D rawEntity2D, ProfileEditorViewModel.AxisSystem axisSystem)
+        public string GetImageUri(object p)
         {
-            RawEntity = rawEntity2D;
 
-            switch (axisSystem)
+            var t = p.ToString();
+
+
+
+            t = t.ToLower();
+
+            switch (Parent.CurrentAxisSystem)
             {
-                case ProfileEditorViewModel.AxisSystem.Xy:
-                    {
-                        XLabel = "X";
-                        YLabel = "Y";
-                        DeltaXLabel = "Incre. X";
-                        DeltaYLabel = "Incre. Y";
-                        CenterXLabel = "Center X";
-                        CenterYLabel = "Center Y";
-                    } break;
 
                 case ProfileEditorViewModel.AxisSystem.Xz:
                     {
-                        XLabel = "Z";
-                        YLabel = "X";
-                        DeltaXLabel = "Incre. Z";
-                        DeltaYLabel = "Incre. X";
-                        CenterXLabel = "Center X";
-                        CenterYLabel = "Center C";
+
+                        switch (t)
+                        {
+                            case "x":
+                                return @"pack://application:,,,/CncConvProg.View;component/Images/gui/Z.png";
+                            case "y":
+                                return @"pack://application:,,,/CncConvProg.View;component/Images/gui/keyX.png";
+                            case "v":
+                                return @"pack://application:,,,/CncConvProg.View;component/Images/gui/keyU.png";
+                            case "u":
+                                return @"pack://application:,,,/CncConvProg.View;component/Images/gui/W.png";
+                            default:
+                                return string.Empty;
+                        }
                     } break;
+
+                //default:
+                //case ProfileEditorViewModel.AxisSystem.Xy:
+                //    switch (t)
+                //    {
+                //        case "x":
+                //            return @"pack://application:,,,/CncConvProg.View;component/Images/gui/keyX.png";
+                //        case "y":
+                //            return @"pack://application:,,,/CncConvProg.View;component/Images/gui/keyY.png";
+                //        default:
+                //            return string.Empty;
+                //    }
             }
+
+            return string.Empty;
+
         }
+
+
+
+
 
         protected List<RawInputViewModel> InputVmList = new List<RawInputViewModel>();
 
-        #region Label Change 
+        #region Label Change
         private string _xLabel;
         public string XLabel
         {
@@ -158,7 +206,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
                 OnPropertyChanged("DeltaYLabel");
             }
         }
-#endregion
+        #endregion
 
         internal void UpdateIsUserInputedAndValue()
         {

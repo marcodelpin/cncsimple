@@ -315,7 +315,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
             return rslt;
         }
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             var dia = operazione.Utensile as IDiametrable;
 
@@ -446,7 +446,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
             foreach (var variable in mm)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
         //internal override ProgramPhase GetOperationProgram(Operazione operazione)
@@ -668,7 +668,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
         /// <param name="profonditaLavorazione"></param>
         /// <param name="zSicurezza"></param>
         /// <param name="extraCorsa"></param>
-        private static void ProcessTrochoidalMillingLarge(ProgramPhase program, MoveActionCollection moveCollectionList,
+        private static void ProcessTrochoidalMillingLarge(ProgramOperation program, MoveActionCollection moveCollectionList,
                                                     double puntoInizialeX, double puntoInizialeY, double larghezzaCava, double lunghezzaCava, double rotationAngle,
                                                     double ae, double diametroFresa, double profonditaPassata, double zLavoro, double profonditaLavorazione, double zSicurezza, double extraCorsa)
         {
@@ -829,7 +829,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
         /// <param name="profonditaLavorazione"></param>
         /// <param name="zSicurezza"></param>
         /// <param name="extraCorsa"></param>
-        private static void ProcessTrochoidalMilling(ProgramPhase program, MoveActionCollection moveCollection,
+        private static void ProcessTrochoidalMilling(ProgramOperation program, MoveActionCollection moveCollection,
                                                     double puntoInizialeX, double puntoInizialeY, double larghezzaCava, double lunghezzaCava, double rotationAngle,
                                                     double step, double diametroFresa, double profonditaPassata, double zLavoro, double profonditaLavorazione, double zSicurezza, double extraCorsa)
         {
@@ -977,7 +977,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
         /// <param name="profonditaLavorazione"></param>
         /// <param name="zSicurezza"></param>
         /// <param name="angleStart"></param>
-        private static void ProcessArcTrochoidalMilling(ProgramPhase program, MoveActionCollection moveCollection,
+        private static void ProcessArcTrochoidalMilling(ProgramOperation program, MoveActionCollection moveCollection,
                                                     double puntoInizialeX, double puntoInizialeY, double larghezzaCava, double lunghezzaCava, double rotationAngle,
                                                     double step, double diametroFresa, double profonditaPassata, double zLavoro, double profonditaLavorazione, double zSicurezza, double angleStart, double angleWidth, Point2D arcCenter, double arcRadius)
         {

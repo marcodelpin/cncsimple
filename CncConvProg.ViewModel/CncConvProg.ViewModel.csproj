@@ -196,6 +196,10 @@
       <Project>{3C6F35FD-D88E-4BFC-92F7-F4C28648770E}</Project>
       <Name>Framework.Implementors.Wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MecPrev.Resources\MecPrev.Resources.csproj">
+      <Project>{E1B4B169-6A89-4870-B667-E340EB6DDA3A}</Project>
+      <Name>MecPrev.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="todosList.txt" />
