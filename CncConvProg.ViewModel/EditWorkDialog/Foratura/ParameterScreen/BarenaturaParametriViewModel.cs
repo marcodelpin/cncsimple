@@ -67,7 +67,54 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
             }
         }
 
+        public Dictionary<byte, string> MillingStrategy
+        {
+            get
+            {
+                var lookup = new Dictionary<byte, string>
+                                 {
+                                     {0, "Traditional"},
+                                     {1, "Spiral"},
 
+                                 };
+
+                return lookup;
+
+            }
+        }
+
+        public double MaterialePerFinitura
+        {
+            get { return _barenatura.MaterialePerFinitura; }
+            set
+            {
+                _barenatura.MaterialePerFinitura = value;
+                OnPropertyChanged("MaterialePerFinitura");
+            }
+        }
+
+        public bool AllargaturaConFresa
+        {
+            get { return _barenatura.AllargaturaAbilitata; }
+            set
+            {
+                _barenatura.AllargaturaAbilitata = value;
+                OnPropertyChanged("AllargaturaConFresa");
+            }
+        }
+
+        public int MillingSelectedStrategy
+        {
+            get
+            {
+                return _barenatura.ModalitaAllargatura;
+            }
+            set
+            {
+                _barenatura.ModalitaAllargatura = value;
+                OnPropertyChanged("MillingSelectedStrategy");
+            }
+        }
 
         protected override string GetValidationError(string propertyName)
         {

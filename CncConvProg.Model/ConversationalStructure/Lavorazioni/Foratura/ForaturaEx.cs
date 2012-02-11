@@ -324,7 +324,10 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
         public bool BarenoAbilitato { get { return BarenaturaOp.Abilitata; } set { BarenaturaOp.Abilitata = value; } }
 
         public bool AllargaturaAbilitata { get; set; }
+
         public int ModalitaAllargatura { get; set; }
+
+        public double MaterialePerFinitura { get; set; }
     }
 
 

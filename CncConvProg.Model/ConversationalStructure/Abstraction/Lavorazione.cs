@@ -37,11 +37,6 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
          * di centro  ,con grezzo non rotante, quindi per ora posso implementarlo nella classe base Lavorazione.
          * 
          * in pratica ho una matrice dove memorizzo sia la rotazione che array.
-         * 
-         * Come faccio ad applicarlo in modo non invasivo??
-         * 
-         * per ora mi preoccupo solo della parte preview..
-         * 
          */
 
         /// <summary>

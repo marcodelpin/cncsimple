@@ -29,11 +29,11 @@
 
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.centerDrillDepth}" MinWidth="100" />
-                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=CenterDrillDepth, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.chamferDepth}" MinWidth="100" />
-                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ChamferDepth, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -69,7 +69,7 @@ namespace CncConvProg.ViewModel.MainViewModel
                 {
                     // Creo nuovo e apro finestra dialogo preferenze
                     preference = new ProgramPreference();
-                    OpenDialog(DialogEnum.ProgramPreference);
+                    OpenDialog(DialogEnum.UnitSelection);
                 }
 
                 //_model = new Singleton(_preference.MeasureUnit);
@@ -189,7 +189,7 @@ namespace CncConvProg.ViewModel.MainViewModel
                 {
                     // Creo nuovo e apro finestra dialogo preferenze
                     preference = new ProgramPreference();
-                    OpenDialog(DialogEnum.ProgramPreference);
+                    OpenDialog(DialogEnum.UnitSelection);
                 }
 
                 // qui la classe preference deve essere settata per forza..
@@ -262,7 +262,7 @@ namespace CncConvProg.ViewModel.MainViewModel
 
                     } break;
 
-                case DialogEnum.ProgramPreference:
+                case DialogEnum.UnitSelection:
                     {
                         var preference = PathFolderHelper.GetPreferenceData();
 
@@ -274,7 +274,7 @@ namespace CncConvProg.ViewModel.MainViewModel
 
                         viewModelBase = new ProgramPreferenceViewModel(preference);
 
-                        dialogKey = Constants.PreferenceModalDialog;
+                        dialogKey = Constants.UnitSelectionDialog;
 
                     } break;
 
@@ -283,6 +283,14 @@ namespace CncConvProg.ViewModel.MainViewModel
                         viewModelBase = new ArticleDetailViewModel();
 
                         dialogKey = Constants.ArticleDetailDialog;
+                    } break;
+
+
+                case DialogEnum.ProgramPreference:
+                    {
+                        //viewModelBase = new ArticleDetailViewModel();
+
+                        //dialogKey = Constants.ArticleDetailDialog;
                     } break;
 
                 default:
@@ -486,8 +494,10 @@ namespace CncConvProg.ViewModel.MainViewModel
         MacchineDialogo,
         UtensiliDialogo,
         MaterialiDialogo,
-        ProgramPreference,
-        DettagliArticolo
+        UnitSelection,
+        DettagliArticolo,
+        ProgramPreference
+
     }
 }
 

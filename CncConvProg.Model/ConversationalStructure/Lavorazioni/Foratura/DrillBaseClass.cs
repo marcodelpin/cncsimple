@@ -71,57 +71,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
         }
 
-        //internal static IPatternDrilling UpdatePattern(PatternForatura patternForatura)
-        //{
-        //    switch (patternForatura)
-        //    {
-        //        case PatternForatura.Circolare:
-        //            {
-        //                return new PatternDrillingCircle();
-
-        //            } break;
-
-        //        case PatternForatura.Rettangolare:
-        //            {
-        //                return  new PatternDrillingRectangle();
-
-        //            } break;
-
-        //        case PatternForatura.Arco:
-        //            {
-        //                return new PatternDrillingArc();
-
-        //            } break;
-
-        //        case PatternForatura.Linea:
-        //            {
-        //                return new PatternDrillingLine();
-
-        //            } break;
-
-        //        case PatternForatura.CoordinateRc:
-        //            {
-        //                return new PatternDrillingRc();
-
-        //            } break;
-
-        //        case PatternForatura.CoordinateXy:
-        //            {
-        //                return new PatternDrillingXy();
-
-        //            } break;
-
-        //        case PatternForatura.TornioForaturaCentrale:
-        //            {
-        //                return new PatternDrillingLatheCenter();
-
-        //            } break;
-
-        //        default:
-        //            throw new NotImplementedException("ForaturaSemplice.UpdatePattern");
-        //    }
-        //}
-
         public bool ForaturaCentraleTornio { get; private set; }
 
         protected DrillBaseClass(bool foraturaCentraleTornio)
@@ -281,200 +230,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             return t as Utensile;
         }
 
-        ///// <summary>
-        ///// Metodo per creare actionCollection per lavorazione fori
-        ///// L'iter nelle varie lavorazioni è identico.
-        ///// Mi sposto sopra foro,
-        ///// Lavorazione ( qui fare metodi differenti in base a necessita)
-        ///// Posizione Iniziale
-        ///// Mi Sposto su foro successivo
-        ///// </summary>
-        //public MoveActionCollection ElaborateMoveActionCollection(MacroDrillingAction macroDrillingAction, Operazione operazione)
-        //{
-        //    var rslt = new MoveActionCollection();
-
-        //    var pntList = macroDrillingAction.DrillPoints;
-
-
-
-
-
-        //    foreach (var point2D in pntList)
-        //    {
-        //        rslt.AddLinearMove(MoveType.Rapid, AxisAbilited.Xy, point2D.X, point2D.Y, null);
-        //        rslt.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macroDrillingAction.SecureZ);
-
-        //        /*
-        //         * fare r del ciclo.
-        //         */
-
-        //        rslt.AddLinearMove(MoveType.SecureRapidFeed, AxisAbilited.Z, null, null, macroDrillingAction.SecureZ + extraCorsa);
-
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Restituisce programma universale per operazione di foratura.
-        ///// </summary>
-        ///// <param name="operazione"></param>
-        ///// <returns></returns>
-        //internal override ProgramPhase GetOperationProgram(Operazione operazione)
-        //{
-        //    /*
-        //     * una cosa è sicuro !!
-        //     * 
-        //     * posso astrarre ulteriormente il questo metodo
-        //     * 
-        //     * in comune ho 
-        //     * 
-        //     * - init program
-        //     * - toolChange ( poi in fase di calcolo programma vedo se saltarlo o meno )
-        //     * - settaggio feed. ( vedere meglio)
-        //     * 
-        //     * -- calcolo programma ( questo è l'unica parte diversa )
-        //     * 
-        //     * - rototraslazione operazioni
-        //     */
-        //    var program = new ProgramPhase(SicurezzaZ);
-
-        //    // cambio utensile 
-        //    var toolChange = new ChangeToolAction(program, operazione);
-
-        //    var parametro = operazione.Utensile.ParametroUtensile as ParametroPunta;
-
-        //    var fresa = operazione.Utensile as DrillTool;
-
-        //    if (fresa == null || parametro == null)
-        //        throw new NullReferenceException();
-
-        //    /*
-        //     * come preference devo prendere da file ,
-        //     * cosi sono sicuro che è aggiornato.
-        //     * 
-        //     * non posso prendere elemento alla volta.
-        //     */
-
-        //    /*
-        //     * preference sarebbe meglio settarlo non qui perche avrei 10 accessi al file se ho 10 operazioni.
-        //     * ma bensi al momento della richiesta di anteprima e generazione codice..
-        //     * 
-        //     * da operazione quindi..
-        //     * 
-        //     * per generazione programma posso, la , invece per generazione anteprima è da altra parte.
-        //     * 
-        //     * quando aggiornare preferenze..
-        //     */
-
-        //    var secureFeed = 1;
-
-        //    var extraCorsa = 1;
-
-        //    var feed = parametro.GetFeed(FeedType.ASync);
-
-        //    if (feed <= 0)
-        //        return null;
-
-        //    var feedDictionary = new Dictionary<MoveType, double>
-        //                             {
-        //                                 {MoveType.Rapid, 10000},
-        //                                 {MoveType.SecureRapidFeed, secureFeed},
-        //                                 {MoveType.Work, feed},
-        //                                 {MoveType.Cw, feed},
-        //                                 {MoveType.Ccw, feed},
-        //                             };
-
-        //    program.SetFeedDictionary(feedDictionary);
-
-        //    var macro = new MacroDrillingAction(program)
-        //    {
-        //        DrillPoints = GetDrillPointList(),
-        //        SecureZ = SicurezzaZ,
-        //        StartZ = InizioZ,
-        //        TipologiaLavorazione = operazione.OperationType,
-        //    };
-
-        //    // macro
-        //    switch (operazione.OperationType)
-        //    {
-        //        case LavorazioniEnumOperazioni.ForaturaMaschiaturaDx:
-        //            {
-        //                var opMaschiatura = operazione.Lavorazione as IMaschiaturaAble;
-
-        //                if (opMaschiatura == null)
-        //                    throw new NullReferenceException();
-
-        //                macro.EndZ = InizioZ - opMaschiatura.ProfonditaMaschiatura;
-
-        //            } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaCentrino:
-        //            {
-        //                var opCentrinable = operazione.Lavorazione as ICentrinoAble;
-
-        //                if (opCentrinable == null)
-        //                    throw new NullReferenceException();
-
-        //                macro.EndZ = InizioZ - ProfonditaCentrino;
-
-        //            } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaSmusso:
-        //            {
-        //                var opSvasatura = operazione.Lavorazione as ISvasaturaAble;
-
-        //                if (opSvasatura == null)
-        //                    throw new NullReferenceException();
-
-        //                macro.EndZ = InizioZ - ProfonditaSvasatura;
-
-        //            } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaPunta:
-        //            {
-        //                var opForatura = operazione.Lavorazione as IForaturaAble;
-
-        //                if (opForatura == null)
-        //                    throw new NullReferenceException();
-
-        //                macro.ModalitaForatura = ModalitaForatura;
-
-        //                macro.EndZ = InizioZ - ProfonditaForatura;
-        //                macro.Step = parametro.Step;
-
-        //            } break;
-        //    }
-
-        //    var move = new MoveActionCollection();
-
-        //    var pntList = macro.DrillPoints;
-
-        //    foreach (var point2D in pntList)
-        //    {
-        //        move.AddLinearMove(MoveType.Rapid, AxisAbilited.Xy, point2D.X, point2D.Y, null);
-        //        move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SecureZ);
-
-        //        ElaborateCycle(move, macro);
-        //        /*
-        //         * fare r del ciclo.
-        //         */
-
-        //        move.AddLinearMove(MoveType.SecureRapidFeed, AxisAbilited.Z, null, null, macro.SecureZ);
-
-        //    }
-
-        //    macro.MoveActionCollection = move;
-
-        //    //var mm = base.GetFinalProgram(macro.MoveActionCollection);
-
-        //    foreach (var variable in macro.MoveActionCollection)
-        //    {
-        //        program.SetFeedMoveAction(variable);
-        //    }
-        //    // disimpegno
-
-        //    return program;
-
-        //}
 
         private void ElaborateAllargaturaBareno(ProgramOperation programPhase, Operazione operazione)
         {
@@ -506,9 +261,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             foreach (var point2D in pntListBar)
             {
-
-                //  moveCollection.AddLinearMove(MoveType.Rapid, AxisAbilited.Xy, point2D.X, point2D.Y, null);
-
                 // Semplice)
                 if (opMaschiatura.ModalitaAllargatura == 0)
                 {
@@ -532,10 +284,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
         }
         /// <summary>
         /// Creo Programma per lavorazioni di foratura.
-        /// Per quasi tutte le operazioni creo una macro ,
-        /// Invece per allargatura foro nella barenatura e lamatura
-        /// faccio programma ad hoc
-        /// 
+        /// Raccoglie dati per creare macro specifiche.
+        /// Per allargatura foro nella barenatura e lamatura faccio programma ad hoc
         /// </summary>
         /// <param name="programPhase"></param>
         /// <param name="operazione"></param>
@@ -558,8 +308,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             /*
              * il punto r è la distanza fra z di sicurezza e z iniziale, - distanza di avvicinamento.. tipo 2mm
-             * 
-             * 
              */
 
             // macro
@@ -673,6 +421,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                 move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SicurezzaZ);
 
                 ElaborateCycle(move, macro);
+
                 /*
                  * fare r del ciclo.
                  */
@@ -683,14 +432,10 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             macro.MoveActionCollection = move;
 
-            //var mm = base.GetFinalProgram(macro.MoveActionCollection);
-
             foreach (var variable in macro.MoveActionCollection)
             {
                 programPhase.SettaValoreAvanzamento(variable);
             }
-
-            // disimpegno
         }
 
         private static void ElaborateCycle(MoveActionCollection move, MacroForaturaAzione macro)
