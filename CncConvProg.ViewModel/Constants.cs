@@ -13,10 +13,8 @@ namespace CncConvProg.ViewModel
         public static string MacchineModalDialog = "MacchineModalDialog";
         public static string UtensiliModalDialog = "UtensiliModalDialog";
         public static string PhaseDetailEditModalDialog = "PhaseDetailEditModalDialog";
+        public static string UnitSelectionDialog = "UnitSelectionDialog";
         public static string PreferenceModalDialog = "PreferenceModalDialog";
-
-
-
         public static string ArticleDetailDialog = "ArticleModalDialog";
     }
 }

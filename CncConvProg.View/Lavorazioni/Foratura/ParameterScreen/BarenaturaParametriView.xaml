@@ -32,12 +32,33 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.centerDrillDepth}" MinWidth="100" />
-                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=CenterDrillDepth, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.chamferDepth}" MinWidth="100" />
-                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ChamferDepth, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                <TextBlock  Text="Allargatura con fresa" MinWidth="100" />
+                <CheckBox x:Name="cbAa" IsChecked="{Binding Path=AllargaturaConFresa}" VerticalAlignment="Center" Margin="5,0"/>
+            </StackPanel>
+            <GroupBox Margin="20,0" Header="Mill setting" IsEnabled="{Binding ElementName=cbAa, Path=IsChecked}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Materiale per finitura" MinWidth="130" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=MaterialePerFinitura,  ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="100"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
+                        <TextBlock Text="Modo Fresatura" MinWidth="130" />
+                        <ComboBox x:Name="cbFinishingType" 
+            				ItemsSource="{Binding Path=MillingStrategy}"
+            				SelectedValue="{Binding Path=MillingSelectedStrategy}"
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key" 
+                            Width="100" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
         </StackPanel>
     </Grid>
 </UserControl>

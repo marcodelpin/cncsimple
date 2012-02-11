@@ -178,30 +178,6 @@
     <Compile Include="Dialog\ToolsDialogView.xaml.cs">
       <DependentUpon>ToolsDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneLamaturaDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneLamaturaDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneAlesaturaDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneAlesaturaDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneBarenaturaDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneBarenaturaDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneCentrinoDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneCentrinoDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneForaturaDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneForaturaDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneMaschiaturaDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneMaschiaturaDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneSvasaturaDataTemplate.xaml.cs">
-      <DependentUpon>OperazioneSvasaturaDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioniCommonScreenView.xaml.cs">
-      <DependentUpon>OperazioniCommonScreenView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Lavorazioni\Foratura\ParameterScreen\MaschiaturaParametriView.xaml.cs">
       <DependentUpon>MaschiaturaParametriView.xaml</DependentUpon>
     </Compile>
@@ -421,38 +397,6 @@
     <Page Include="Dialog\ToolsDialogView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneLamaturaDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneAlesaturaDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneBarenaturaDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneCentrinoDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneForaturaDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneMaschiaturaDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioneSvasaturaDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Lavorazioni\Foratura\OperazioniDataTemplate\OperazioniCommonScreenView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lavorazioni\Foratura\ParameterScreen\MaschiaturaParametriView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -904,7 +848,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 e x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

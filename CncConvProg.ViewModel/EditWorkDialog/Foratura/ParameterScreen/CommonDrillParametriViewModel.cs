@@ -63,6 +63,33 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
 
             }
         }
+
+        public double CenterDrillDepth
+        {
+            get { return _drillBaseClass.ProfonditaCentrino; }
+            set
+            {
+
+                if (_drillBaseClass.ProfonditaCentrino == value) return;
+
+                _drillBaseClass.ProfonditaCentrino = value;
+                OnPropertyChanged("CenterDrillDepth");
+
+            }
+        }
+        public double ChamferDepth
+        {
+            get { return _drillBaseClass.ProfonditaSvasatura; }
+            set
+            {
+
+                if (_drillBaseClass.ProfonditaSvasatura == value) return;
+
+                _drillBaseClass.ProfonditaSvasatura = value;
+                OnPropertyChanged("ChamferDepth");
+
+            }
+        }
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error { get { return null; } }

@@ -61,6 +61,9 @@
                                                            Command="{Binding Path=DataContext.OpenFileDialogCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"/>
                         <ribbon:RibbonApplicationMenuItem  ImageSource="pack://application:,,,/Images/gui/save.png" Header="_Save" Command="{Binding Path=SaveCmd}"/>
                         <ribbon:RibbonApplicationMenuItem  ImageSource="pack://application:,,,/Images/gui/save.png" Header="Sa_ve As" Command="{Binding Path=SaveFileDialogCmd}"/>
+                        <ribbon:RibbonApplicationMenuItem  Header="Unit Selection" 
+                                                           Command="{Binding Path=DataContext.OpenDialogCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                           CommandParameter="{x:Static Member=MainViewModel:DialogEnum.UnitSelection}"/>
                         <ribbon:RibbonApplicationMenuItem  ImageSource="pack://application:,,,/Images/gui/preference.png" Header="Program Preference" 
                                                            Command="{Binding Path=DataContext.OpenDialogCmd, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                            CommandParameter="{x:Static Member=MainViewModel:DialogEnum.ProgramPreference}"/>
