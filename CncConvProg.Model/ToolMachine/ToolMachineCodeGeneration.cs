@@ -20,6 +20,7 @@ namespace CncConvProg.Model.ToolMachine
 
     /// <summary>
     /// Classe parziale ToolMachine.
+    /// Nota : con token partial posso dividere una stessa classe . La visibilita dei membri interni rimane invariata.
     /// In questo file sono contenuti i metodi e proprietà necessari per creare GCODE
     /// </summary>
     public abstract partial class ToolMachine
@@ -33,7 +34,7 @@ namespace CncConvProg.Model.ToolMachine
          * - Il tipo del movimento corrente ( rapido, lavoro , .. )
          * - Compensazione Attivata 
          */
-        
+
         protected MoveType CurrentMoveType = MoveType.Rapid;
 
         protected double? CurrentX = null;
@@ -70,20 +71,28 @@ namespace CncConvProg.Model.ToolMachine
 
         /// <summary>
         /// Metodo principale che crea codice G
+        /// La string risultante da questo metodo sarà il programma che andrò a stampare.
         /// </summary>
         /// <param name="program">Classe che contiene tutte le informazioni necessarie per creare il programma</param>
         /// <returns>Programma GCODE</returns>
         public string ProcessProgram(MachineProgram program)
         {
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            ////  
+            //// La string risultante da questo metodo sarà il programma gcode.
+            //// Per ottenere questa stringa si può procedere come meglio credi.
+            //// La classe MachineProgram contiene tutte le info necessarie per creare il programma.
+            ////   
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
             /*
-             * Inizializzo code, inseriro qui il codice g risultante.
+             * La variabile code contiene il programma gcode che man mano verrà creato.
              */
 
             var code = new StringBuilder();
 
             code.AppendLine("%");
-
-            /*todo - numerare fasi*/
 
             var programNumber = program.ProgramNumber;
             var commentoProgramma = program.ProgramComment;
@@ -171,6 +180,7 @@ namespace CncConvProg.Model.ToolMachine
             _flag = false;
 
             CreateCodeFromAction(action, ref code);
+
             // se qui ha eseguito
             _flag = true;
         }
@@ -266,8 +276,6 @@ namespace CncConvProg.Model.ToolMachine
                     } break;
             }
 
-
-
             macroCode += ("Z" + FormatCoordinate(macro.EndZ));
 
             if (macro.Step > 0)
@@ -279,8 +287,15 @@ namespace CncConvProg.Model.ToolMachine
             if (macro.Sosta > 0)
                 macroCode += ("P" + FormatCoordinate(macro.Sosta));
 
-            if (macro.MacroFeed > 0)
-                macroCode += (FormatFeed(macro.MacroFeed));
+            /*
+             * Qui inserisco valore avanzamento.
+             * todo - gestire anche modalità avanzamento - sincrono asincrono
+             */
+            if (macro.ParametriTaglio != null)
+            {
+                if (macro.ParametriTaglio.ValoreFeed > 0)
+                    macroCode += "F" + (FormatFeed(macro.ParametriTaglio.ValoreFeed));
+            }
 
             code.AppendLine(macroCode);
 
@@ -604,7 +619,7 @@ namespace CncConvProg.Model.ToolMachine
             CurrentY = null;
             CurrentZ = null;
         }
-   
+
     }
 }
 

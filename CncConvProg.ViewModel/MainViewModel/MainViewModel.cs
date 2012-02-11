@@ -262,6 +262,31 @@ namespace CncConvProg.ViewModel.MainViewModel
 
                     } break;
 
+                case DialogEnum.DettagliArticolo:
+                    {
+                        viewModelBase = new ArticleDetailViewModel();
+
+                        dialogKey = Constants.ArticleDetailDialog;
+                    } break;
+
+                case DialogEnum.ProgramPreference:
+                    {
+                        var preference = PathFolderHelper.GetPreferenceData();
+
+                        if (preference == null)
+                        {
+                            // Creo nuovo e apro finestra dialogo preferenze
+                            preference = new ProgramPreference();
+                            PathFolderHelper.SavePreferenceFile(preference);
+
+                        }
+
+                        viewModelBase = new ProgramPreferenceViewModel(preference);
+
+                        dialogKey = Constants.PreferenceModalDialog;
+
+                    } break;
+
                 case DialogEnum.UnitSelection:
                     {
                         var preference = PathFolderHelper.GetPreferenceData();
@@ -270,27 +295,12 @@ namespace CncConvProg.ViewModel.MainViewModel
                         {
                             // Creo nuovo e apro finestra dialogo preferenze
                             preference = new ProgramPreference();
+                            PathFolderHelper.SavePreferenceFile(preference);
                         }
 
                         viewModelBase = new ProgramPreferenceViewModel(preference);
 
                         dialogKey = Constants.UnitSelectionDialog;
-
-                    } break;
-
-                case DialogEnum.DettagliArticolo:
-                    {
-                        viewModelBase = new ArticleDetailViewModel();
-
-                        dialogKey = Constants.ArticleDetailDialog;
-                    } break;
-
-
-                case DialogEnum.ProgramPreference:
-                    {
-                        //viewModelBase = new ArticleDetailViewModel();
-
-                        //dialogKey = Constants.ArticleDetailDialog;
                     } break;
 
                 default:

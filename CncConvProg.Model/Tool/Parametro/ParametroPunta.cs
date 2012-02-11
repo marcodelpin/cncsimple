@@ -8,9 +8,8 @@ using CncConvProg.Model.PreviewPathEntity;
 namespace CncConvProg.Model.Tool.Parametro
 {
     [Serializable]
-    public class ParametroPunta : Parametro.ParametroUtensile, IFeedAble
+    public class ParametroPunta : ParametroUtensile, IFeedAble
     {
-
         private Drill.DrillTool Drill
         {
             get
@@ -18,7 +17,8 @@ namespace CncConvProg.Model.Tool.Parametro
                 return Utensile as Drill.DrillTool;
             }
         }
-        internal ParametroPunta(Drill.DrillTool tool)
+
+        internal ParametroPunta(Utensile tool)
             : base(tool)
         {
 
@@ -26,28 +26,6 @@ namespace CncConvProg.Model.Tool.Parametro
             NumeroGiri = new UserInput();
             AvanzamentoAsincrono = new UserInput();
             AvanzamentoSincrono = new UserInput();
-        }
-
-        public override double CalcolateUnitToolCost()
-        {
-            var rslt = 0d;
-
-            if (AvanzamentoAsincrono.Value.HasValue)
-            {
-                var feedMmMin = AvanzamentoAsincrono.Value.Value;
-
-                if (TempoVitaUtensile > 0 && CostoUtensile > 0)
-                    rslt = CostoUtensile / TempoVitaUtensile;
-
-                else if (MetriVitaUtensile > 0 && CostoUtensile > 0 && feedMmMin > 0)
-                {
-                    var tempoVita = (MetriVitaUtensile * 1000) / feedMmMin;
-
-                    rslt = CostoUtensile / tempoVita;
-                }
-            }
-
-            return rslt;
         }
 
         private double DiametroPunta { get { return Drill.Diametro; } }
@@ -116,30 +94,6 @@ namespace CncConvProg.Model.Tool.Parametro
 
             NumeroGiri.SetValue(false, FeedAndSpeedHelper.GetNumeroGiri(velocitaTaglio, DiametroPunta, Drill.Unit));
         }
-
-        //internal double GetFeed(ConversationalStructure.FeedType feedType)
-        //{
-        //    switch (feedType)
-        //    {
-        //        case ConversationalStructure.FeedType.Sync:
-        //            {
-        //                if (AvanzamentoSincrono.Value.HasValue)
-        //                    return AvanzamentoSincrono.Value.Value;
-
-        //            } break;
-
-        //        case ConversationalStructure.FeedType.ASync:
-        //        default:
-        //            {
-        //                if (AvanzamentoAsincrono.Value.HasValue)
-        //                    return AvanzamentoAsincrono.Value.Value;
-
-        //            } break;
-        //    }
-
-        //    return 0;
-        //}
-
 
         public double FeedSync
         {

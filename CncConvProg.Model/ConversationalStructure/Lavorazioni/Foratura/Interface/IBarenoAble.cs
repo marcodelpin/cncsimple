@@ -12,12 +12,9 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Interfa
 
         double DiametroBarenatura { get; set; }
 
-        /// <summary>
-        /// Diametro di sgrossatura se il foro viene allargato
-        /// </summary>
-        double DiametroAllargatura { get; set; }
+     //   bool BarenoAbilitato { get; set; }
 
-        bool BarenoAbilitato { get; set; }
+        double MaterialePerFinitura { get; set; }
 
         bool AllargaturaAbilitata { get; set; }
 
@@ -26,6 +23,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Interfa
          * 1 - Interpolazione
          */
 
-        int ModalitaAllargatura { get; set; }
+        byte ModalitaAllargatura { get; set; }
     }
 }

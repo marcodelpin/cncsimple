@@ -30,13 +30,6 @@ namespace CncConvProg.ViewModel
                 _preference.DefaultMeasureUnit = value == "Inch" ? MeasureUnit.Inch : MeasureUnit.Millimeter;
 
                 OnPropertyChanged("UnitSelected");
-                OnPropertyChanged("RapidSecureFeed");
-                OnPropertyChanged("SecureDistance");
-
-                OnPropertyChanged("DefaultSecureZ");
-
-
-
             }
         }
         /// <summary>

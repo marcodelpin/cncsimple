@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CncConvProg.Model.ConversationalStructure.Abstraction
 {
+
     public interface IFeedAble
     {
         double FeedSync { get; }

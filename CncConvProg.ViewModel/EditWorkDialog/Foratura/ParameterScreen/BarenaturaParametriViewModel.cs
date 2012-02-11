@@ -103,7 +103,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
             }
         }
 
-        public int MillingSelectedStrategy
+        public byte MillingSelectedStrategy
         {
             get
             {

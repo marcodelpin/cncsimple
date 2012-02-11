@@ -18,7 +18,7 @@ using CncConvProg.Model.Tool.Parametro;
 namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 {
     [Serializable]
-    public abstract class DrillBaseClass : LavorazioneFresatura, IForaturaPatternable, IDrillDiameter, IForaturaAble, ICentrinoAble, ISvasaturaAble
+    public abstract class DrillBaseClass : LavorazioneFresatura, IForaturaPatternable, IForaturaAble, ICentrinoAble, ISvasaturaAble
     {
         public override FaseDiLavoro.TipoFaseLavoro[] FasiCompatibili
         {
@@ -204,15 +204,18 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             return 0;
         }
+        /// <summary>
+        /// Metodo utilizzato nella selezione automatica dell'utensile.
+        /// </summary>
+        /// <param name="operazione"></param>
+        /// <param name="utensiles"></param>
+        /// <param name="matGuid"></param>
+        /// <returns></returns>
         public override Utensile PickBestTool(Operazione operazione, IEnumerable<Utensile> utensiles, Guid matGuid)
         {
             var d = GetDiameter(operazione.OperationType);
 
             /* Fra utensili IDiameter */
-            //  var dias = utensiles.OfType<IDiametrable>();
-
-            // var tools = dias.OrderBy(n => Math.Abs(n.Diametro - d)).First();
-
             var tool = (from utensile in utensiles
                         from parametro in utensile.ParametriUtensile
                         where parametro.MaterialGuid == matGuid
@@ -233,9 +236,9 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
         private void ElaborateAllargaturaBareno(ProgramOperation programPhase, Operazione operazione)
         {
-            var opMaschiatura = operazione.Lavorazione as IBarenoAble;
+            var opBarenatura = operazione.Lavorazione as IBarenoAble;
 
-            if (opMaschiatura == null)
+            if (opBarenatura == null)
                 throw new NullReferenceException();
 
             var pntListBar = GetDrillPointList();
@@ -244,7 +247,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             var iniZ = InizioZ;
 
-            var endZ = InizioZ - opMaschiatura.ProfonditaBareno;
+            var endZ = InizioZ - opBarenatura.ProfonditaBareno;
 
             var fresa = operazione.Utensile as FresaCandela;
 
@@ -254,7 +257,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             var profPassata = parametro.GetProfonditaPassata();
 
-            var diaAllargatura = opMaschiatura.DiametroAllargatura;
+            var diaAllargatura = opBarenatura.DiametroBarenatura - opBarenatura.MaterialePerFinitura;
 
             if (InizioZ <= endZ) return;
             if (fresa.Diametro > diaAllargatura) return;
@@ -262,17 +265,23 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             foreach (var point2D in pntListBar)
             {
                 // Semplice)
-                if (opMaschiatura.ModalitaAllargatura == 0)
+                if (opBarenatura.ModalitaAllargatura == 0)
                 {
                     var profile = Profile2D.CreateCircle(diaAllargatura / 2, point2D);
 
-                    MillProgrammingHelper.GetInternRoughing(moveCollection, profile, opMaschiatura.ProfonditaBareno,
+                    moveCollection.AddLinearMove(MoveType.Rapid, AxisAbilited.Xy, point2D.X,
+                                                     point2D.Y, null, null);
+
+                    MillProgrammingHelper.GetInternRoughing(moveCollection, profile, opBarenatura.ProfonditaBareno,
                         profPassata, larghezzaPassata, fresa.Diametro, 0, InizioZ, SicurezzaZ, 0, 0);
+
+                    moveCollection.AddLinearMove(MoveType.Rapid, AxisAbilited.Xy, point2D.X,
+                                 point2D.Y, null, null);
 
                 }
 
                 // Interpolazione
-                else if (opMaschiatura.ModalitaAllargatura == 1)
+                else if (opBarenatura.ModalitaAllargatura == 1)
                 {
                     MillProgrammingHelper.GetRoughHelicalInterpolation(moveCollection, InizioZ, endZ, SicurezzaZ, point2D,
                         diaAllargatura, fresa.Diametro, profPassata, larghezzaPassata);
@@ -306,11 +315,18 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                                 PuntoRitorno = SicurezzaZ - InizioZ,
                             };
 
+            macro.ParametriTaglio = new ParametroVelocita();
+
+            ParametroVelocita parametroVelocita;
+
+            if (programPhase.FeedDictionary.TryGetValue(MoveType.Work, out parametroVelocita))
+                macro.ParametriTaglio = parametroVelocita;
+
             /*
              * il punto r è la distanza fra z di sicurezza e z iniziale, - distanza di avvicinamento.. tipo 2mm
              */
 
-            // macro
+            // macro)
             switch (operazione.OperationType)
             {
 
@@ -480,6 +496,15 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                         }
                     } break;
 
+                case LavorazioniEnumOperazioni.ForaturaMaschiaturaDx:
+                case LavorazioniEnumOperazioni.ForaturaMaschiaturaSx:
+                    {
+
+                        move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.EndZ);
+                        move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.SicurezzaZ);
+
+                    } break;
+
                 case LavorazioniEnumOperazioni.ForaturaAlesatore:
                     {
                         move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.EndZ);
@@ -490,6 +515,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                 /*
                  * In questi casi l'utensile va giu in lavoro e ritorna a punto iniziale in rapido
                  */
+                case LavorazioniEnumOperazioni.ForaturaBareno:
                 case LavorazioniEnumOperazioni.ForaturaLamatore:
                 case LavorazioniEnumOperazioni.ForaturaCentrino:
                 case LavorazioniEnumOperazioni.ForaturaSmusso:
@@ -504,105 +530,6 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
         }
 
-        //internal override Utensile CreateTool(LavorazioniEnumOperazioni enumOperationType)
-        //{ /*
-        //     * per ora restituisco solamente punta , poi implementare centrino e svasatore in base a enum
-        //     */
-
-        //    switch ((LavorazioniEnumOperazioni)enumOperationType)
-        //    {
-        //        case LavorazioniEnumOperazioni.ForaturaCentrino:
-        //            return new Centrino(MeasureUnit);
-
-        //        case LavorazioniEnumOperazioni.ForaturaPunta:
-        //            return new Punta(MeasureUnit);
-
-        //        case LavorazioniEnumOperazioni.ForaturaSmusso:
-        //            return new Svasatore(MeasureUnit);
-
-        //        case LavorazioniEnumOperazioni.ForaturaMaschiaturaDx:
-        //            return new Maschio(MeasureUnit);
-
-        //        case LavorazioniEnumOperazioni.ForaturaBareno:
-        //            return new Bareno(MeasureUnit);
-
-        //        case LavorazioniEnumOperazioni.ForaturaAlesatore:
-        //            return new Alesatore(MeasureUnit);
-
-        //        case LavorazioniEnumOperazioni.ForaturaLamatore:
-        //            return new Lamatore(MeasureUnit);
-
-        //        //case EnumOperazioniForatura.FresaFilettare:
-        //        //    return new FresaFilettare(unit);
-
-        //        default:
-        //            throw new NotImplementedException("DrillBaseClass.CreateTool");
-
-        //    }
-
-        //    throw new NotImplementedException();
-        //}
-
-        //internal override List<Utensile> GetCompatibleTools(LavorazioniEnumOperazioni operationType, MagazzinoUtensile magazzino)
-        //{
-        //    IEnumerable<Utensile> tools = null;
-
-        //    switch ((LavorazioniEnumOperazioni)operationType)
-        //    {
-        //        //case EnumOperazioniForatura.FresaFilettare:
-        //        //    {
-        //        //        tools = magazzino.GetTools<FresaFilettare>(FaseDiLavoro.Model.MeasureUnit);
-        //        //    } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaSmusso:
-        //            {
-        //                tools = magazzino.GetTools<Svasatore>(MeasureUnit);
-        //            } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaPunta:
-        //            {
-        //                tools = magazzino.GetTools<Punta>(MeasureUnit);
-        //                /* filtro punta diametro */
-        //            } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaCentrino:
-        //            {
-        //                tools = magazzino.GetTools<Centrino>(MeasureUnit);
-
-        //            } break;
-
-
-        //        case LavorazioniEnumOperazioni.ForaturaLamatore:
-        //            {
-        //                tools = magazzino.GetTools<Lamatore>(MeasureUnit);
-
-        //            } break;
-
-
-        //        case LavorazioniEnumOperazioni.ForaturaBareno:
-        //            {
-        //                tools = magazzino.GetTools<Bareno>(MeasureUnit);
-
-        //            } break;
-
-        //        case LavorazioniEnumOperazioni.ForaturaAlesatore:
-        //            {
-        //                tools = magazzino.GetTools<Alesatore>(MeasureUnit);
-
-        //            } break;
-
-        //        default:
-        //            {
-        //                throw new NotImplementedException("DrBaseClass.GetCompTools");
-        //                //return magazzino.GetDrill(DiametroForatura, unit);
-        //            } break;
-        //    }
-
-        //    if (tools != null)
-        //        return tools.ToList();
-
-        //    return null;
-        //}
 
         public List<Point2D> GetDrillPointList()
         {
@@ -614,22 +541,22 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             return pntList;
         }
 
-        public double GetDrillDiameter(LavorazioniEnumOperazioni enumOperazioniForatura)
-        {
-            switch (enumOperazioniForatura)
-            {
-                case LavorazioniEnumOperazioni.ForaturaPunta:
-                    {
-                        return DiametroForatura;
+        //public double GetDrillDiameter(LavorazioniEnumOperazioni enumOperazioniForatura)
+        //{
+        //    switch (enumOperazioniForatura)
+        //    {
+        //        case LavorazioniEnumOperazioni.ForaturaPunta:
+        //            {
+        //                return DiametroForatura;
 
-                    } break;
+        //            } break;
 
-                default:
-                    return 0;
-            }
+        //        default:
+        //            return 0;
+        //    }
 
-            return 0;
-        }
+        //    return 0;
+        //}
 
     }
 }

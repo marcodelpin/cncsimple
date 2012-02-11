@@ -10,8 +10,6 @@ namespace CncConvProg.Model.Tool.Parametro
     {
         public Utensile Utensile { get; private set; }
 
-        public abstract double CalcolateUnitToolCost();
-
         protected ParametroUtensile(Utensile tool)
         {
             Utensile = tool;
@@ -67,14 +65,6 @@ namespace CncConvProg.Model.Tool.Parametro
         }
 
         internal abstract void SetFeed(ProgramOperation program, double rapidFeed, double secureRapidFeed, FeedType feedType);
-
-        public double TempoVitaUtensile { get; set; }
-
-        public double MetriVitaUtensile { get; set; }
-
-        public double CostoUtensile { get; set; }
-
-        public double UsuraEuroMin { get; set; }
 
         internal void SetUtensile(Tool.Utensile utensile)
         {
