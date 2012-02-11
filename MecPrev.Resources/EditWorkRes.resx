@@ -399,4 +399,16 @@
   <data name="DiametroLamatura" xml:space="preserve">
     <value>Counterbore Diameter</value>
   </data>
+  <data name="centerDrillDepth" xml:space="preserve">
+    <value>Center Drill Depth</value>
+  </data>
+  <data name="chamferDepth" xml:space="preserve">
+    <value>Chamfer Depth</value>
+  </data>
+  <data name="CounterBoreDiameter" xml:space="preserve">
+    <value>Counterbore Diameter</value>
+  </data>
+  <data name="reamerDiameter" xml:space="preserve">
+    <value>Reamer Diameter</value>
+  </data>
 </root>
