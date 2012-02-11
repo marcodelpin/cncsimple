@@ -6,12 +6,12 @@ namespace CncConvProg.View.Dialog
     /// <summary>
     /// Interaction logic for EditWorkView.xaml
     /// </summary>
-    public partial class MaterialsDialogView : Window, IModalWindow
+    public partial class ProgramPreferenceView : Window , IModalWindow
     {
-        public MaterialsDialogView()
+        public ProgramPreferenceView()
         {
             InitializeComponent();
-
+            Owner = Application.Current.MainWindow;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

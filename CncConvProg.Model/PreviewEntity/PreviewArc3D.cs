@@ -1,7 +1,9 @@
 ﻿using System;
 using CncConvProg.Geometry.Entity;
+using CncConvProg.Model.PathGenerator;
+using CncConvProg.Model.PreviewPathEntity;
 
-namespace CncConvProg.Model.PreviewPathEntity
+namespace CncConvProg.Model.PreviewEntity
 {
     [Serializable]
     public class PreviewArc3D : Arc3D, IPreviewEntity

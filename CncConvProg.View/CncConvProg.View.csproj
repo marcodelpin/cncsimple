@@ -163,6 +163,12 @@
     <Compile Include="Dialog\MachinesDialogView.xaml.cs">
       <DependentUpon>MachinesDialogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\PreferencePanelView.xaml.cs">
+      <DependentUpon>PreferencePanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ProgramPreferenceView.xaml.cs">
+      <DependentUpon>ProgramPreferenceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\ThreadTableView.xaml.cs">
       <DependentUpon>ThreadTableView.xaml</DependentUpon>
     </Compile>
@@ -295,8 +301,23 @@
     <Compile Include="Lavorazioni\OperazioneScreen\ToolDataTemplate\UtensileTornituraScanalaturaDataTemplate.xaml.cs">
       <DependentUpon>UtensileTornituraScanalaturaDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaEsternaView.xaml.cs">
-      <DependentUpon>ScanalaturaEsternaView.xaml</DependentUpon>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaFrontale\Pattern\FrontalGroovePatternsView.xaml.cs">
+      <DependentUpon>FrontalGroovePatternsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaFrontale\Pattern\StandardFaceGroovePatternView.xaml.cs">
+      <DependentUpon>StandardFaceGroovePatternView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaFrontale\Pattern\ShapeVFaceGroovePatternView.xaml.cs">
+      <DependentUpon>ShapeVFaceGroovePatternView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaEsterna\Pattern\GroovePatternsView.xaml.cs">
+      <DependentUpon>GroovePatternsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaEsterna\Pattern\StandardGroovePatternView.xaml.cs">
+      <DependentUpon>StandardGroovePatternView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Lavorazioni\TornituraGenerale\ScanalaturaEsterna\Pattern\ShapeVGroovePatternView.xaml.cs">
+      <DependentUpon>ShapeVGroovePatternView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lavorazioni\TornituraGenerale\SfacciaturaParametriView.xaml.cs">
       <DependentUpon>SfacciaturaParametriView.xaml</DependentUpon>
@@ -304,8 +325,8 @@
     <Compile Include="Lavorazioni\TornituraGenerale\TornituraFilettaturaView.xaml.cs">
       <DependentUpon>TornituraFilettaturaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgramPreferenceView.xaml.cs">
-      <DependentUpon>ProgramPreferenceView.xaml</DependentUpon>
+    <Compile Include="Dialog\SelectionUnitView.xaml.cs">
+      <DependentUpon>SelectionUnitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditPhaseDetailView.xaml.cs">
       <DependentUpon>EditPhaseDetailView.xaml</DependentUpon>
@@ -349,11 +370,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ValueConverter\EnumToBoolConverter.cs" />
-    <Compile Include="Properties\WorkDialogResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WorkDialogResources.resx</DependentUpon>
-    </Compile>
     <Page Include="Controls\AppStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -383,6 +399,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\MachinesDialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\PreferencePanelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\ProgramPreferenceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -562,7 +586,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaEsternaView.xaml">
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaFrontale\Pattern\FrontalGroovePatternsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaFrontale\Pattern\StandardFaceGroovePatternView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaFrontale\Pattern\ShapeVFaceGroovePatternView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaEsterna\Pattern\GroovePatternsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaEsterna\Pattern\StandardGroovePatternView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Lavorazioni\TornituraGenerale\ScanalaturaEsterna\Pattern\ShapeVGroovePatternView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -574,7 +618,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ProgramPreferenceView.xaml">
+    <Page Include="Dialog\SelectionUnitView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -712,11 +756,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomHighlighting.xshd" />
-    <EmbeddedResource Include="Properties\WorkDialogResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>WorkDialogResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

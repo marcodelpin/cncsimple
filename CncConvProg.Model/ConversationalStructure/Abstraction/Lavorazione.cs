@@ -8,6 +8,7 @@ using CncConvProg.Geometry.Entity;
 using CncConvProg.Geometry.PreviewPathEntity;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Common;
 using CncConvProg.Model.PathGenerator;
+using CncConvProg.Model.PreviewEntity;
 using CncConvProg.Model.PreviewPathEntity;
 using CncConvProg.Model.Tool;
 using CncConvProg.Model.Tool.Drill;
@@ -106,85 +107,8 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
         /// Cerco di raggruppare ulteriormente metodi comuni per avere meno problemi.
         /// </summary>
         /// <returns></returns>
-        internal ProgramPhase GetOperationProgram(Operazione operazione)
-        {
-            /*
-             * - init program
-             * - toolChange ( poi in fase di calcolo programma vedo se saltarlo o meno )
-             * - settaggio feed. ( vedere meglio)
-             * 
-             * -- calcolo programma ( questo è l'unica parte diversa )
-             * 
-             * - rototraslazione operazioni
-             */
-
-            // todo : tenere conto anche dell'asse c attivazione g112 per il tornio ..
-            // Creo nuovo programma, tutte le lavorazioni (  hanno Z Sicurezza )
-            // anche perchè pensavo di settarla a livello di fase di lavoro..
-            var program = new ProgramPhase(SicurezzaZ);
-
-            // Se cambio utensile è opzionale , oppure se è forzato non cambio utensile..
-            //var cambioUtensile = (operazione.ToolChangeOptional && operazione.ForceToolChange) || !operazione.ToolChangeOptional;
-
-            var changeToolAction = new ChangeToolAction(program, operazione);
-
-            changeToolAction.CutViewerToolInfo = CutViewerHelper.PrintTool(operazione.Utensile);
-
-
-            // Ora setto avanzamenti comuni - Rapido - SecureFeed - Ecc..
-            // per ora setto cazzo .. dove lo posso prendere ??
-
-            var preference = Singleton.Preference.GetPreference(MeasureUnit);
-
-            ExtraCorsa = preference.MillEntryExitSecureDistance;
-
-            SecureFeed = preference.MillingRapidSecureFeedAsync;
-
-            /*
-             * L'idea per i feed e di cercare di inserirli tutti nel dizionario, se poi vengono usati ok, 
-             * altrimenti è lo stesso..
-             */
-            // Magari è piu corretto settarle nella classe base parametro..
-
-            var feed = operazione.Utensile.ParametroUtensile.GetFeed(FeedType.ASync);
-            var plungeFeed = operazione.Utensile.ParametroUtensile.GetPlungeFeed(FeedType.ASync);
-
-            /*
-             * Non controllo più che i feed siano <= 0 , al limite nel prog ci sarà scritto F0
-             */
-            var rapidFeed = FaseDiLavoro.GetRapidFeed();
-
-            operazione.Utensile.ParametroUtensile.SetFeed(program, rapidFeed, SecureFeed, FeedType.ASync);
-
-            //var feedDictionary = new Dictionary<MoveType, double>
-            //                         {
-            //                             {MoveType.Rapid, 10000},
-            //                             {MoveType.SecureRapidFeed, SecureFeed},
-            //                             {MoveType.Work, feed},
-            //                             {MoveType.Cw, feed},
-            //                             {MoveType.Ccw, feed},
-            //                             {MoveType.PlungeFeed, plungeFeed},
-            //                         };
-
-            //program.SetFeedDictionary(feedDictionary);
-
-            /*
-             * ora c'è richiamo il metodo specifico della lavorazione.
-             * In ingresso prende il ProgramPhase. e Operazione.
-             */
-            CreateSpecificProgram(program, operazione);
-
-            /*
-             * todo.
-             * qui andrebbe il metodo per fare le rototraslazioni. 
-             * per ora lo lascio delegato alla lavorazione specifica 
-             * per via del problemi con ciclo di foratura..
-             */
-
-            return program;
-        }
-
-
+        internal abstract ProgramOperation GetOperationProgram(Operazione operazione);
+        
         /// <summary>
         /// Metodo per ottenere miglior utensile fra quelli selezionati.
         /// </summary>
@@ -210,7 +134,7 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
         /// </summary>
         /// <param name="programPhase"></param>
         /// <param name="operazione"></param>
-        protected abstract void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione);
+        protected abstract void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione);
 
 
 
@@ -500,7 +424,7 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
          * la parte che mi serve è solamente qella relativa al codice , comunque per ora non me ne proccoupa
          */
 
-        internal List<IPreviewEntity> GetPathPreview(ProgramPhase programPhase, ToolMachine.ToolMachine toolMachine)
+        internal List<IPreviewEntity> GetPathPreview(ProgramOperation programPhase, ToolMachine.ToolMachine toolMachine)
         {
             return toolMachine.GetPreview(programPhase);
         }

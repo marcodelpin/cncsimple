@@ -37,35 +37,35 @@ namespace CncConvProg.Model.ConversationalStructure.Abstraction
             }
         }
 
-        //internal override ProgramPhase GetOperationProgram(Operazione operazione)
-        //{
-        //    /*
-        //     * - init program
-        //     * - toolChange ( poi in fase di calcolo programma vedo se saltarlo o meno )
-        //     * - settaggio feed. ( vedere meglio)
-        //     * 
-        //     * -- calcolo programma ( questo è l'unica parte diversa )
-        //     * 
-        //     * - rototraslazione operazioni
-        //     */
+        internal override ProgramOperation GetOperationProgram(Operazione operazione)
+        {
+            /*
+             * - init program
+             * - toolChange ( poi in fase di calcolo programma vedo se saltarlo o meno )
+             * - settaggio feed. ( vedere meglio)
+             * 
+             * -- calcolo programma ( questo è l'unica parte diversa )
+             * 
+             * - rototraslazione operazioni
+             */
 
-        //    var preference = Singleton.Preference.GetPreference(MeasureUnit);
+            var preference = Singleton.Preference.GetPreference(MeasureUnit);
 
-        //    var program = new ProgramPhase();
+            var program = new ProgramOperation(0);
 
-        //    ExtraCorsa = preference.TurningSecureDistance;
+            ExtraCorsa = preference.TurningSecureDistance;
 
-        //    RapidSecureFeed = preference.TurningRapidSecureFeedSync;
+            //RapidSecureFeed = preference.TurningRapidSecureFeedSync;
 
-        //    var changeToolAction = new ChangeToolAction(program, operazione);
+            var changeToolAction = new CambiaUtensileAction(program, operazione);
 
-        //    var rapidFeed = FaseDiLavoro.GetRapidFeed();
+            var rapidFeed = FaseDiLavoro.GetRapidFeed();
 
-        //    operazione.Utensile.ParametroUtensile.SetFeed(program, rapidFeed, RapidSecureFeed, FeedType.Sync);
+            operazione.Utensile.ParametroUtensile.SetFeed(program, rapidFeed, 0, FeedType.Sync);
 
-        //    CreateSpecificProgram(program, operazione);
+            CreateSpecificProgram(program, operazione);
 
-        //    return program;
-        //}
+            return program;
+        }
     }
 }

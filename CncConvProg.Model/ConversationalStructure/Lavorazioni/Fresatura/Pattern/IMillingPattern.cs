@@ -25,12 +25,11 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura.Patter
     public interface IMillingPattern
     {
         // Se il calcolo del profilo non è possibile ritorna null
-        Geometry.Entity.Profile2D GetClosedProfile();
+        Profile2D GetClosedProfile();
     }
 
     public interface IOpenMillingPattern : IMillingPattern
     {
-
         double MaterialToRemove { get; }
         Profile2D GetTrimmingProfile();
     }

@@ -12,4 +12,20 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura.GolePa
         Profile2D Profile { get; }
     }
 
+    public enum TurnGroovePattern
+    {
+        ProfiloLibero,
+        VShape,
+        Standard,
+    }
+
+    /// <summary>
+    /// Obsolete
+    /// </summary>
+    public enum GrooveDirection
+    {
+        Extern,
+        Intern,
+        Face
+    }
 }

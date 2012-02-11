@@ -93,18 +93,18 @@ namespace CncConvProg.Model.ToolMachine
             code.AppendLine("G53 Z0");
         }
 
-        protected override void CreateCodeFromAction(ChangeToolAction programAction, ref StringBuilder code)
+        protected override void CreateCodeFromAction(CambiaUtensileAction programAction, ref StringBuilder code)
         {
             // Etichetta Utensile
-            var toolLabel = programAction.ToolLabel;
+            var toolLabel = programAction.EtichettaUtensile;
 
             code.AppendLine(FormatComment(toolLabel));
 
 
             // Numero e correttore
-            var toolNumber = programAction.NumberTool;
+            var toolNumber = programAction.NumeroUtensile;
 
-            var latheToolCorrector = programAction.LatheToolCorrector;
+            var latheToolCorrector = programAction.CorrettoreUtensileTornio;
 
             code.AppendLine(NumericControl.CharToolCode +
                             toolNumber.ToString("00") +
@@ -112,8 +112,8 @@ namespace CncConvProg.Model.ToolMachine
 
             // Parametri
             var modalitaVelocita = programAction.ModalitaVelocita;
-            var speed = programAction.Speed;
-            var spindleRotation = programAction.SpindleRotation;
+            var speed = programAction.Velocità;
+            var spindleRotation = programAction.RotazioneMandrino;
 
             WriteToolParameter(modalitaVelocita, speed, spindleRotation, ref code);
 

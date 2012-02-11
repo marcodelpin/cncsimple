@@ -15,7 +15,7 @@ namespace CncConvProg.Model.Tool.Parametro
 
 
         }
-        internal override void SetFeed(ProgramPhase program, double rapidFeed, double secureRapidFeed, FeedType feedType)
+        internal override void SetFeed(ProgramOperation program, double rapidFeed, double secureRapidFeed, FeedType feedType)
         {
             var velocitaType = ModalitaVelocita == ModalitaVelocita.GiriFissi ? VelocitaType.ASync : VelocitaType.Sync;
 

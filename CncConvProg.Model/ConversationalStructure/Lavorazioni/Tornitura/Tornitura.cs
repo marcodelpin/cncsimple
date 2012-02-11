@@ -36,7 +36,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
         public Operazione Finitura { get; set; }
 
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             var moveCollection = new MoveActionCollection();
 
@@ -70,7 +70,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             foreach (var variable in moveCollection)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
 

@@ -103,7 +103,7 @@ namespace CncConvProg.Model.Tool.Parametro
             return 0;
         }
 
-        internal override void SetFeed(ProgramPhase program, double rapidFeed, double secureRapidFeed, FeedType feedType)
+        internal override void SetFeed(ProgramOperation program, double rapidFeed, double secureRapidFeed, FeedType feedType)
         {
             var nGiri = GetNumeroGiri();
             var feed = GetFeed(FeedType.ASync);

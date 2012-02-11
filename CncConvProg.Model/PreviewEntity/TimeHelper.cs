@@ -1,5 +1,6 @@
 ﻿using System;
 using CncConvProg.Geometry.Entity;
+using CncConvProg.Model.PreviewEntity;
 
 namespace CncConvProg.Model.PreviewPathEntity
 {

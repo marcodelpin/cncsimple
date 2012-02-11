@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CncConvProg.Geometry.Entity;
 using CncConvProg.Model.ConversationalStructure.Abstraction;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Common;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura.GolePattern;
 using CncConvProg.Model.PathGenerator;
 using CncConvProg.Model.Tool.LatheTool;
 using CncConvProg.Model.Tool.Parametro;
@@ -14,18 +15,11 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
     /// Può avere immissione profilo o template con gole con forma standard.
     /// </summary>
     [Serializable]
-    public class TornituraScanalatura : LavorazioneTornitura
+    public class TornituraScanalatura : LavorazioneTornitura, IGroovePatternable
     {
-        public enum TipoScanalatura
-        {
-            Esterna,
-            Interna,
-            Frontale
-        }
+        public readonly GrooveDirection ScanalaturaType;
 
-        public readonly TipoScanalatura ScanalaturaType;
-
-        public TornituraScanalatura(TipoScanalatura tipoScanalatura)
+        public TornituraScanalatura(GrooveDirection grooveDirection)
             : base()
         {
             Sgrossatura = new Operazione(this, LavorazioniEnumOperazioni.TornituraScanalaturaSgrossatura);
@@ -34,7 +28,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             NumeroGole = 1;
 
-            ScanalaturaType = tipoScanalatura;
+            ScanalaturaType = grooveDirection;
         }
 
         public double DiameterIniziale { get; set; }
@@ -66,10 +60,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
             get { return MecPrev.Resources.GuiRes.TurnGroove; }
         }
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
-
-
             var parametro = operazione.Utensile.ParametroUtensile as ParametroUtensileTornituraScanalatura;
 
             var utensile = operazione.Utensile as UtensileScanalatura;
@@ -89,7 +81,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
                 switch (ScanalaturaType)
                 {
-                    case TipoScanalatura.Esterna:
+                    case GrooveDirection.Extern:
                         {
                             var stepGole = i * DistanzaGole;
 
@@ -120,7 +112,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
                             }
                         } break;
 
-                    case TipoScanalatura.Interna:
+                    case GrooveDirection.Intern:
                         {
                             var stepGole = i * DistanzaGole;
 
@@ -155,7 +147,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
                         } break;
 
-                    case TipoScanalatura.Frontale:
+                    case GrooveDirection.Face:
                         {
                             var stepGole = i * DistanzaGole;
 
@@ -192,7 +184,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             foreach (var variable in moveCollection)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
 
@@ -206,8 +198,8 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
                 switch (ScanalaturaType)
                 {
-                    case TipoScanalatura.Interna:
-                    case TipoScanalatura.Esterna:
+                    case GrooveDirection.Intern:
+                    case GrooveDirection.Extern:
                         {
                             var step = i * DistanzaGole;
                             var startZ = StartZ - step;
@@ -223,7 +215,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
                         } break;
 
-                    case TipoScanalatura.Frontale:
+                    case GrooveDirection.Face:
                         {
                             var step = i * DistanzaGole;
                             var startD = DiameterIniziale + step;
@@ -252,6 +244,33 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
             return new List<IEntity3D>(l);
         }
 
+        private TurnGroovePattern _groovePattern;
+        public TurnGroovePattern GroovePattern
+        {
+            get
+            {
+                return _groovePattern;
+            }
+            set
+            {
+                _groovePattern = value;
+                UpdatePattern();
+            }
+        }
+
+        private void UpdatePattern()
+        {
+            switch (GroovePattern)
+            {
+                case TurnGroovePattern.VShape:
+                    {
+                        Pattern = new GrooveVShapeExtern();
+                    }
+                    break;
+
+            }
+        }
+        public IGroovePattern Pattern { get; private set; }
     }
 
     //[Serializable]

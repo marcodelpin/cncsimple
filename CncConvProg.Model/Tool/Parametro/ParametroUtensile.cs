@@ -66,7 +66,7 @@ namespace CncConvProg.Model.Tool.Parametro
             return 0;
         }
 
-        internal abstract void SetFeed(ProgramPhase program, double rapidFeed, double secureRapidFeed, FeedType feedType);
+        internal abstract void SetFeed(ProgramOperation program, double rapidFeed, double secureRapidFeed, FeedType feedType);
 
         public double TempoVitaUtensile { get; set; }
 

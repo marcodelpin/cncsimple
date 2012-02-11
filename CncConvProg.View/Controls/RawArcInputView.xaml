@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:ValueConverter="clr-namespace:CncConvProg.View.ValueConverter" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Resources="clr-namespace:MecPrev.Resources;assembly=MecPrev.Resources" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ValueConverter:EnumToBoolConverter x:Key="EBConverter"/>
@@ -11,37 +11,37 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{Binding Path=XLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyX.png" Width="25"/>
+                <Image Tag="x" Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyX.png" Width="25" Loaded="Image_Loaded" />
                 <TextBox x:Name="xTb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=X, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock  Text="{Binding Path=YLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyY.png" Width="25"/>
+                <Image Tag="y" Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyY.png" Width="25" Loaded="Image_Loaded" />
                 <TextBox x:Name="yTb" ab:AttachedProperties.AutoSelectText="True"   DataContext="{Binding Path=Y, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock  Text="{Binding Path=CenterXLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyI.png" Width="25"/>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyI.png" Width="25"/>
                 <TextBox ab:AttachedProperties.AutoSelectText="True"   DataContext="{Binding Path=CenterX, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock  Text="{Binding Path=CenterYLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyJ.png" Width="25"/>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyJ.png" Width="25"/>
                 <TextBox ab:AttachedProperties.AutoSelectText="True"   DataContext="{Binding Path=CenterY, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock  Text="Alternate Arc" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyA.png" Width="25"/>
+                <TextBlock  Text="{x:Static Resources:EditWorkRes.AlternateArc}" MinWidth="100" />
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyA.png" Width="25"/>
                 <CheckBox x:Name="cbAa" IsChecked="{Binding Path=AlternateArc}" VerticalAlignment="Center" Margin="5,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock  Text="Radius" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyR.png" Width="25"/>
+                <TextBlock  Text="{x:Static Resources:EditWorkRes.Radius}" MinWidth="100" />
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyR.png" Width="25"/>
                 <TextBox x:Name="rTb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=Radius, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel >
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock Text="Direction" MinWidth="100"/>
-                <Image Source="pack://application:,,,/Images/gui/keyD.png" Width="25"/>
+                <TextBlock Text="{x:Static Resources:EditWorkRes.Direction}" MinWidth="100"/>
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyD.png" Width="25"/>
                 <RadioButton IsChecked="{Binding Path=DirectionClockwise,    
                             Converter={StaticResource EBConverter},    
                             ConverterParameter=true}" Content="Cw"
@@ -57,22 +57,22 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{Binding Path=DeltaXLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyU.png" Width="25"/>
+                <Image Tag="u" Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyU.png" Width="25" Loaded="Image_Loaded" />
                 <TextBox x:Name="uTb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=DeltaX, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock  Text="{Binding Path=DeltaYLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyV.png" Width="25"/>
+                <Image Tag="v" Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyV.png" Width="25" ImageFailed="Image_ImageFailed" Loaded="Image_Loaded" />
                 <TextBox x:Name="vTb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=DeltaY, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock  Text="Chamfer" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyC.png" Width="25"/>
+                <TextBlock  Text="{x:Static Resources:EditWorkRes.Chamfer}" MinWidth="100" />
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyC.png" Width="25"/>
                 <TextBox x:Name="cTb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=Chamfer, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
-                <TextBlock  Text="End Radius" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyR.png" Width="25"/>
+                <TextBlock  Text="{x:Static Resources:EditWorkRes.EndRadius}" MinWidth="100" />
+                <Image Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyR.png" Width="25"/>
                 <TextBox x:Name="r1Tb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=EndRadius, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" MinWidth="80" />
             </StackPanel>
         </StackPanel>

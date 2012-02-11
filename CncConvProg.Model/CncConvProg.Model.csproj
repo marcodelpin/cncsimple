@@ -80,7 +80,9 @@
     <Compile Include="ConversationalStructure\Lavorazioni\Foratura\Pattern\PatternDrillingXy.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Common\LavorazioniEnumOperazioni.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\GolePattern\GroovePatterns.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\GolePattern\GrooveVShape.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\GolePattern\IGroovePattern.cs" />
+    <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\GolePattern\IGroovePatternable.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\Tornitura.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\TornituraFilettatura.cs" />
     <Compile Include="ConversationalStructure\Lavorazioni\Tornitura\TornituraScanalatura.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="PreviewEntity\PreviewPathBuilder.cs" />
     <Compile Include="PreviewEntity\TimeHelper.cs" />
     <Compile Include="Singleton.cs" />
+    <Compile Include="ToolMachine\ToolMachineCodeGeneration.cs" />
     <Compile Include="Tool\Drill\Alesatore.cs" />
     <Compile Include="Tool\Drill\Bareno.cs" />
     <Compile Include="Tool\Drill\Centrino.cs" />
@@ -136,7 +139,7 @@
     <Compile Include="PathGenerator\CodeCreator.cs" />
     <Compile Include="PathGenerator\MachineProgram.cs" />
     <Compile Include="PathGenerator\ProgramAction.cs" />
-    <Compile Include="PathGenerator\ProgramPhase.cs" />
+    <Compile Include="PathGenerator\ProgramOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadTable\RigaTabellaFilettatura.cs" />
     <Compile Include="ThreadTable\TabellaFilettature.cs" />

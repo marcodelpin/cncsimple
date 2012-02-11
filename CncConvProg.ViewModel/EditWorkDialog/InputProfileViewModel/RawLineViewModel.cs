@@ -15,8 +15,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
 
         public RawLine2D Source { get { return _rawLine; } }
 
-        public RawLineViewModel(RawLine2D rawLine2D, ProfileEditorViewModel.AxisSystem axisSystem)
-            : base(rawLine2D, axisSystem)
+        public RawLineViewModel(RawLine2D rawLine2D, ProfileEditorViewModel.AxisSystem axisSystem, ProfileEditorViewModel parent)
+            : base(rawLine2D, axisSystem, parent)
         {
             _rawLine = rawLine2D;
 

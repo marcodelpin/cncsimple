@@ -1,42 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CncConvProg.Geometry.Entity;
-using CncConvProg.Geometry.PreviewPathEntity;
+using CncConvProg.Model.PathGenerator;
+using CncConvProg.Model.PreviewPathEntity;
 
-namespace CncConvProg.Model.PreviewPathEntity
+namespace CncConvProg.Model.PreviewEntity
 {
-    public enum VelocitaType
-    {
-        Sync,
-        ASync
-    }
-
-    [Serializable]
-    public class ParametroVelocita
-    {
-        // 0 giri fissi 1 giri variabili
-        public VelocitaType ModoVelocita { get; set; }
-
-        // 0 mm/min 1 mm/giro
-        public VelocitaType ModoAvanzamento { get; set; }
-
-        public double ValoreVelocita { get; set; }
-
-        public double ValoreFeed { get; set; }
-    }
-
+  
     public interface IPreviewEntity
     {
-
         ParametroVelocita ParametroVelocita { get; set; }
-        // magari fare set move type speed type 
+
         double GetMoveLength();
 
         bool IsRapidMovement { get; }
-
-        // TimeSpan GetTimeSpan();
-
-
     }
 
     public static class PreviewEntityHelper

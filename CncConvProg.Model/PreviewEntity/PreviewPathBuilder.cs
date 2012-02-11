@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using CncConvProg.Geometry.Entity;
+using CncConvProg.Model.PathGenerator;
+using CncConvProg.Model.PreviewEntity;
 using CncConvProg.Model.PreviewPathEntity;
 
 namespace CncConvProg.Geometry.PreviewPathEntity

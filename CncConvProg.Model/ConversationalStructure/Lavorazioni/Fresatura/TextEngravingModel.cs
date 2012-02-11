@@ -87,7 +87,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
         //    return magazzino.GetTools<FresaCandela>(unit).Cast<Utensile>().ToList();
         //}
 
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             // var fresa = operazione.Utensile as IDiametrable;
 
@@ -117,7 +117,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura
 
             foreach (var variable in mm)
             {
-                programPhase.AddMoveAction(variable);
+                programPhase.AggiungiAzioneMovimento(variable);
             }
         }
 

@@ -8,12 +8,12 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{Binding Path=XLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyX.png" Width="25"/>
+                <Image Tag="x" Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyX.png" Width="25" Loaded="Image_Loaded" />
                 <TextBox x:Name="xTb" ab:AttachedProperties.AutoSelectText="True"  DataContext="{Binding Path=X, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{Binding Path=YLabel}" MinWidth="100" />
-                <Image Source="pack://application:,,,/Images/gui/keyY.png" Width="25"/>
+                <Image Tag="y" Source="pack://application:,,,/CncConvProg.View;component/Images/gui/keyY.png" Width="25" ImageFailed="Image_ImageFailed" Loaded="Image_Loaded" />
                 <TextBox x:Name="yTb" ab:AttachedProperties.AutoSelectText="True"   DataContext="{Binding Path=Y, UpdateSourceTrigger=LostFocus}" Text="{Binding Path=Value, UpdateSourceTrigger=LostFocus, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
         </StackPanel>

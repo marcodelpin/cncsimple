@@ -25,7 +25,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura.Pattern
         {
             var rslt = new List<Point2D>();
 
-            for (int i = 0; i <= NumeroFori; i++)
+            for (int i = 0; i < NumeroFori; i++)
             {
                 var distance = (i * Passo) + FirstLenght;
 

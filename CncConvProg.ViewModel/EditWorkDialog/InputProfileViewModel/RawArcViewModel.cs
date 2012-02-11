@@ -15,8 +15,8 @@ namespace CncConvProg.ViewModel.EditWorkDialog.InputProfileViewModel
 
         public RawArc2D Source { get { return _rawArc; } }
 
-        public RawArcViewModel(RawArc2D rawLine2D, ProfileEditorViewModel.AxisSystem axisSystem)
-            : base(rawLine2D, axisSystem)
+        public RawArcViewModel(RawArc2D rawLine2D, ProfileEditorViewModel.AxisSystem axisSystem, ProfileEditorViewModel parent)
+            : base(rawLine2D, axisSystem, parent)
         {
             _rawArc = rawLine2D;
 

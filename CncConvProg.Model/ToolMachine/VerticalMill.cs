@@ -40,20 +40,20 @@ namespace CncConvProg.Model.ToolMachine
             }
         }
 
-        protected override void CreateCodeFromAction(ChangeToolAction programAction, ref StringBuilder code)
+        protected override void CreateCodeFromAction(CambiaUtensileAction programAction, ref StringBuilder code)
         {
             code.AppendLine("G0 G17 G40 G49 G80 G90");
 
             // controllo refrigerante
-            code.AppendLine(programAction.Coolant ? "M8" : "M9");
+            code.AppendLine(programAction.Refrigerante ? "M8" : "M9");
 
             // Etichetta Utensile
-            var toolLabel = programAction.ToolLabel;
+            var toolLabel = programAction.EtichettaUtensile;
 
             code.AppendLine(FormatComment(toolLabel));
 
             // Numero e correttore
-            var toolNumber = programAction.NumberTool;
+            var toolNumber = programAction.NumeroUtensile;
 
             code.AppendLine(programAction.CutViewerToolInfo);
 
@@ -64,15 +64,15 @@ namespace CncConvProg.Model.ToolMachine
             }
 
             // Parametri
-            var speed = programAction.Speed;
+            var speed = programAction.Velocità;
 
-            var spindleRotation = programAction.SpindleRotation;
+            var spindleRotation = programAction.RotazioneMandrino;
 
             // Attivo Parametri 
             code.Append("G0 G54 " + "S" + FormatSpeed(speed) + "M3");
 
             // Attivo correttore altezza
-            var nHeightCor = programAction.MillHeightCorrector;
+            var nHeightCor = programAction.CorrettoreUtensileAltezzaCentro;
             code.Append("\nG43 H" + nHeightCor + "\n");
 
             /*Resetto posizione attuale , in modo da forzare la riscrittura delle coordinate.

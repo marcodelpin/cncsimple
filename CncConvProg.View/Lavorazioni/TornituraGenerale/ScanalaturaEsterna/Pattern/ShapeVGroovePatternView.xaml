@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="CncConvProg.View.Lavorazioni.TornituraGenerale.ScanalaturaEsterna.Pattern.ShapeVGroovePatternView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:CustomControl="clr-namespace:CncConvProg.View.Controls" xmlns:ab="clr-namespace:CncConvProg.View.AttachedProperty" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Resources="clr-namespace:MecPrev.Resources;assembly=MecPrev.Resources" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*" />
+            <RowDefinition Height=".5*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*" />
+            <ColumnDefinition Width=".5*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static Resources:EditWorkRes.StartDiameter}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=DiametroIni, ValidatesOnDataErrors=True}" MinWidth="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="{x:Static Resources:EditWorkRes.EndDiameter}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=DiametroFin, ValidatesOnDataErrors=True}" MinWidth="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="{x:Static Resources:EditWorkRes.zStart}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=StartZ, ValidatesOnDataErrors=True}" MinWidth="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="{x:Static Resources:EditWorkRes.Width}" MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=Larghezza, ValidatesOnDataErrors=True}" MinWidth="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="N°  : " MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=NumeroGole, ValidatesOnDataErrors=True}" MinWidth="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="Step : " MinWidth="100" />
+                <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=DistanzaGole, ValidatesOnDataErrors=True}" MinWidth="100" />
+            </StackPanel>
+
+
+        </StackPanel>
+
+        <Image Grid.Column="1" Width="200" Source="{Binding SelectedItem.Tag, ElementName=RadioButtonList}" />
+
+    </Grid>
+</UserControl>

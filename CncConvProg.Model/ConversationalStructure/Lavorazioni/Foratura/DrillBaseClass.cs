@@ -18,7 +18,7 @@ using CncConvProg.Model.Tool.Parametro;
 namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 {
     [Serializable]
-    public abstract class DrillBaseClass : Lavorazione, IForaturaPatternable, IDrillDiameter, IForaturaAble, ICentrinoAble, ISvasaturaAble
+    public abstract class DrillBaseClass : LavorazioneFresatura, IForaturaPatternable, IDrillDiameter, IForaturaAble, ICentrinoAble, ISvasaturaAble
     {
         public override FaseDiLavoro.TipoFaseLavoro[] FasiCompatibili
         {
@@ -476,7 +476,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
         //}
 
-        private void ElaborateAllargaturaBareno(ProgramPhase programPhase, Operazione operazione)
+        private void ElaborateAllargaturaBareno(ProgramOperation programPhase, Operazione operazione)
         {
             var opMaschiatura = operazione.Lavorazione as IBarenoAble;
 
@@ -528,7 +528,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
             }
 
             foreach (var a in moveCollection)
-                programPhase.AddMoveAction(a);
+                programPhase.AggiungiAzioneMovimento(a);
         }
         /// <summary>
         /// Creo Programma per lavorazioni di foratura.
@@ -539,7 +539,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
         /// </summary>
         /// <param name="programPhase"></param>
         /// <param name="operazione"></param>
-        protected override void CreateSpecificProgram(ProgramPhase programPhase, Operazione operazione)
+        protected override void CreateSpecificProgram(ProgramOperation programPhase, Operazione operazione)
         {
             if (operazione.OperationType == LavorazioniEnumOperazioni.AllargaturaBareno)
             {
@@ -547,13 +547,13 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                 return;
             }
 
-            var macro = new MacroDrillingAction(programPhase)
+            var macro = new MacroForaturaAzione(programPhase)
                             {
-                                DrillPoints = GetDrillPointList(),
-                                SecureZ = SicurezzaZ,
+                                PuntiForatura = GetDrillPointList(),
+                                SicurezzaZ = SicurezzaZ,
                                 StartZ = InizioZ,
                                 TipologiaLavorazione = operazione.OperationType,
-                                PuntoR = SicurezzaZ - InizioZ,
+                                PuntoRitorno = SicurezzaZ - InizioZ,
                             };
 
             /*
@@ -596,7 +596,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                             throw new NullReferenceException();
 
                         macro.EndZ = InizioZ - opMaschiatura.ProfonditaLamatura;
-                        macro.Dweel = 500;
+                        macro.Sosta = 500;
 
                     } break;
 
@@ -606,7 +606,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
                         if (opMaschiatura == null)
                             throw new NullReferenceException();
-                        macro.Dweel = 500;
+                        macro.Sosta = 500;
 
 
                         macro.EndZ = InizioZ - opMaschiatura.ProfonditaMaschiatura;
@@ -632,7 +632,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                             throw new NullReferenceException();
 
                         macro.EndZ = InizioZ - ProfonditaSvasatura;
-                        macro.Dweel = 500;
+                        macro.Sosta = 500;
 
 
                     } break;
@@ -665,19 +665,19 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             var move = new MoveActionCollection();
 
-            var pntList = macro.DrillPoints;
+            var pntList = macro.PuntiForatura;
 
             foreach (var point2D in pntList)
             {
                 move.AddLinearMove(MoveType.Rapid, AxisAbilited.Xy, point2D.X, point2D.Y, null);
-                move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SecureZ);
+                move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SicurezzaZ);
 
                 ElaborateCycle(move, macro);
                 /*
                  * fare r del ciclo.
                  */
 
-                move.AddLinearMove(MoveType.SecureRapidFeed, AxisAbilited.Z, null, null, macro.SecureZ);
+                move.AddLinearMove(MoveType.SecureRapidFeed, AxisAbilited.Z, null, null, macro.SicurezzaZ);
 
             }
 
@@ -687,13 +687,13 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
             foreach (var variable in macro.MoveActionCollection)
             {
-                programPhase.SetFeedMoveAction(variable);
+                programPhase.SettaValoreAvanzamento(variable);
             }
 
             // disimpegno
         }
 
-        private static void ElaborateCycle(MoveActionCollection move, MacroDrillingAction macro)
+        private static void ElaborateCycle(MoveActionCollection move, MacroForaturaAzione macro)
         {
             var enumOperazioniForatura = macro.TipologiaLavorazione;
             var modalitaForatura = macro.ModalitaForatura;
@@ -729,7 +729,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                             case Lavorazioni.Foratura.ModalitaForatura.Semplice:
                                 {
                                     move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.EndZ);
-                                    move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SecureZ);
+                                    move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SicurezzaZ);
 
                                 } break;
                         }
@@ -738,7 +738,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                 case LavorazioniEnumOperazioni.ForaturaAlesatore:
                     {
                         move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.EndZ);
-                        move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.SecureZ);
+                        move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.SicurezzaZ);
                     } break;
 
 
@@ -750,7 +750,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                 case LavorazioniEnumOperazioni.ForaturaSmusso:
                     {
                         move.AddLinearMove(MoveType.Work, AxisAbilited.Z, null, null, macro.EndZ);
-                        move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SecureZ);
+                        move.AddLinearMove(MoveType.Rapid, AxisAbilited.Z, null, null, macro.SicurezzaZ);
 
                     } break;
 

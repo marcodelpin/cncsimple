@@ -15,6 +15,7 @@ using CncConvProg.Model.ConversationalStructure.Lavorazioni.Common;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Fresatura;
 using CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura;
+using CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura.GolePattern;
 using CncConvProg.Model.FileManageUtility;
 using CncConvProg.Model.PathGenerator;
 using CncConvProg.Model.Tool;
@@ -801,7 +802,7 @@ namespace CncConvProg.ViewModel.MainViewModel
             uniProgram.ProgramNumber = selectedPhase.ProgramNumber;
             uniProgram.ProgramComment = selectedPhase.Descrizione;
 
-            uniProgram.NoChangeToolSecureZ = selectedPhase.NoChangeToolSecureZ;
+            uniProgram.ZSicurezzaNoCambioUtensile = selectedPhase.NoChangeToolSecureZ;
 
             var operation = Singleton.Instance.GetOperationList(selectedPhase.FaseDiLavoroGuid);
 
@@ -825,7 +826,7 @@ namespace CncConvProg.ViewModel.MainViewModel
 
                 programPhase.SetCambioUtensile(operazione.OutputCambioUtensile);
 
-                uniProgram.Operations.Add(programPhase);
+                uniProgram.Operazioni.Add(programPhase);
 
                 count++;
                 var perc = (int)((count / opCount) * 100);
@@ -1344,18 +1345,18 @@ namespace CncConvProg.ViewModel.MainViewModel
                 // Tornitura 
                 case EnumWork.TornituraScanalaturaEsterna:
                     {
-                        lavorazione = new TornituraScanalatura(TornituraScanalatura.TipoScanalatura.Esterna);
+                        lavorazione = new TornituraScanalatura(GrooveDirection.Extern);
                     } break;
 
                 case EnumWork.TornituraScanalaturaInterna:
                     {
-                        lavorazione = new TornituraScanalatura(TornituraScanalatura.TipoScanalatura.Interna);
+                        lavorazione = new TornituraScanalatura(GrooveDirection.Intern);
 
                     } break;
 
                 case EnumWork.TornituraScanalaturaFrontale:
                     {
-                        lavorazione = new TornituraScanalatura(TornituraScanalatura.TipoScanalatura.Frontale);
+                        lavorazione = new TornituraScanalatura(GrooveDirection.Face);
 
                     } break;
                 case EnumWork.TornituraInterna:
