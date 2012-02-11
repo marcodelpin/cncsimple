@@ -131,7 +131,7 @@ namespace CncConvProg.Model.ToolMachine
             if (moveAction.MoveType == MoveType.Rapid)
                 plotStyle = EnumPlotStyle.RapidMove;
 
-            path3D.AddLine(plotStyle, moveAction.X, moveAction.Y, moveAction.Z, moveAction.ParametroVelocita);
+            path3D.AddLine(plotStyle, moveAction.X, moveAction.Y, moveAction.Z, moveAction.ParametriTaglio);
 
         }
 
@@ -140,7 +140,7 @@ namespace CncConvProg.Model.ToolMachine
             var center = new Point3D(moveAction.Center.X, moveAction.Center.Y, 0);
 
             path3D.AddArc(EnumPlotStyle.Arc, center, moveAction.Radius, moveAction.ClockWise,
-                moveAction.X, moveAction.Y, moveAction.Z, moveAction.ParametroVelocita);
+                moveAction.X, moveAction.Y, moveAction.Z, moveAction.ParametriTaglio);
         }
 
    

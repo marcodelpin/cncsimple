@@ -34,28 +34,6 @@ namespace CncConvProg.Model.Tool.Parametro
             AvanzamentoSincronoPiantata = new UserInput();
         }
 
-        public override double CalcolateUnitToolCost()
-        {
-            var rslt = 0d;
-
-            if (AvanzamentoAsincrono.Value.HasValue)
-            {
-                var feedMmMin = AvanzamentoAsincrono.Value.Value;
-
-                if (TempoVitaUtensile > 0 && CostoUtensile > 0)
-                    rslt = CostoUtensile / TempoVitaUtensile;
-
-                else if (MetriVitaUtensile > 0 && CostoUtensile > 0 && feedMmMin > 0)
-                {
-                    var tempoVita = (MetriVitaUtensile * 1000) / feedMmMin;
-
-                    rslt = CostoUtensile / tempoVita;
-                }
-            }
-
-            return rslt;
-        }
-
         public void SetProfPassataPerc(double value)
         {
 

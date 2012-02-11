@@ -63,7 +63,7 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.Common
             }
         }
 
-        public int ModoAllargatura
+        public byte ModoAllargatura
         {
             get
             {

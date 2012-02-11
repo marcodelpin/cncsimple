@@ -98,7 +98,6 @@
     <Compile Include="Dialog\TabellaFilettaturaViewModel.cs" />
     <Compile Include="EditWorkDialog\Common\RotoTraslateWorkViewModel.cs" />
     <Compile Include="EditWorkDialog\Common\ViewModelValidable.cs" />
-    <Compile Include="EditWorkDialog\Foratura\Common\OperazioniExViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\Common\ForaturaCommonViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\ParameterScreen\CommonDrillParametriViewModel.cs" />
     <Compile Include="EditWorkDialog\Foratura\ParameterScreen\LamaturaParametriViewModel.cs" />

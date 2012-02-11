@@ -32,6 +32,19 @@ namespace CncConvProg.ViewModel.EditWorkDialog.Foratura.ParameterScreen
                 OnPropertyChanged("ProfonditaLamatura");
             }
         }
+
+        public double DiametroLamatura
+        {
+            get
+            {
+                return _lamatura.DiametroLamatura;
+            }
+            set
+            {
+                _lamatura.DiametroLamatura = value;
+                OnPropertyChanged("DiametroLamatura");
+            }
+        }
         protected override string[] ValidatedProperties
         {
             get

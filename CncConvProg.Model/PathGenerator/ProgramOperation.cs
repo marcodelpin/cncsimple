@@ -164,7 +164,7 @@ namespace CncConvProg.Model.PathGenerator
         /// <param name="action"></param>
         public void SettaValoreAvanzamento(LinearMoveAction action)
         {
-            if (action.ParametroVelocita != null) return;
+            if (action.ParametriTaglio != null) return;
             ParametroVelocita parametroVelocita;
             var finded = FeedDictionary.TryGetValue(action.MoveType, out parametroVelocita);
             if (!finded)
@@ -172,7 +172,7 @@ namespace CncConvProg.Model.PathGenerator
                 //todo - gestire mancato avanzamento
             }
 
-            action.ParametroVelocita = parametroVelocita;
+            action.ParametriTaglio = parametroVelocita;
         }
         internal void AddFeedType(MoveType[] moveType, VelocitaType velocitaType, double p, VelocitaType velocitaType2, double p2)
         {

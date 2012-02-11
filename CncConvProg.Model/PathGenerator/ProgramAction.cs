@@ -17,7 +17,7 @@ namespace CncConvProg.Model.PathGenerator
     [Serializable]
     public abstract class ProgramAction
     {
-        public ParametroVelocita ParametroVelocita { get; set; }
+        public ParametroVelocita ParametriTaglio { get; set; }
 
         protected ProgramAction(ProgramOperation programPhase)
         {
@@ -304,6 +304,6 @@ namespace CncConvProg.Model.PathGenerator
         /// </summary>
         public double Sosta { get; set; }
 
-        public int MacroFeed { get; set; }
+      //  public int MacroFeed { get; set; }
     }
 }

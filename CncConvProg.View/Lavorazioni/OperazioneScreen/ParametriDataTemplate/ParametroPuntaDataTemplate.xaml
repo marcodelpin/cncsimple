@@ -14,11 +14,11 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel>
                         <TextBlock ab:AttachedProperties.AutoSelectText="True" Text="RPM" Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox DataContext="{Binding Path=NumeroGiri}" Text="{Binding Path=Value, StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                        <TextBox DataContext="{Binding Path=NumeroGiri}" Text="{Binding Path=Value, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="{Binding Path=VelocitaTaglioLabel}" MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox ab:AttachedProperties.AutoSelectText="True" DataContext="{Binding Path=VelocitaTaglio}" Text="{Binding Path=Value, StringFormat=F0, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" DataContext="{Binding Path=VelocitaTaglio}" Text="{Binding Path=Value, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
                     </StackPanel>
                 </StackPanel>
             </Controls:FocusableListBoxItem>
@@ -26,11 +26,11 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel >
                         <TextBlock Text="{Binding Path=FeedAsyncLabel}" Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox ab:AttachedProperties.AutoSelectText="True" DataContext="{Binding Path=AvanzamentoAsincrono}" Text="{Binding Path=Value, StringFormat=F0,  ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" DataContext="{Binding Path=AvanzamentoAsincrono}" Text="{Binding Path=Value, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="{Binding Path=FeedSyncLabel}" MinWidth="80" Padding="0,0,2,0" Margin="0,0,2,0" />
-                        <TextBox ab:AttachedProperties.AutoSelectText="True" DataContext="{Binding Path=AvanzamentoSincrono}" Text="{Binding Path=Value,StringFormat=F3, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                        <TextBox ab:AttachedProperties.AutoSelectText="True" DataContext="{Binding Path=AvanzamentoSincrono}" Text="{Binding Path=Value, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
                     </StackPanel>
                     <TextBlock Text="Feed" Padding="0,0,2,0" Margin="0,0,2,0" />
                 </StackPanel>
@@ -39,7 +39,7 @@
             <Controls:FocusableListBoxItem Tag="pack://application:,,,/Images/archivia.png" Style="{DynamicResource FocusableListBoxItemStyle1}" >
                 <StackPanel>
                     <TextBlock Text="Step " Padding="0,0,2,0" Margin="0,0,2,0" />
-                    <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=Step ,ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                    <TextBox ab:AttachedProperties.AutoSelectText="True"  Text="{Binding Path=Step, ValidatesOnDataErrors=True, TargetNullValue={x:Static System:String.Empty}}" Style="{DynamicResource TextBoxStyle1Dialog}" />
                 </StackPanel>
             </Controls:FocusableListBoxItem>
         </Controls:FocusableListBox>

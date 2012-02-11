@@ -273,7 +273,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
         {
             get
             {
-                var opList = new List<Operazione> { Centrinatura, Foratura, BarenaturaOp, AllargaturaOp, Svasatura };
+                var opList = new List<Operazione> { Centrinatura, Foratura, AllargaturaOp, BarenaturaOp, Svasatura };
 
                 return opList;
             }
@@ -312,20 +312,16 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
 
         public override double DiametroPreview
         {
-            get { return DiametroForatura; }
+            get { return DiametroBarenatura; }
         }
 
         public double ProfonditaBareno { get; set; }
 
         public double DiametroBarenatura { get; set; }
 
-        public double DiametroAllargatura { get; set; }
+        public bool AllargaturaAbilitata { get { return BarenaturaOp.Abilitata; } set { BarenaturaOp.Abilitata = value; } }
 
-        public bool BarenoAbilitato { get { return BarenaturaOp.Abilitata; } set { BarenaturaOp.Abilitata = value; } }
-
-        public bool AllargaturaAbilitata { get; set; }
-
-        public int ModalitaAllargatura { get; set; }
+        public byte ModalitaAllargatura { get; set; }
 
         public double MaterialePerFinitura { get; set; }
     }
