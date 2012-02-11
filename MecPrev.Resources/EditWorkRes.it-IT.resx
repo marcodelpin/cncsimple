@@ -399,4 +399,16 @@
   <data name="DiametroLamatura" xml:space="preserve">
     <value>Diametro Lamatura</value>
   </data>
+  <data name="centerDrillDepth" xml:space="preserve">
+    <value>Prof. Centrino </value>
+  </data>
+  <data name="chamferDepth" xml:space="preserve">
+    <value>Prof. Svasatore</value>
+  </data>
+  <data name="CounterBoreDiameter" xml:space="preserve">
+    <value>Diametro Lamatore</value>
+  </data>
+  <data name="reamerDiameter" xml:space="preserve">
+    <value>Diametro Alesatore</value>
+  </data>
 </root>
