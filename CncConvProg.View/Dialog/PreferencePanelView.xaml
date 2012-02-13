@@ -16,6 +16,10 @@
                         <Label Content="{x:Static Resources:GuiRes.SecureRapidFeed}" Target="{Binding ElementName=tbSecFeed}" MinWidth="120" />
                         <TextBox x:Name="tbSecFeed" Text="{Binding Path=MillingRapidSecureFeedAsync}" MinWidth="100" />
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Distanza Sicurezza Cicli Foratura" Target="{Binding ElementName=tbDistaSecFeed}" MinWidth="120" />
+                        <TextBox x:Name="tbDistaSecFeed" Text="{Binding Path=DistanzaSicurezzaCicliForatura}" MinWidth="100" />
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="{x:Static Resources:GuiRes.TurningPreference}">
@@ -28,6 +32,7 @@
                         <Label Content="{x:Static Resources:GuiRes.SecureRapidFeed}" Target="{Binding ElementName=tbTSecFeed}" MinWidth="120" />
                         <TextBox x:Name="tbTSecFeed" Text="{Binding Path=MillingRapidSecureFeedAsync}" MinWidth="100" />
                     </StackPanel>
+                    
                 </StackPanel>
             </GroupBox>
         </StackPanel>

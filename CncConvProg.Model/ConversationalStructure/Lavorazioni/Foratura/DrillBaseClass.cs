@@ -306,13 +306,17 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                 return;
             }
 
+            var preference = Singleton.Preference.GetPreference(Singleton.Instance.MeasureUnit);
+
+            var distanzaSicurezza = preference.DistanzaSicurezzaCicliForatura;
+
             var macro = new MacroForaturaAzione(programPhase)
                             {
                                 PuntiForatura = GetDrillPointList(),
                                 SicurezzaZ = SicurezzaZ,
                                 StartZ = InizioZ,
                                 TipologiaLavorazione = operazione.OperationType,
-                                PuntoRitorno = SicurezzaZ - InizioZ,
+                                IncrementoR = SicurezzaZ - InizioZ - distanzaSicurezza,
                             };
 
             macro.ParametriTaglio = new ParametroVelocita();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CncConvProg.Geometry.Entity;
+using CncConvProg.Model.PathGenerator;
 
 namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 {
@@ -98,7 +99,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             return maxZ;
         }
-        internal static void GetRoughingTurnProgram(PathGenerator.MoveActionCollection moveCollection, Profile2D profile2D, double profPassata, double avvicinamento, double stacco, Tornitura.TipoTornitura tipoTornitura)
+        internal static void GetRoughingTurnProgram(ProgramOperation programOperation, MoveActionCollection moveCollection, Profile2D profile2D, double profPassata, double avvicinamento, double stacco, Tornitura.TipoTornitura tipoTornitura, bool useMacro, double sovraX, double sovraZ)
         {
             // assumo che sia diametro esterno.
 
@@ -106,21 +107,34 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             if (profile2D == null) return;
 
+            if(useMacro)
+            {
+                    var turnMacro = new MacroLongitudinalTurningAction(programOperation)
+                    {
+                        SovraMetalloX = sovraX,
+                        SovraMetalloZ = sovraZ,
+                        Profile = profile2D,
+                        ProfonditaPassata = profPassata,
+                        Distacco = stacco,
+                        TipologiaLavorazione = tipoTornitura,
+                    };
+            }
+
             switch (tipoTornitura)
             {
                 case Tornitura.TipoTornitura.Esterna:
                     {
-                        GetSgrossaturaEsterna(moveCollection, profile2D, profPassata, avvicinamento, stacco);
+                        GetSgrossaturaEsterna(programOperation, moveCollection, profile2D, profPassata, avvicinamento, stacco);
                     } break;
 
                 case Tornitura.TipoTornitura.Interna:
                     {
-                        GetSgrossaturaInterna(moveCollection, profile2D, profPassata, avvicinamento, stacco);
+                        GetSgrossaturaInterna(moveCollection, profile2D, profPassata, avvicinamento, stacco, useMacro);
                     } break;
             }
         }
 
-        internal static void GetSgrossaturaEsterna(PathGenerator.MoveActionCollection moveCollection, Profile2D profile2D, double profPassata, double avvicinamento, double stacco)
+        internal static void GetSgrossaturaEsterna(ProgramOperation programOperation, MoveActionCollection moveCollection, Profile2D profile2D, double profPassata, double avvicinamento, double stacco)
         {
             /*
              * assumo anche che nel profilo non ci siano tasche..
@@ -135,40 +149,44 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
 
             var r = stacco;
 
-            var currentDia = diaIniziale;
+            
+                var currentDia = diaIniziale;
 
-            moveCollection.AddLinearMove(MoveType.Work, AxisAbilited.Xyz, zIniziale, currentDia, 0);
-            while (currentDia > diaFinale)
-            {
-                currentDia -= profPassata;
-                if (currentDia <= diaFinale)
-                    currentDia = diaFinale;
+                moveCollection.AddLinearMove(MoveType.Work, AxisAbilited.Xyz, zIniziale, currentDia, 0);
+                while (currentDia > diaFinale)
+                {
+                    currentDia -= profPassata;
+                    if (currentDia <= diaFinale)
+                        currentDia = diaFinale;
 
-                var scanIniPoint = new Point2D(zIniziale, currentDia);
-                var scanEndPoint = new Point2D(zMin, currentDia);
+                    var scanIniPoint = new Point2D(zIniziale, currentDia);
+                    var scanEndPoint = new Point2D(zMin, currentDia);
 
-                var scanLine = new Line2D() { Start = scanIniPoint, End = scanEndPoint };
+                    var scanLine = new Line2D() { Start = scanIniPoint, End = scanEndPoint };
 
-                var intersectPoint = FindIntersectionPoint(profile2D, scanLine);
+                    var intersectPoint = FindIntersectionPoint(profile2D, scanLine);
 
-                if (intersectPoint == null)
-                    break;
+                    if (intersectPoint == null)
+                        break;
 
-                moveCollection.AddLinearMove(MoveType.Work, AxisAbilited.Xyz, null, currentDia, 0);
+                    moveCollection.AddLinearMove(MoveType.Work, AxisAbilited.Xyz, null, currentDia, 0);
 
 
-                moveCollection.AddLinearMove(MoveType.Work, AxisAbilited.Xyz, intersectPoint.X, null, 0);
 
-                moveCollection.AddLinearMove(MoveType.Rapid, AxisAbilited.Xyz, zIniziale, currentDia + avvicinamento, 0);
+                    moveCollection.AddLinearMove(MoveType.Work, AxisAbilited.Xyz, intersectPoint.X, null, 0);
 
-                //var line = new Line2D() {Start = iniPoint, End = intersectPoint};
+                    moveCollection.AddLinearMove(MoveType.Rapid, AxisAbilited.Xyz, zIniziale, currentDia + avvicinamento,
+                                                 0);
 
-                // poi devo fare stacco , ritorno a z e incremento diametro.
+                    //var line = new Line2D() {Start = iniPoint, End = intersectPoint};
 
+                    // poi devo fare stacco , ritorno a z e incremento diametro.
+
+                
             }
         }
 
-        internal static void GetSgrossaturaInterna(PathGenerator.MoveActionCollection moveCollection, Profile2D profile2D, double profPassata, double avvicinamento, double stacco)
+        internal static void GetSgrossaturaInterna(PathGenerator.MoveActionCollection moveCollection, Profile2D profile2D, double profPassata, double avvicinamento, double stacco, bool useMacro)
         {
             /*
              * assumo anche che nel profilo non ci siano tasche..

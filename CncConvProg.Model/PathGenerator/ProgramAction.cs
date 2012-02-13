@@ -241,6 +241,10 @@ namespace CncConvProg.Model.PathGenerator
         public double SovraMetalloZ { get; set; }
 
         public Point2D PuntoAttacco { get; set; }
+
+        public double Distacco { get; set; }
+
+        public ConversationalStructure.Lavorazioni.Tornitura.Tornitura.TipoTornitura TipologiaLavorazione { get; set; }
     }
 
     /// <summary>
@@ -277,7 +281,7 @@ namespace CncConvProg.Model.PathGenerator
         /// <summary>
         /// Punto Ritorno
         /// </summary>
-        public double PuntoRitorno { get; set; }
+        public double IncrementoR { get; set; }
 
         /// <summary>
         /// Step
