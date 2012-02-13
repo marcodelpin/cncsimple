@@ -128,7 +128,7 @@
 
                     
 
-                    <ribbon:RibbonGroup Header="{x:Static Resources:GuiRes.TurningOp}">
+                    <ribbon:RibbonGroup Header="{x:Static Resources:GuiRes.TurningOp}" >
                         <ribbon:RibbonMenuButton 
                                         Label="{x:Static Resources:GuiRes.TurningOp}"
                                          LargeImageSource="pack://application:,,,/CncConvProg.View;component/Images/Work/Turning.png"

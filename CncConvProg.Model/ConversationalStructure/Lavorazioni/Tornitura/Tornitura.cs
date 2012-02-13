@@ -14,14 +14,17 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
     [Serializable]
     public sealed class Tornitura : LavorazioneTornitura
     {
-        /*
-         * creare sia verticale che orizzontale..
-         * con stessa classe.
-         * 
-         */
         public RawProfile Profile { get; set; }
 
         public double InizioZ { get; set; }
+
+        public double DiametroIniziale { get; set; }
+
+        public bool UsaMacroSgrossatura { get; set; }
+
+        public double SovrametalloFinituraX { get; set; }
+
+        public double SovrametalloFinituraY { get; set; }
 
         public override List<Operazione> Operazioni
         {
@@ -47,13 +50,17 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
             // La profondità di passata = x2 
             var profPassata = parametro.ProfonditaPassata * 2;
 
+            var preference = Singleton.Preference.GetPreference(Singleton.Instance.MeasureUnit);
+
+            var distacco = preference.DistaccoSgrossaturaTornitura;
+
             var profile2D = Profile.GetProfileResult(false);
 
             switch (operazione.OperationType)
             {
                 case LavorazioniEnumOperazioni.TornituraSgrossatura:
                     {
-                        TurnProgrammingHelper.GetRoughingTurnProgram(moveCollection, profile2D, profPassata, ExtraCorsa, ExtraCorsa, _tipoTornitura);
+                        TurnProgrammingHelper.GetRoughingTurnProgram(programPhase, moveCollection, profile2D, profPassata, ExtraCorsa, distacco, _tipoTornitura, UsaMacroSgrossatura, SovrametalloFinituraX, SovrametalloFinituraY);
                     }
                     break;
 
@@ -175,7 +182,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Tornitura
             ini.X.SetValue(true, 0);
 
 
-           // AddDummyProfile(_tipoTornitura);
+            // AddDummyProfile(_tipoTornitura);
 
             Sgrossatura = new Operazione(this, LavorazioniEnumOperazioni.TornituraSgrossatura);
 

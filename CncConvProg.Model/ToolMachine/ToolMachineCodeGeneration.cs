@@ -79,9 +79,9 @@ namespace CncConvProg.Model.ToolMachine
         {
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
-            ////  
+            ////  !!!!!!!!!!!
             //// La string risultante da questo metodo sarà il programma gcode.
-            //// Per ottenere questa stringa si può procedere come meglio credi.
+            //// Per ottenere questa stringa puoi procedere come meglio credi.
             //// La classe MachineProgram contiene tutte le info necessarie per creare il programma.
             ////   
             //////////////////////////////////////////////////////
@@ -281,8 +281,8 @@ namespace CncConvProg.Model.ToolMachine
             if (macro.Step > 0)
                 macroCode += ("Q" + FormatCoordinate(macro.Step));
 
-            if (macro.PuntoRitorno > 0)
-                macroCode += ("R" + FormatCoordinate(macro.PuntoRitorno));
+            if (macro.IncrementoR > 0)
+                macroCode += ("R" + FormatCoordinate(macro.IncrementoR));
 
             if (macro.Sosta > 0)
                 macroCode += ("P" + FormatCoordinate(macro.Sosta));
