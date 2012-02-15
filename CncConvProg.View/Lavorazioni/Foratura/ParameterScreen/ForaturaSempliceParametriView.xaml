@@ -13,14 +13,17 @@
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.zDepth}" MinWidth="100" />
                 <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ProfonditaForatura, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}" />
+                <TextBlock Text="[D]" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.zStart}" MinWidth="100" />
                 <TextBox  ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=InizioZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                <TextBlock Text="[S]" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.zSecure}" MinWidth="100" />
                 <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=SicurezzaZ, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
+                <TextBlock Text="[S1]" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1Dialog}">
                 <TextBlock Text="{x:Static Resources:EditWorkRes.centerDrillDepth}" MinWidth="100" />
@@ -30,6 +33,8 @@
                 <TextBlock Text="{x:Static Resources:EditWorkRes.chamferDepth}" MinWidth="100" />
                 <TextBox ab:AttachedProperties.AutoSelectText="True" Text="{Binding Path=ChamferDepth, ValidatesOnDataErrors=True}" Style="{DynamicResource TextBoxStyle1Dialog}"/>
             </StackPanel>
+            <Image Margin="10" Grid.Column="1" Width="Auto"
+                   Source="pack://application:,,,/CncConvProg.View;component/Images/Work/Milling/001.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
         </StackPanel>
     </Grid>
 </UserControl>
