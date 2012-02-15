@@ -279,9 +279,9 @@ namespace CncConvProg.Model.PathGenerator
         public ModalitaForatura ModalitaForatura { get; set; }
 
         /// <summary>
-        /// Punto Ritorno
+        /// Incremento R
         /// </summary>
-        public double IncrementoR { get; set; }
+        public double CodiceR { get; set; }
 
         /// <summary>
         /// Step
@@ -307,7 +307,5 @@ namespace CncConvProg.Model.PathGenerator
         /// Sosta
         /// </summary>
         public double Sosta { get; set; }
-
-      //  public int MacroFeed { get; set; }
     }
 }

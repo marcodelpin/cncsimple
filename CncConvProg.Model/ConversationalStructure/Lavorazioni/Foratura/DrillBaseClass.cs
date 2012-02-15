@@ -316,7 +316,7 @@ namespace CncConvProg.Model.ConversationalStructure.Lavorazioni.Foratura
                                 SicurezzaZ = SicurezzaZ,
                                 StartZ = InizioZ,
                                 TipologiaLavorazione = operazione.OperationType,
-                                IncrementoR = SicurezzaZ - InizioZ - distanzaSicurezza,
+                                CodiceR = InizioZ + distanzaSicurezza,
                             };
 
             macro.ParametriTaglio = new ParametroVelocita();

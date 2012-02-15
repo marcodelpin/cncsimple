@@ -281,8 +281,8 @@ namespace CncConvProg.Model.ToolMachine
             if (macro.Step > 0)
                 macroCode += ("Q" + FormatCoordinate(macro.Step));
 
-            if (macro.IncrementoR > 0)
-                macroCode += ("R" + FormatCoordinate(macro.IncrementoR));
+            //if (macro.IncrementoR > 0)
+                macroCode += ("R" + FormatCoordinate(macro.CodiceR));
 
             if (macro.Sosta > 0)
                 macroCode += ("P" + FormatCoordinate(macro.Sosta));
